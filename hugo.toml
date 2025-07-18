@@ -1,0 +1,41 @@
+title = 'Scientific Lab'
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+theme = 'scilab'
+
+[menus]
+  [[menus.main]]
+  identifier = 'research'
+  name = 'Research'
+  url = '/research'
+  weight = 10
+
+  [[menus.main]]
+  identifier = 'team'
+  name = 'The Team'
+  url = '/team'
+  weight = 20
+
+  [[menus.main]]
+  identifier = 'publications'
+  name = 'Publications'
+  url = '/publications'
+  weight = 30
+
+  [[menus.main]]
+  identifier = 'resources'
+  name = 'Resources'
+  url = '/resources'
+  weight = 40
+
+  [[menus.main]]
+  identifier = 'labfun'
+  name = 'Lab Fun'
+  url = '/labfun'
+  weight = 50
+
+  [[menus.main]]
+  identifier = 'philosophy'
+  name = 'Lab Philosophy'
+  url = '/philosophy'
+  weight = 60
