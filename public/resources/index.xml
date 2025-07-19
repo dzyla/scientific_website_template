@@ -4,7 +4,7 @@
     <title>Resources on Bio Lab</title>
     <link>/resources/</link>
     <description>Recent content in Resources on Bio Lab</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="/resources/index.xml" rel="self" type="application/rss+xml" />
   </channel>

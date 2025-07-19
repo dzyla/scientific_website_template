@@ -10,6 +10,7 @@ Our lab is equipped with state-of-the-art facilities for cryo-EM sample preparat
 
 ## Protocols
 
-*   [Sample Preparation for Cryo-EM](/resources/sample-prep.pdf)
-*   [Data Acquisition Guidelines](/resources/data-acquisition.pdf)
-*   [Image Processing Workflow](/resources/image-processing.pdf)
+The following protocols are available in markdown format:
+
+* [Sample Preparation](/protocols/sample-prep)
+* [Image Processing](/protocols/image-processing)

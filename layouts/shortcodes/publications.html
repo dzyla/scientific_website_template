@@ -1,0 +1,52 @@
+{{/*
+  Publication shortcode.
+  Attempts to fetch publications from ORCID or Crossref. If remote fetching
+  fails (e.g. due to network restrictions), data/publications.json will be used
+  instead.
+*/}}
+
+{{- $orcid := .Get "orcid" -}}
+{{- $author := .Get "author" -}}
+{{- $entries := slice -}}
+
+{{- $remoteUrl := "" -}}
+{{- if $orcid }}
+  {{- $remoteUrl = printf "https://pub.orcid.org/v3.0/%s/works" $orcid -}}
+{{- else if $author }}
+  {{- $q := urlquery $author -}}
+  {{- $remoteUrl = printf "https://api.crossref.org/works?query.author=%s&rows=20" $q -}}
+{{- end }}
+
+{{- if $remoteUrl }}
+  {{- $res := resources.GetRemote $remoteUrl }}
+  {{- if not $res.Error }}
+    {{- $json := $res.Content | transform.Unmarshal }}
+    {{- if $json.group }}
+      {{- $entries = $json.group -}}
+    {{- else if $json.message.items }}
+      {{- $entries = $json.message.items -}}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- if eq (len $entries) 0 }}
+  {{- $entries = site.Data.publications -}}
+{{- end }}
+
+<ol class="publications-list">
+{{- range $index, $pub := $entries }}
+  {{- $num := add $index 1 }}
+  <li class="publication-item" style="margin-bottom:1rem;">
+    <div class="pub-info">
+      <strong class="pub-num">{{ $num }}.</strong>
+      <span class="pub-title">{{ with $pub.title }}{{ . }}{{ end }}</span><br>
+      <span class="pub-authors">{{ with $pub.authors }}{{ . }}{{ else }}{{ $pub.author_string }}{{ end }}</span><br>
+      <span class="pub-journal">{{ with $pub.containerTitle }}{{ . }}{{ else }}{{ $pub.journal }}{{ end }}</span>,
+      <span class="pub-year">{{ with $pub.published.print }}{{ . }}{{ else }}{{ $pub.year }}{{ end }}</span>
+    </div>
+    {{- with $pub.image }}
+      <div class="pub-image"><img src="{{ . }}" alt="{{ $pub.title }}" style="max-width:100px;"></div>
+    {{- end }}
+  </li>
+{{- end }}
+</ol>

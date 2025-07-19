@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Cryo-EM structure of virus A",
+    "authors": "A. Smith, B. Johnson",
+    "journal": "Journal of Virology",
+    "year": 2023,
+    "image": "https://via.placeholder.com/150?text=Paper+1"
+  },
+  {
+    "title": "Insights into Viral Infection",
+    "authors": "A. Smith, C. Williams",
+    "journal": "Nature Microbiology",
+    "year": 2024,
+    "image": "https://via.placeholder.com/150?text=Paper+2"
+  }
+]
