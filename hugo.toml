@@ -1,41 +1,34 @@
-title = 'Scientific Lab'
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-theme = 'scilab'
+# Hugo configuration file
+title = "Bio Lab"
+languageCode = "en-us"
+theme = "scilab"
 
-[menus]
-  [[menus.main]]
-  identifier = 'research'
-  name = 'Research'
-  url = '/research'
-  weight = 10
-
-  [[menus.main]]
-  identifier = 'team'
-  name = 'The Team'
-  url = '/team'
-  weight = 20
-
-  [[menus.main]]
-  identifier = 'publications'
-  name = 'Publications'
-  url = '/publications'
-  weight = 30
-
-  [[menus.main]]
-  identifier = 'resources'
-  name = 'Resources'
-  url = '/resources'
-  weight = 40
-
-  [[menus.main]]
-  identifier = 'labfun'
-  name = 'Lab Fun'
-  url = '/labfun'
-  weight = 50
-
-  [[menus.main]]
-  identifier = 'philosophy'
-  name = 'Lab Philosophy'
-  url = '/philosophy'
-  weight = 60
+[menu]
+  [[menu.main]]
+    name = "Research"
+    url = "/research"
+    weight = 1
+  [[menu.main]]
+    name = "Team"
+    url = "/team"
+    weight = 2
+  [[menu.main]]
+    name = "Publications"
+    url = "/publications"
+    weight = 3
+  [[menu.main]]
+    name = "Resources"
+    url = "/resources"
+    weight = 4
+  [[menu.main]]
+    name = "Lab Fun"
+    url = "/labfun"
+    weight = 5
+  [[menu.main]]
+    name = "Philosophy"
+    url = "/philosophy"
+    weight = 6
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact"
+    weight = 7

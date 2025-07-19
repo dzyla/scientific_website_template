@@ -1,0 +1,13 @@
+{{ define "main" }}
+  <section class="hero">
+    <div class="hero-image">
+      <img src="{{ "images/hero.jpg" | relURL }}" alt="Lab Image">
+    </div>
+    <h1>{{ .Site.Title }}</h1>
+    <p>Welcome to our lab website. We are dedicated to...</p>
+  </section>
+
+  <div class="home-content">
+    {{ .Content }}  <!-- Render content from your homepage markdown file -->
+  </div>
+{{ end }}
