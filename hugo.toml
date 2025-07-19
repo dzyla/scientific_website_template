@@ -3,6 +3,11 @@ title = "Bio Lab"
 languageCode = "en-us"
 theme = "scilab"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [menu]
   [[menu.main]]
     name = "Research"

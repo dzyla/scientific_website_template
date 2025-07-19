@@ -2,24 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Team on Bio Lab</title>
-    <link>//localhost:1313/team/</link>
+    <link>/team/</link>
     <description>Recent content in Team on Bio Lab</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="//localhost:1313/team/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/team/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Alice Smith</title>
-      <link>//localhost:1313/team/alice-smith/</link>
+      <link>/team/alice-smith/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/team/alice-smith/</guid>
+      <guid>/team/alice-smith/</guid>
       <description>&lt;p&gt;Alice leads the lab and has extensive experience in cryo-EM and structural virology. Her research focuses on understanding virus structure and developing new methods for cryo-EM data analysis.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bob Johnson</title>
-      <link>//localhost:1313/team/bob-johnson/</link>
+      <link>/team/bob-johnson/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/team/bob-johnson/</guid>
+      <guid>/team/bob-johnson/</guid>
       <description>&lt;p&gt;Bob is a Postdoctoral Researcher focusing on analyzing cryo-EM data and refining structural models. He is particularly interested in developing new algorithms for image processing and 3D reconstruction.  Bob enjoys hiking and exploring national parks in his free time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Carol Williams</title>
+      <link>/team/carol-williams/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/team/carol-williams/</guid>
+      <description>&lt;p&gt;Carol is a graduate student investigating the conformational dynamics of viral proteins.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>David Brown</title>
+      <link>/team/david-brown/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/team/david-brown/</guid>
+      <description>&lt;p&gt;David helps with sample preparation and data acquisition.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,7 +1,9 @@
-<ul>
+<ul class="news-list">
   {{ range sort site.Data.news "date" "desc" }}
-  <li>
-    <strong>{{ .date }}</strong> - <a href="{{ .link }}">{{ .title }}</a>
+  <li class="news-item">
+    <span class="news-date">{{ .date }}</span>
+    <span class="news-text"><a href="{{ .link }}">{{ .title }}</a></span>
   </li>
   {{ end }}
 </ul>
+

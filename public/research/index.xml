@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Research on Bio Lab</title>
-    <link>//localhost:1313/research/</link>
+    <link>/research/</link>
     <description>Recent content in Research on Bio Lab</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="//localhost:1313/research/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/research/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
