@@ -19,7 +19,7 @@
 
 {{- if $remoteUrl }}
   {{- $res := resources.GetRemote $remoteUrl }}
-  {{- if not $res.Error }}
+  {{- if not $res.Err }}
     {{- $json := $res.Content | transform.Unmarshal }}
     {{- if $json.group }}
       {{- $entries = $json.group -}}
