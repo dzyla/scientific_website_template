@@ -18,9 +18,9 @@
 {{- end }}
 
 {{- if $remoteUrl }}
-  {{- $res := resources.GetRemote $remoteUrl }}
-  {{- if not $res.Err }}
-    {{- $json := $res.Content | transform.Unmarshal }}
+  {{- $r := try (resources.GetRemote $remoteUrl) -}}
+  {{- if not $r.Err }}
+    {{- $json := $r.Value.Content | transform.Unmarshal -}}
     {{- if $json.group }}
       {{- $entries = $json.group -}}
     {{- else if $json.message.items }}
