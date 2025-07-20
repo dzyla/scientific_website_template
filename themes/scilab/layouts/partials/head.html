@@ -7,5 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     {{ $css := resources.Get "css/main.css" }}
     <link rel="stylesheet" href="{{ $css.Permalink }}">
+    {{ $custom := resources.Get "css/custom.css" }}
+    <link rel="stylesheet" href="{{ $custom.Permalink }}">
     {{ partial "head/js.html" . }}
 </head>

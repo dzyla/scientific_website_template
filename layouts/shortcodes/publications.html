@@ -1,52 +1,47 @@
 {{/*
-  Publication shortcode.
-  Attempts to fetch publications from ORCID or Crossref. If remote fetching
-  fails (e.g. due to network restrictions), data/publications.json will be used
-  instead.
+  Renders a list of publications from data/publications.json.
+  This file should be generated from your .bib file using the provided Python script.
+
+  This approach is more robust and maintainable than parsing BibTeX with regex.
+
+  Usage: {{< publications >}}
 */}}
 
-{{- $orcid := .Get "orcid" -}}
-{{- $author := .Get "author" -}}
-{{- $entries := slice -}}
+{{/* Default to loading data from `site.Data.publications` */}}
+{{- $pubs := site.Data.publications -}}
 
-{{- $remoteUrl := "" -}}
-{{- if $orcid }}
-  {{- $remoteUrl = printf "https://pub.orcid.org/v3.0/%s/works" $orcid -}}
-{{- else if $author }}
-  {{- $q := urlquery $author -}}
-  {{- $remoteUrl = printf "https://api.crossref.org/works?query.author=%s&rows=20" $q -}}
-{{- end }}
-
-{{- if $remoteUrl }}
-  {{- $r := try (resources.GetRemote $remoteUrl) -}}
-  {{- if not $r.Err }}
-    {{- $json := $r.Value.Content | transform.Unmarshal -}}
-    {{- if $json.group }}
-      {{- $entries = $json.group -}}
-    {{- else if $json.message.items }}
-      {{- $entries = $json.message.items -}}
-    {{- end }}
-  {{- end }}
-{{- end }}
-
-{{- if eq (len $entries) 0 }}
-  {{- $entries = site.Data.publications -}}
-{{- end }}
-
+{{- if not $pubs -}}
+  {{/* Provide a helpful error message if the data file is missing */}}
+  {{- errorf "Could not find publications data in data/publications.json. Please run the 'scripts/bib_to_json.py' script to generate it from your publications.bib file." -}}
+{{- else -}}
 <ol class="publications-list">
-{{- range $index, $pub := $entries }}
-  {{- $num := add $index 1 }}
-  <li class="publication-item" style="margin-bottom:1rem;">
-    <div class="pub-info">
-      <strong class="pub-num">{{ $num }}.</strong>
-      <span class="pub-title">{{ with $pub.title }}{{ . }}{{ end }}</span><br>
-      <span class="pub-authors">{{ with $pub.authors }}{{ . }}{{ else }}{{ $pub.author_string }}{{ end }}</span><br>
-      <span class="pub-journal">{{ with $pub.containerTitle }}{{ . }}{{ else }}{{ $pub.journal }}{{ end }}</span>,
-      <span class="pub-year">{{ with $pub.published.print }}{{ . }}{{ else }}{{ $pub.year }}{{ end }}</span>
-    </div>
-    {{- with $pub.image }}
-      <div class="pub-image"><img src="{{ . }}" alt="{{ $pub.title }}" style="max-width:100px;"></div>
-    {{- end }}
-  </li>
-{{- end }}
+  {{/* Sort publications by year in descending order */}}
+  {{- range sort $pubs "year" "desc" -}}
+    <li class="publication-item">
+      <p class="publication-title">{{ .title | plainify }}</p>
+      <p class="publication-authors">{{ .author | plainify }}</p>
+      <p class="publication-meta">
+        <em>{{ .journal | plainify }}</em>
+        {{- with .volume -}}
+          <strong>{{ . }}</strong>
+        {{- end -}}
+        {{- with .pages -}}
+          :{{ . | plainify }}
+        {{- end -}}
+        ({{ .year }}).
+      </p>
+      <p class="publication-links">
+        {{- with .doi -}}
+          <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI</a>
+        {{- end -}}
+        {{- with .url -}}
+          <a href="{{ . }}" target="_blank" rel="noopener">Link</a>
+        {{- end -}}
+        {{- with .pdf -}}
+          <a href="{{ . | relURL }}" target="_blank" rel="noopener">PDF</a>
+        {{- end -}}
+      </p>
+    </li>
+  {{- end -}}
 </ol>
+{{- end -}}
