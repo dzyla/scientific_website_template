@@ -5,7 +5,7 @@
   {{ $pi := where .Pages "Params.type" "pi" }}
   {{ range $pi }}
     <div class="team-member pi">
-      <img src="{{ .Params.image | absURL | safeURL }}" alt="{{ .Title }}">
+      <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}">
       <div class="info">
         <h2>{{ .Title }}</h2>
         <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
@@ -18,7 +18,7 @@
     {{ $members := where .Pages "Params.type" "member" }}
     {{ range $members }}
       <div class="team-member">
-        <img src="{{ .Params.image | absURL | safeURL }}" alt="{{ .Title }}">
+        <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}">
         <h3>{{ .Title }}</h3>
         <p class="role">{{ .Params.role }}</p>
         <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
