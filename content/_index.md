@@ -13,18 +13,6 @@ title: "Bio Lab"
 </section>
 
 <section class="news">
-  <h2>Latest News</h2>
+  <h3>Latest News</h3>
   {{< news >}}
 </section>
-
-<section class="join-us">
-  <h2>Join Our Team</h2>
-  <p>We are always looking for talented and motivated individuals. If you are passionate about our research and have a strong background in relevant fields, please contact us.</p>
-  <a href="/contact" class="button">Contact Us</a>
-</section>
-
-<section class="lab-work">
-  <h2>Our Work</h2>
-  <p>Our research focuses on understanding the structural basis of viral infection using cryo-electron microscopy and other biophysical techniques.</p>
-</section>
-

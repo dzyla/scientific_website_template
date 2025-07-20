@@ -1,6 +1,6 @@
 ---
 title: "David Brown"
-image: "https://via.placeholder.com/200?text=David+Brown"
+image: "/images/4.jpg"
 role: "Research Assistant"
 email: "david.brown@biolab.edu"
 type: "member"

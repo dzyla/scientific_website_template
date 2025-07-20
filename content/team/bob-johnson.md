@@ -1,6 +1,6 @@
 ---
 title: "Bob Johnson"
-image: "https://via.placeholder.com/200?text=Bob+Johnson"
+image: "/images/2.jpg"
 role: "Postdoctoral Researcher"
 email: "bob.johnson@biolab.edu"
 type: "member"

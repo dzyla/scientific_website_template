@@ -102,7 +102,7 @@ a:hover {
 /* Home Page Specifics */
 .hero {
     text-align: center;
-    padding: 3rem 0;
+    padding-top: 3rem;
 }
 
 .hero h1 {
@@ -186,25 +186,6 @@ a:hover {
     color: #333;
 }
 
-
-/* Team Page */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.team-member {
-    text-align: center;
-}
-
-.team-member img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1rem;
-}
 /* Team Page */
 .team-grid {
     display: grid;
@@ -218,15 +199,15 @@ a:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: 1px solid #eee;
+    border: 1px solid #d1d1d1;
     padding: 1rem;
     border-radius: 5px;
 }
   
 .team-member img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 150px; /* Set a fixed width */
+    height: 150px; /* Set a fixed height to match width */
+    border-radius: 15%; /* This creates the circle shape */
     object-fit: cover;
     margin-bottom: 1rem;
 }
@@ -251,13 +232,10 @@ a:hover {
     flex-direction: row;
     align-items: flex-start;
     text-align: left;
-    gap: 2rem;
+    gap: 1.5rem;
 }
-  
-.team-member.pi img {
-    width: 200px;
-    height: 200px;
-}
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -310,4 +288,101 @@ a:hover {
     border-top: 1px solid #eee;
     color: #777;
     font-size: 0.9rem;
+}
+
+/* Carousel Styles */
+.carousel-container {
+  width: 100%;
+  /* max-width: 900px; Or your preferred max width */
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden; /* Ensures images stay within the rounded corners */
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  /* Maintain a 16:9 aspect ratio */
+  /* padding-top: 56.25%;  */
+  /* background-color: #eee; Placeholder color while images load */
+}
+
+.carousel img {
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  width: 100%;
+  /* height: 100%; */
+  /* object-fit: cover; Cover the area without distortion */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out; /* Slower, smoother fade */
+}
+
+.carousel img.active {
+  opacity: 1;
+}
+
+
+/* News Section Styles */
+.news-container {
+  max-height: 500px; /* Adjust height as needed to fit ~10 items */
+  overflow-y: auto;  /* Add scrollbar if content overflows */
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 0 1.5rem;
+  background-color: #fdfdfd;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.news-item:first-child {
+  padding-top: 1.5rem;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+  padding-bottom: 1.5rem;
+}
+
+.news-date {
+  flex-shrink: 0;
+  width: 90px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.news-content {
+  flex-grow: 1;
+}
+
+.news-title, .news-title-link {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0 0 0.25rem 0;
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.news-title-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.news-summary {
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
 }

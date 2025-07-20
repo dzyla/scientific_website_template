@@ -1,19 +1,68 @@
-{
-    "smith2023": {
-        "authors": "Smith A, Johnson B, Williams C",
-        "title": "High-resolution structure of the ribosome-translocon complex",
-        "journal": "Cell",
-        "year": 2023,
-        "volume": "186",
-        "pages": "1-15",
-        "link": "https://www.cell.com/cell/fulltext/S0092-8674(23)00001-2"
-    },
-    "williams2022": {
-        "authors": "Williams C, Brown D",
-        "title": "A novel method for plunge-freezing biological samples",
-        "journal": "Journal of Structural Biology",
-        "year": 2022,
-        "link": "https://www.sciencedirect.com/science/article/pii/S1047847722001234"
-
-    }
-}
+[
+  {
+    "title": "Framework for classifying chemicals for repeat dose toxicity using NAMs",
+    "authors": "J. E. Doe, P. Botham, D. Holland, M. Fuart Gatnik, V. Giri, H. Kang, P. Kalra, S. León Pérez, S. Marty, S. Moors, R. Raeburn, E. Reale, R. Settivari, M. Sica, K. Z. Travis, S. J. Wijeyesakere",
+    "journal": "Archives of Toxicology",
+    "year": 2025
+  },
+  {
+    "title": "Analysis of health concerns not addressed by REACH for low tonnage chemicals and opportunities for new approach methodology",
+    "authors": "Philip Botham, Mark T. D. Cronin, Richard Currie, John Doe, Dorothee Funk-Weyer, Timothy W. Gant, Marcel Leist, Sue Marty, Bennard van Ravenzwaay, Carl Westmoreland",
+    "journal": "Archives of Toxicology",
+    "year": 2023
+  },
+  {
+    "title": "Use of New Approach Methodologies (NAMs) in regulatory decisions for chemical safety: Report from an EPAA Deep Dive Workshop",
+    "authors": "Carl Westmoreland, Hans J. Bender, John E. Doe, Miriam N. Jacobs, George E.N. Kass, Federica Madia, Catherine Mahony, Irene Manou, Gavin Maxwell, Pilar Prieto, Rob Roggeband, Tomasz Sobanski, Katrin Schütte, Andrew P. Worth, Zvonimir Zvonar, Mark T.D. Cronin",
+    "journal": "Regulatory Toxicology and Pharmacology",
+    "year": 2022
+  },
+  {
+    "title": "A new approach to the classification of carcinogenicity",
+    "authors": "John E. Doe, Alan R. Boobis, Samuel M. Cohen, Vicki L. Dellarco, Penelope A. Fenner-Crisp, Angelo Moretto, Timothy P. Pastoor, Rita S. Schoeny, Jennifer G. Seed, Douglas C. Wolf",
+    "journal": "Archives of Toxicology",
+    "year": 2022
+  },
+  {
+    "title": "A framework for chemical safety assessment incorporating new approach methodologies within REACH",
+    "authors": "Nicholas Ball, Remi Bars, Philip A. Botham, Andreea Cuciureanu, Mark T. D. Cronin, John E. Doe, Tatsiana Dudzina, Timothy W. Gant, Marcel Leist, Bennard van Ravenzwaay",
+    "journal": "Archives of Toxicology",
+    "year": 2022
+  },
+  {
+    "title": "The codification of hazard and its impact on the hazard versus risk controversy",
+    "authors": "John E. Doe, Alan R. Boobis, Samuel M. Cohen, Vicki L. Dellarco, Penelope A. Fenner-Crisp, Angelo Moretto, Timothy P. Pastoor, Rita S. Schoeny, Jennifer G. Seed, Douglas C. Wolf",
+    "journal": "Archives of Toxicology",
+    "year": 2021
+  },
+  {
+    "title": "The modification of cancer risk by chemicals",
+    "authors": "David J Harrison, John E Doe",
+    "journal": "Toxicology Research",
+    "year": 2021
+  },
+  {
+    "title": "Re: A call for action on the development and implementation of new methodologies for safety assessment of chemical-based products in the EU – A short communication",
+    "authors": "Mark Cronin, John Doe, Marina Pereira, Catherine Willett",
+    "journal": "Regulatory Toxicology and Pharmacology",
+    "year": 2021
+  },
+  {
+    "title": "Chemical carcinogenicity revisited 3: Risk assessment of carcinogenic potential based on the current state of knowledge of carcinogenesis in humans",
+    "authors": "Samuel M. Cohen, Alan R. Boobis, Vicki L. Dellarco, John E. Doe, Penelope A. Fenner-Crisp, Angelo Moretto, Timothy P. Pastoor, Rita S. Schoeny, Jennifer G. Seed, Douglas C. Wolf",
+    "journal": "Regulatory Toxicology and Pharmacology",
+    "year": 2019
+  },
+  {
+    "title": "Classification schemes for carcinogenicity based on hazard-identification have become outmoded and serve neither science nor society",
+    "authors": "Alan R. Boobis, Samuel M. Cohen, Vicki L. Dellarco, John E. Doe, Penelope A. Fenner-Crisp, Angelo Moretto, Timothy P. Pastoor, Rita S. Schoeny, Jennifer G. Seed, Douglas C. Wolf",
+    "journal": "Regulatory Toxicology and Pharmacology",
+    "year": 2016
+  },
+  {
+    "title": "A proposal to improve clarity and communication in the EU Classification process for chemicals for carcinogenicity and reproductive and developmental toxicity",
+    "authors": "J. E. Doe",
+    "journal": "Journal of Applied Toxicology",
+    "year": 2014
+  }
+]

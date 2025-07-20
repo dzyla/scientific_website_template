@@ -1,5 +1,5 @@
 ---
 title: "Team"
 ---
-Welcome to our team page. Meet the lab members below.
 
+<img src="/images/lab.jpg" alt="Lab image 1">

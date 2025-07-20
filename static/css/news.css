@@ -1,0 +1,62 @@
+/* News Section Styles */
+.news-container {
+  max-height: 500px; /* Adjust height as needed to fit ~10 items */
+  overflow-y: auto;  /* Add scrollbar if content overflows */
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 0 1.5rem;
+  background-color: #fdfdfd;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.news-item:first-child {
+  padding-top: 1.5rem;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+  padding-bottom: 1.5rem;
+}
+
+.news-date {
+  flex-shrink: 0;
+  width: 90px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.news-content {
+  flex-grow: 1;
+}
+
+.news-title, .news-title-link {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0 0 0.25rem 0;
+  display: block;
+  color: #333;
+  text-decoration: none;
+}
+
+.news-title-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.news-summary {
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
+}

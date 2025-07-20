@@ -1,9 +1,26 @@
-<ul class="news-list">
-  {{ range sort site.Data.news "date" "desc" }}
-  <li class="news-item">
-    <span class="news-date">{{ .date }}</span>
-    <span class="news-text"><a href="{{ .link }}">{{ .title }}</a></span>
-  </li>
-  {{ end }}
-</ul>
+{{/* Get all pages from the 'news' section, assuming that's where news lives */}}
+{{ $pages := where site.RegularPages "Section" "news" }}
 
+{{/* Sort by date, newest first */}}
+{{ $sortedPages := $pages.ByDate.Reverse }}
+
+<div class="news-container">
+  <ul class="news-list">
+    {{ range $sortedPages }}
+      <li class="news-item">
+        <span class="news-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        <div class="news-content">
+          {{/* Check for an external link in the front matter */}}
+          {{ if .Params.link }}
+            <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" class="news-title-link">{{ .Title }}</a>
+          {{ else }}
+            <strong class="news-title">{{ .Title }}</strong>
+          {{ end }}
+          <div class="news-summary">{{ .Summary }}</div>
+        </div>
+      </li>
+    {{ else }}
+      <li><p>No news to display.</p></li>
+    {{ end }}
+  </ul>
+</div>
