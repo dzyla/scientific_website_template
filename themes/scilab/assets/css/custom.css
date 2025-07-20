@@ -1,0 +1,33 @@
+/* Responsive images within main content */
+.main img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Publication list styling */
+.publications-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.publication-item {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+.publication-item:last-child {
+  border-bottom: none;
+}
+.pub-title {
+  font-weight: 600;
+}
+.pub-authors {
+  color: #555;
+}
+.pub-journal,
+.pub-year {
+  color: #888;
+  font-size: 0.9rem;
+}
