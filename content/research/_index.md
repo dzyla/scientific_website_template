@@ -2,8 +2,6 @@
 title: "Research"
 ---
 
-# Our Research Focus
-
 Our lab utilizes cryo-electron microscopy (cryo-EM) to study the structures of viruses and their components.  We focus on:
 
 *   **High-Resolution Structure Determination:**  We employ advanced cryo-EM techniques to determine the structures of viruses and viral proteins at near-atomic resolution, revealing crucial details about their architecture.
@@ -17,12 +15,12 @@ We are particularly interested in viruses with significant public health impact,
 
 ### Project 1:  Understanding Virus X Assembly
 
-[![](/images/project1.jpg)](/images/project1.jpg)
+[![](/images/img1.jpg)](/images/images.jpg)
 
 We are investigating the assembly mechanism of Virus X using cryo-EM. This project focuses on identifying key structural intermediates and understanding the roles of different viral proteins in the assembly process.
 
 ### Project 2: Developing Novel Inhibitors for Virus Y
 
-[![](/images/project2.jpg)](/images/project2.jpg)
+[![](/images/img2.jpg)](/images/img2.jpg)
 
 This project aims to identify and characterize novel inhibitors that target Virus Y. We use cryo-EM to visualize inhibitor binding and understand the structural basis of inhibition, which can inform the development of antiviral therapeutics.

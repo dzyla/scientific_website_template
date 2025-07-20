@@ -4,9 +4,9 @@ title: "Bio Lab"
 
 <section class="hero">
   <div class="carousel">
-    <img src="https://via.placeholder.com/800x600?text=Lab+Image+1" alt="Lab image 1">
-    <img src="https://via.placeholder.com/800x600?text=Lab+Image+2" alt="Lab image 2">
-    <img src="https://via.placeholder.com/800x600?text=Lab+Image+3" alt="Lab image 3">
+    <img src="/images/lab.jpg" alt="Lab image 1">
+    <img src="/images/img1.jpg" alt="Lab image 2">
+    <img src="/images/img2.jpg" alt="Lab image 3">
   </div>
   <h1>Welcome to Bio Lab</h1>
   <p>We are a cutting-edge biophysics laboratory dedicated to unraveling the complexities of biological systems through innovative research and interdisciplinary collaboration.</p>
