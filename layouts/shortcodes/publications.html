@@ -14,7 +14,11 @@
     <li class="publication-item">
       <div class="pub-text">
         <p class="pub-title">{{ $p.title | plainify }}</p>
-        <p class="pub-authors">{{ $p.authors | plainify }}</p>
+        {{- $authors := $p.authors | plainify -}}
+        {{- range $name := $p.highlight -}}
+          {{- $authors = replace $authors $name (printf "<strong>%s</strong>" $name) -}}
+        {{- end -}}
+        <p class="pub-authors">{{ $authors | safeHTML }}</p>
         <p class="pub-meta"><em>{{ $p.journal | plainify }}</em> ({{ $p.year }}) {{- with $p.link -}}[<a href="{{ . }}" target="_blank" rel="noopener">link</a>]{{- end -}}</p>
       </div>
       {{- with $p.image -}}

@@ -16,13 +16,14 @@ def format_authors(contributors):
             
     return ", ".join(author_names)
 
-def fetch_publications(orcid_id):
+def fetch_publications(orcid_id, highlight_names=None):
     """
     Fetches and formats publication data from the ORCID public API.
     """
     print(f"Fetching publications for ORCID iD: {orcid_id}...")
     API_URL = f"https://pub.orcid.org/v3.0/{orcid_id}/works"
     headers = {"Accept": "application/json"}
+    highlight_names = highlight_names or []
 
     try:
         # First, get the summary of all works to get their put-codes
@@ -59,14 +60,29 @@ def fetch_publications(orcid_id):
 
             contributors_obj = work_data.get('contributors') or {}
             authors = format_authors(contributors_obj.get('contributor', []))
+
+            # Try to find a DOI or URL for a direct link
+            link = None
+            for ext in (work_data.get('external-ids') or {}).get('external-id', []):
+                if ext.get('external-id-type', '').lower() == 'doi':
+                    link = f"https://doi.org/{ext.get('external-id-value')}"
+                    break
+            if not link:
+                link = (work_data.get('url') or {}).get('value')
+
             # Add to our list if we have a title and year
             if title and year:
-                publications.append({
+                entry = {
                     "title": title,
                     "authors": authors,
                     "journal": journal,
                     "year": int(year)
-                })
+                }
+                if link:
+                    entry["link"] = link
+                if highlight_names:
+                    entry["highlight"] = [n for n in highlight_names if n in authors]
+                publications.append(entry)
             sys.stdout.write(f"\rProcessed {i+1}/{len(work_summaries)}")
             sys.stdout.flush()
 
@@ -88,9 +104,12 @@ def main():
     parser = argparse.ArgumentParser(description="Generate a publications.json file from an ORCID iD.")
     parser.add_argument("orcid_id", help="The ORCID iD of the researcher (e.g., 0000-0002-1825-0097).")
     parser.add_argument("-o", "--output", default="publications.json", help="The name of the output JSON file.")
+    parser.add_argument("-hl", "--highlight", default="", help="Comma separated list of author names to highlight in the output JSON.")
     args = parser.parse_args()
 
-    publications_data = fetch_publications(args.orcid_id)
+    highlight_names = [n.strip() for n in args.highlight.split(',') if n.strip()]
+
+    publications_data = fetch_publications(args.orcid_id, highlight_names)
 
     if publications_data is not None:
         with open(args.output, 'w', encoding='utf-8') as f:
