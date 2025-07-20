@@ -1,16 +1,19 @@
-[
-  {
-    "title": "Cryo-EM structure of virus A",
-    "authors": "A. Smith, B. Johnson",
-    "journal": "Journal of Virology",
-    "year": 2023,
-    "image": "https://via.placeholder.com/150?text=Paper+1"
-  },
-  {
-    "title": "Insights into Viral Infection",
-    "authors": "A. Smith, C. Williams",
-    "journal": "Nature Microbiology",
-    "year": 2024,
-    "image": "https://via.placeholder.com/150?text=Paper+2"
-  }
-]
+{
+    "smith2023": {
+        "authors": "Smith A, Johnson B, Williams C",
+        "title": "High-resolution structure of the ribosome-translocon complex",
+        "journal": "Cell",
+        "year": 2023,
+        "volume": "186",
+        "pages": "1-15",
+        "link": "https://www.cell.com/cell/fulltext/S0092-8674(23)00001-2"
+    },
+    "williams2022": {
+        "authors": "Williams C, Brown D",
+        "title": "A novel method for plunge-freezing biological samples",
+        "journal": "Journal of Structural Biology",
+        "year": 2022,
+        "link": "https://www.sciencedirect.com/science/article/pii/S1047847722001234"
+
+    }
+}

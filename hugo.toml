@@ -26,18 +26,14 @@ theme = "scilab"
     url = "/resources"
     weight = 4
   [[menu.main]]
-    name = "Protocols"
-    url = "/protocols"
-    weight = 5
-  [[menu.main]]
     name = "Lab Fun"
     url = "/labfun"
-    weight = 6
+    weight = 5
   [[menu.main]]
     name = "Philosophy"
     url = "/philosophy"
-    weight = 7
+    weight = 6
   [[menu.main]]
     name = "Contact"
     url = "/contact"
-    weight = 8
+    weight = 7

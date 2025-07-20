@@ -1,0 +1,18 @@
+{{/*
+    Shortcode to display a publication from data/publications.json
+    Usage: {{< publication "publication_id" >}}
+*/}}
+{{- $pubId := .Get 0 -}}
+{{- $pub := index .Site.Data.publications $pubId -}}
+
+{{- if $pub -}}
+<div class="publication">
+    <p>
+        {{ $pub.authors }} ({{ $pub.year }}).
+        {{- with $pub.link -}}<a href="{{ . }}" target="_blank" rel="noopener">{{- end -}}
+        {{ $pub.title }}.
+        {{- if $pub.link -}}</a>{{- end -}}
+        <em>{{ $pub.journal }}</em>{{ with $pub.volume }}, {{ . }}{{ end }}{{ with $pub.pages }}, {{ . }}{{ end }}.
+    </p>
+</div>
+{{- end -}}
