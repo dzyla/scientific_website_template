@@ -1,0 +1,5 @@
+<div class="carousel">
+  {{- range $i, $path := .Params -}}
+    <img src="{{ $path | relURL | safeURL }}" alt="Lab image {{ add $i 1 }}">
+  {{- end -}}
+</div>
