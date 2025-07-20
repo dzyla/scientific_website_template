@@ -8,11 +8,9 @@
 {{- if $pub -}}
 <div class="publication">
     <p>
-        {{ $pub.authors }} ({{ $pub.year }}).
-        {{- with $pub.link -}}<a href="{{ . }}" target="_blank" rel="noopener">{{- end -}}
-        {{ $pub.title }}.
-        {{- if $pub.link -}}</a>{{- end -}}
+        {{ $pub.authors }} ({{ $pub.year }}). {{ $pub.title }}.
         <em>{{ $pub.journal }}</em>{{ with $pub.volume }}, {{ . }}{{ end }}{{ with $pub.pages }}, {{ . }}{{ end }}.
+        {{- with $pub.link }} [<a href="{{ . }}" target="_blank" rel="noopener">link</a>]{{- end }}
     </p>
 </div>
 {{- end -}}
