@@ -1,46 +1,27 @@
 {{/*
   Renders a list of publications from data/publications.json.
-  This file should be generated from your .bib file using the provided Python script.
-
-  This approach is more robust and maintainable than parsing BibTeX with regex.
-
   Usage: {{< publications >}}
 */}}
 
-{{/* Default to loading data from `site.Data.publications` */}}
 {{- $pubs := site.Data.publications -}}
 
 {{- if not $pubs -}}
-  {{/* Provide a helpful error message if the data file is missing */}}
-  {{- errorf "Could not find publications data in data/publications.json. Please run the 'scripts/bib_to_json.py' script to generate it from your publications.bib file." -}}
+  {{- errorf "Could not find publications data in data/publications.json." -}}
 {{- else -}}
 <ol class="publications-list">
-  {{/* Sort publications by year in descending order */}}
   {{- range sort $pubs "year" "desc" -}}
+    {{- $p := . -}}
     <li class="publication-item">
-      <p class="publication-title">{{ .title | plainify }}</p>
-      <p class="publication-authors">{{ .author | plainify }}</p>
-      <p class="publication-meta">
-        <em>{{ .journal | plainify }}</em>
-        {{- with .volume -}}
-          <strong>{{ . }}</strong>
-        {{- end -}}
-        {{- with .pages -}}
-          :{{ . | plainify }}
-        {{- end -}}
-        ({{ .year }}).
-      </p>
-      <p class="publication-links">
-        {{- with .doi -}}
-          <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI</a>
-        {{- end -}}
-        {{- with .url -}}
-          <a href="{{ . }}" target="_blank" rel="noopener">Link</a>
-        {{- end -}}
-        {{- with .pdf -}}
-          <a href="{{ . | relURL }}" target="_blank" rel="noopener">PDF</a>
-        {{- end -}}
-      </p>
+      <div class="pub-text">
+        <p class="pub-title">{{ $p.title | plainify }}</p>
+        <p class="pub-authors">{{ $p.authors | plainify }}</p>
+        <p class="pub-meta"><em>{{ $p.journal | plainify }}</em> ({{ $p.year }})</p>
+      </div>
+      {{- with $p.image -}}
+      <div class="pub-image">
+        <img src="{{ . }}" alt="illustration for {{ $p.title | plainify }}">
+      </div>
+      {{- end -}}
     </li>
   {{- end -}}
 </ol>

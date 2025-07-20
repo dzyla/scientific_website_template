@@ -8,11 +8,15 @@
 
 /* Publication list styling */
 .publications-list {
-  list-style: none;
+  list-style: decimal;
+  list-style-position: inside;
   padding-left: 0;
   margin: 0;
 }
 .publication-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
@@ -20,14 +24,25 @@
 .publication-item:last-child {
   border-bottom: none;
 }
+.pub-text {
+  flex: 0 0 75%;
+}
+.pub-image {
+  flex: 0 0 25%;
+  margin-left: 1rem;
+  text-align: right;
+}
+.pub-image img {
+  max-width: 100%;
+  height: auto;
+}
 .pub-title {
   font-weight: 600;
 }
 .pub-authors {
   color: #555;
 }
-.pub-journal,
-.pub-year {
+.pub-meta {
   color: #888;
   font-size: 0.9rem;
 }
