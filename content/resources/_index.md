@@ -2,10 +2,13 @@
 title: "Resources"
 ---
 
-# Lab Resources & Protocols
-
-[![](/images/cryo-em-setup.jpg)](/images/cryo-em-setup.jpg)
-
-Our lab is equipped with state-of-the-art facilities for cryo-EM sample preparation, data acquisition, and analysis. We have access to high-end microscopes and computational resources.
+Our lab maintains a collection of external resources.
 
 ## Protocols
+- [Cryo-EM Sample Preparation](https://example.com/sample-prep)
+- [Image Processing Workflow](https://example.com/image-processing)
+- [Data Collection Guide](https://example.com/data-collection)
+
+## Other Resources
+- [Analysis Scripts on GitHub](https://github.com/example/repo)
+- [Plasmid Database](https://example.com/plasmids)

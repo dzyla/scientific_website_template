@@ -12,12 +12,9 @@ You can reach us at:
 
 <div class="contact-grid">
   <div class="contact-map">
-    <!-- Embed your map here.  For example, using an iframe from Google Maps: -->
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.199171925128!2d-73.99103558459883!3d40.75889527932893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258f89a3a3f2f%3A0x91014008b5b95b44!2sYour%20Lab%20Location!5e0!3m2!1sen!2sus!4v1678889999999!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe width="600" height="450" frameborder="0" scrolling="no" src="https://www.openstreetmap.org/export/embed.html?bbox=-117.255%2C32.865%2C-117.253%2C32.867&amp;layer=mapnik&amp;marker=32.866%2C-117.254"></iframe>
   </div>
   <div class="contact-details">
-    <b>Address: </b>
-    Bio Lab, Department of Biophysics, 456 Research Avenue, Science City, 12345, USA
-    <!--  Add more details as needed -->
+    <b>Address:</b> Scripps Pier, La Jolla, San Diego, CA 92037
   </div>
 </div>

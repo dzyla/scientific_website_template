@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 0.2rem;
 }
@@ -36,6 +36,10 @@
   max-width: 100%;
   height: auto;
 }
+.publication-item p {
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
 .pub-title {
   font-weight: 600;
 }
@@ -45,4 +49,5 @@
 .pub-meta {
   color: #888;
   font-size: 0.9rem;
+  margin-bottom: 0;
 }
