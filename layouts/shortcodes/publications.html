@@ -1,52 +1,28 @@
-{{/*
-  Publication shortcode.
-  Attempts to fetch publications from ORCID or Crossref. If remote fetching
-  fails (e.g. due to network restrictions), data/publications.json will be used
-  instead.
-*/}}
-
-{{- $orcid := .Get "orcid" -}}
-{{- $author := .Get "author" -}}
+{{/* Publication shortcode with JSON or BibTeX support */}}
+{{- $file := .Get "file" | default "publications.json" -}}
 {{- $entries := slice -}}
-
-{{- $remoteUrl := "" -}}
-{{- if $orcid }}
-  {{- $remoteUrl = printf "https://pub.orcid.org/v3.0/%s/works" $orcid -}}
-{{- else if $author }}
-  {{- $q := urlquery $author -}}
-  {{- $remoteUrl = printf "https://api.crossref.org/works?query.author=%s&rows=20" $q -}}
-{{- end }}
-
-{{- if $remoteUrl }}
-  {{- $r := try (resources.GetRemote $remoteUrl) -}}
-  {{- if not $r.Err }}
-    {{- $json := $r.Value.Content | transform.Unmarshal -}}
-    {{- if $json.group }}
-      {{- $entries = $json.group -}}
-    {{- else if $json.message.items }}
-      {{- $entries = $json.message.items -}}
-    {{- end }}
-  {{- end }}
-{{- end }}
-
-{{- if eq (len $entries) 0 }}
-  {{- $entries = site.Data.publications -}}
-{{- end }}
-
+{{- if hasSuffix $file ".bib" -}}
+  {{- $bib := readFile (printf "data/%s" $file) -}}
+  {{- $raw := findRE "@[^{]+\{[^@]+" $bib -}}
+  {{- range $raw }}
+    {{- $entry := . -}}
+    {{- $title := replaceRE "(?s).*title\\s*=\\s*\\{([^}]*)\\}.*" "$1" $entry -}}
+    {{- $authors := replaceRE "(?s).*author\\s*=\\s*\\{([^}]*)\\}.*" "$1" $entry -}}
+    {{- $journal := replaceRE "(?s).*journal\\s*=\\s*\\{([^}]*)\\}.*" "$1" $entry -}}
+    {{- $year := replaceRE "(?s).*year\\s*=\\s*\\{([^}]*)\\}.*" "$1" $entry -}}
+    {{- $entries = $entries | append (dict "title" $title "authors" $authors "journal" $journal "year" $year) -}}
+  {{- end -}}
+{{- else -}}
+  {{- $name := replaceRE "\\.json$" "" $file -}}
+  {{- $entries = index site.Data $name -}}
+{{- end -}}
 <ol class="publications-list">
 {{- range $index, $pub := $entries }}
-  {{- $num := add $index 1 }}
-  <li class="publication-item" style="margin-bottom:1rem;">
-    <div class="pub-info">
-      <strong class="pub-num">{{ $num }}.</strong>
-      <span class="pub-title">{{ with $pub.title }}{{ . }}{{ end }}</span><br>
-      <span class="pub-authors">{{ with $pub.authors }}{{ . }}{{ else }}{{ $pub.author_string }}{{ end }}</span><br>
-      <span class="pub-journal">{{ with $pub.containerTitle }}{{ . }}{{ else }}{{ $pub.journal }}{{ end }}</span>,
-      <span class="pub-year">{{ with $pub.published.print }}{{ . }}{{ else }}{{ $pub.year }}{{ end }}</span>
-    </div>
-    {{- with $pub.image }}
-      <div class="pub-image"><img src="{{ . }}" alt="{{ $pub.title }}" style="max-width:100px;"></div>
-    {{- end }}
+  <li class="publication-item">
+    <span class="pub-title">{{ $pub.title }}</span><br>
+    <span class="pub-authors">{{ $pub.authors }}</span><br>
+    <span class="pub-journal">{{ $pub.journal }}</span>,
+    <span class="pub-year">{{ $pub.year }}</span>
   </li>
 {{- end }}
 </ol>
