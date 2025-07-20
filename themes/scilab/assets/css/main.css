@@ -342,9 +342,9 @@ a:hover {
 
 .news-item {
   display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #eee;
+  gap: 1rem;
+  padding: 0rem 0;
+  border-bottom: 1px solid #c9c9c9;
 }
 
 .news-item:first-child {
