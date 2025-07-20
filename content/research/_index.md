@@ -15,7 +15,7 @@ We are particularly interested in viruses with significant public health impact,
 
 ### Project 1:  Understanding Virus X Assembly
 
-[![](/images/img1.jpg)](/images/images.jpg)
+[![](/images/img1.jpg)](/images/img1.jpg)
 
 We are investigating the assembly mechanism of Virus X using cryo-EM. This project focuses on identifying key structural intermediates and understanding the roles of different viral proteins in the assembly process.
 
