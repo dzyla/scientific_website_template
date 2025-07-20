@@ -1,6 +1,7 @@
 # Hugo configuration file
-title = "Bio Lab"
+baseURL = "https://dzyla.github.io/scientific_website_template/"
 languageCode = "en-us"
+title = "Bio Lab"
 theme = "scilab"
 
 [markup]
