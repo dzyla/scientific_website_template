@@ -1,3 +1,18 @@
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+/* News scroll window for long lists */
+.news-container {
+  max-height: 350px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  background: #fff;
+  padding: 0 1.5rem;
+  border: 1px solid #e5e5e5;
+}
 /* General Body Styles */
 body {
     font-family: 'Inter', sans-serif;
@@ -37,7 +52,7 @@ body {
 .header .logo a {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #000;
+    color: var(--highlight-color);
     text-decoration: none;
 }
 
@@ -59,16 +74,17 @@ body {
     border-bottom: 2px solid transparent;
 }
 
+/* Use accent color from CSS variable */
 .header nav a:hover,
 .header nav li.active a {
-    color: #000;
-    border-bottom: 2px solid #000;
+    color: var(--highlight-color);
+    border-bottom: 2px solid var(--highlight-color);
 }
 
 
 /* Main Content */
 .main {
-    flex-grow: 1;
+    flex: 1 0 auto;
 }
 
 p {
@@ -102,7 +118,7 @@ a:hover {
 /* Home Page Specifics */
 .hero {
     text-align: center;
-    padding-top: 3rem;
+    padding-top: 0.5rem;
 }
 
 .hero h1 {
@@ -164,7 +180,7 @@ a:hover {
 }
 
 .email a {
-  color: #007bff;
+  color: var(--highlight-color);
 }
 /* News Shortcode */
 .news-list {
@@ -280,11 +296,13 @@ a:hover {
 .contact-details {
   line-height: 1.6;
 }
+
+
 /* Footer */
 .footer {
     text-align: center;
-    padding: 2rem 0;
-    margin-top: 3rem;
+    padding: 1rem 0 1rem 0;
+    margin-top: 0.5rem;
     border-top: 1px solid #eee;
     color: #777;
     font-size: 0.9rem;
@@ -324,65 +342,88 @@ a:hover {
 }
 
 
-/* News Section Styles */
-.news-container {
-  max-height: 500px; /* Adjust height as needed to fit ~10 items */
-  overflow-y: auto;  /* Add scrollbar if content overflows */
-  border: 1px solid #e1e1e1;
-  border-radius: 8px;
-  padding: 0 1.5rem;
-  background-color: #fdfdfd;
+
+/* News section styles are now in static/css/news.css */
+
+/* Modern minimal tweaks */
+body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #ffffff;
+    color: #222;
+    font-size: 17px;
 }
 
-.news-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-.news-item {
-  display: flex;
-  gap: 1rem;
-  padding: 0rem 0;
-  border-bottom: 1px solid #c9c9c9;
+.header {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 0.5rem;
+    background: #fff;
 }
 
-.news-item:first-child {
-  padding-top: 1.5rem;
+.header .logo a {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--highlight-color, #1976d2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: none;
 }
 
-.news-item:last-child {
-  border-bottom: none;
-  padding-bottom: 1.5rem;
+.header nav a {
+    color: #222;
+    font-size: 1.08rem;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+    padding-bottom: 2px;
+}
+.header nav a:hover,
+.header nav li.active a {
+    color: var(--highlight-color);
+    border-bottom: 2px solid var(--highlight-color);
 }
 
-.news-date {
-  flex-shrink: 0;
-  width: 90px;
-  font-size: 0.9em;
-  color: #666;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #222;
+    margin-top: 1.2rem;
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.01em;
+}
+h1 { font-size: 2.3rem; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.3rem; }
+
+a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--highlight-color);
 }
 
-.news-content {
-  flex-grow: 1;
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: 1.7;
 }
 
-.news-title, .news-title-link {
-  font-weight: bold;
-  font-size: 1.1em;
-  margin: 0 0 0.25rem 0;
-  display: block;
-  color: #333;
-  text-decoration: none;
+/* Card style for team/publications */
+.team-member, .publications-list li {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
-.news-title-link:hover {
-  text-decoration: underline;
-  color: #0056b3;
-}
-
-.news-summary {
-  font-size: 0.95em;
-  color: #555;
-  line-height: 1.5;
-}

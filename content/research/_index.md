@@ -15,12 +15,14 @@ We are particularly interested in viruses with significant public health impact,
 
 ### Project 1:  Understanding Virus X Assembly
 
-[![](/images/img1.jpg)](/images/img1.jpg)
+
+{{< show_img "images/img1.jpg" "Lab members working on experiments" >}}
 
 We are investigating the assembly mechanism of Virus X using cryo-EM. This project focuses on identifying key structural intermediates and understanding the roles of different viral proteins in the assembly process.
 
 ### Project 2: Developing Novel Inhibitors for Virus Y
 
-[![](/images/img2.jpg)](/images/img2.jpg)
+
+{{< show_img "images/img2.jpg" "Group discussion in the lab" >}}
 
 This project aims to identify and characterize novel inhibitors that target Virus Y. We use cryo-EM to visualize inhibitor binding and understand the structural basis of inhibition, which can inform the development of antiviral therapeutics.

@@ -2,17 +2,13 @@
 title: "Lab Fun"
 ---
 
-# Life in the Lab
-
 We believe that a positive and collaborative lab environment fosters creativity and productivity. Here are some glimpses into our lab life:
 
-
-[![](/images/img1.jpg)](/images/img1.jpg)
+{{< show_img "images/img1.jpg" "Team outing at the park" >}}
 
 We enjoy team outings and social events to unwind and connect outside of research.
 
-
-[![](/images/img2.jpg)](/images/img2.jpg)
+{{< show_img "images/img2.jpg" "Collaborative data analysis session" >}}
 
 Our team collaborates closely on data analysis and troubleshooting, celebrating successes together.
 

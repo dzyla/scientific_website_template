@@ -1,6 +1,6 @@
 ---
 title: "Carol Williams"
-image: "/images/3.jpg"
+image: "images/3.jpg"
 role: "Graduate Student"
 email: "carol.williams@biolab.edu"
 type: "member"

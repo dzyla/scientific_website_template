@@ -1,6 +1,6 @@
 ---
 title: "Alice Smith"
-image: "/images/1.jpg"
+image: "images/1.jpg"
 role: "Principal Investigator"
 email: "alice.smith@biolab.edu"
 type: "pi"

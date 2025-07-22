@@ -4,17 +4,17 @@
 {{/* Sort by date, newest first */}}
 {{ $sortedPages := $pages.ByDate.Reverse }}
 
-<div class="news-container">
+<div class="news-container" style="--highlight-color: {{ site.Params.highlightColor }};">
   <ul class="news-list">
     {{ range $sortedPages }}
       <li class="news-item">
         <span class="news-date">{{ .Date.Format "Jan 2, 2006" }}</span>
         <div class="news-content">
-          {{/* Check for an external link in the front matter */}}
+          {{/* Only make title a link if .Params.link is present, otherwise just show as text */}}
           {{ if .Params.link }}
             <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" class="news-title-link">{{ .Title }}</a>
           {{ else }}
-            <strong class="news-title">{{ .Title }}</strong>
+            <span class="news-title">{{ .Title }}</span>
           {{ end }}
           <div class="news-summary">{{ .Summary }}</div>
         </div>

@@ -2,4 +2,5 @@
 title: "Team"
 ---
 
-<img src="/images/lab.jpg" alt="Lab image 1">
+{{< show_img "images/lab.jpg" "Our group picture from May 2024" >}}
+
