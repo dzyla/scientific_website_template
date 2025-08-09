@@ -4,26 +4,32 @@
 
   {{ $pi := where .Pages "Params.type" "pi" }}
   {{ range $pi }}
-    <div class="team-member pi">
-      <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}">
-      <div class="info">
-        <h2>{{ .Title }}</h2>
-        <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
-        <div class="content">{{ .Content }}</div>
-      </div>
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}" class="img-fluid rounded mb-3" loading="lazy">
     </div>
+    <div class="col-md-9">
+      <h2>{{ .Title }}</h2>
+      <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
+      <div class="content">{{ .Content }}</div>
+    </div>
+  </div>
   {{ end }}
 
-  <div class="team-grid">
+  <div class="row">
     {{ $members := where .Pages "Params.type" "member" }}
     {{ range $members }}
-      <div class="team-member">
-        <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}">
-        <h3>{{ .Title }}</h3>
-        <p class="role">{{ .Params.role }}</p>
-        <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
-        <div class="content">{{ .Content }}</div>
+    <div class="col-md-4 col-sm-6 mb-4">
+      <div class="card h-100 text-center">
+        <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}" class="card-img-top" loading="lazy">
+        <div class="card-body">
+          <h3 class="card-title">{{ .Title }}</h3>
+          <p class="role">{{ .Params.role }}</p>
+          <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
+          <div class="content">{{ .Content }}</div>
+        </div>
       </div>
+    </div>
     {{ end }}
   </div>
 {{ end }}

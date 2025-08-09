@@ -3,6 +3,7 @@ baseURL = "https://dzyla.github.io/scientific_website_template/"
 languageCode = "en-us"
 title = "Bio Lab"
 theme = "scilab"
+googleAnalytics = "G-XXXXXXXXXX"
 
 [params]
   highlightColor = "#1976d2" # Default blue, change to any hex color

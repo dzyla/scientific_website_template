@@ -23,7 +23,7 @@
       </div>
       {{- with $p.image -}}
       <div class="pub-image">
-        <img src="{{ . }}" alt="illustration for {{ $p.title | plainify }}">
+        <img src="{{ . }}" alt="illustration for {{ $p.title | plainify }}" class="img-fluid" loading="lazy">
       </div>
       {{- end -}}
     </li>

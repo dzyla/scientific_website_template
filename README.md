@@ -37,8 +37,9 @@ This repository contains a minimal Hugo template for scientific labs, designed f
 
 ## Features
 
-- Custom theme `SciLab` with a clean, responsive layout
+- Custom theme `SciLab` now using the [Bootstrap](https://getbootstrap.com) framework for a modern, responsive layout with a collapsible mobile menu
 - Pre-configured sections: Research, Team, Publications, Resources, Lab Fun, Philosophy, Protocols, News
+- Built-in Google Analytics support
 - Shortcodes for news, publications, and carousel
 - Example content for team members, publications, and protocols
 
@@ -68,7 +69,7 @@ This repository contains a minimal Hugo template for scientific labs, designed f
    - Update images in `static/images/`
 
 4. **Customize styles:**
-   - Edit CSS in `static/css/news.css` and other files in `static/css/`
+   - The site uses Bootstrap by default. Add overrides in `static/css/` if needed.
 
 5. **Shortcodes:**
    - Use shortcodes in your Markdown files: `{{< news >}}`, `{{< publications >}}`, `{{< carousel >}}`
