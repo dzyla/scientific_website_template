@@ -1,0 +1,81 @@
+/* ---------- Landing hero and carousel ----------------------------------- */
+:root { --hero-gap: 1.1rem; }
+@media (max-width: 768px) { :root { --hero-gap: 0.9rem; } }
+
+.hero { text-align: center; padding-top: 0.25rem; }
+.hero-image { margin-bottom: var(--hero-gap); }
+
+/* Stable height; isolate stacking for consistent cross-fade */
+.carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 420px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f6f8fb;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  outline: none;
+  isolation: isolate;            /* new: ensure we control the stacking context */
+}
+@media (max-width: 768px) {
+  .carousel { aspect-ratio: 4 / 3; max-height: 340px; }
+}
+
+/* Cross-fade and subtle motion */
+.carousel img {
+  position: absolute !important; /* ensure stacking even if something overrides */
+  inset: 0 !important;
+  display: block !important;     /* defeats any legacy display:none */
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+  transform: translateX(10px) scale(1.02);
+  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out !important;
+}
+
+.carousel img.active {
+  z-index: 1;
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* Subtle navigation arrows */
+.carousel .nav-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 5; display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  opacity: 0;
+}
+.carousel .nav-prev { left: 8px; }
+.carousel .nav-next { right: 8px; }
+.carousel:hover .nav-btn,
+.carousel:focus-within .nav-btn { opacity: 1; }
+.carousel .nav-btn:hover { background: rgba(255,255,255,0.95); transform: translateY(-50%) scale(1.04); box-shadow: 0 4px 12px rgba(0,0,0,0.14); }
+.carousel .nav-btn:active { transform: translateY(-50%) scale(0.98); }
+.carousel .nav-btn:focus-visible { outline: 2px solid var(--highlight-color, #1976d2); outline-offset: 2px; }
+.carousel .nav-btn svg { width: 18px; height: 18px; color: #111; }
+@media (max-width: 420px) {
+  .carousel .nav-btn { width: 32px; height: 32px; }
+  .carousel .nav-prev { left: 6px; } .carousel .nav-next { right: 6px; }
+}
+
+/* Respect reduced motion (if OS/browser has it ON, fades will be off) */
+@media (prefers-reduced-motion: reduce) {
+  .carousel img { transition: none !important; }
+  .carousel .nav-btn { transition: none; }
+}
+
+/* Remove accidental extra top margin after hero */
+.home-content section:first-of-type { margin-top: 0; }

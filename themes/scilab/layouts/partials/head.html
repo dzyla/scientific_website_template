@@ -1,18 +1,29 @@
 <head>
-    <style>
-      :root {
-        --highlight-color: {{ .Site.Params.highlightColor | default "#1976d2" }};
-      }
-    </style>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ .Site.Title }}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    {{ $css := resources.Get "css/main.css" }}
-    <link rel="stylesheet" href="{{ $css.Permalink }}">
-    {{ $custom := resources.Get "css/custom.css" }}
-    <link rel="stylesheet" href="{{ $custom.Permalink }}">
-    {{ partial "head/js.html" . }}
+  <style>
+    :root { --highlight-color: {{ .Site.Params.highlightColor | default "#1976d2" }}; }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Site.Title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  {{ $css := resources.Get "css/main.css" }}
+  <link rel="stylesheet" href="{{ $css.Permalink }}">
+
+
+  {{ $nav := resources.Get "css/nav.css" }}
+  <link rel="stylesheet" href="{{ $nav.Permalink }}">
+
+  {{ $custom := resources.Get "css/custom.css" }}
+  <link rel="stylesheet" href="{{ $custom.Permalink }}">
+
+  {{ $news := resources.Get "css/news.css" }}
+  <link rel="stylesheet" href="{{ $news.Permalink }}">
+
+  {{ $hero := resources.Get "css/hero.css" }}
+  <link rel="stylesheet" href="{{ $hero.Permalink }}">
+
+  {{ partial "head/js.html" . }}
 </head>

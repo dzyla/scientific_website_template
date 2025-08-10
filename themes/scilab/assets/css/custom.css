@@ -53,3 +53,8 @@
   font-size: 0.95rem;
   margin-bottom: 0;
 }
+
+@media (max-width: 768px) {
+  .publication-item { grid-template-columns: 1fr; }
+  .pub-image { margin-left: 0; text-align: left; margin-top: .5rem; }
+}

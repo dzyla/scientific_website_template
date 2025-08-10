@@ -1,429 +1,235 @@
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* ========== Base resets =================================================== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:root {
+  /* Spacing scale (rem): s-xs to s-3xl */
+  --s-2xs: .25rem;
+  --s-xs:  .5rem;
+  --s-sm:  .1rem;
+  --s-md:  1rem;
+  --s-lg:  1.5rem;
+  --s-xl:  2rem;
+  --s-2xl: 3rem;
+  --s-3xl: 4rem;
+
+  /* Container widths */
+  --container: 960px;
+
+  /* Colors */
+  --text: #222;
+  --muted: #555;
+  --border: #eaeaea;
+  --shadow-1: 0 2px 8px rgba(0,0,0,0.04);
+
+  /* Typography */
+  --font: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --h1: clamp(1.9rem, 4vw, 2.5rem);
+  --h2: clamp(1.5rem, 3.2vw, 2rem);
+  --h3: clamp(1.2rem, 2.6vw, 1.75rem);
+  --body: clamp(1rem, 2.2vw, 1.08rem);
 }
-/* News scroll window for long lists */
-.news-container {
-  max-height: 350px;
-  overflow-y: auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  background: #fff;
-  padding: 0 1.5rem;
-  border: 1px solid #e5e5e5;
-}
-/* General Body Styles */
+
+/* ========== Global ======================================================== */
+html, body { height: 100%; }
 body {
-    font-family: 'Inter', sans-serif;
-    line-height: 1.7;
-    color: #333;
-    background-color: #ffffff;
-    margin: 0;
-    padding: 0;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: var(--font);
+  line-height: 1.65;
+  color: var(--text);
+  background: #fff;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: var(--body);
 }
 
-/* Container */
+img { max-width: 100%; height: auto; display: block; }
+
+/* ========== Layout helpers =============================================== */
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-    box-sizing: border-box;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--s-lg);
+  width: 100%;
 }
 
-/* Header and Navigation */
+/* Main area grows to push footer down */
+.main { flex: 1 0 auto; }
+
+/* ========== Header & Nav (desktop styles stay) ============================ */
 .header {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 0.5rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: .5rem;
+  background: #fff;
 }
-
 .header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
 .header .logo a {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--highlight-color);
-    text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--highlight-color, #1976d2);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
+/* Horizontal menu (desktop) */
 .header nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
 }
-
-.header nav a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: 400;
-    transition: color 0.2s ease-in-out;
-    padding-bottom: 3px;
-    border-bottom: 2px solid transparent;
+.header nav a,
+.menu-link {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color .18s, border-color .18s, background .18s;
+  padding-bottom: 2px;
 }
-
-/* Use accent color from CSS variable */
 .header nav a:hover,
-.header nav li.active a {
-    color: var(--highlight-color);
-    border-bottom: 2px solid var(--highlight-color);
+.header nav li.active a,
+.menu-link:hover,
+.menu-link.active {
+  color: var(--highlight-color);
+  border-bottom-color: var(--highlight-color);
 }
 
-
-/* Main Content */
-.main {
-    flex: 1 0 auto;
-}
-
-p {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-}
-
-/* Headings */
+/* ========== Typography ===================================================== */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    color: #000;
-    padding-top: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .01em;
+  margin: var(--s-lg) 0 var(--s-sm);
 }
+h1 { font-size: var(--h1); }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.75rem; }
+p { margin: 0 0 var(--s-md); }
 
 /* Links */
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Home Page Specifics */
-.hero {
-    text-align: center;
-    padding-top: 0.5rem;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.25rem;
-    color: #555;
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
-}
-
-.hero-image {
-  margin-bottom: 2rem;
-}
-
-.hero-image img {
-  width: 100%;
-  height: auto;
-  max-height: 400px;  /* Adjust as needed */
-  object-fit: cover;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Carousel */
-.carousel {
-  position: relative;
-  overflow: hidden;
-  height: 400px;
-}
-.carousel img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
-}
-.carousel img.active {
-  display: block;
-}
+a { color: var(--highlight-color, #1976d2); }
+a:hover { text-decoration: underline; }
 
 
+/* Consistent section spacing on home */
+.home-content section { margin-bottom: var(--s-2xl); }
+.home-content h2 { margin-bottom: var(--s-md); }
+.home-content p  { line-height: 1.65; }
 
-.home-content section {
-  margin-bottom: 2rem; /* Adds spacing between sections */
-}
-
-.home-content h2 {
-  margin-bottom: 1rem;
-}
-
-.home-content p {
-  line-height: 1.6;
-}
-
-.email a {
-  color: var(--highlight-color);
-}
-/* News Shortcode */
-.news-list {
-    list-style: none;
-    padding: 0;
-}
-.news-item {
-    display: flex;
-    margin-bottom: 1rem;
-}
-.news-date {
-    font-weight: bold;
-    color: #555;
-    margin-right: 1.5rem;
-    flex-shrink: 0;
-    width: 30%;
-}
-.news-text {
-    color: #333;
-}
-
-/* Team Page */
+/* ========== Team ========================================================== */
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust min width as needed */
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap: var(--s-lg);
+  margin-top: var(--s-lg);
 }
-
 .team-member {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border: 1px solid #d1d1d1;
-    padding: 1rem;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #d1d1d1;
+  padding: var(--s-lg);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
-  
 .team-member img {
-    width: 150px; /* Set a fixed width */
-    height: 150px; /* Set a fixed height to match width */
-    border-radius: 15%; /* This creates the circle shape */
-    object-fit: cover;
-    margin-bottom: 1rem;
+  width: 150px; height: 150px;
+  border-radius: 15%;
+  object-fit: cover;
+  margin-bottom: var(--s-md);
 }
-  
-.team-member h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-}
-  
-.team-member .role {
-    color: #777;
-    font-style: italic;
-    margin-bottom: 1rem;
-}
-  
-.team-member .content {
-    color: #555;
-}
-  
+.team-member h3 { margin-bottom: .5rem; font-size: 1.25rem; font-weight: 700; }
+.team-member .role { color: #777; font-style: italic; margin-bottom: var(--s-md); }
+.team-member .content { color: #555; }
 .team-member.pi {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-    gap: 1.5rem;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--s-lg);
 }
 
-
-
-/* Responsive */
-@media (max-width: 768px) {
-    .header .container {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: flex-start; /* Align items to the start */
-    }
-
-    .home-sections {
-        grid-template-columns: 1fr;
-    }
-    .team-grid {
-        grid-template-columns: 1fr; /* Single column on small screens */
-    }
-    .team-member.pi {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+/* ========== Publications / Cards ========================================= */
+.publications-list { list-style: none; padding: 0; }
+.team-member, .publications-list li {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
-/* Publications List */
-.publications-list {
-    list-style: none;
-    padding: 0;
-}
-
+/* ========== Contact ======================================================= */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: var(--s-2xl);
 }
-
 .contact-map iframe {
   width: 100%;
-  height: 300px;  /* Adjust as desired */
+  height: 300px;
   border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 6px;
 }
+.contact-details { line-height: 1.65; }
 
-.contact-details {
-  line-height: 1.6;
-}
-
-
-/* Footer */
+/* ========== Footer ======================================================== */
 .footer {
+  text-align: center;
+  padding: var(--s-lg) 0;
+  margin-top: var(--s-sm);
+  border-top: 1px solid var(--border);
+  color: #777;
+  font-size: .95rem;
+  background: #fff;
+}
+
+/* ========== Responsive ==================================================== */
+@media (max-width: 992px) {
+  :root { --container: 920px; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container: 100%;
+    --s-xl: 1.5rem;
+    --s-2xl: 2rem;
+  }
+
+  /* Keep title and hamburger on one row (your nav.css handles the panel) */
+  .header .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Make the panel menu vertical (nav.css) */
+
+  /* Tighter hero and headings on phones */
+  .hero { padding-top: var(--s-xs); }
+  .hero-image { margin-bottom: var(--s-lg); }
+  .home-content section { margin-bottom: var(--s-xl); }
+
+  .team-grid { grid-template-columns: 1fr; }
+  .team-member.pi {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 1rem 0 1rem 0;
-    margin-top: 0.5rem;
-    border-top: 1px solid #eee;
-    color: #777;
-    font-size: 0.9rem;
+  }
+
+  .contact-grid { grid-template-columns: 1fr; gap: var(--s-xl); }
 }
-
-/* Carousel Styles */
-.carousel-container {
-  width: 100%;
-  /* max-width: 900px; Or your preferred max width */
-  margin: 2rem auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  overflow: hidden; /* Ensures images stay within the rounded corners */
-}
-
-.carousel {
-  position: relative;
-  width: 100%;
-  /* Maintain a 16:9 aspect ratio */
-  /* padding-top: 56.25%;  */
-  /* background-color: #eee; Placeholder color while images load */
-}
-
-.carousel img {
-  position: absolute;
-  /* top: 0;
-  left: 0; */
-  width: 100%;
-  /* height: 100%; */
-  /* object-fit: cover; Cover the area without distortion */
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out; /* Slower, smoother fade */
-}
-
-.carousel img.active {
-  opacity: 1;
-}
-
-
-
-/* News section styles are now in static/css/news.css */
-
-/* Modern minimal tweaks */
-body {
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    background: #ffffff;
-    color: #222;
-    font-size: 17px;
-}
-
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.header {
-    padding: 1.2rem 0;
-    border-bottom: 1px solid #eaeaea;
-    margin-bottom: 0.5rem;
-    background: #fff;
-}
-
-.header .logo a {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--highlight-color, #1976d2);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    background: none;
-}
-
-.header nav a {
-    color: #222;
-    font-size: 1.08rem;
-    font-weight: 500;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s, color 0.2s;
-    padding-bottom: 2px;
-}
-.header nav a:hover,
-.header nav li.active a {
-    color: var(--highlight-color);
-    border-bottom: 2px solid var(--highlight-color);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    color: #222;
-    margin-top: 1.2rem;
-    margin-bottom: 0.7rem;
-    letter-spacing: 0.01em;
-}
-h1 { font-size: 2.3rem; }
-h2 { font-size: 1.7rem; }
-h3 { font-size: 1.3rem; }
-
-a {
-    color: var(--highlight-color);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-a:hover {
-    text-decoration: underline;
-    color: var(--highlight-color);
-}
-
-p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    line-height: 1.7;
-}
-
-/* Card style for team/publications */
-.team-member, .publications-list li {
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    padding: 1.2rem;
-    margin-bottom: 1.2rem;
-}
-

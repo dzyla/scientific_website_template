@@ -1,10 +1,30 @@
-<header class="header">
-    <div class="container">
-        <div class="logo">
-            <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-        </div>
-        <nav>
-            {{ partial "menu.html" . }}
-        </nav>
+<header class="header" role="banner">
+  <div class="container">
+    <div class="logo">
+      <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
     </div>
+
+    <!-- Mobile hamburger button (right of title) -->
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+    >
+      <!-- Accessible SVG icon -->
+      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Main navigation -->
+    <nav id="nav-menu" class="nav-menu" role="navigation" aria-label="Main menu">
+      {{ partial "menu.html" . }}
+    </nav>
+  </div>
 </header>
+
+<!-- Backdrop for mobile menu -->
+<div id="nav-backdrop" class="nav-backdrop" hidden></div>

@@ -1,26 +1,41 @@
-{{/* Get all pages from the 'news' section, assuming that's where news lives */}}
+{{/* Collect news pages (section = "news"), newest first */}}
 {{ $pages := where site.RegularPages "Section" "news" }}
+{{ $sorted := $pages.ByDate.Reverse }}
 
-{{/* Sort by date, newest first */}}
-{{ $sortedPages := $pages.ByDate.Reverse }}
-
-<div class="news-container" style="--highlight-color: {{ site.Params.highlightColor }};">
+<div class="news-container" style="--highlight-color: {{ site.Params.highlightColor | default "#1976d2" }};">
   <ul class="news-list">
-    {{ range $sortedPages }}
-      <li class="news-item">
-        <span class="news-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-        <div class="news-content">
-          {{/* Only make title a link if .Params.link is present, otherwise just show as text */}}
-          {{ if .Params.link }}
-            <a href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer" class="news-title-link">{{ .Title }}</a>
-          {{ else }}
-            <span class="news-title">{{ .Title }}</span>
-          {{ end }}
-          <div class="news-summary">{{ .Summary }}</div>
+    {{ range $sorted }}
+    <li class="news-item">
+      <!-- Semantic date -->
+      <time class="news-date" datetime='{{ .Date.Format "2006-01-02" }}'>
+        {{ .Date.Format "Jan 2, 2006" }}
+      </time>
+
+      <!-- Title + body block -->
+      <div class="news-content">
+        {{/* Title (linked if .Params.link exists) */}}
+        {{ if .Params.link }}
+        <a class="news-title-link" href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer">
+          {{ .Title }}
+        </a>
+        {{ else }}
+        <span class="news-title">{{ .Title }}</span>
+        {{ end }}
+
+        {{/* Summary/body (falls back to .Summary; allow explicit .Params.summary if provided) */}}
+        <div class="news-summary">
+          {{ with .Params.summary }}{{ . | markdownify }}{{ else }}{{ .Summary }}{{ end }}
         </div>
-      </li>
+      </div>
+    </li>
     {{ else }}
-      <li><p>No news to display.</p></li>
+    <li class="news-item">
+      <time class="news-date" datetime="">—</time>
+      <div class="news-content">
+        <span class="news-title">No news to display</span>
+        <div class="news-summary">Please check back soon.</div>
+      </div>
+    </li>
     {{ end }}
   </ul>
 </div>
