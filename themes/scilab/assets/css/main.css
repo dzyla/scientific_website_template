@@ -96,8 +96,7 @@ img { max-width: 100%; height: auto; display: block; }
   transition: color .18s, border-color .18s, background .18s;
   padding-bottom: 2px;
 }
-.header nav a:hover,
-.header nav li.active a,
+
 .menu-link:hover,
 .menu-link.active {
   color: var(--highlight-color);

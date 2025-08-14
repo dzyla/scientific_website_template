@@ -43,7 +43,7 @@
 
   .menu-list { flex-direction: column; gap: 0; }
   .menu-item + .menu-item { border-top: 1px solid #f1f5f9; }
-  .menu-link { display: block; padding: .75rem 1rem; border-bottom: 0 !important; border-radius: 8px; }
+  .menu-link { display: block; padding: .75rem 1rem; border-bottom: 0; border-radius: 8px; }
   .menu-link:hover { background: #f8fafc; }
   .menu-link.active { background: #eef6ff; color: var(--highlight-color); font-weight: 600; }
 }

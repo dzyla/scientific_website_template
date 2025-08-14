@@ -1,0 +1,170 @@
+{{/* Clean two-column Contact block.
+     Row 1: left (30%) address, right (70%) map.
+     Row 2: full-width icon links (maps + profiles).
+*/}}
+
+{{- $building := .Get "building" | default "" -}}
+{{- $department := .Get "department" | default "" -}}
+{{- $institution := .Get "institution" | default "" -}}
+{{- $street := .Get "street" | default "" -}}
+{{- $city := .Get "city" | default "" -}}
+{{- $state := .Get "state" | default "" -}}
+{{- $zip := .Get "zip" | default "" -}}
+{{- $country := .Get "country" | default "" -}}
+
+{{- $addrLine := printf "%s, %s, %s %s" $street $city $state $zip -}}
+{{- $gmapsQuery := $addrLine | urlquery -}}
+{{- $gmapsEmbed := printf "https://www.google.com/maps?q=%s&output=embed" $gmapsQuery -}}
+{{- $gmapsSearch := printf "https://www.google.com/maps/search/?api=1&query=%s" $gmapsQuery -}}
+{{- $gmapsDir := printf "https://www.google.com/maps/dir/?api=1&destination=%s" $gmapsQuery -}}
+
+{{/* Optional profile links (render only if present) */}}
+{{- $scholar := .Get "scholar" | default "" -}}
+{{- $orcid := .Get "orcid" | default "" -}}
+{{- $github := .Get "github" | default "" -}}
+{{- $twitter := .Get "twitter" | default "" -}}
+{{- $bluesky := .Get "bluesky" | default "" -}}
+{{- $linkedin := .Get "linkedin" | default "" -}}
+{{- $website := .Get "website" | default "" -}}
+
+<div class="contact-block contact-grid">
+  <div class="contact-left">
+    <h2 class="contact-title">Visit us</h2>
+    <address class="contact-address">
+      {{- if $building }}{{ $building }}<br>{{ end -}}
+      {{- if or $department $institution -}}
+        {{- if $department }}{{ $department }}, {{ end -}}
+        {{- if $institution }}{{ $institution }}{{ end -}}<br>
+      {{- end -}}
+      {{- if $street }}{{ $street }}<br>{{ end -}}
+      {{- if or $city $state $zip -}}
+        {{- $city }}{{ if and $city $state }}, {{ end -}}{{ $state }} {{ $zip }}<br>
+      {{- end -}}
+      {{- if $country }}{{ $country }}{{ end -}}
+    </address>
+  </div>
+
+  <div class="contact-right">
+    <div class="map-embed" aria-label="Map">
+      <iframe
+        src="{{ $gmapsEmbed }}"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map to our address"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="contact-links">
+    <ul class="contact-icons">
+      <!-- Google Maps: View -->
+      <li>
+        <a href="{{ $gmapsSearch }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a6 6 0 0 0-6 6c0 4.4 6 12 6 12s6-7.6 6-12a6 6 0 0 0-6-6zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+          </svg>
+          <span>View on Google Maps</span>
+        </a>
+      </li>
+
+      <!-- Google Maps: Directions -->
+      <li>
+        <a href="{{ $gmapsDir }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM12 20.6L3.4 12 12 3.4 20.6 12 12 20.6zm-1-5.6v-3H9l3-3 3 3h-2v3h-2z"/>
+          </svg>
+          <span>Get directions</span>
+        </a>
+      </li>
+
+      {{- if $scholar }}
+      <!-- Google Scholar -->
+      <li>
+        <a href="{{ $scholar }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3l10 5-10 5L2 8l10-5zm6.5 4.75V12c0 2.5-3.6 4.5-6.5 4.5S5.5 14.5 5.5 12V7.75L12 11l6.5-3.25z"/>
+          </svg>
+          <span>Google Scholar</span>
+        </a>
+      </li>
+      {{- end }}
+
+      {{- if $orcid }}
+      <!-- ORCID -->
+      <li>
+        <a href="{{ $orcid }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <rect x="10.5" y="6" width="1.8" height="12" rx="0.9" ry="0.9"></rect>
+            <circle cx="15.5" cy="12" r="3"></circle>
+          </svg>
+          <span>ORCID</span>
+        </a>
+      </li>
+      {{- end }}
+
+      {{- if $github }}
+      <!-- GitHub (code icon) -->
+      <li>
+        <a href="{{ $github }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M10 6l4 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </li>
+      {{- end }}
+
+      {{- if $twitter }}
+      <!-- Twitter/X -->
+      <li>
+        <a href="{{ $twitter }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 4l16 16M20 4L4 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Twitter/X</span>
+        </a>
+      </li>
+      {{- end }}
+
+      {{- if $bluesky }}
+      <!-- Bluesky (cloud icon) -->
+      <li>
+        <a href="{{ $bluesky }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17h10a4 4 0 0 0 0-8 5.5 5.5 0 0 0-10.7 1.6A3.5 3.5 0 0 0 7 17z"/>
+          </svg>
+          <span>Bluesky</span>
+        </a>
+      </li>
+      {{- end }}
+
+      {{- if $linkedin }}
+      <!-- LinkedIn (briefcase) -->
+      <li>
+        <a href="{{ $linkedin }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h3a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1h3zm2 0h4V5h-4v2z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+      </li>
+      {{- end }}
+
+      {{- if $website }}
+      <!-- Website (globe) -->
+      <li>
+        <a href="{{ $website }}" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span>Website</span>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+
+</div>

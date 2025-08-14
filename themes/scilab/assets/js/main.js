@@ -1,6 +1,6 @@
 // SciLab theme JS
 document.addEventListener('DOMContentLoaded', () => {
-  /* ===== Mobile navigation (kept here so hamburger works) ================= */
+  /* ===== Mobile navigation ================================================= */
   const toggle = document.getElementById('nav-toggle');
   const menu   = document.getElementById('nav-menu');
   const backdrop = document.getElementById('nav-backdrop');
@@ -30,12 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const mq = window.matchMedia('(min-width: 769px)');
   (mq.addEventListener ? mq.addEventListener('change', () => mq.matches && closeMenu())
                        : mq.addListener(() => mq.matches && closeMenu()));
+});
 
-  /* ===== Carousel: smooth cross-fade, 5s autoplay, arrows, keys, swipe ==== */
+/* ===========================================================================
+   Defer carousel until all stylesheets and fonts are loaded.
+   This avoids “Layout was forced before the page was fully loaded.”
+   ========================================================================== */
+window.addEventListener('load', () => {
   const carousels = document.querySelectorAll('.carousel');
   if (carousels.length) carousels.forEach(initCarousel);
 
   function initCarousel(root) {
+    // Explicitly opt-in to animation even if OS has reduced motion
+    root.setAttribute('data-animate', 'always');
+
     const slides = Array.from(root.querySelectorAll('img'));
     if (!slides.length) return;
 
@@ -45,14 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
     prev.type = 'button';
     prev.setAttribute('aria-label', 'Previous slide');
     prev.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
     const next = document.createElement('button');
     next.className = 'nav-btn nav-next';
     next.type = 'button';
     next.setAttribute('aria-label', 'Next slide');
     next.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
     root.appendChild(prev); root.appendChild(next);
+
     if (!root.hasAttribute('tabindex')) root.setAttribute('tabindex', '0');
 
     let index = 0, timer = null;
@@ -60,31 +67,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const SWIPE_THRESHOLD = 40;
     let touchStartX = null, touchStartY = null;
 
+    // Initialize first slide as active
     slides.forEach((el, i) => i === 0 ? el.classList.add('active') : el.classList.remove('active'));
 
-
-    // Robust crossfade: always only one .active, and transition is triggered
+    // Two-RAF crossfade so transitions always fire visibly
     const crossfadeTo = (i) => {
       const targetIndex = (i + slides.length) % slides.length;
       if (index === targetIndex) return;
-      slides.forEach((el, idx) => {
-        if (idx === targetIndex) {
-          el.classList.add('active');
-        } else {
-          el.classList.remove('active');
-        }
+      const current = slides[index];
+      const nextEl  = slides[targetIndex];
+
+      // 1) fade-in next
+      nextEl.classList.add('active');
+
+      // 2) then fade-out previous in the next paint
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          current.classList.remove('active');
+          index = targetIndex;
+        });
       });
-      index = targetIndex;
     };
 
     const nextSlide = () => crossfadeTo(index + 1);
-    const prevSlideFn = () => crossfadeTo(index - 1);
+    const prevSlide = () => crossfadeTo(index - 1);
 
     const start = () => { stop(); if (slides.length > 1) timer = setInterval(nextSlide, AUTOPLAY_MS); };
     const stop  = () => { if (timer) { clearInterval(timer); timer = null; } };
 
     next.addEventListener('click', () => { nextSlide(); start(); });
-    prev.addEventListener('click', () => { prevSlideFn(); start(); });
+    prev.addEventListener('click', () => { prevSlide(); start(); });
 
     root.addEventListener('mouseenter', stop);
     root.addEventListener('mouseleave', start);
@@ -93,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     root.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); start(); }
-      if (e.key === 'ArrowLeft')  { e.preventDefault(); prevSlideFn(); start(); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); prevSlide(); start(); }
     });
 
     root.addEventListener('touchstart', (e) => {
@@ -106,11 +118,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (touchStartX === null) { start(); return; }
       const dx = (e.changedTouches[0].clientX) - touchStartX;
       const dy = (e.changedTouches[0].clientY) - touchStartY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) dx < 0 ? nextSlide() : prevSlideFn();
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) dx < 0 ? nextSlide() : prevSlide();
       touchStartX = touchStartY = null;
       start();
     }, { passive: true });
 
     if (slides.length > 1) start(); else { prev.style.display = 'none'; next.style.display = 'none'; }
   }
+});
+
+/* Fallback active-state by URL (in case templates fail) */
+document.addEventListener('DOMContentLoaded', function () {
+  var here = location.pathname.replace(/\/+$/, '');
+  document.querySelectorAll('.menu-link').forEach(function (a) {
+    var href = (a.getAttribute('href') || '').replace(location.origin, '').replace(/\/+$/, '');
+    if (href && href === here) {
+      a.classList.add('active');
+      a.setAttribute('aria-current', 'page');
+    }
+  });
 });

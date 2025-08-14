@@ -58,3 +58,91 @@
   .publication-item { grid-template-columns: 1fr; }
   .pub-image { margin-left: 0; text-align: left; margin-top: .5rem; }
 }
+
+/* --- Nav link color fix: default black, highlight only on hover/active --- */
+.header .menu-link,
+.header .menu-link:link,
+.header .menu-link:visited {
+  color: #111 !important;
+}
+
+/* Hover shows highlight color but does not persist */
+.header .menu-link:hover {
+  color: var(--highlight-color) !important;
+  border-bottom-color: var(--highlight-color);
+}
+
+/* Active/current page stays highlighted */
+.header .menu-link.active,
+.header .menu-link[aria-current="page"] {
+  color: var(--highlight-color) !important;
+  font-weight: 600;
+  border-bottom-color: var(--highlight-color);
+}
+
+/* --- Contact: 30/70 layout with links below --- */
+.contact-grid {
+  display: grid;
+  grid-template-areas:
+    "left"
+    "right"
+    "links";
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (min-width: 820px) {
+  .contact-grid {
+    grid-template-areas:
+      "left right"
+      "links links";
+    grid-template-columns: 3fr 7fr; /* 30% / 70% */
+  }
+}
+.contact-left   { grid-area: left; }
+.contact-right  { grid-area: right; }
+.contact-links  { grid-area: links; }
+
+.contact-title { margin: 0 0 0.5rem 0; }
+.contact-address { font-style: normal; line-height: 1.6; }
+
+.map-embed {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f4f4f4;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.map-embed iframe { width: 100%; height: 100%; border: 0; }
+
+/* Icon link bar (full width, below map) */
+.contact-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+}
+.contact-icons li { display: inline-flex; }
+.contact-icons a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.contact-icons a:hover {
+  color: var(--highlight-color);
+  border-bottom-color: var(--highlight-color);
+}
+
+/* SVG icon sizing and color */
+.icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  fill: currentColor;
+}

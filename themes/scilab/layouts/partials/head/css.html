@@ -1,9 +1,16 @@
-{{- with resources.Get "css/main.css" }}
-  {{- if eq hugo.Environment "development" }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}">
-  {{- else }}
-    {{- with . | minify | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{- end }}
-  {{- end }}
-{{- end }}
+{{- $main := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint -}}
+{{- $nav  := resources.Get "css/nav.css"  | resources.Minify | resources.Fingerprint -}}
+{{- $hero := resources.Get "css/hero.css" | resources.Minify | resources.Fingerprint -}}
+{{- $news := resources.Get "css/news.css" | resources.Minify | resources.Fingerprint -}}
+{{- $custom := resources.Get "css/custom.css" | resources.Minify | resources.Fingerprint -}}
+
+<style>
+  :root { --highlight-color: {{ site.Params.highlightColor | default "#1976d2" }}; }
+</style>
+
+<link rel="preload" href="{{ $main.RelPermalink }}" as="style">
+<link rel="stylesheet" href="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ $nav.RelPermalink }}"  integrity="{{ $nav.Data.Integrity }}"  crossorigin="anonymous">
+<link rel="stylesheet" href="{{ $hero.RelPermalink }}" integrity="{{ $hero.Data.Integrity }}" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ $news.RelPermalink }}" integrity="{{ $news.Data.Integrity }}" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}" crossorigin="anonymous">

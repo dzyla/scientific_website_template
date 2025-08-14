@@ -1,0 +1,81 @@
+{{/* Two-column "Visit us" block with optional Bluesky link.
+     Usage example in content is shown below. */}}
+
+{{- $building := .Get "building" | default "" -}}
+{{- $department := .Get "department" | default "" -}}
+{{- $institution := .Get "institution" | default "" -}}
+{{- $street := .Get "street" | default "" -}}
+{{- $city := .Get "city" | default "" -}}
+{{- $state := .Get "state" | default "" -}}
+{{- $zip := .Get "zip" | default "" -}}
+{{- $country := .Get "country" | default "" -}}
+{{- $lat := .Get "lat" | default "" -}}
+{{- $lon := .Get "lon" | default "" -}}
+{{- $parking := .Get "parking_url" | default "" -}}
+{{- $campusmap := .Get "campus_map_url" | default "" -}}
+{{- $bsky := .Get "bluesky" | default "" -}}
+{{- $bskyURL := .Get "bluesky_url" | default "" -}}
+
+{{- $addrLine := printf "%s, %s, %s %s" $street $city $state $zip -}}
+{{- $gmapsQuery := $addrLine | urlquery -}}
+{{- $gmapsSearch := printf "https://www.google.com/maps/search/?api=1&query=%s" $gmapsQuery -}}
+{{- $gmapsDir := printf "https://www.google.com/maps/dir/?api=1&destination=%s" $gmapsQuery -}}
+
+<div class="visit-grid">
+  <div class="visit-col">
+    <h3>Physical address</h3>
+    <address>
+      {{- if $building }}{{ $building }}<br>{{ end -}}
+      {{- if or $department $institution -}}
+        {{- if $department }}{{ $department }}, {{ end -}}
+        {{- if $institution }}{{ $institution }}{{ end -}}<br>
+      {{- end -}}
+      {{- if $street }}{{ $street }}<br>{{ end -}}
+      {{- if or $city $state $zip -}}
+        {{- $city }}{{ if and $city $state }}, {{ end -}}{{ $state }} {{ $zip }}<br>
+      {{- end -}}
+      {{- if $country }}{{ $country }}{{ end -}}
+    </address>
+  </div>
+
+  <div class="visit-col">
+    <h3>Maps and directions</h3>
+    <ul class="link-list">
+      <li><a href="{{ $gmapsSearch }}" target="_blank" rel="noopener">View location on Google Maps</a></li>
+      <li><a href="{{ $gmapsDir }}" target="_blank" rel="noopener">Get directions</a></li>
+      {{- if and $lat $lon -}}
+        <li>
+          <a href="https://www.openstreetmap.org/?mlat={{ $lat }}&mlon={{ $lon }}#map=17/{{ $lat }}/{{ $lon }}"
+             target="_blank" rel="noopener">View on OpenStreetMap</a>
+        </li>
+      {{- end -}}
+    </ul>
+
+    <h3>Campus map and parking</h3>
+    <ul class="link-list">
+      {{- if $parking -}}
+        <li><a href="{{ $parking }}" target="_blank" rel="noopener">Visitor parking information</a></li>
+      {{- else -}}
+        <li><a href="https://www.google.com/maps/search/?api=1&query=parking%20near%20{{ (printf "%s %s" $institution $city) | urlquery }}"
+               target="_blank" rel="noopener">Visitor parking information</a></li>
+      {{- end -}}
+      {{- if $campusmap -}}
+        <li><a href="{{ $campusmap }}" target="_blank" rel="noopener">Campus map</a></li>
+      {{- else -}}
+        <li><a href="https://www.google.com/maps/search/?api=1&query={{ (printf "%s campus map" $institution) | urlquery }}"
+               target="_blank" rel="noopener">Campus map</a></li>
+      {{- end -}}
+    </ul>
+
+    <h3>Connect</h3>
+    <ul class="link-list">
+      {{- if $bskyURL -}}
+        <li><a href="{{ $bskyURL }}" target="_blank" rel="noopener">Bluesky</a></li>
+      {{- else if $bsky -}}
+        <li><a href="https://bsky.app/profile/{{ $bsky }}" target="_blank" rel="noopener">Bluesky</a></li>
+      {{- else -}}
+        <!-- Provide either bluesky="handle.bsky.social" or bluesky_url="https://bsky.app/profile/..." -->
+      {{- end -}}
+    </ul>
+  </div>
+</div>

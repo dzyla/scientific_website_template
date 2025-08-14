@@ -35,7 +35,7 @@
   pointer-events: none;
   backface-visibility: hidden;
   will-change: opacity, transform;
-  transform: translateX(10px) scale(1.02);
+  transform: translateX(5px) scale(1.02);
   transition: opacity 800ms ease-in-out, transform 800ms ease-in-out !important;
 }
 
@@ -79,3 +79,16 @@
 
 /* Remove accidental extra top margin after hero */
 .home-content section:first-of-type { margin-top: 0; }
+
+.carousel img { z-index: 0; }
+.carousel img.active { z-index: 1; }
+
+/* If OS requests reduced motion, we still allow the carousel to animate
+   when you explicitly opt it in with data-animate="always". */
+@media (prefers-reduced-motion: reduce) {
+  .carousel img { transition: none; }  /* keep global accessibility */
+}
+/* Opt-in override: only for carousels you mark as data-animate="always" */
+.carousel[data-animate="always"] img {
+  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out !important;
+}

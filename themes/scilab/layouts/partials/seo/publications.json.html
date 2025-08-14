@@ -1,0 +1,38 @@
+{{- if eq .Kind "page" -}}
+  {{- if in .RelPermalink "/publications" -}}
+    {{- $pubs := site.Data.publications -}}
+    {{- if $pubs -}}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {{- $first := true -}}
+          {{- range $pubs -}}
+            {{- if not $first }},{{ end -}}
+            {
+              "@type": "ScholarlyArticle",
+              "name": {{ .title | plainify | jsonify }},
+              "author": [
+                {{- $names := split ( .authors | plainify ) "," -}}
+                {{- $nfirst := true -}}
+                {{- range $names -}}
+                  {{- if not $nfirst }},{{ end -}}
+                  { "@type": "Person", "name": {{ trim . " " | jsonify }} }
+                  {{- $nfirst = false -}}
+                {{- end -}}
+              ],
+              "isPartOf": { "@type": "Periodical", "name": {{ .journal | plainify | jsonify }} },
+              "datePublished": "{{ .year }}",
+              {{- with .link -}}
+              "url": {{ . | jsonify }},
+              {{- end -}}
+              "headline": {{ .title | plainify | jsonify }}
+            }
+            {{- $first = false -}}
+          {{- end -}}
+        ]
+      }
+      </script>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

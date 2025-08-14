@@ -1,0 +1,12 @@
+{{- $name := site.Params.organization_name | default site.Title -}}
+{{- $logo := site.Params.organization_logo | default "/favicon.svg" | relURL -}}
+{{- $url  := site.Params.organization_url  | default site.BaseURL -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ $name | jsonify }},
+  "url": {{ $url | jsonify }},
+  "logo": {{ $logo | absURL | jsonify }}
+}
+</script>

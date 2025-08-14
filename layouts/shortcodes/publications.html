@@ -1,30 +1,39 @@
 {{/*
-  Renders a list of publications from data/publications.json.
+  Renders publications from data/publications.json
   Usage: {{< publications >}}
+  Expected fields per item: title, authors (comma-separated string),
+  journal, year, link (optional), image (optional), highlight (array of names)
 */}}
 
 {{- $pubs := site.Data.publications -}}
-
 {{- if not $pubs -}}
   {{- errorf "Could not find publications data in data/publications.json." -}}
 {{- else -}}
 <ol class="publications-list">
   {{- range sort $pubs "year" "desc" -}}
     {{- $p := . -}}
+  {{- $authors := split ( $p.authors | plainify ) "," -}}
+    {{- $hl := $p.highlight | default slice -}}
     <li class="publication-item">
       <div class="pub-text">
         <p class="pub-title">{{ $p.title | plainify }}</p>
-        {{- $authors := $p.authors | plainify -}}
-        {{- range $name := $p.highlight -}}
-          {{- $authors = replace $authors $name (printf "<strong>%s</strong>" $name) -}}
-        {{- end -}}
-        <p class="pub-authors">{{ $authors | safeHTML }}</p>
-        <p class="pub-meta"><em>{{ $p.journal | plainify }}</em> ({{ $p.year }}) {{- with $p.link -}}[<a href="{{ . }}" target="_blank" rel="noopener">link</a>]{{- end -}}</p>
+        <p class="pub-authors">
+          {{- range $i, $name := $authors -}}
+            {{- $trim := trim $name " " -}}
+            {{- $isHL := in $hl $trim -}}
+            {{- if $isHL -}}<strong>{{ $trim }}</strong>{{ else }}{{ $trim }}{{ end -}}
+            {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
+          {{- end -}}
+        </p>
+        <p class="pub-meta">
+          <em>{{ $p.journal | plainify }}</em> ({{ $p.year }})
+          {{- with $p.link -}} [<a href="{{ . }}" target="_blank" rel="noopener">link</a>]{{- end -}}
+        </p>
       </div>
       {{- with $p.image -}}
-      <div class="pub-image">
-        <img src="{{ . }}" alt="illustration for {{ $p.title | plainify }}">
-      </div>
+        <div class="pub-image">
+          <img src="{{ . }}" alt="illustration for {{ $p.title | plainify }}" loading="lazy">
+        </div>
       {{- end -}}
     </li>
   {{- end -}}

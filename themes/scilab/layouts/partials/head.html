@@ -1,29 +1,36 @@
 <head>
-  <style>
-    :root { --highlight-color: {{ .Site.Params.highlightColor | default "#1976d2" }}; }
-  </style>
+  <style>:root { --highlight-color: {{ .Site.Params.highlightColor | default "#1976d2" }}; }</style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Site.Title }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+  <link rel="alternate icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
 
-  {{ $css := resources.Get "css/main.css" }}
-  <link rel="stylesheet" href="{{ $css.Permalink }}">
+  {{ partial "head/analytics.html" . }} <!-- Google Analytics -->
+  {{ partial "head/css.html" . }}  <!-- bundles main, nav, custom, news, hero (hero last) -->
+  {{ partial "head/js.html" . }}   <!-- builds and fingerprints assets/js/main.js -->
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}"/>
 
+  <!-- Site verification (optional, set tokens in hugo.toml) -->
+  {{ with site.Params.verification_google }}
+  <meta name="google-site-verification" content="{{ . }}">
+  {{ end }}
+  {{ with site.Params.verification_bing }}
+  <meta name="msvalidate.01" content="{{ . }}">
+  {{ end }}
+  {{ with site.Params.verification_yandex }}
+  <meta name="yandex-verification" content="{{ . }}">
+  {{ end }}
 
-  {{ $nav := resources.Get "css/nav.css" }}
-  <link rel="stylesheet" href="{{ $nav.Permalink }}">
+  <!-- Robots: allow indexing by default; override per-page with front matter if needed -->
+  <meta name="robots" content="index, follow">
+  {{ partial "seo/organization.json.html" . }}
+  {{ partial "seo/website.json.html" . }}
+  {{ partial "seo/publications.json.html" . }}
+  <meta name="robots" content="{{ with .Params.robots }}{{ . }}{{ else }}index, follow{{ end }}">
 
-  {{ $custom := resources.Get "css/custom.css" }}
-  <link rel="stylesheet" href="{{ $custom.Permalink }}">
-
-  {{ $news := resources.Get "css/news.css" }}
-  <link rel="stylesheet" href="{{ $news.Permalink }}">
-
-  {{ $hero := resources.Get "css/hero.css" }}
-  <link rel="stylesheet" href="{{ $hero.Permalink }}">
-
-  {{ partial "head/js.html" . }}
 </head>

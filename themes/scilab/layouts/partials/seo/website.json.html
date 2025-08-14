@@ -1,0 +1,10 @@
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": {{ .Site.BaseURL | jsonify }},
+  "name": {{ .Site.Title | jsonify }}
+}
+</script>
+{{- end -}}

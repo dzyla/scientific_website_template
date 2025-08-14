@@ -1,7 +1,10 @@
 <header class="header" role="banner">
   <div class="container">
     <div class="logo">
-      <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+      <a href="{{ .Site.BaseURL }}" style="display: flex; align-items: center; gap: 0.5em;">
+        <img src="{{ "favicon.svg" | relURL }}" alt="Site logo" style="height: 2em; width: 2em; vertical-align: middle;"/>
+        {{ .Site.Title }}
+      </a>
     </div>
 
     <!-- Mobile hamburger button (right of title) -->

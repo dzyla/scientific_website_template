@@ -1,5 +1,17 @@
-<div class="carousel">
+<div class="carousel" role="region" aria-label="Image carousel" data-carousel="auto">
   {{- range $i, $path := .Params -}}
-    <img src="{{ $path | absURL | safeURL }}" alt="Lab image {{ add $i 1 }}"{{ if eq $i 0 }} class="active"{{ end }}>
+    <img
+      src="{{ $path | absURL | safeURL }}"
+      alt="Lab image {{ add $i 1 }}"
+      loading="lazy"
+      {{ if eq $i 0 }}class="active"{{ end }}
+    >
   {{- end -}}
+
+  <button class="nav-btn nav-prev" type="button" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+  </button>
+  <button class="nav-btn nav-next" type="button" aria-label="Next slide">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.59 16.59 1.41 1.41L16 12 10 6 8.59 7.41 13.17 12z"/></svg>
+  </button>
 </div>

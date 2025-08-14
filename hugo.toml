@@ -5,40 +5,64 @@ title = "Bio Lab"
 theme = "scilab"
 
 [params]
-  highlightColor = "#1976d2" # Default blue, change to any hex color
+  highlightColor = "#cfb87c"         # your brand accent
+  ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
+  # Use one or more verification tokens below after you register each service.
+  verification_google = ""           # e.g., "abc123..."
+  verification_bing = ""             # e.g., "BingSiteAuthCode"
+  verification_yandex = ""           # optional
+  organization_name = "Bio Lab"
+  organization_logo = "/favicon.svg"
+  organization_url  = "https://dzyla.github.io/scientific_website_template/"
+  twitter_handle = "@dawidzyla"     # optional, for cards
 
 canonifyURLs = false
+
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# Respect user privacy while keeping analytics useful
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+    useSessionStorage = false
+  [privacy.youtube]
+    privacyEnhanced = true
 
 [menu]
   [[menu.main]]
     name = "Research"
-    url = "/research"
+    pageRef = "research"
     weight = 1
+
   [[menu.main]]
     name = "Team"
-    url = "/team"
+    pageRef = "team"
     weight = 2
+
   [[menu.main]]
     name = "Publications"
-    url = "/publications"
+    pageRef = "publications"
     weight = 3
+
   [[menu.main]]
     name = "Resources"
-    url = "/resources"
+    pageRef = "resources"
     weight = 4
-  [[menu.main]]
-    name = "Lab Fun"
-    url = "/labfun"
-    weight = 5
+
   [[menu.main]]
     name = "Philosophy"
-    url = "/philosophy"
-    weight = 6
+    pageRef = "philosophy"
+    weight = 5
+
   [[menu.main]]
     name = "Contact"
-    url = "/contact"
-    weight = 7
+    pageRef = "contact"
+    weight = 6
