@@ -1,5 +1,109 @@
 <footer class="footer">
-    <div class="container">
-        <span>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</span>
+  <div class="container">
+    <div class="footer-top">
+      <p class="footer-tagline">
+        {{ .Site.Params.tagline | default "Curious minds mapping viral structure to therapeutic impact." }}
+      </p>
     </div>
+
+    <div class="footer-grid" role="navigation" aria-label="Footer">
+      <div class="footer-col">
+        <h4>Stay in touch</h4>
+        {{ with .Site.Params.contact_address }}
+          <p class="footer-address">{{ . }}</p>
+        {{ end }}
+        <ul class="footer-contact">
+          {{ with .Site.Params.contact_email }}
+            <li>
+              <a class="footer-link" href="mailto:{{ . }}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>{{ . }}</span>
+              </a>
+            </li>
+          {{ end }}
+          {{ with .Site.Params.contact_phone }}
+            <li>
+              <a class="footer-link" href="tel:{{ . | replace " " "" }}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3h2.3a1 1 0 0 1 .95.68l1.05 3.14a1 1 0 0 1-.29 1.05l-1.32 1.25a12.1 12.1 0 0 0 5.48 5.48l1.25-1.32a1 1 0 0 1 1.05-.29l3.14 1.05a1 1 0 0 1 .68.95V20a1 1 0 0 1-1 1A17.4 17.4 0 0 1 3 6.6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>{{ . }}</span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          {{ with .Site.Params.footer_links }}
+            {{ range . }}
+              {{ $href := "" }}
+              {{ if .pageRef }}
+                {{ with site.GetPage .pageRef }}
+                  {{ $href = .RelPermalink }}
+                {{ end }}
+              {{ end }}
+              {{ if and (eq $href "") .url }}
+                {{ if (or (strings.HasPrefix .url "http://") (strings.HasPrefix .url "https://")) }}
+                  {{ $href = .url }}
+                {{ else }}
+                  {{ $href = relLangURL .url }}
+                {{ end }}
+              {{ end }}
+              {{ if $href }}
+                <li>
+                  <a class="footer-link" href="{{ $href }}" {{ if (strings.HasPrefix $href "http") }}target="_blank" rel="noopener"{{ end }}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    <span>{{ .name }}</span>
+                  </a>
+                </li>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul class="footer-social">
+          {{ with .Site.Params.scholar }}
+            <li>
+              <a class="footer-link" href="{{ . }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Zm0 12-9-5v6l9 5 9-5v-6l-9 5Z" fill="currentColor"/></svg>
+                <span>Google Scholar</span>
+              </a>
+            </li>
+          {{ end }}
+          {{ with .Site.Params.github }}
+            <li>
+              <a class="footer-link" href="{{ . }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.68c-2.77.6-3.35-1.34-3.35-1.34-.46-1.16-1.12-1.47-1.12-1.47-.92-.64.07-.63.07-.63 1.02.07 1.55 1.05 1.55 1.05.9 1.54 2.36 1.09 2.94.83.09-.65.36-1.1.65-1.36-2.21-.25-4.54-1.11-4.54-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.29.1-2.68 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.9-1.29 2.74-1.02 2.74-1.02.55 1.39.2 2.42.1 2.68.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.37.32.7.94.7 1.9v2.81c0 .26.18.57.69.48A10 10 0 0 0 12 2Z" fill="currentColor"/></svg>
+                <span>GitHub</span>
+              </a>
+            </li>
+          {{ end }}
+          {{ with .Site.Params.linkedin }}
+            <li>
+              <a class="footer-link" href="{{ . }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm-1 6h4v12H4zM9 9h3.8v1.63h.05c.53-1 1.82-2.05 3.75-2.05C20.5 8.58 21 11 21 14.18V21h-4v-6c0-1.44-.03-3.3-2.01-3.3-2 0-2.3 1.56-2.3 3.19V21H9z" fill="currentColor"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </li>
+          {{ end }}
+          {{ with .Site.Params.bluesky }}
+            <li>
+              <a class="footer-link" href="{{ . }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4c1.6 1.7 3.6 3.9 5 6.1C11.4 7.9 13.4 5.7 15 4c1.4-1.5 4-2.2 4 1.2 0 1.1-.6 4-1 5.3-.5 1.5-1.6 1.8-2.9 1.5 2.1.4 3.1 1.5 1.7 3.9-1.6 2.7-4.2 3.6-4.8 3.6-.6 0-3.2-.9-4.8-3.6-1.4-2.4-.4-3.5 1.7-3.9-1.3.3-2.4 0-2.9-1.5-.4-1.3-1-4.2-1-5.3C1 1.8 3.6 2.5 5 4Z" fill="currentColor"/></svg>
+                <span>Bluesky</span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</span>
+    </div>
+  </div>
 </footer>

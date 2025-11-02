@@ -2,34 +2,39 @@
 title: "Philosophy"
 ---
 
-At our lab, we practice rigorous, data-driven science. We focus on clear questions and reproducible results.
+We are a welcoming, data-driven lab that values clarity, kindness, and rigor. Whether you join us as a student, postdoc, or collaborator, we want you to understand what it feels like to work here and how we support each other.
 
-* **Evidence first.** We base decisions on data, validated methods, and peer review. We comply with laws and ethics, and we let evidence guide conclusions.
+## Our Core Principles
 
-* **Inclusive by design.** We welcome people of all identities and backgrounds. We judge ideas by their merit and treat everyone with respect.
+### Evidence guides every decision
+We let data, validated methods, and constructive peer review shape our conclusions. When the evidence changes, our thinking changes with it.
 
-* **Collaboration with purpose.** We work together when it creates real synergy. We share credit, help each other, and build on complementary strengths.
+### Curiosity with a purpose
+We choose questions that excite us and matter to the field. Progress can be incremental, but the big picture should energize you every week.
 
-* **Curiosity leads the way.** We choose projects that ask exciting questions. Daily work can be hard, but the big question should energize you.
+### Inclusive by design
+We welcome people of every background and identity. Respect is non‑negotiable, and ideas are evaluated on their merits—full stop.
 
-* **Smart productivity.**  We plan well, think deeply, and focus on high-value tasks. We measure progress by insight and results, not hours.
+### Collaboration with accountability
+We work together when it produces better science. That means sharing credit, being transparent about progress, and holding ourselves to high standards.
 
-* **Open and direct communication.** We speak clearly, listen actively, and give timely feedback. We discuss results and concerns with respect and honesty.
+### Reproducibility and openness
+We document methods, keep clean code and data, and share materials whenever policy and consent allow. If someone else cannot repeat it, it is not done yet.
 
-* **Reproducibility and openness.** We document methods, keep clean code and data, and share materials when possible. We aim for work others can repeat.
+## How We Support You
 
-* **Learning and mentorship.** We teach skills, review each other’s work, and celebrate growth. We expect questions, curiosity, and steady improvement.
-
-* **Safety and integrity.** We follow safety rules, institutional policies, and community standards. We avoid shortcuts that risk people or data quality.
-
-## What You Can Expect
-
-You can expect clear goals, regular feedback, and support to do your best work. You will own a question that excites you and contributes to the field.
+- Clear expectations and regular feedback so you can track growth.
+- Access to documented protocols, validated tools, and mentorship at every career stage.
+- A psychologically safe environment where questions are encouraged and mistakes are treated as learning moments.
+- Time set aside for learning new skills, presenting your work, and planning the next step.
 
 ## What We Ask of You
 
-We ask you to be curious, careful, and collaborative. We ask you to plan, think deeply, and communicate openly about your progress and needs.
+- Be curious, careful, and candid about your results—especially when something is surprising.
+- Plan your work, communicate early, and ask for help before you feel stuck.
+- Respect lab mates’ time, materials, and boundaries; give feedback that is direct and kind.
+- Make safety, data integrity, and inclusion part of every experiment.
 
 ---
 
-Our aim is simple: do excellent science that stands up to scrutiny, share it with the community, and grow as scientists and colleagues.
+Our aim is simple: do excellent science that stands up to scrutiny, share it openly, and grow as scientists and colleagues along the way.

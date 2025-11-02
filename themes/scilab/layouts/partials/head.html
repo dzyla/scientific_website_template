@@ -1,36 +1,72 @@
 <head>
-  <style>:root { --highlight-color: {{ .Site.Params.highlightColor | default "#1976d2" }}; }</style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ .Site.Title }}</title>
+  <style>:root { --highlight-color: {{ .Site.Params.highlightColor | default "#1976d2" }}; }</style>
+
+  {{/* Page <title> — include site name while avoiding duplication on the homepage */}}
+  {{ $siteTitle := .Site.Title }}
+  {{ $pageHeading := .Title | default $siteTitle }}
+  {{ $pageTitle := cond .IsHome $siteTitle (printf "%s · %s" $pageHeading $siteTitle) }}
+  <title>{{ $pageTitle | plainify }}</title>
+
+  {{/* Shared description fallback */}}
+  {{ $description := "" }}
+  {{ if .Params.description }}
+    {{ $description = (.Params.description | plainify) }}
+  {{ else if .IsHome }}
+    {{ $tagline := .Site.Params.tagline | default (printf "%s research lab" $siteTitle) }}
+    {{ $description = (.Site.Params.description | default $tagline) }}
+  {{ else if .Summary }}
+    {{ $description = (.Summary | plainify) }}
+  {{ end }}
+  {{ with $description }}
+    <meta name="description" content="{{ . }}">
+  {{ end }}
+
+  {{ $ogImage := .Params.og_image | default .Params.image | default .Site.Params.social_image | default .Site.Params.organization_logo }}
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
   <link rel="alternate icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
 
-  {{ partial "head/analytics.html" . }} <!-- Google Analytics -->
-  {{ partial "head/css.html" . }}  <!-- bundles main, nav, custom, news, hero (hero last) -->
-  {{ partial "head/js.html" . }}   <!-- builds and fingerprints assets/js/main.js -->
-  <!-- Canonical URL -->
-  <link rel="canonical" href="{{ .Permalink }}"/>
+  {{ partial "head/analytics.html" . }}
+  {{ partial "head/css.html" . }}
+  {{ partial "head/js.html" . }}
+
+  {{ with .Permalink }}
+    <link rel="canonical" href="{{ . }}"/>
+  {{ end }}
+
+  {{/* Robots defaults to index/follow unless explicitly overridden */}}
+  {{ $robots := "index, follow" }}
+  {{ with .Params.robots }}{{ $robots = . }}{{ end }}
+  <meta name="robots" content="{{ $robots }}">
+
+  <meta property="og:site_name" content="{{ $siteTitle | plainify }}">
+  <meta property="og:title" content="{{ $pageHeading | plainify }}">
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  {{ with .Permalink }}<meta property="og:url" content="{{ . }}">{{ end }}
+  {{ with $description }}
+    <meta property="og:description" content="{{ . | plainify }}">
+    <meta name="twitter:description" content="{{ . | plainify }}">
+  {{ end }}
+  {{ with $ogImage }}
+    <meta property="og:image" content="{{ . | absURL }}">
+    <meta name="twitter:image" content="{{ . | absURL }}">
+  {{ end }}
+  <meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
+  {{ with .Site.Params.twitter_handle }}<meta name="twitter:site" content="{{ . }}">{{ end }}
 
   <!-- Site verification (optional, set tokens in hugo.toml) -->
-  {{ with site.Params.verification_google }}
-  <meta name="google-site-verification" content="{{ . }}">
-  {{ end }}
-  {{ with site.Params.verification_bing }}
-  <meta name="msvalidate.01" content="{{ . }}">
-  {{ end }}
-  {{ with site.Params.verification_yandex }}
-  <meta name="yandex-verification" content="{{ . }}">
-  {{ end }}
+  {{ with site.Params.verification_google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
+  {{ with site.Params.verification_bing }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
+  {{ with site.Params.verification_yandex }}<meta name="yandex-verification" content="{{ . }}">{{ end }}
 
-  <!-- Robots: allow indexing by default; override per-page with front matter if needed -->
-  <meta name="robots" content="index, follow">
   {{ partial "seo/organization.json.html" . }}
   {{ partial "seo/website.json.html" . }}
   {{ partial "seo/publications.json.html" . }}
-  <meta name="robots" content="{{ with .Params.robots }}{{ . }}{{ else }}index, follow{{ end }}">
 
+  {{ block "head_extra" . }}{{ end }}
 </head>

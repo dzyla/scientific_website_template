@@ -7,7 +7,7 @@
   /* Spacing scale (rem): s-xs to s-3xl */
   --s-2xs: .25rem;
   --s-xs:  .5rem;
-  --s-sm:  .1rem;
+  --s-sm:  .75rem;
   --s-md:  1rem;
   --s-lg:  1.5rem;
   --s-xl:  2rem;
@@ -15,16 +15,20 @@
   --s-3xl: 4rem;
 
   /* Container widths */
-  --container: 960px;
+  --container: 1024px;
 
   /* Colors */
   --text: #222;
   --muted: #555;
   --border: #eaeaea;
   --shadow-1: 0 2px 8px rgba(0,0,0,0.04);
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #faf6ee;
 
   /* Typography */
   --font: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --font-serif: 'Source Serif 4', 'Georgia', serif;
   --h1: clamp(1.9rem, 4vw, 2.5rem);
   --h2: clamp(1.5rem, 3.2vw, 2rem);
   --h3: clamp(1.2rem, 2.6vw, 1.75rem);
@@ -35,9 +39,9 @@
 html, body { height: 100%; }
 body {
   font-family: var(--font);
-  line-height: 1.65;
+  line-height: 1.78;
   color: var(--text);
-  background: #fff;
+  background: #ffffff;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -56,14 +60,19 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* Main area grows to push footer down */
-.main { flex: 1 0 auto; }
+.main {
+  flex: 1 0 auto;
+  background: transparent;
+}
 
 /* ========== Header & Nav (desktop styles stay) ============================ */
 .header {
   padding: 1.2rem 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
   margin-bottom: .5rem;
   background: #fff;
+  color: var(--text);
+  transition: box-shadow .2s ease, border-color .2s ease;
 }
 .header .container {
   display: flex;
@@ -78,6 +87,10 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.header.is-condensed {
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+  border-bottom-color: rgba(148, 163, 184, 0.35);
+}
 
 /* Horizontal menu (desktop) */
 .header nav ul {
@@ -91,7 +104,7 @@ img { max-width: 100%; height: auto; display: block; }
 .menu-link {
   text-decoration: none;
   color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
   border-bottom: 2px solid transparent;
   transition: color .18s, border-color .18s, background .18s;
   padding-bottom: 2px;
@@ -111,8 +124,16 @@ h1, h2, h3, h4, h5, h6 {
   margin: var(--s-lg) 0 var(--s-sm);
 }
 h1 { font-size: var(--h1); }
-h2 { font-size: var(--h2); }
-h3 { font-size: var(--h3); }
+h2 {
+  font-size: var(--h2);
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+h3 {
+  font-size: var(--h3);
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
 
 p { margin: 0 0 var(--s-md); }
 
@@ -122,47 +143,27 @@ a:hover { text-decoration: underline; }
 
 
 /* Consistent section spacing on home */
-.home-content section { margin-bottom: var(--s-2xl); }
+.home-content {
+  max-width: 72ch;
+  margin: 0 auto;
+}
+.home-content section { margin-bottom: var(--s-xl); }
 .home-content h2 { margin-bottom: var(--s-md); }
-.home-content p  { line-height: 1.65; }
+.home-content p  { line-height: 1.78; }
+.section-divider {
+  width: 72px;
+  height: 3px;
+  background: var(--highlight-color);
+  border-radius: 999px;
+  margin: var(--s-sm) 0 var(--s-lg);
+}
 
 /* ========== Team ========================================================== */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-  gap: var(--s-lg);
-  margin-top: var(--s-lg);
-}
-.team-member {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border: 1px solid #d1d1d1;
-  padding: var(--s-lg);
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-}
-.team-member img {
-  width: 150px; height: 150px;
-  border-radius: 15%;
-  object-fit: cover;
-  margin-bottom: var(--s-md);
-}
-.team-member h3 { margin-bottom: .5rem; font-size: 1.25rem; font-weight: 700; }
-.team-member .role { color: #777; font-style: italic; margin-bottom: var(--s-md); }
-.team-member .content { color: #555; }
-.team-member.pi {
-  flex-direction: row;
-  align-items: flex-start;
-  text-align: left;
-  gap: var(--s-lg);
-}
+.team-grid { margin-top: var(--s-lg); display: grid; gap: var(--s-lg); }
 
 /* ========== Publications / Cards ========================================= */
 .publications-list { list-style: none; padding: 0; }
-.team-member, .publications-list li {
+.publications-list li {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 8px;

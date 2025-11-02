@@ -6,6 +6,8 @@ theme = "scilab"
 
 [params]
   highlightColor = "#cfb87c"         # your brand accent
+  description = "Structure-guided virology and biophysics for antiviral discovery."
+  tagline = "Structure-guided virology and biophysics for antiviral discovery."
   ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
   # Use one or more verification tokens below after you register each service.
   verification_google = ""           # e.g., "abc123..."
@@ -14,7 +16,31 @@ theme = "scilab"
   organization_name = "Bio Lab"
   organization_logo = "/favicon.svg"
   organization_url  = "https://dzyla.github.io/scientific_website_template/"
-  twitter_handle = "@dawidzyla"     # optional, for cards
+  joinURL = "/contact/"
+  joinLabel = "Join us"
+  contact_email = "hello@biolab.example"
+  contact_phone = "+1 (555) 123-4567"
+  contact_address = "University of Avalone · Department of Structural Biology"
+  scholar = "https://scholar.google.com/"
+  github = "https://github.com/yourorg"
+  linkedin = "https://www.linkedin.com/company/biolab/"
+  bluesky = "https://bsky.app/profile/biolab.example"
+
+  [[params.footer_links]]
+    name = "Research"
+    pageRef = "research"
+
+  [[params.footer_links]]
+    name = "Publications"
+    pageRef = "publications"
+
+  [[params.footer_links]]
+    name = "Team"
+    pageRef = "team"
+
+  [[params.footer_links]]
+    name = "Contact"
+    pageRef = "contact"
 
 canonifyURLs = false
 

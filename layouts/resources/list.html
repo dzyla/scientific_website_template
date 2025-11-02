@@ -1,4 +1,38 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  {{ .Content }}
+  {{ with .Content }}{{ . }}{{ end }}
+
+  {{ $links := .Params.resources }}
+  {{ if $links }}
+    <div class="resource-list" data-reveal>
+      {{ $page := . }}
+      {{ range $links }}
+        {{ $title := .title | default "" }}
+        {{ $category := .category }}
+        {{ $description := .description }}
+        {{ $url := "" }}
+        {{ with .ref }}
+          {{ $url = relref $page . }}
+        {{ end }}
+        {{ if and (eq $url "") .url }}
+          {{ $url = .url }}
+        {{ end }}
+        <article class="resource-card">
+          {{ with $category }}
+            <span class="resource-pill">{{ . }}</span>
+          {{ end }}
+          {{ if $url }}
+            <h2><a href="{{ $url }}" {{ if strings.HasPrefix $url "http" }}target="_blank" rel="noopener"{{ end }}>{{ $title }}</a></h2>
+          {{ else }}
+            <h2>{{ $title }}</h2>
+          {{ end }}
+          {{ with $description }}
+            <p>{{ . }}</p>
+          {{ end }}
+        </article>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p>Check back soon — we are curating a refreshed list of onboarding and analysis resources.</p>
+  {{ end }}
 {{ end }}

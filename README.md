@@ -68,10 +68,11 @@ This repository contains a minimal Hugo template for scientific labs, designed f
    - Update images in `static/images/`
 
 4. **Customize styles:**
-   - Edit CSS in `static/css/news.css` and other files in `static/css/`
+   - Edit CSS under the Hugo asset pipeline in `themes/scilab/assets/css/` (e.g., `main.css`, `custom.css`). The styles are fingerprinted and concatenated automatically.
 
 5. **Shortcodes:**
-   - Use shortcodes in your Markdown files: `{{< news >}}`, `{{< publications >}}`, `{{< carousel >}}`
+   - Use shortcodes in your Markdown files: `{{< news limit="4" summary="true" >}}`, `{{< publications >}}`, `{{< carousel >}}`
+   - `news` accepts optional `section` (default `news`), `limit`, and `summary=false` to tailor the widget.
 
 ## How to Add/Remove Team Members
 
@@ -98,7 +99,7 @@ This repository contains a minimal Hugo template for scientific labs, designed f
 
 ## Cleaning Up
 
-- Duplicated CSS/JS files have been removed; only use files in `static/`
+- Theme CSS/JS is managed through the `/themes/scilab/assets/` pipeline (no need for duplicate files under `static/`)
 - Unused archetypes and empty folders have been removed
 
 ## Deploying

@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('nav-toggle');
   const menu   = document.getElementById('nav-menu');
   const backdrop = document.getElementById('nav-backdrop');
+  const header = document.querySelector('.header');
+  const backToTop = document.getElementById('back-to-top');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const openMenu = () => {
     if (!menu) return;
@@ -30,6 +33,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const mq = window.matchMedia('(min-width: 769px)');
   (mq.addEventListener ? mq.addEventListener('change', () => mq.matches && closeMenu())
                        : mq.addListener(() => mq.matches && closeMenu()));
+
+  /* ===== Header + back-to-top behaviour ==================================== */
+  const handleScrollState = () => {
+    const y = window.scrollY || window.pageYOffset;
+    if (header) header.classList.toggle('is-condensed', y > 10);
+    if (backToTop) backToTop.classList.toggle('is-visible', y > 320);
+  };
+  window.addEventListener('scroll', handleScrollState, { passive: true });
+  handleScrollState();
+
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  });
+
+  /* ===== Reveal on scroll =================================================== */
+  const revealTargets = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && revealTargets.length) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+    revealTargets.forEach((el) => {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-revealed'));
+  }
 });
 
 /* ===========================================================================
@@ -37,28 +73,37 @@ document.addEventListener('DOMContentLoaded', () => {
    This avoids “Layout was forced before the page was fully loaded.”
    ========================================================================== */
 window.addEventListener('load', () => {
-  const carousels = document.querySelectorAll('.carousel');
+  const carousels = document.querySelectorAll('.carousel[data-carousel]');
   if (carousels.length) carousels.forEach(initCarousel);
 
   function initCarousel(root) {
     // Explicitly opt-in to animation even if OS has reduced motion
     root.setAttribute('data-animate', 'always');
 
+    // If controls already exist in markup, reuse them
+    let prev = root.querySelector('.nav-prev');
+    let next = root.querySelector('.nav-next');
+
     const slides = Array.from(root.querySelectorAll('img'));
     if (!slides.length) return;
 
-    // Inject subtle arrows
-    const prev = document.createElement('button');
-    prev.className = 'nav-btn nav-prev';
-    prev.type = 'button';
-    prev.setAttribute('aria-label', 'Previous slide');
-    prev.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    const next = document.createElement('button');
-    next.className = 'nav-btn nav-next';
-    next.type = 'button';
-    next.setAttribute('aria-label', 'Next slide');
-    next.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    root.appendChild(prev); root.appendChild(next);
+    // Inject subtle arrows only if missing
+    if (!prev) {
+      prev = document.createElement('button');
+      prev.className = 'nav-btn nav-prev';
+      prev.type = 'button';
+      prev.setAttribute('aria-label', 'Previous slide');
+      prev.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      root.appendChild(prev);
+    }
+    if (!next) {
+      next = document.createElement('button');
+      next.className = 'nav-btn nav-next';
+      next.type = 'button';
+      next.setAttribute('aria-label', 'Next slide');
+      next.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      root.appendChild(next);
+    }
 
     if (!root.hasAttribute('tabindex')) root.setAttribute('tabindex', '0');
 

@@ -1,29 +1,52 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  {{ .Content }}
+  {{ with .Content }}{{ . }}{{ end }}
 
-  {{ $pi := where .Pages "Params.type" "pi" }}
+  {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
   {{ range $pi }}
-    <div class="team-member pi">
-      <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}">
-      <div class="info">
+    {{ $page := . }}
+    {{ $imgPath := $page.Params.image }}
+    {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
+    <article class="team-card team-card--lead" data-reveal>
+      {{ with $imgPath }}
+        <div class="team-portrait">
+          <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+        </div>
+      {{ else }}
+        <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
+      {{ end }}
+      <div class="team-info">
         <h2>{{ .Title }}</h2>
-        <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
+        {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
+        {{ with .Params.email }}
+          <p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>
+        {{ end }}
         <div class="content">{{ .Content }}</div>
       </div>
-    </div>
+    </article>
   {{ end }}
 
-  <div class="team-grid">
-    {{ $members := where .Pages "Params.type" "member" }}
+  <div class="team-grid" data-reveal>
+    {{ $members := (where .Pages "Params.type" "member").ByWeight }}
     {{ range $members }}
-      <div class="team-member">
-        <img src="{{ .Params.image | relURL | safeURL }}" alt="{{ .Title }}">
-        <h3>{{ .Title }}</h3>
-        <p class="role">{{ .Params.role }}</p>
-        <p class="email"><a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
-        <div class="content">{{ .Content }}</div>
-      </div>
+      {{ $page := . }}
+      {{ $imgPath := $page.Params.image }}
+      {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
+      <article class="team-card">
+        {{ with $imgPath }}
+          <div class="team-portrait">
+            <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+          </div>
+        {{ else }}
+          <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
+        {{ end }}
+        <div class="team-info">
+          <h3>{{ .Title }}</h3>
+          {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
+          {{ with .Params.email }}<p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+          <div class="content">{{ .Content }}</div>
+        </div>
+      </article>
     {{ end }}
   </div>
 {{ end }}
