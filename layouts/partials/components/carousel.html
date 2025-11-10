@@ -1,0 +1,26 @@
+{{- $page := .Page -}}
+{{- $images := .Images | default slice -}}
+{{- $aria := .AriaLabel | default "Image carousel" -}}
+{{- $dataAttr := .DataAttr | default "auto" -}}
+{{- $altPrefix := .AltPrefix | default "Slide" -}}
+
+{{- if gt (len $images) 0 }}
+  <div class="carousel" role="region" aria-label="{{ $aria }}" data-carousel="{{ $dataAttr }}">
+    {{- range $i, $path := $images }}
+      {{- $src := cond (or (hasPrefix $path "http://") (hasPrefix $path "https://")) $path ($path | relURL) -}}
+      <img
+        src="{{ $src | safeURL }}"
+        alt="{{ printf "%s %d" $altPrefix (add $i 1) }}"
+        loading="lazy"
+        {{- if eq $i 0 }} class="active"{{ end }}
+      >
+    {{- end }}
+
+    <button class="nav-btn nav-prev" type="button" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="nav-btn nav-next" type="button" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.59 16.59 1.41 1.41L16 12 10 6 8.59 7.41 13.17 12z"/></svg>
+    </button>
+  </div>
+{{- end }}

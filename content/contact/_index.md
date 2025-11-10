@@ -4,7 +4,7 @@ description: "How to reach our lab for collaborations, positions, and media."
 ---
 
 {{< contact_block
-  building="Building Name, Room 123"
+  building="Building Name, Room 1234"
   department="Department of Structural Biology"
   institution="University of Avalone"
   street="123 Main St"
@@ -21,3 +21,4 @@ description: "How to reach our lab for collaborations, positions, and media."
   bluesky="https://bsky.app/profile/your-handle.bsky.social"
   linkedin="https://www.linkedin.com/in/YOURPROFILE/"
 >}}
+{{< join_us >}}

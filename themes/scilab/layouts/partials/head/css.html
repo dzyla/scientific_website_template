@@ -7,5 +7,12 @@
 -}}
 {{- $bundle := $styles | resources.Concat "css/site.css" | resources.Minify | resources.Fingerprint -}}
 
+<style>
+  :root {
+    --highlight-color: {{ site.Params.highlightColor | default "#b78b2c" }};
+    --highlight-text-color: {{ site.Params.highlightTextColor | default "#271400" }};
+  }
+</style>
+
 <link rel="preload" href="{{ $bundle.RelPermalink }}" as="style">
 <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous">

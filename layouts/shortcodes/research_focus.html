@@ -1,0 +1,14 @@
+{{- $data := site.Data.research -}}
+{{- with $data.topics -}}
+<section class="research-topics" data-reveal>
+  <h2>Lab interests</h2>
+  <div class="research-topic-grid">
+    {{- range . -}}
+      <article class="research-topic">
+        <h3>{{ .title }}</h3>
+        <p>{{ .description }}</p>
+      </article>
+    {{- end -}}
+  </div>
+</section>
+{{- end -}}

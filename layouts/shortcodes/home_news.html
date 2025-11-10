@@ -1,0 +1,35 @@
+{{- $cfg := site.Params.home.news | default dict -}}
+{{- $heading := "Latest News" -}}
+{{- if isset $cfg "heading" }}
+  {{- $heading = index $cfg "heading" -}}
+{{- end -}}
+{{- $description := "" -}}
+{{- if isset $cfg "description" }}
+  {{- $description = index $cfg "description" -}}
+{{- end -}}
+{{- $section := "news" -}}
+{{- if isset $cfg "section" }}
+  {{- $section = index $cfg "section" -}}
+{{- end -}}
+{{- $limit := 0 -}}
+{{- if isset $cfg "limit" }}
+  {{- $limit = index $cfg "limit" -}}
+{{- end -}}
+{{- $showSummaries := true -}}
+{{- if isset $cfg "showSummaries" }}
+  {{- $showSummaries = index $cfg "showSummaries" -}}
+{{- end -}}
+
+<section class="news" data-reveal>
+  {{- with $heading }}<h3>{{ . }}</h3>{{ end }}
+  <div class="section-divider" aria-hidden="true"></div>
+  {{- with $description }}<p class="news-intro">{{ . }}</p>{{ end }}
+
+  {{- $context := dict "Site" site
+      "Section" $section
+      "Limit" $limit
+      "ShowSummary" $showSummaries
+      "HighlightColor" (site.Params.highlightColor | default "#cfb87c")
+  -}}
+  {{- partial "components/news_list.html" $context -}}
+</section>

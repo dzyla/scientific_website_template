@@ -1,5 +1,29 @@
 // SciLab theme JS
-document.addEventListener('DOMContentLoaded', () => {
+const runWhenStylesReady = (handler) => {
+  const invoke = () => {
+    const exec = () => handler();
+    if ('requestAnimationFrame' in window) {
+      requestAnimationFrame(() => requestAnimationFrame(exec));
+    } else {
+      setTimeout(exec, 0);
+    }
+  };
+
+  const afterFonts = () => {
+    const ready = document.fonts && 'ready' in document.fonts
+      ? document.fonts.ready
+      : Promise.resolve();
+    ready.then(invoke);
+  };
+
+  if (document.readyState === 'complete') {
+    afterFonts();
+  } else {
+    window.addEventListener('load', afterFonts, { once: true });
+  }
+};
+
+const initUI = () => {
   /* ===== Mobile navigation ================================================= */
   const toggle = document.getElementById('nav-toggle');
   const menu   = document.getElementById('nav-menu');
@@ -41,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backToTop) backToTop.classList.toggle('is-visible', y > 320);
   };
   window.addEventListener('scroll', handleScrollState, { passive: true });
-  handleScrollState();
+  runWhenStylesReady(() => handleScrollState());
 
   backToTop?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
@@ -49,30 +73,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ===== Reveal on scroll =================================================== */
   const revealTargets = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window && revealTargets.length) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          obs.unobserve(entry.target);
+  if (revealTargets.length) {
+    runWhenStylesReady(() => {
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+        revealTargets.forEach((el) => {
+          el.classList.add('reveal');
+          observer.observe(el);
+        });
+      } else {
+        revealTargets.forEach((el) => el.classList.add('is-revealed'));
+      }
+    });
+  }
+
+  const hoverCards = document.querySelectorAll('.research-topic, .research-project, .resource-card, .publication-card, .alumni-card, .join-position, .contact-card, .team-card');
+  if (hoverCards.length) {
+    hoverCards.forEach((card) => {
+      card.addEventListener('pointerup', (event) => {
+        if (event.pointerType && event.pointerType !== 'mouse') return;
+        const active = document.activeElement;
+        if (active && card.contains(active) && typeof active.blur === 'function') {
+          active.blur();
         }
       });
-    }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
-
-    revealTargets.forEach((el) => {
-      el.classList.add('reveal');
-      observer.observe(el);
     });
-  } else {
-    revealTargets.forEach((el) => el.classList.add('is-revealed'));
   }
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initUI);
+} else {
+  initUI();
+}
 
 /* ===========================================================================
    Defer carousel until all stylesheets and fonts are loaded.
    This avoids “Layout was forced before the page was fully loaded.”
    ========================================================================== */
-window.addEventListener('load', () => {
+runWhenStylesReady(() => {
   const carousels = document.querySelectorAll('.carousel[data-carousel]');
   if (carousels.length) carousels.forEach(initCarousel);
 

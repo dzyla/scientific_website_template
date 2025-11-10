@@ -1,0 +1,22 @@
+{{- $data := site.Data.research -}}
+{{- with $data.projects -}}
+  {{- if gt (len .items) 0 -}}
+<section class="research-projects" data-reveal>
+  <h2>{{ .title | default "Research projects" }}</h2>
+  <div class="research-project-grid">
+    {{- range .items -}}
+      <article class="research-project">
+        <div class="project-media">
+          {{- $img := .image | relURL -}}
+          <img src="{{ $img }}" alt="{{ .caption | default .title }}">
+        </div>
+        <div class="project-body">
+          <h3>{{ .title }}</h3>
+          <p>{{ .summary }}</p>
+        </div>
+      </article>
+    {{- end -}}
+  </div>
+</section>
+  {{- end -}}
+{{- end -}}

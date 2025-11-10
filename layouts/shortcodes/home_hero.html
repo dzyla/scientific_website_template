@@ -1,0 +1,62 @@
+{{- $hero := site.Params.home.hero | default dict -}}
+{{- $carousel := slice -}}
+{{- if isset $hero "carousel" -}}
+  {{- $carousel = index $hero "carousel" -}}
+{{- end -}}
+{{- $title := cond (isset $hero "title") (index $hero "title") (printf "Welcome to %s" site.Title) -}}
+{{- $intro := slice -}}
+{{- if isset $hero "intro" -}}
+  {{- $intro = index $hero "intro" -}}
+{{- end -}}
+{{- $lead := "" -}}
+{{- if isset $hero "lead" -}}
+  {{- $lead = index $hero "lead" -}}
+{{- end -}}
+{{- $actions := slice -}}
+{{- if isset $hero "actions" -}}
+  {{- $actions = index $hero "actions" -}}
+{{- end -}}
+{{- $actionsAria := cond (isset $hero "actionsAria") (index $hero "actionsAria") "Quick links" -}}
+
+<section class="hero" data-reveal>
+  {{- if gt (len $carousel) 0 }}
+    {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
+  {{- end }}
+
+  <h1>{{ $title }}</h1>
+
+  {{- if or $lead (gt (len $intro) 0) }}
+    <div class="hero-intro">
+      {{- with $lead }}<p><strong>{{ . }}</strong></p>{{ end }}
+      {{- range $intro }}<p>{{ . }}</p>{{ end }}
+    </div>
+  {{- end }}
+
+  {{- if gt (len $actions) 0 }}
+    <div class="hero-actions" aria-label="{{ $actionsAria }}">
+      {{- range $actions }}
+        {{- $href := "" -}}
+        {{- if isset . "pageRef" -}}
+          {{- $ref := index . "pageRef" -}}
+          {{- with site.GetPage $ref -}}
+            {{- $href = .RelPermalink -}}
+          {{- else -}}
+            {{- with site.GetPage (printf "%s/_index.md" $ref) -}}
+              {{- $href = .RelPermalink -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- if and (eq $href "") (isset . "url") -}}
+          {{- $href = index . "url" -}}
+        {{- end -}}
+        {{- if ne $href "" }}
+          {{- $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") -}}
+          {{- $newTab := or (and (isset . "newTab") (index . "newTab")) $isExternal -}}
+          <a class="hero-pill" href="{{ $href }}"{{ if $newTab }} target="_blank" rel="noopener"{{ end }}>
+            {{- index . "label" | default "Learn more" -}}
+          </a>
+        {{- end -}}
+      {{- end }}
+    </div>
+  {{- end }}
+</section>

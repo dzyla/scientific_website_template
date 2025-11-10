@@ -1,82 +1,8 @@
 {{/* Configurable news widget – defaults to the "news" section */}}
-{{ $section := .Get "section" | default "news" }}
-{{ $limit := .Get "limit" | default 0 }}
-{{ $showSummary := ne (.Get "summary") "false" }}
-{{ $highlight := site.Params.highlightColor | default "#1976d2" }}
-
-{{ $pages := where site.RegularPages "Section" $section }}
-{{ $pages = where $pages "Draft" "ne" true }}
-{{ $pages = where $pages "Params.hidden" "ne" true }}
-{{ $sorted := $pages.ByDate.Reverse }}
-{{ if gt (int $limit) 0 }}
-  {{ $sorted = first $limit $sorted }}
-{{ end }}
-
-<div class="news-container" style="--highlight-color: {{ $highlight }};">
-  <ul class="news-list">
-    {{ range $sorted }}
-      {{ $link := .Params.link | default .RelPermalink }}
-      {{ $eventDate := .PublishDate }}
-      {{ if eq $eventDate.Unix 0 }}
-        {{ $eventDate = .Date }}
-      {{ end }}
-      <li class="news-item">
-        <time class="news-date" datetime='{{ $eventDate.Format "2006-01-02" }}'>
-          {{ $eventDate.Format "Jan 2, 2006" }}
-        </time>
-
-        <div class="news-content">
-          {{ if .Params.link }}
-            <a class="news-title-link" href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer">
-              {{ .Title }}
-            </a>
-          {{ else }}
-            <a class="news-title-link" href="{{ $link }}">
-              {{ .Title }}
-            </a>
-          {{ end }}
-
-          {{ if $showSummary }}
-            <div class="news-summary">
-              {{ with .Params.summary }}
-                {{ . | markdownify }}
-              {{ else }}
-                {{ with .Summary }}
-                  {{ . | plainify | truncate 180 }}
-                {{ end }}
-              {{ end }}
-            </div>
-          {{ end }}
-
-          {{ with .Params.tags }}
-            <div class="news-tags">
-              {{ range . }}
-                <span class="news-tag">{{ . }}</span>
-              {{ end }}
-            </div>
-          {{ end }}
-
-          {{ if .Params.link }}
-            <a class="news-more" href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer">
-              Visit article
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h14M19 5l-7 7M19 5h-6M19 5v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          {{ else if .RelPermalink }}
-            <a class="news-more" href="{{ .RelPermalink }}">
-              Read more
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          {{ end }}
-        </div>
-      </li>
-    {{ else }}
-      <li class="news-item">
-        <time class="news-date" datetime="">—</time>
-        <div class="news-content">
-          <span class="news-title">No news to display</span>
-          <div class="news-summary">Please check back soon.</div>
-        </div>
-      </li>
-    {{ end }}
-  </ul>
-</div>
+{{- $context := dict "Site" site
+    "Section" (.Get "section" | default "news")
+    "Limit" (.Get "limit" | default 0)
+    "ShowSummary" (ne (.Get "summary") "false")
+    "HighlightColor" (site.Params.highlightColor | default "#cfb87c")
+-}}
+{{- partial "components/news_list.html" $context -}}

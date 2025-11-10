@@ -1,0 +1,7 @@
+{{- $data := site.Data.research -}}
+{{- with $data.hero -}}
+<section class="research-hero" data-reveal>
+  <h1>{{ .title }}</h1>
+  <p>{{ .intro }}</p>
+</section>
+{{- end -}}

@@ -1,2 +1,2 @@
 {{- $mainJS := resources.Get "js/main.js" | js.Build | fingerprint -}}
-<script src="{{ $mainJS.Permalink }}" integrity="{{ $mainJS.Data.Integrity }}" defer></script>
+<script src="{{ $mainJS.RelPermalink }}" integrity="{{ $mainJS.Data.Integrity }}" defer></script>

@@ -24,14 +24,22 @@
 {{- $bluesky := .Get "bluesky" | default "" -}}
 {{- $linkedin := .Get "linkedin" | default "" -}}
 
-<section class="contact-modern" data-reveal>
+<section class="contact-section contact-modern" data-reveal>
   <header class="contact-hero">
+    <h2>Contact the lab</h2>
     <p>Interested in collaborations, positions, or sharing reagents? Reach out—we love hearing from fellow scientists and future trainees.</p>
   </header>
 
-  <div class="contact-columns">
-    <div class="contact-card contact-card--info">
-      <h3>Lab Address</h3>
+  <div class="contact-map" aria-label="Lab location">
+    <iframe src="{{ $gmapsEmbed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to our lab" allowfullscreen></iframe>
+    <div class="contact-map-actions">
+      <a class="chip chip--light" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Open in Google Maps</a>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <article class="contact-card contact-card--address">
+      <h3>Visit us</h3>
       <address>
         {{- if $building }}<span>{{ $building }}</span>{{ end -}}
         {{- if or $department $institution }}<span>{{ if $department }}{{ $department }}, {{ end }}{{ $institution }}</span>{{ end -}}
@@ -39,37 +47,36 @@
         {{- if or $city $state $zip }}<span>{{ $city }}{{ if and $city $state }}, {{ end }}{{ $state }} {{ $zip }}</span>{{ end -}}
         {{- if $country }}<span>{{ $country }}</span>{{ end -}}
       </address>
+    </article>
 
-      <div class="contact-meta">
-        <p><strong>Email</strong><br><a href="mailto:{{ $email }}">{{ $email }}</a></p>
-        <p><strong>Phone</strong><br><a href="tel:{{ $phone | replace " " "" }}">{{ $phone }}</a></p>
-        <p><strong>Office hours</strong><br>{{ $officeHours }}</p>
-      </div>
-
-      <div class="contact-actions">
-        <a class="chip" href="mailto:{{ $email }}">Email the lab</a>
-        <a class="chip" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Directions</a>
-      </div>
-    </div>
-
-    <div class="contact-card contact-card--map">
-      <div class="map-frame" aria-label="Lab location">
-        <iframe src="{{ $gmapsEmbed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to our lab" allowfullscreen></iframe>
-      </div>
-      <a class="map-link" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Open in Google Maps</a>
-    </div>
-  </div>
-
-  <div class="contact-network">
-    {{- if or $scholar $orcid $github $bluesky $linkedin -}}
-      <h3>Research profiles</h3>
-      <ul class="contact-network-list">
-        {{- if $scholar }}<li><a href="{{ $scholar }}" target="_blank" rel="noopener">Google Scholar</a></li>{{ end -}}
-        {{- if $orcid }}<li><a href="{{ $orcid }}" target="_blank" rel="noopener">ORCID</a></li>{{ end -}}
-        {{- if $github }}<li><a href="{{ $github }}" target="_blank" rel="noopener">GitHub</a></li>{{ end -}}
-        {{- if $bluesky }}<li><a href="{{ $bluesky }}" target="_blank" rel="noopener">Bluesky</a></li>{{ end -}}
-        {{- if $linkedin }}<li><a href="{{ $linkedin }}" target="_blank" rel="noopener">LinkedIn</a></li>{{ end -}}
+    <article class="contact-card contact-card--reach">
+      <h3>Reach out</h3>
+      <ul class="contact-list">
+        <li><span>Email</span><a href="mailto:{{ $email }}">{{ $email }}</a></li>
+        <li><span>Phone</span><a href="tel:{{ $phone | replace " " "" }}">{{ $phone }}</a></li>
+        <li><span>Office hours</span>{{ $officeHours }}</li>
       </ul>
+      <div class="contact-actions">
+        <a class="chip chip--outline" href="mailto:{{ $email }}">Email the lab</a>
+        <a class="chip chip--outline" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </article>
+
+    {{- $profiles := slice -}}
+    {{- with $scholar }}{{ $profiles = $profiles | append (dict "name" "Google Scholar" "url" .) }}{{ end -}}
+    {{- with $orcid }}{{ $profiles = $profiles | append (dict "name" "ORCID" "url" .) }}{{ end -}}
+    {{- with $github }}{{ $profiles = $profiles | append (dict "name" "GitHub" "url" .) }}{{ end -}}
+    {{- with $bluesky }}{{ $profiles = $profiles | append (dict "name" "Bluesky" "url" .) }}{{ end -}}
+    {{- with $linkedin }}{{ $profiles = $profiles | append (dict "name" "LinkedIn" "url" .) }}{{ end -}}
+    {{- if gt (len $profiles) 0 }}
+      <article class="contact-card contact-card--profiles">
+        <h3>Research profiles</h3>
+        <div class="contact-profiles">
+          {{- range $profiles }}
+            <a class="chip chip--outline" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>
+          {{- end }}
+        </div>
+      </article>
     {{- end -}}
   </div>
 </section>

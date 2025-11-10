@@ -1,0 +1,30 @@
+{{/* Join Us shortcode: renders roles from data/join_us.yaml */}}
+
+{{- $data := site.Data.join_us -}}
+{{- if not $data -}}
+  {{- warnf "join_us shortcode: data/join_us.yaml not found." -}}
+{{- else -}}
+  <section class="contact-section join-us" data-reveal>
+    <h2>Join Us</h2>
+    {{ with $data.intro }}<p class="join-us-intro">{{ . }}</p>{{ end }}
+
+    {{ with $data.positions }}
+      <div class="join-positions">
+        {{ range . }}
+          <div class="join-position">
+            <h3>{{ .title }}</h3>
+            {{ with .bullets }}
+              <ul>
+                {{ range . }}<li>{{ . }}</li>{{ end }}
+              </ul>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with $data.cta.text }}
+      <p class="join-us-cta">{{ . }}</p>
+    {{ end }}
+  </section>
+{{- end -}}
