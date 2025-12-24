@@ -42,6 +42,14 @@
             {{- end }}
           </h4>
 
+          {{- with .Params.tags }}
+             <div class="news-tags">
+               {{- range . }}
+                 <span class="news-tag">{{ . }}</span>
+               {{- end }}
+             </div>
+           {{- end }}
+
           {{- if $showSummary }}
             <div class="news-summary">
               {{- with .Params.summary -}}
@@ -53,14 +61,6 @@
               {{- end -}}
             </div>
           {{- end }}
-
-          {{- with .Params.tags }}
-             <div class="news-tags">
-               {{- range . }}
-                 <span class="news-tag">{{ . }}</span>
-               {{- end }}
-             </div>
-           {{- end }}
 
           {{- if .Params.link }}
             <a class="news-more" href="{{ .Params.link }}" target="_blank" rel="noopener noreferrer">

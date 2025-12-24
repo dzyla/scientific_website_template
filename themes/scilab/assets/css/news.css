@@ -23,14 +23,14 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--s-lg);
+  gap: var(--s-md); /* Compact gap */
 }
 
 .news-item {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: var(--s-lg);
-  padding-bottom: var(--s-lg);
+  grid-template-columns: 120px 1fr; /* Slightly narrower date col */
+  gap: var(--s-md);
+  padding-bottom: var(--s-md);
   border-bottom: 1px solid var(--border);
 }
 

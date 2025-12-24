@@ -403,15 +403,16 @@
   align-items: center;
   justify-content: center;
   gap: .35rem;
-  font-size: .75rem;
+  font-size: .7rem;
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
-  padding: .2rem .75rem;
+  padding: .2rem .6rem;
   border-radius: 999px;
-  background: var(--highlight-color);
-  color: var(--highlight-text, #271400);
-  min-width: 6.5rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  min-width: fit-content;
 }
 .resource-card h2 {
   margin-top: 0;
