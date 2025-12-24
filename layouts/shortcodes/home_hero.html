@@ -21,6 +21,12 @@
 <section class="hero" data-reveal>
   <div class="container">
     <div class="hero-grid">
+      <div class="hero-media">
+        {{- if gt (len $carousel) 0 }}
+          {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
+        {{- end }}
+      </div>
+
       <div class="hero-content">
         <h1>{{ $title }}</h1>
 
@@ -57,12 +63,6 @@
               {{- end -}}
             {{- end }}
           </div>
-        {{- end }}
-      </div>
-
-      <div class="hero-media">
-        {{- if gt (len $carousel) 0 }}
-          {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
         {{- end }}
       </div>
     </div>

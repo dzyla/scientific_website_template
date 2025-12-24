@@ -85,7 +85,7 @@
 .hero-media {
   position: relative;
   width: 100%;
-  margin-top: var(--s-xl);
+  margin-bottom: var(--s-lg);
 }
 
 /* Carousel component styles */

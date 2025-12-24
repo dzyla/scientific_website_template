@@ -6,14 +6,15 @@
   margin: 0 auto;
 }
 
-/* Specific styling for homepage widget: Clean list (removed boxy widget look) */
+/* Specific styling for homepage widget: Scrollable Box */
 .home-news-widget .news-list-wrapper {
-  max-height: none;
-  overflow-y: visible;
-  padding: 0;
-  border: none;
-  background: transparent;
-  max-width: 800px;
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 0.5rem; /* space for scrollbar */
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: var(--surface);
 }
 
 .news-list {
