@@ -518,24 +518,31 @@
 
 @media (max-width: 640px) {
   .footer {
-    padding: var(--s-xl) 0 var(--s-lg);
+    padding: var(--s-lg) 0;
   }
   .footer-top { display: none; }
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: var(--s-lg);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-lg) var(--s-sm);
     padding-inline: var(--s-md);
+    margin-bottom: var(--s-lg);
   }
+  /* Remove card styling for mobile to reduce bulk */
   .footer-col {
-    align-items: center;
+    align-items: center; /* Center content in column */
     text-align: center;
     gap: .5rem;
-    padding: var(--s-md) var(--s-sm);
-    background: rgba(255,255,255,0.82);
-    border: 1px solid rgba(148,163,184,0.22);
-    border-radius: calc(var(--radius-lg));
-    box-shadow: 0 12px 32px rgba(15,23,42,0.12);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
+  /* Span full width for the last item if odd number (usually 3 cols: Contact, Explore, Connect) */
+  .footer-col:last-child {
+    grid-column: 1 / -1;
+    margin-top: var(--s-sm);
+  }
+
   .footer-col h4 { display: none; }
   .footer-contact,
   .footer-links,

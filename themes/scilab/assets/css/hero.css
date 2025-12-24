@@ -2,6 +2,7 @@
 .hero {
   position: relative;
   padding: var(--s-2xl) 0;
+  margin-bottom: var(--s-3xl); /* Add space before next section */
   overflow: hidden; /* Prevent horizontal scroll if carousel is large */
 }
 
@@ -180,7 +181,7 @@
   }
 
   .carousel {
-    aspect-ratio: 4 / 3; /* More square on mobile */
+    aspect-ratio: 16 / 9; /* Wider on mobile for cinematic feel */
     border-radius: var(--radius-md);
   }
 

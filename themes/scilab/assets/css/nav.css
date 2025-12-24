@@ -46,7 +46,7 @@
   .menu-item { border: 0; }
   .menu-link {
     display: block;
-    padding: .85rem 1.1rem;
+    padding: .5rem 1rem;
     border-bottom: 0;
     border-radius: calc(var(--radius-md) + 2px);
     font-weight: 600;
