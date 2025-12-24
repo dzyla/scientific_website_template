@@ -6,6 +6,17 @@
   margin: 0 auto;
 }
 
+/* Specific styling for homepage widget: Scrollable Box */
+.home-news-widget .news-list-wrapper {
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 0.5rem; /* space for scrollbar */
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: var(--surface);
+}
+
 .news-list {
   list-style: none;
   margin: 0;
@@ -29,7 +40,7 @@
 }
 
 .news-date {
-  font-family: var(--font-serif);
+  font-family: var(--font); /* Modern sans-serif */
   font-size: 0.95rem;
   color: var(--muted);
   font-weight: 500;
