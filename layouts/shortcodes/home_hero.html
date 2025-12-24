@@ -19,44 +19,52 @@
 {{- $actionsAria := cond (isset $hero "actionsAria") (index $hero "actionsAria") "Quick links" -}}
 
 <section class="hero" data-reveal>
-  {{- if gt (len $carousel) 0 }}
-    {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
-  {{- end }}
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1>{{ $title }}</h1>
 
-  <h1>{{ $title }}</h1>
+        {{- if or $lead (gt (len $intro) 0) }}
+          <div class="hero-intro-text">
+            {{- with $lead }}<p class="hero-lead">{{ . }}</p>{{ end }}
+            {{- range $intro }}<p>{{ . }}</p>{{ end }}
+          </div>
+        {{- end }}
 
-  {{- if or $lead (gt (len $intro) 0) }}
-    <div class="hero-intro">
-      {{- with $lead }}<p><strong>{{ . }}</strong></p>{{ end }}
-      {{- range $intro }}<p>{{ . }}</p>{{ end }}
+        {{- if gt (len $actions) 0 }}
+          <div class="hero-actions" aria-label="{{ $actionsAria }}">
+            {{- range $actions }}
+              {{- $href := "" -}}
+              {{- if isset . "pageRef" -}}
+                {{- $ref := index . "pageRef" -}}
+                {{- with site.GetPage $ref -}}
+                  {{- $href = .RelPermalink -}}
+                {{- else -}}
+                  {{- with site.GetPage (printf "%s/_index.md" $ref) -}}
+                    {{- $href = .RelPermalink -}}
+                  {{- end -}}
+                {{- end -}}
+              {{- end -}}
+              {{- if and (eq $href "") (isset . "url") -}}
+                {{- $href = index . "url" -}}
+              {{- end -}}
+              {{- if ne $href "" }}
+                {{- $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") -}}
+                {{- $newTab := or (and (isset . "newTab") (index . "newTab")) $isExternal -}}
+                <a class="hero-pill" href="{{ $href }}"{{ if $newTab }} target="_blank" rel="noopener"{{ end }}>
+                  {{- index . "label" | default "Learn more" -}}
+                </a>
+              {{- end -}}
+            {{- end }}
+          </div>
+        {{- end }}
+      </div>
+
+      <div class="hero-media">
+        {{- if gt (len $carousel) 0 }}
+          {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
+        {{- end }}
+      </div>
     </div>
-  {{- end }}
-
-  {{- if gt (len $actions) 0 }}
-    <div class="hero-actions" aria-label="{{ $actionsAria }}">
-      {{- range $actions }}
-        {{- $href := "" -}}
-        {{- if isset . "pageRef" -}}
-          {{- $ref := index . "pageRef" -}}
-          {{- with site.GetPage $ref -}}
-            {{- $href = .RelPermalink -}}
-          {{- else -}}
-            {{- with site.GetPage (printf "%s/_index.md" $ref) -}}
-              {{- $href = .RelPermalink -}}
-            {{- end -}}
-          {{- end -}}
-        {{- end -}}
-        {{- if and (eq $href "") (isset . "url") -}}
-          {{- $href = index . "url" -}}
-        {{- end -}}
-        {{- if ne $href "" }}
-          {{- $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") -}}
-          {{- $newTab := or (and (isset . "newTab") (index . "newTab")) $isExternal -}}
-          <a class="hero-pill" href="{{ $href }}"{{ if $newTab }} target="_blank" rel="noopener"{{ end }}>
-            {{- index . "label" | default "Learn more" -}}
-          </a>
-        {{- end -}}
-      {{- end }}
-    </div>
-  {{- end }}
+  </div>
 </section>

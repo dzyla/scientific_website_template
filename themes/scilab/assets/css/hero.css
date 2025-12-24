@@ -1,145 +1,198 @@
 /* ---------- Landing hero and carousel ----------------------------------- */
-@media (max-width: 768px) {
-  :root { --hero-gap: 0.9rem; }
+.hero {
+  position: relative;
+  padding: var(--s-2xl) 0;
+  overflow: hidden; /* Prevent horizontal scroll if carousel is large */
 }
 
-.hero {
-  text-align: center;
-  padding: var(--s-xl) 0 var(--s-lg);
-  position: relative;
+/* Split layout using CSS Grid */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2xl);
+  align-items: center;
 }
-.hero-image { margin-bottom: var(--hero-gap); }
-.hero-intro {
-  max-width: min(74ch, var(--container-narrow));
-  margin: 0 auto;
-  padding-inline: var(--s-lg);
+
+.hero-content {
+  max-width: 60ch;
 }
+
+.hero h1 {
+  margin-top: 0;
+  margin-bottom: var(--s-md);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.hero-intro-text {
+  font-size: 1.125rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: var(--s-lg);
+}
+
+.hero-lead {
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: var(--s-sm);
+  font-size: 1.25rem;
+}
+
 .hero-actions {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: var(--s-sm);
-  margin-top: var(--s-lg);
 }
+
 .hero-pill {
   display: inline-flex;
   align-items: center;
-  gap: .4rem;
-  padding: .5rem 1.2rem;
-  border-radius: 999px;
+  justify-content: center;
+  gap: .5rem;
+  padding: .75rem 1.5rem;
+  border-radius: var(--radius-sm);
   background: var(--accent);
-  color: var(--highlight-text, #271400);
+  color: var(--highlight-text, #ffffff);
   text-decoration: none;
   font-weight: 600;
-  transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
-  box-shadow: var(--shadow-soft);
-}
-.hero-pill:hover {
-  opacity: .95;
-  box-shadow: var(--shadow-medium);
-  transform: translateY(-1px);
-}
-.hero-pill:focus-visible {
-  outline: 2px solid var(--highlight-color);
-  outline-offset: 3px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-1);
 }
 
-/* Stable height; isolate stacking for consistent cross-fade */
+.hero-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  filter: brightness(1.05);
+  text-decoration: none;
+}
+
+.hero-pill:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+/* Carousel / Media container */
+.hero-media {
+  position: relative;
+  width: 100%;
+}
+
+/* Carousel component styles */
 .carousel {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: 420px;
+  aspect-ratio: 16 / 10; /* Slightly taller for split layout */
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--neutral-50);
-  box-shadow: var(--shadow-soft);
-  outline: none;
-  isolation: isolate;            /* new: ensure we control the stacking context */
-}
-.carousel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(15,23,42,0.08), rgba(255,255,255,0.0));
-  pointer-events: none;
-  z-index: 2;
-}
-@media (max-width: 768px) {
-  .carousel { aspect-ratio: 4 / 3; max-height: 340px; }
-  .hero-intro { padding-inline: var(--s-md); }
+  background: var(--neutral-100);
+  box-shadow: var(--shadow-medium);
+  isolation: isolate;
 }
 
-/* Cross-fade and subtle motion */
 .carousel img {
-  position: absolute !important; /* ensure stacking even if something overrides */
-  inset: 0 !important;
-  display: block !important;     /* defeats any legacy display:none */
-  width: 100% !important;
-  height: 100% !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  z-index: 0;
   opacity: 0;
-  pointer-events: none;
-  backface-visibility: hidden;
+  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out;
   will-change: opacity, transform;
-  transform: translateX(5px) scale(1.02);
-  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out !important;
+  z-index: 0;
+  transform: scale(1.05);
 }
 
 .carousel img.active {
-  z-index: 1;
   opacity: 1;
-  transform: translateX(0) scale(1);
+  z-index: 1;
+  transform: scale(1);
 }
 
-/* Subtle navigation arrows */
+/* Navigation Buttons */
 .carousel .nav-btn {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  z-index: 5; display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 999px;
-  border: 1px solid rgba(15,23,42,0.12);
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(2px);
-  box-shadow: var(--shadow-1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
   opacity: 0;
+  transition: all 0.2s ease;
+  color: var(--text);
 }
-.carousel .nav-prev { left: 8px; }
-.carousel .nav-next { right: 8px; }
+
 .carousel:hover .nav-btn,
-.carousel:focus-within .nav-btn { opacity: 1; }
-.carousel .nav-btn:hover { background: rgba(255,255,255,0.95); transform: translateY(-50%) scale(1.04); box-shadow: var(--shadow-soft); }
-.carousel .nav-btn:active { transform: translateY(-50%) scale(0.98); }
-.carousel .nav-btn:focus-visible { outline: 2px solid var(--highlight-color); outline-offset: 2px; }
-.carousel .nav-btn svg { width: 18px; height: 18px; color: var(--text); }
-@media (max-width: 420px) {
-  .carousel .nav-btn { width: 32px; height: 32px; }
-  .carousel .nav-prev { left: 6px; } .carousel .nav-next { right: 6px; }
+.carousel:focus-within .nav-btn {
+  opacity: 1;
 }
 
-@media (max-width: 600px) {
-  .hero { padding: var(--s-lg) 0 var(--s-md); }
-  .hero-actions { width: 100%; gap: var(--s-xs); }
-  .hero-pill { width: 100%; justify-content: center; }
+.carousel .nav-prev { left: 1rem; }
+.carousel .nav-next { right: 1rem; }
+
+.carousel .nav-btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
 }
 
-/* Respect reduced motion (if OS/browser has it ON, fades will be off) */
+.carousel .nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr; /* Stack vertically */
+    gap: var(--s-lg);
+  }
+
+  .hero-content {
+    max-width: 100%;
+    text-align: center; /* Center text on mobile/tablet */
+    order: 1; /* Content first (default) */
+  }
+
+  .hero-media {
+    order: 2; /* Media second */
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero h1 {
+     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--s-xl) 0;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .carousel {
+    aspect-ratio: 4 / 3; /* More square on mobile */
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .carousel img {
+  .carousel img, .hero-pill, .nav-btn {
     transition: none !important;
     transform: none !important;
   }
-  .carousel .nav-btn { transition: none; }
 }
-/* Opt-in override: only for carousels you mark as data-animate="always" */
-.carousel[data-animate="always"] img {
-  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out !important;
-}
-
-/* Remove accidental extra top margin after hero */
-.home-content section:first-of-type { margin-top: 0; }
-
-.carousel img { z-index: 0; }
-.carousel img.active { z-index: 1; }
