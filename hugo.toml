@@ -32,11 +32,8 @@ theme = "scilab"
   [params.home]
     [params.home.hero]
       title = "Structure-guided virology, from single virions to therapeutics"
-      lead = "We combine cryo-EM, tomography, and biophysics to see how viruses enter cells and assemble new particles."
-      intro = [
-        "These atomic snapshots reveal weak spots that we can target with next-generation antivirals.",
-        "Our team is collaborative, data-forward, and always looking for curious scientists who want to explore mechanism-driven questions with real translational impact."
-      ]
+      lead = "We combine cryo-EM and biophysics to capture atomic snapshots of viral assembly. By revealing these transient mechanisms, we identify weak spots to target with next-generation antivirals."
+      intro = []
       carousel = [
         "images/lab.jpg",
         "images/img1.jpg",

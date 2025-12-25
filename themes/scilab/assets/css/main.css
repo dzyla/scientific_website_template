@@ -27,11 +27,26 @@
   --background: #ffffff;
   --surface: #ffffff;
   --surface-alt: #faf6ee;
-  --accent: var(--highlight-color, #b78b2c);
-  --accent-soft: rgba(183,139,44,0.18);
-  --highlight-soft: rgba(183,139,44,0.18);
-  --highlight-outline: rgba(183,139,44,0.4);
-  --highlight-text: var(--highlight-text-color, #ffffff); /* Default text on accent should be white unless overridden */
+  /* Updated highlight color for better contrast: darker gold/ochre */
+  --accent: #9A7B2C; /* Adjusted from #b78b2c for better contrast on white, or similar */
+  /* Actually user suggested Darker Gold (Mustard -> Ochre) or Black buttons */
+  /* Let's try to set accent to a darker shade if needed, but #b78b2c is already somewhat dark.
+     Wait, user said "mustard gold buttons with white text often fail WCAG".
+     #b78b2c on #ffffff is 3.01:1 (fail AA large text).
+     #ffffff on #b78b2c is 3.01:1.
+     We need > 4.5:1 or > 3:1 for large text.
+     If we darken it to #9A7215?
+     Let's stick to user request "Darker Gold background".
+     Or we can change buttons to Black/White.
+     Let's define a specific --btn-bg var.
+  */
+
+  --accent: #a07415; /* Darker gold */
+
+  --accent-soft: rgba(160, 116, 21, 0.18);
+  --highlight-soft: rgba(160, 116, 21, 0.18);
+  --highlight-outline: rgba(160, 116, 21, 0.4);
+  --highlight-text: #ffffff;
   --neutral-50: #f8fafc;
   --neutral-100: #f1f5f9;
   --neutral-200: #e2e8f0;
@@ -166,7 +181,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .menu-link:hover,
 .menu-link.active {
-  color: var(--highlight-color);
+  color: var(--accent);
 }
 
 /* ========== Typography ===================================================== */
@@ -189,7 +204,7 @@ p { margin: 0 0 var(--s-md); }
 
 /* Links */
 a {
-  color: var(--highlight-color);
+  color: var(--accent);
   text-decoration: none;
   transition: color .2s ease;
 }
@@ -209,7 +224,7 @@ hr {
 .section-divider {
   width: 40px;
   height: 4px;
-  background: var(--highlight-color);
+  background: var(--accent);
   margin: var(--s-sm) 0 var(--s-lg);
   border-radius: 2px;
 }
@@ -250,6 +265,45 @@ hr {
   color: var(--muted);
   font-size: 0.9rem;
   background: var(--neutral-50);
+}
+
+/* ========== Value Cards Grid (Philosophy) ================================= */
+.value-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.value-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none; /* Removed border */
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.value-card-icon {
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.value-card-title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.value-card-body {
+    color: var(--muted);
+    line-height: 1.5;
 }
 
 /* ========== Responsive ==================================================== */

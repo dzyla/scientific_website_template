@@ -1,0 +1,17 @@
+{{- $title := .Get "title" -}}
+{{- $icon := .Get "icon" -}}
+
+<div class="value-card">
+  {{- if $icon }}
+  <div class="value-card-icon">
+     <!-- Simple icon placeholder or use a library if available. -->
+     <!-- For now, I'll use a simple colored circle or similar if no SVG library is ready. -->
+     <!-- Assuming fontawesome or feather is not loaded, I will use a simple visual cue. -->
+     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-{{ $icon }}"><circle cx="12" cy="12" r="10"></circle></svg>
+  </div>
+  {{- end }}
+  <h3 class="value-card-title">{{ $title }}</h3>
+  <div class="value-card-body">
+    {{ .Inner }}
+  </div>
+</div>
