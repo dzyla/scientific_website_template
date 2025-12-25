@@ -1,71 +1,43 @@
 /* ---------- Landing hero and carousel ----------------------------------- */
-/* Split Hero */
-.hero-split {
-  position: relative;
-  min-height: 85vh; /* Full viewport height */
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+/* Stacked Hero (Vertical) */
+.hero-stack {
+  padding: var(--s-2xl) 0;
   margin-bottom: var(--s-3xl);
-}
-
-.hero-image-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-/* Ensure carousel fills the container */
-.hero-image-container .carousel {
-    height: 100%;
-    aspect-ratio: auto; /* Reset aspect ratio */
-    border-radius: 0;
-    box-shadow: none;
-}
-.hero-image-container .carousel img {
-    object-fit: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(90deg, #ffffff 40%, rgba(255,255,255,0) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xl);
 }
 
 .hero-content-container {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  pointer-events: none; /* Let clicks pass through to image if needed */
+  text-align: left; /* Keep text left aligned or center? User said "keep the hero carousel below the text" but didn't specify align. Left is usually better for reading. */
+  max-width: 800px; /* Limit width for readability */
+  margin: 0 auto; /* Center the block itself */
 }
 
-.hero-text-column {
-  width: 50%;
-  padding-right: 2rem;
-  pointer-events: auto; /* Enable clicks on text column */
+.hero-text-block {
+    text-align: center; /* Center align text as per standard hero or user previous request? Previous was left. Let's stick to center for a "stacked" hero as it looks balanced, or left? The prompt 1 said "Text in left column". Prompt 2 says "keep carousel below". I'll center it for a classic look, or keep left if it was left. The initial critique said "Text block is center-aligned and too dense". So maybe Left is better. But "keep carousel below" might imply full width. I'll align center for now as it's safer for a vertical stack. */
+    text-align: left;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
-  color: #000; /* Force black for contrast on white */
+  color: var(--text);
   margin-bottom: 1.5rem;
 }
 
 .hero-body p {
-  font-size: 1.25rem; /* 20px+ as requested */
+  font-size: 1.25rem;
   line-height: 1.6;
-  color: #333;
+  color: var(--muted);
   margin-bottom: 1rem;
 }
 
 .hero-lead {
     font-size: 1.4rem !important;
     font-weight: 500;
+    color: var(--text) !important;
 }
 
 .hero-actions {
@@ -73,10 +45,9 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 2rem;
-  justify-content: flex-start; /* Left align */
+  justify-content: flex-start; /* Match text align */
 }
 
-/* Button styles reused/adapted */
 .hero-pill {
   display: inline-flex;
   align-items: center;
@@ -100,49 +71,29 @@
   text-decoration: none;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 992px) {
-  .hero-split {
-    flex-direction: column;
-    height: auto;
-    min-height: auto;
-    padding-bottom: 3rem;
-  }
-
-  .hero-image-container {
-    position: relative;
-    height: 50vh;
-    order: -1;
-  }
-
-  .hero-overlay {
-      display: none; /* Remove gradient on mobile */
-  }
-
-  .hero-content-container {
-      margin-top: 2rem;
-  }
-
-  .hero-text-column {
-    width: 100%;
-    padding-right: 0;
-    text-align: center; /* Center text on mobile */
-  }
-
-  .hero-actions {
-      justify-content: center;
-  }
-
-  .hero-lead {
-      font-size: 1.2rem !important;
-  }
+/* Carousel Container */
+.hero-image-container {
+  width: 100%;
+  max-width: var(--container); /* Use container width */
+  margin: 0 auto;
+  padding: 0 var(--s-lg);
 }
 
-/* Carousel internal styles adjustments if needed */
-.carousel img {
-  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out;
+.hero-image-container .carousel {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    aspect-ratio: 21 / 9; /* Cinematic */
 }
-.carousel img.active {
-  opacity: 1;
-  z-index: 1;
+
+@media (max-width: 768px) {
+    .hero-image-container .carousel {
+        aspect-ratio: 16 / 9;
+    }
+    .hero-text-block {
+        text-align: left;
+    }
+    .hero-actions {
+        justify-content: flex-start;
+    }
 }

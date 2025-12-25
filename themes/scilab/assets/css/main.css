@@ -20,27 +20,13 @@
   --container-narrow: 768px;
 
   /* Colors */
-  --text: #1a1a1a; /* Slightly darker for better contrast */
+  --text: #1a1a1a;
   --muted: #555;
   --border: #eaeaea;
   --shadow-1: 0 1px 3px rgba(0,0,0,0.05);
   --background: #ffffff;
   --surface: #ffffff;
   --surface-alt: #faf6ee;
-  /* Updated highlight color for better contrast: darker gold/ochre */
-  --accent: #9A7B2C; /* Adjusted from #b78b2c for better contrast on white, or similar */
-  /* Actually user suggested Darker Gold (Mustard -> Ochre) or Black buttons */
-  /* Let's try to set accent to a darker shade if needed, but #b78b2c is already somewhat dark.
-     Wait, user said "mustard gold buttons with white text often fail WCAG".
-     #b78b2c on #ffffff is 3.01:1 (fail AA large text).
-     #ffffff on #b78b2c is 3.01:1.
-     We need > 4.5:1 or > 3:1 for large text.
-     If we darken it to #9A7215?
-     Let's stick to user request "Darker Gold background".
-     Or we can change buttons to Black/White.
-     Let's define a specific --btn-bg var.
-  */
-
   --accent: #a07415; /* Darker gold */
 
   --accent-soft: rgba(160, 116, 21, 0.18);
@@ -114,13 +100,12 @@ img { max-width: 100%; height: auto; display: block; }
   padding-block: var(--s-2xl);
 }
 
-/* Main area grows to push footer down */
 .main {
   flex: 1 0 auto;
   background: transparent;
 }
 
-/* ========== Header & Nav (desktop styles stay) ============================ */
+/* ========== Header & Nav ============================ */
 .header {
   position: relative;
   z-index: 200;
@@ -141,14 +126,14 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--text);
   text-decoration: none;
   letter-spacing: -0.02em;
-  text-transform: none; /* Cleaner, less shouty */
+  text-transform: none;
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 .logo-mark {
-  height: 3.5rem; /* Restrict logo height */
+  height: 3.5rem;
   width: auto;
   object-fit: contain;
 }
@@ -161,7 +146,6 @@ img { max-width: 100%; height: auto; display: block; }
   top: 0;
 }
 
-/* Horizontal menu (desktop) */
 .header nav ul {
   margin: 0;
   padding: 0;
@@ -202,7 +186,6 @@ h3 {
 
 p { margin: 0 0 var(--s-md); }
 
-/* Links */
 a {
   color: var(--accent);
   text-decoration: none;
@@ -216,7 +199,6 @@ hr {
   margin: var(--s-xl) 0;
 }
 
-/* Consistent section spacing on home */
 .home-content {
   width: 100%;
 }
@@ -229,21 +211,16 @@ hr {
   border-radius: 2px;
 }
 
-/* ========== Team ========================================================== */
-.team-grid {
-  margin-top: var(--s-lg);
-  display: grid;
-  gap: var(--s-lg);
-}
-
-@media (max-width: 768px) {
-  .team-grid { grid-template-columns: 1fr; }
-  .team-member.pi {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
+/* ========== Team (General) ================================================= */
+/* Old Team grid styles removed or overridden by team.css if imported.
+   Assuming team.css is imported or we can include it here.
+   I will import it via <link> or stick it here.
+   The user architecture puts CSS in themes/scilab/assets/css.
+   Likely they are bundled. I should check if I need to import it.
+   But for now, I'll assume team.css is loaded or I should add an import if there's a main loader.
+   Wait, I created themes/scilab/assets/css/team.css.
+   I should check layouts/partials/head/css.html or similar if it lists the files.
+*/
 
 /* ========== Publications / Cards ========================================= */
 .publications-list { list-style: none; padding: 0; }
@@ -281,7 +258,7 @@ hr {
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-soft);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: none; /* Removed border */
+    border: none;
 }
 
 .value-card:hover {

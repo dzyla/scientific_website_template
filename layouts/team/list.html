@@ -2,84 +2,114 @@
   <h1>{{ .Title }}</h1>
   {{ with .Content }}{{ . }}{{ end }}
 
+  <!-- PI Section (Featured Hierarchy) -->
   {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
   {{ range $pi }}
     {{ $page := . }}
     {{ $imgPath := $page.Params.image }}
     {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
-    <article class="team-card team-card--lead" data-reveal>
-      {{ with $imgPath }}
-        {{ $img := resources.GetMatch $imgPath }}
-        {{ if $img }}
-          {{ $processed := $img.Fill "320x360 Center" }}
-          <div class="team-portrait">
-            <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+    <section class="team-pi-section" data-reveal>
+      <div class="team-pi-card">
+        <div class="team-pi-visual">
+          {{ with $imgPath }}
+            {{ $img := resources.GetMatch $imgPath }}
+            {{ if $img }}
+              {{ $processed := $img.Fill "400x400 Center" }} <!-- Square or 4:3 -->
+              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+            {{ else }}
+              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+            {{ end }}
+          {{ else }}
+            <div class="team-portrait--placeholder" aria-hidden="true"></div>
+          {{ end }}
+        </div>
+        <div class="team-pi-info">
+          <span class="pi-tag">Principal Investigator</span>
+          <h2>{{ .Title }}</h2>
+          <!-- Focus Tag -->
+          <div class="pi-focus">Cryo-EM Methodology & Viral Assembly</div>
+
+          <div class="pi-bio">
+              {{ .Content }}
           </div>
-        {{ else }}
-          <div class="team-portrait">
-            <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
-          </div>
-        {{ end }}
-      {{ else }}
-        <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
-      {{ end }}
-      <div class="team-info">
-        <h2>{{ .Title }}</h2>
-        {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
-        {{ with .Params.email }}
-          <p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>
-        {{ end }}
-        <div class="content">{{ .Content }}</div>
+
+          {{ with .Params.email }}
+            <p class="pi-contact"><a href="mailto:{{ . }}" class="button-link">Email {{ $page.Title }}</a></p>
+          {{ end }}
+        </div>
       </div>
-    </article>
+    </section>
   {{ end }}
 
+  <!-- Team Grid -->
   <div class="team-grid" data-reveal>
     {{ $members := (where .Pages "Params.type" "member").ByWeight }}
     {{ range $members }}
       {{ $page := . }}
       {{ $imgPath := $page.Params.image }}
       {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
-      <article class="team-card">
-        {{ with $imgPath }}
-          {{ $img := resources.GetMatch $imgPath }}
-          {{ if $img }}
-            {{ $processed := $img.Fill "280x320 Center" }}
-            <div class="team-portrait">
-              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
-            </div>
+      <article class="team-card-vertical">
+        <div class="team-card-image">
+          {{ with $imgPath }}
+            {{ $img := resources.GetMatch $imgPath }}
+            {{ if $img }}
+              {{ $processed := $img.Fill "300x350 Center" }}
+              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
+            {{ else }}
+              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
+            {{ end }}
           {{ else }}
-            <div class="team-portrait">
-              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
-            </div>
+            <div class="team-portrait--placeholder" aria-hidden="true"></div>
           {{ end }}
-        {{ else }}
-          <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
-        {{ end }}
-        <div class="team-info">
-          <h3>{{ .Title }}</h3>
-          {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
-          {{ with .Params.email }}<p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
-          <div class="content">{{ .Content }}</div>
+        </div>
+        <div class="team-card-content">
+          <h3 class="team-name">{{ .Title }}</h3>
+          {{ with .Params.role }}<p class="team-role">{{ . }}</p>{{ end }}
+          {{ with .Params.email }}
+            <a href="mailto:{{ . }}" class="team-contact-icon" aria-label="Email {{ $page.Title }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+          {{ end }}
         </div>
       </article>
     {{ end }}
+
+    <!-- Hiring / Join Us Card -->
+    <article class="team-card-vertical team-hiring-card">
+        <div class="hiring-content">
+            <h3>Join Our Team</h3>
+            <p>We are always looking for curious scientists.</p>
+            <a href="{{ "contact" | relURL }}" class="hiring-link">See Opportunities &rarr;</a>
+        </div>
+    </article>
   </div>
 
+  <!-- Alumni Section (Compact Table) -->
   {{ with site.Data.alumni }}
     {{ $alumni := . }}
     {{ if gt (len $alumni) 0 }}
       <section class="team-alumni" data-reveal>
         <h2>Alumni</h2>
-        <p class="team-alumni-intro">Former lab members and the paths they’ve taken after their time with us.</p>
-        <div class="alumni-grid">
-          {{ range $alumni }}
-            <article class="alumni-card">
-              <h3 class="alumni-name">{{ .name }}</h3>
-              <p class="alumni-role">{{ .role }}</p>
-              <p class="alumni-current">{{ .current }}</p>
-            </article>
-          {{ end }}
+        <div class="alumni-table-wrapper">
+            <table class="alumni-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Former Role</th>
+                        <th>Current Position</th>
+                        <!-- <th>Year Left</th> If available -->
+                    </tr>
+                </thead>
+                <tbody>
+                  {{ range $alumni }}
+                    <tr>
+                        <td class="alumni-name-cell">{{ .name }}</td>
+                        <td>{{ .role }}</td>
+                        <td>{{ .current }}</td>
+                    </tr>
+                  {{ end }}
+                </tbody>
+            </table>
         </div>
       </section>
     {{ end }}
