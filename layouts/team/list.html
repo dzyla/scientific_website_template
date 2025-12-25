@@ -1,17 +1,13 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
 
-  <!-- Group Photo (Polished) -->
   {{ with .Content }}
     <div class="team-group-photo-container">
-        {{ . }} <!-- Assuming .Content contains the {{< show_img >}} shortcode or similar. -->
-        <!-- Since we can't easily parse markdown here to style the image inside, we might need to rely on CSS targeting or just let content be content but wrapped.
-             If the user put a shortcode, we can assume it renders an img.
-             Let's wrap it in a styled container. -->
+        {{ . }}
     </div>
   {{ end }}
 
-  <!-- PI Section (Refined) -->
+  <!-- PI Section (Scaled Down) -->
   {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
   {{ range $pi }}
     {{ $page := . }}
@@ -23,7 +19,7 @@
           {{ with $imgPath }}
             {{ $img := resources.GetMatch $imgPath }}
             {{ if $img }}
-              {{ $processed := $img.Fill "400x500 Center" }} <!-- Rectangular portrait for PI too? User said "Keep Alice at top... Ensure image... vertically centered". 4:5 or Square is good. Let's do 4:5 to match others or Square. User said "Keep Alice at top... tighten layout". I'll stick to a nice portrait ratio. -->
+              {{ $processed := $img.Fill "400x450 Center" }} <!-- Slightly reduced height from 500 -->
               <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
             {{ else }}
               <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
@@ -35,7 +31,6 @@
         <div class="team-pi-info">
           <span class="pi-tag">Principal Investigator</span>
           <h2>{{ .Title }}</h2>
-          <!-- Focus Tag (Hardcoded based on previous context, or we can look for params) -->
           <div class="pi-focus">Cryo-EM Methodology & Viral Assembly</div>
 
           <div class="pi-bio">
@@ -50,13 +45,10 @@
     </section>
   {{ end }}
 
-  <!-- Team Grid (3-Column Vertical Cards) -->
+  <!-- Team Grid (Scaled Down Cards) -->
   <div class="team-grid" data-reveal>
     {{ $members := (where .Pages "Params.type" "member").ByWeight }}
     {{ range $members }}
-      <!-- Filter out "Someone New" if it exists as a separate file, or just let the Join card replace it if user deleted it.
-           User said "Fix the Someone New placeholder; if it's not a real person, remove it".
-           I will check title. -->
       {{ if ne .Title "Someone New" }}
           {{ $page := . }}
           {{ $imgPath := $page.Params.image }}
@@ -66,7 +58,7 @@
               {{ with $imgPath }}
                 {{ $img := resources.GetMatch $imgPath }}
                 {{ if $img }}
-                  {{ $processed := $img.Fill "400x500 Center" }} <!-- 4:5 Aspect Ratio -->
+                  {{ $processed := $img.Fill "300x350 Center" }} <!-- Scaled Down significantly (was 400x500) -->
                   <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
                 {{ else }}
                   <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
@@ -78,7 +70,7 @@
             <div class="team-card-content">
               <h3 class="team-name">{{ .Title }}</h3>
               {{ with .Params.role }}<p class="team-role">{{ . }}</p>{{ end }}
-              <p class="team-focus">Structural kinetics of viral entry</p> <!-- Placeholder or Param? User said "Add a 1-sentence research focus". I'll use a placeholder or Param if exists. -->
+              <p class="team-focus">Structural kinetics of viral entry</p>
             </div>
           </article>
       {{ end }}

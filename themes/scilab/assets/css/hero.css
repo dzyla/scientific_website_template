@@ -1,15 +1,14 @@
 /* ---------- Landing hero and carousel ----------------------------------- */
-/* Split Blur Hero */
-.hero-split-blur {
+/* Split Opaque Hero */
+.hero-split-opaque {
   position: relative;
   min-height: 85vh; /* Full viewport height */
   display: flex;
-  align-items: center;
   overflow: hidden;
   margin-bottom: var(--s-3xl);
 }
 
-/* Image fills the section */
+/* Image fills the section, acts as background */
 .hero-image-container {
   position: absolute;
   inset: 0;
@@ -30,33 +29,40 @@
     object-fit: cover;
 }
 
-/* Wrapper to constrain grid/content width */
-.hero-content-wrapper {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  pointer-events: none; /* Let clicks pass */
+/* Overlay Container: Spans full width/height on top of image */
+.hero-overlay-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    pointer-events: none; /* Let clicks pass through transparent parts */
 }
 
-/* The Blurred Text Column */
-.hero-blur-column {
-  width: 50%;
-  max-width: 600px;
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.75); /* Translucent white */
-  backdrop-filter: blur(16px); /* Strong blur */
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  pointer-events: auto; /* Re-enable clicks */
-  text-align: left;
+/* Left Spacer (Transparent) */
+.hero-spacer {
+    flex: 1; /* Takes up remaining space (approx 60-65%) */
+}
+
+/* Right Opaque Column */
+.hero-opaque-column {
+    width: 40%; /* Approx 35-40% */
+    min-width: 500px;
+    background: #fff; /* Solid White */
+    height: 100%;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    padding: 4rem;
+    pointer-events: auto; /* Re-enable clicks */
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1); /* Shadow to separate from image */
+}
+
+.hero-text-content {
+    width: 100%;
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   line-height: 1.1;
   color: #000;
@@ -64,14 +70,14 @@
 }
 
 .hero-body p {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   line-height: 1.6;
-  color: #1a1a1a;
+  color: #333;
   margin-bottom: 1rem;
 }
 
 .hero-lead {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
     font-weight: 600;
 }
 
@@ -106,7 +112,7 @@
   text-decoration: none;
 }
 
-/* Carousel Internal Logic Restoration (Crucial) */
+/* Carousel Logic (Restored) */
 .carousel {
   position: relative;
   isolation: isolate;
@@ -161,29 +167,33 @@
 
 /* Responsive */
 @media (max-width: 992px) {
-  .hero-split-blur {
+  .hero-split-opaque {
     flex-direction: column;
     height: auto;
     min-height: auto;
-    display: block; /* Let flow normally */
-    padding-bottom: 3rem;
+    display: block;
   }
 
   .hero-image-container {
       position: relative;
-      height: 50vh;
+      height: 50vh; /* Image Top */
   }
 
-  .hero-content-wrapper {
-      padding-top: 2rem;
+  .hero-overlay-container {
+      position: relative;
+      display: block;
+      height: auto;
   }
 
-  .hero-blur-column {
+  .hero-spacer {
+      display: none;
+  }
+
+  .hero-opaque-column {
       width: 100%;
-      max-width: none;
-      background: rgba(255,255,255,0.9); /* Less transparent on mobile for legibility */
-      margin-top: -2rem; /* Overlap image slightly */
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-medium);
+      min-width: 0;
+      height: auto;
+      padding: 3rem 1.5rem;
+      box-shadow: none;
   }
 }
