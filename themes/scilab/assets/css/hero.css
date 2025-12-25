@@ -1,42 +1,78 @@
 /* ---------- Landing hero and carousel ----------------------------------- */
-/* Stacked Hero (Vertical) */
-.hero-stack {
-  padding: var(--s-2xl) 0;
-  margin-bottom: var(--s-3xl);
+/* Split Blur Hero */
+.hero-split-blur {
+  position: relative;
+  min-height: 85vh; /* Full viewport height */
   display: flex;
-  flex-direction: column;
-  gap: var(--s-xl);
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: var(--s-3xl);
 }
 
-.hero-content-container {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
+/* Image fills the section */
+.hero-image-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-.hero-text-block {
-    text-align: center;
+/* Ensure carousel fills the container */
+.hero-image-container .carousel {
+    height: 100%;
+    width: 100%;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+}
+.hero-image-container .carousel img {
+    object-fit: cover;
+}
+
+/* Wrapper to constrain grid/content width */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* Let clicks pass */
+}
+
+/* The Blurred Text Column */
+.hero-blur-column {
+  width: 50%;
+  max-width: 600px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.75); /* Translucent white */
+  backdrop-filter: blur(16px); /* Strong blur */
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  pointer-events: auto; /* Re-enable clicks */
+  text-align: left;
 }
 
 .hero-title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
-  color: var(--text);
+  color: #000;
   margin-bottom: 1.5rem;
 }
 
 .hero-body p {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: var(--muted);
+  color: #1a1a1a;
   margin-bottom: 1rem;
 }
 
 .hero-lead {
     font-size: 1.4rem !important;
-    font-weight: 500;
-    color: var(--text) !important;
+    font-weight: 600;
 }
 
 .hero-actions {
@@ -44,7 +80,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 2rem;
-  justify-content: center; /* Center actions */
+  justify-content: flex-start;
 }
 
 .hero-pill {
@@ -70,31 +106,11 @@
   text-decoration: none;
 }
 
-.hero-pill:focus-visible {
-  outline: 2px solid var(--highlight-color);
-  outline-offset: 2px;
-}
-
-/* Carousel Container */
-.hero-image-container {
-  width: 100%;
-  max-width: var(--container); /* Use container width */
-  margin: 0 auto;
-  padding: 0 var(--s-lg);
-}
-
-/* Carousel component styles - RESTORED */
+/* Carousel Internal Logic Restoration (Crucial) */
 .carousel {
   position: relative;
-  width: 100%;
-  aspect-ratio: 21 / 9; /* Cinematic */
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--neutral-100);
-  box-shadow: var(--shadow-strong);
   isolation: isolate;
 }
-
 .carousel img {
   position: absolute;
   inset: 0;
@@ -107,14 +123,11 @@
   z-index: 0;
   transform: scale(1.05);
 }
-
 .carousel img.active {
   opacity: 1;
   z-index: 1;
   transform: scale(1);
 }
-
-/* Navigation Buttons */
 .carousel .nav-btn {
   position: absolute;
   top: 50%;
@@ -135,41 +148,42 @@
   transition: all 0.2s ease;
   color: var(--text);
 }
-
 .carousel:hover .nav-btn,
 .carousel:focus-within .nav-btn {
   opacity: 1;
 }
-
 .carousel .nav-prev { left: 1.5rem; }
 .carousel .nav-next { right: 1.5rem; }
-
 .carousel .nav-btn:hover {
   background: #fff;
   transform: translateY(-50%) scale(1.1);
 }
 
-.carousel .nav-btn svg {
-  width: 24px;
-  height: 24px;
-}
-
-/* Responsive Adjustments */
+/* Responsive */
 @media (max-width: 992px) {
-  .carousel {
-    aspect-ratio: 16 / 9;
+  .hero-split-blur {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    display: block; /* Let flow normally */
+    padding-bottom: 3rem;
   }
-}
 
-@media (max-width: 768px) {
-    .hero-image-container .carousel {
-        aspect-ratio: 16 / 9;
-    }
-}
+  .hero-image-container {
+      position: relative;
+      height: 50vh;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .carousel img, .hero-pill, .nav-btn {
-    transition: none !important;
-    transform: none !important;
+  .hero-content-wrapper {
+      padding-top: 2rem;
+  }
+
+  .hero-blur-column {
+      width: 100%;
+      max-width: none;
+      background: rgba(255,255,255,0.9); /* Less transparent on mobile for legibility */
+      margin-top: -2rem; /* Overlap image slightly */
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-medium);
   }
 }
