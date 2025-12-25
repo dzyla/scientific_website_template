@@ -9,14 +9,13 @@
 }
 
 .hero-content-container {
-  text-align: left; /* Keep text left aligned or center? User said "keep the hero carousel below the text" but didn't specify align. Left is usually better for reading. */
-  max-width: 800px; /* Limit width for readability */
-  margin: 0 auto; /* Center the block itself */
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .hero-text-block {
-    text-align: center; /* Center align text as per standard hero or user previous request? Previous was left. Let's stick to center for a "stacked" hero as it looks balanced, or left? The prompt 1 said "Text in left column". Prompt 2 says "keep carousel below". I'll center it for a classic look, or keep left if it was left. The initial critique said "Text block is center-aligned and too dense". So maybe Left is better. But "keep carousel below" might imply full width. I'll align center for now as it's safer for a vertical stack. */
-    text-align: left;
+    text-align: center;
 }
 
 .hero-title {
@@ -45,7 +44,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 2rem;
-  justify-content: flex-start; /* Match text align */
+  justify-content: center; /* Center actions */
 }
 
 .hero-pill {
@@ -71,6 +70,11 @@
   text-decoration: none;
 }
 
+.hero-pill:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
 /* Carousel Container */
 .hero-image-container {
   width: 100%;
@@ -79,21 +83,93 @@
   padding: 0 var(--s-lg);
 }
 
-.hero-image-container .carousel {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-medium);
-    aspect-ratio: 21 / 9; /* Cinematic */
+/* Carousel component styles - RESTORED */
+.carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9; /* Cinematic */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--neutral-100);
+  box-shadow: var(--shadow-strong);
+  isolation: isolate;
+}
+
+.carousel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out;
+  will-change: opacity, transform;
+  z-index: 0;
+  transform: scale(1.05);
+}
+
+.carousel img.active {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1);
+}
+
+/* Navigation Buttons */
+.carousel .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  color: var(--text);
+}
+
+.carousel:hover .nav-btn,
+.carousel:focus-within .nav-btn {
+  opacity: 1;
+}
+
+.carousel .nav-prev { left: 1.5rem; }
+.carousel .nav-next { right: 1.5rem; }
+
+.carousel .nav-btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel .nav-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .carousel {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 @media (max-width: 768px) {
     .hero-image-container .carousel {
         aspect-ratio: 16 / 9;
     }
-    .hero-text-block {
-        text-align: left;
-    }
-    .hero-actions {
-        justify-content: flex-start;
-    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel img, .hero-pill, .nav-btn {
+    transition: none !important;
+    transform: none !important;
+  }
 }

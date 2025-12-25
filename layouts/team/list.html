@@ -14,7 +14,7 @@
           {{ with $imgPath }}
             {{ $img := resources.GetMatch $imgPath }}
             {{ if $img }}
-              {{ $processed := $img.Fill "400x400 Center" }} <!-- Square or 4:3 -->
+              {{ $processed := $img.Fill "280x280 Center" }} <!-- Reduced size -->
               <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
             {{ else }}
               <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
@@ -48,12 +48,12 @@
       {{ $page := . }}
       {{ $imgPath := $page.Params.image }}
       {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
-      <article class="team-card-vertical">
-        <div class="team-card-image">
+      <article class="team-card-compact">
+        <div class="team-card-compact-image">
           {{ with $imgPath }}
             {{ $img := resources.GetMatch $imgPath }}
             {{ if $img }}
-              {{ $processed := $img.Fill "300x350 Center" }}
+              {{ $processed := $img.Fill "120x120 Center" }} <!-- Small square -->
               <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
             {{ else }}
               <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
@@ -62,24 +62,23 @@
             <div class="team-portrait--placeholder" aria-hidden="true"></div>
           {{ end }}
         </div>
-        <div class="team-card-content">
+        <div class="team-card-compact-content">
           <h3 class="team-name">{{ .Title }}</h3>
           {{ with .Params.role }}<p class="team-role">{{ . }}</p>{{ end }}
           {{ with .Params.email }}
-            <a href="mailto:{{ . }}" class="team-contact-icon" aria-label="Email {{ $page.Title }}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:{{ . }}" class="team-contact-link">
+              <span class="contact-icon">✉</span> Email
             </a>
           {{ end }}
         </div>
       </article>
     {{ end }}
 
-    <!-- Hiring / Join Us Card -->
-    <article class="team-card-vertical team-hiring-card">
-        <div class="hiring-content">
+    <!-- Hiring / Join Us Card (Compact Version) -->
+    <article class="team-card-compact team-hiring-card-compact">
+        <div class="hiring-content-compact">
             <h3>Join Our Team</h3>
-            <p>We are always looking for curious scientists.</p>
-            <a href="{{ "contact" | relURL }}" class="hiring-link">See Opportunities &rarr;</a>
+            <a href="{{ "contact" | relURL }}" class="hiring-link-compact">Apply &rarr;</a>
         </div>
     </article>
   </div>
@@ -97,7 +96,6 @@
                         <th>Name</th>
                         <th>Former Role</th>
                         <th>Current Position</th>
-                        <!-- <th>Year Left</th> If available -->
                     </tr>
                 </thead>
                 <tbody>

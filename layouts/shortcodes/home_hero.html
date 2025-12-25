@@ -19,6 +19,14 @@
 {{- $actionsAria := cond (isset $hero "actionsAria") (index $hero "actionsAria") "Quick links" -}}
 
 <section class="hero-stack" data-reveal>
+  <!-- Image/Carousel Container (Top) -->
+  <div class="hero-image-container">
+     {{- if gt (len $carousel) 0 }}
+         {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
+     {{- end }}
+  </div>
+
+  <!-- Content Container (Bottom) -->
   <div class="container hero-content-container">
     <div class="hero-text-block">
       <h1 class="hero-title">{{ $title }}</h1>
@@ -55,11 +63,5 @@
       </div>
       {{- end }}
     </div>
-  </div>
-
-  <div class="hero-image-container">
-     {{- if gt (len $carousel) 0 }}
-         {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
-     {{- end }}
   </div>
 </section>

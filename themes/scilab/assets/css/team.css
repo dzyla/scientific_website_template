@@ -7,7 +7,7 @@
 
 .team-pi-card {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 280px 1fr; /* Fixed width for image column */
     gap: var(--s-2xl);
     align-items: center;
     background: #fff;
@@ -24,13 +24,13 @@
 .team-pi-info h2 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    font-size: 2.5rem;
+    font-size: 2rem; /* Slightly smaller H2 */
 }
 
 .pi-tag {
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: var(--accent);
 }
@@ -38,15 +38,15 @@
 .pi-focus {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--muted);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .pi-bio {
     font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
 }
 
 .button-link {
@@ -65,115 +65,118 @@
 }
 
 
-/* --- Team Grid (Vertical Cards) --- */
+/* --- Team Grid (Compact Horizontal Cards) --- */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Dense grid */
+    gap: 1.5rem;
     margin-bottom: var(--s-3xl);
 }
 
-.team-card-vertical {
+.team-card-compact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     background: #fff;
     border-radius: var(--radius-md);
-    overflow: hidden;
-    /* Soft shadow, no border */
+    padding: 0.75rem;
     box-shadow: var(--shadow-1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    flex-direction: column;
+    border: 1px solid transparent; /* Prepare for hover border or keep clean */
 }
 
-.team-card-vertical:hover {
-    transform: translateY(-5px);
+.team-card-compact:hover {
+    transform: translateY(-3px);
     box-shadow: var(--shadow-medium);
+    border-color: var(--border);
 }
 
-.team-card-image {
-    width: 100%;
-    aspect-ratio: 4/5;
-    background: var(--neutral-100);
+.team-card-compact-image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 50%; /* Circle avatar */
     overflow: hidden;
+    background: var(--neutral-100);
 }
 
-.team-card-image img {
+.team-card-compact-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: filter 0.4s ease;
-    /* Grayscale by default */
     filter: grayscale(100%);
 }
 
-.team-card-vertical:hover .team-card-image img {
+.team-card-compact:hover .team-card-compact-image img {
     filter: grayscale(0%);
 }
 
-.team-card-content {
-    padding: 1.25rem;
-    text-align: center;
+.team-card-compact-content {
+    flex: 1;
+    min-width: 0; /* Prevent flex overflow */
 }
 
 .team-name {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .team-role {
-    margin: 0.25rem 0 0.75rem;
-    font-size: 0.9rem;
+    margin: 0.1rem 0 0.4rem;
+    font-size: 0.85rem;
     color: var(--muted);
+    line-height: 1.2;
 }
 
-.team-contact-icon {
+.team-contact-link {
+    font-size: 0.8rem;
     color: var(--muted);
-    transition: color 0.2s ease;
-    display: inline-block;
-    padding: 0.25rem;
-}
-.team-contact-icon:hover {
-    color: var(--accent);
-}
-
-/* --- Hiring Card --- */
-.team-hiring-card {
-    background: var(--accent); /* Gold/Mustard */
-    color: #fff; /* Assuming white text on dark gold */
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
-    text-align: center;
-    min-height: 350px; /* Match typical card height */
+    gap: 0.3rem;
 }
-
-.hiring-content {
-    padding: 2rem;
-}
-
-.team-hiring-card h3 {
-    color: #fff;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.team-hiring-card p {
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 2rem;
-}
-
-.hiring-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #fff;
+.team-contact-link:hover {
     color: var(--accent);
-    font-weight: 700;
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    transition: transform 0.2s ease;
+    text-decoration: underline;
 }
-.hiring-link:hover {
-    transform: scale(1.05);
+
+.contact-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* --- Hiring Card (Compact) --- */
+.team-hiring-card-compact {
+    background: var(--accent);
+    color: #fff;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 1rem;
+    min-height: 100px; /* Match approximate height of other cards */
+}
+
+.hiring-content-compact h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.hiring-link-compact {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.hiring-link-compact:hover {
+    color: rgba(255,255,255,0.8);
 }
 
 
@@ -190,7 +193,7 @@
 
 .alumni-table th,
 .alumni-table td {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--border);
 }
@@ -199,7 +202,7 @@
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: 0.05em;
 }
 
@@ -218,7 +221,7 @@
     }
     .team-pi-visual img {
         margin: 0 auto;
-        max-width: 350px;
+        max-width: 250px;
     }
     .team-pi-info {
         text-align: center;
