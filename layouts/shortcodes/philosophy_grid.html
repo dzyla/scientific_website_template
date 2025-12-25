@@ -1,0 +1,44 @@
+{{/*
+  Philosophy Grid Shortcode
+  Usage: {{< philosophy_grid >}}...HTML content...{{< /philosophy_grid >}}
+
+  However, since we want to move the HTML *out* of the markdown, this shortcode will
+  define the grid structure itself, and we might pass data or just hardcode the blocks
+  if they are static.
+
+  Better approach for this specific request:
+  The shortcode will output the wrapper `div` and we will place the items inside it,
+  ensuring markdown processing is handled correctly if we use inner content,
+  OR we just fully template it here to avoid markdown mixing issues.
+
+  Given the "unify code" instruction, fully templating the items here is cleaner
+  than mixing HTML in Markdown.
+*/}}
+
+<div class="philosophy-grid">
+  <div class="philosophy-item">
+    <div class="phil-number">01</div>
+    <h3>Evidence & Rigor</h3>
+    <p>Data, validated methods, and constructive peer review shape our conclusions. When the evidence changes, so do our plans.</p>
+  </div>
+  <div class="philosophy-item">
+    <div class="phil-number">02</div>
+    <h3>Curiosity First</h3>
+    <p>We choose questions that spark excitement <em>and</em> move the field. Weekly progress might be incremental, but the arc should stay energising.</p>
+  </div>
+  <div class="philosophy-item">
+    <div class="phil-number">03</div>
+    <h3>Open & Inclusive</h3>
+    <p>Respect is non-negotiable. Ideas stand on their own merits. Everyone gets room to contribute, be heard, and own their success.</p>
+  </div>
+  <div class="philosophy-item">
+    <div class="phil-number">04</div>
+    <h3>Shared Success</h3>
+    <p>Shared projects mean shared credit, clear updates, and transparent ownership. We succeed together.</p>
+  </div>
+  <div class="philosophy-item">
+    <div class="phil-number">05</div>
+    <h3>Reproducible</h3>
+    <p>We document what we do, clean our data, and share code. If someone else cannot repeat it, it is not finished yet.</p>
+  </div>
+</div>

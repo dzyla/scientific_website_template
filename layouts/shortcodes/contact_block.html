@@ -25,11 +25,12 @@
 {{- $linkedin := .Get "linkedin" | default "" -}}
 
 <section class="contact-section contact-modern" data-reveal>
-  <div class="contact-map" aria-label="Lab location">
-    <iframe src="{{ $gmapsEmbed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to our lab" allowfullscreen></iframe>
-    <div class="contact-map-actions">
-      <a class="chip chip--light" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Open in Google Maps</a>
-    </div>
+  {{/* Map at the top, full width */}}
+  <div class="contact-map-full">
+     <iframe src="{{ $gmapsEmbed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to our lab" allowfullscreen></iframe>
+     <div class="contact-map-overlay">
+         <a class="chip chip--light" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Get Directions</a>
+     </div>
   </div>
 
   <div class="contact-grid">

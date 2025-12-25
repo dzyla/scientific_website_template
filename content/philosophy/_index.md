@@ -6,13 +6,7 @@ We are a welcoming, data-driven lab that values clarity, kindness, and rigor. Wh
 
 We organise our culture around a handful of promises. They keep the day-to-day approachable and make the bigger ambitions believable.
 
-## What Anchors Our Lab
-
-- **Evidence guides every decision.** Data, validated methods, and constructive peer review shape our conclusions. When the evidence changes, so do our plans.
-- **Curiosity is key.** We choose questions that spark excitement *and* move the field. Weekly progress might be incremental, but the arc should stay energising.
-- **Everyone is welcome.** Respect is non-negotiable; ideas stand on their own merits. Everyone gets room to contribute and to be heard.
-- **Collaboration comes with accountability.** Shared projects mean shared credit, clear updates, and transparent ownership of next steps.
-- **Reproducibility is mandatory.** We document what we do, clean our data and code, and share when policy and consent allow. If someone else cannot repeat it, it is not finished yet.
+{{< philosophy_grid >}}
 
 ## How We Support You
 

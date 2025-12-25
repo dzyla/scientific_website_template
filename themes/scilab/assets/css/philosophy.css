@@ -1,0 +1,38 @@
+
+/* Philosophy Grid */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--s-2xl);
+  margin: var(--s-2xl) 0;
+}
+
+.philosophy-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-sm);
+}
+
+.phil-number {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--neutral-200); /* Subtle, light grey number */
+  line-height: 1;
+  margin-bottom: var(--s-xs);
+}
+
+.philosophy-item h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text);
+  font-family: var(--font-serif);
+}
+
+.philosophy-item p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}

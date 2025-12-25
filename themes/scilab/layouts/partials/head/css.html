@@ -3,6 +3,8 @@
     (resources.Get "css/nav.css")
     (resources.Get "css/hero.css")
     (resources.Get "css/news.css")
+    (resources.Get "css/publications.css")
+    (resources.Get "css/philosophy.css")
     (resources.Get "css/custom.css")
 -}}
 {{- $bundle := $styles | resources.Concat "css/site.css" | resources.Minify | resources.Fingerprint -}}
@@ -14,5 +16,6 @@
   }
 </style>
 
-<link rel="preload" href="{{ $bundle.RelPermalink }}" as="style" crossorigin="anonymous">
+{{/* Preload not strictly needed if the stylesheet is render-blocking in head, but if kept, needs integrity to match */}}
+<link rel="preload" href="{{ $bundle.RelPermalink }}" as="style" integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous">

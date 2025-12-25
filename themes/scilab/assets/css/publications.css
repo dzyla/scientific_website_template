@@ -1,0 +1,151 @@
+
+/* Timeline Layout for Publications */
+.publications-section {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.publications-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* "Increase vertical gap... to 40px+" (3rem is ~48px) */
+  margin-top: var(--s-lg);
+  position: relative;
+}
+
+/* Entry Layout */
+.timeline-entry {
+  display: grid;
+  grid-template-columns: 80px 1fr; /* 15% / 85% approx on desktop, but fixed width year is cleaner */
+  gap: var(--s-xl);
+  align-items: baseline;
+}
+
+@media (min-width: 768px) {
+  .timeline-entry {
+    grid-template-columns: 100px 1fr;
+  }
+}
+
+/* Year Styling - "Large, Bold" */
+.timeline-year {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--highlight-color);
+  text-align: right;
+  line-height: 1;
+  position: relative;
+  top: 4px; /* Optical alignment with title */
+}
+
+/* Content Styling */
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.timeline-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+}
+.timeline-title a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+.timeline-title a:hover {
+  color: var(--highlight-color);
+}
+
+.timeline-authors {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.timeline-meta {
+  font-size: 0.95rem;
+  color: var(--muted);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-style: italic;
+}
+
+.timeline-link {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--highlight-color);
+}
+
+/* Featured Entry Specifics */
+.featured-entry {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.featured-entry:last-child {
+  border-bottom: 0;
+}
+
+.featured-entry .timeline-content {
+  display: grid;
+  gap: var(--s-lg);
+}
+
+@media (min-width: 768px) {
+  .featured-entry .timeline-content {
+    grid-template-columns: 1fr 120px; /* Text left, Thumb right */
+  }
+}
+
+.featured-entry .timeline-title {
+  font-size: 1.4rem; /* Slightly larger for featured */
+  font-family: var(--font-serif);
+}
+
+.thumb-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--neutral-100);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumb-placeholder::after {
+  content: "Paper";
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+  .timeline-entry {
+    grid-template-columns: 1fr; /* Stack vertically */
+    gap: var(--s-xs);
+  }
+  .timeline-year {
+    text-align: left;
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .featured-entry .timeline-content {
+    grid-template-columns: 1fr; /* No side-by-side thumb on mobile */
+  }
+  .timeline-thumb {
+    display: none; /* Hide thumb on mobile to save space */
+  }
+}

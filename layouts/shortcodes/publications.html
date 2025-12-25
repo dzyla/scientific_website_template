@@ -9,33 +9,58 @@
 {{- if not $pubs -}}
   {{- errorf "Could not find publications data in data/publications.json." -}}
 {{- else -}}
-<section class="publications-section" data-reveal>
-  <div class="publications-grid">
-  {{- range sort $pubs "year" "desc" -}}
+{{/* Timeline Layout for Publications */}}
+<section class="publications-section timeline-layout" data-reveal>
+
+  {{/* 1. Selected Publications with Thumbnails */}}
+  <h2 class="section-title">Selected Publications</h2>
+  <div class="publications-timeline featured">
+  {{- range first 3 (sort $pubs "year" "desc") -}}
     {{- $p := . -}}
-    {{- $authors := split ( $p.authors | plainify ) "," -}}
-    {{- $hl := $p.highlight | default slice -}}
-    <article class="publication-card">
-      <header class="publication-header">
-        <span class="publication-year">{{ $p.year }}</span>
-        <span class="publication-journal">{{ $p.journal | plainify }}</span>
-      </header>
-      <h3 class="publication-title">
-        {{- if $p.link -}}
-          <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
-        {{- else -}}
-          {{ $p.title | plainify }}
-        {{- end -}}
-      </h3>
-      <p class="publication-authors">
-        {{- range $i, $name := $authors -}}
-          {{- $trim := trim $name " " -}}
-          {{- $isHL := in $hl $trim -}}
-          {{- if $isHL -}}<strong>{{ $trim }}</strong>{{ else }}{{ $trim }}{{ end -}}
-          {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
-        {{- end -}}
-      </p>
-      {{ with $p.summary }}<p class="publication-summary">{{ . }}</p>{{ end }}
+    <article class="timeline-entry featured-entry">
+      <div class="timeline-year">{{ $p.year }}</div>
+      <div class="timeline-content">
+        <div class="timeline-main">
+          <h3 class="timeline-title">
+            {{- if $p.link -}}
+              <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
+            {{- else -}}
+              {{ $p.title | plainify }}
+            {{- end -}}
+          </h3>
+          <p class="timeline-authors">{{ $p.authors | plainify }}</p>
+          <p class="timeline-journal">{{ $p.journal | plainify }}</p>
+        </div>
+        <div class="timeline-thumb">
+           {{/* Placeholder for key figure/thumb - using a generic science icon or empty div if no image */}}
+           <div class="thumb-placeholder"></div>
+        </div>
+      </div>
+    </article>
+  {{- end -}}
+  </div>
+
+  {{/* 2. Full List Timeline */}}
+  <h2 class="section-title" style="margin-top: 4rem;">All Publications</h2>
+  <div class="publications-timeline">
+  {{- range after 3 (sort $pubs "year" "desc") -}}
+    {{- $p := . -}}
+    <article class="timeline-entry">
+      <div class="timeline-year">{{ $p.year }}</div>
+      <div class="timeline-content">
+          <h3 class="timeline-title">
+            {{- if $p.link -}}
+              <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
+            {{- else -}}
+              {{ $p.title | plainify }}
+            {{- end -}}
+          </h3>
+          <p class="timeline-authors">{{ $p.authors | plainify }}</p>
+          <div class="timeline-meta">
+            <span class="timeline-journal">{{ $p.journal | plainify }}</span>
+            {{- if $p.link -}} <a href="{{ $p.link }}" class="timeline-link" target="_blank" rel="noopener">View Paper &rarr;</a>{{- end -}}
+          </div>
+      </div>
     </article>
   {{- end -}}
   </div>

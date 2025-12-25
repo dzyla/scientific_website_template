@@ -27,10 +27,10 @@
   --background: #ffffff;
   --surface: #ffffff;
   --surface-alt: #faf6ee;
-  --accent: var(--highlight-color, #b78b2c);
-  --accent-soft: rgba(183,139,44,0.18);
-  --highlight-soft: rgba(183,139,44,0.18);
-  --highlight-outline: rgba(183,139,44,0.4);
+  --accent: var(--highlight-color, #D4AF37);
+  --accent-soft: rgba(212,175,55,0.18);
+  --highlight-soft: rgba(212,175,55,0.18);
+  --highlight-outline: rgba(212,175,55,0.4);
   --highlight-text: var(--highlight-text-color, #ffffff); /* Default text on accent should be white unless overridden */
   --neutral-50: #f8fafc;
   --neutral-100: #f1f5f9;
@@ -38,7 +38,7 @@
 
   /* Typography */
   --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Source Serif 4', 'Georgia', serif;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
 
   /* Fluid typography */
   --h1: clamp(2rem, 5vw, 2.75rem);
@@ -171,13 +171,14 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ========== Typography ===================================================== */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
   margin: var(--s-lg) 0 var(--s-sm);
-  line-height: 1.25;
+  line-height: 1.2;
 }
-h1 { font-size: var(--h1); letter-spacing: -0.02em; }
+h1 { font-size: var(--h1); letter-spacing: -0.03em; }
 h2 {
   font-size: var(--h2);
 }
