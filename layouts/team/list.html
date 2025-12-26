@@ -64,6 +64,17 @@
         </div>
       </article>
     {{ end }}
+
+    <!-- Join Us Card -->
+    {{- $joinData := site.Data.join_us -}}
+    {{- if $joinData -}}
+    <article class="team-card team-card--join">
+      <div class="join-icon">→</div>
+      <h3>Join Us</h3>
+      {{ with $joinData.intro }}<p class="join-text">{{ . }}</p>{{ end }}
+      <a href="{{ "contact" | relURL }}" class="join-link">See Positions</a>
+    </article>
+    {{- end -}}
   </div>
 
   {{ with site.Data.alumni }}

@@ -16,7 +16,11 @@
 
 <section class="hero-split-matte" data-reveal>
     <!-- Background Image (Absolute, behind everything) -->
-    <div class="hero-bg-image" style="background-image: url('{{ index $carousel 0 | relURL }}');"></div>
+    <div class="hero-bg-image">
+         {{- if gt (len $carousel) 0 }}
+             {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
+         {{- end }}
+    </div>
 
     <!-- Matte Gradient Overlay (Absolute, sits on top of image, behind text) -->
     <div class="hero-matte-overlay"></div>

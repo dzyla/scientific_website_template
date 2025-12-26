@@ -15,9 +15,30 @@
 .nav-toggle:focus-visible { outline: 2px solid var(--highlight-color); outline-offset: 2px; }
 
 /* Base menu styles (desktop) */
-.menu-list { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 0; }
+.menu-list { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 0; align-items: center; }
 .menu-link { display: inline-block; text-decoration: none; padding-bottom: 3px; border-bottom: 2px solid transparent; }
 .menu-link:hover, .menu-link.active { color: var(--highlight-color); border-bottom-color: var(--highlight-color); }
+
+/* CTA Pill for Contact */
+.menu-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  background: var(--highlight-color);
+  color: var(--highlight-text-color, #ffffff) !important;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+}
+.menu-cta-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  filter: brightness(1.05);
+  border-bottom-color: transparent; /* Override default link underline logic */
+}
 
 /* Backdrop (mobile only) */
 .nav-backdrop { position: fixed; inset: 0; background: rgba(17,24,39,.45); z-index: 40; }
