@@ -1,35 +1,45 @@
-{{- $cfg := site.Params.home.news | default dict -}}
-{{- $heading := "Latest News" -}}
-{{- if isset $cfg "heading" }}
-  {{- $heading = index $cfg "heading" -}}
-{{- end -}}
-{{- $description := "" -}}
-{{- if isset $cfg "description" }}
-  {{- $description = index $cfg "description" -}}
-{{- end -}}
-{{- $section := "news" -}}
-{{- if isset $cfg "section" }}
-  {{- $section = index $cfg "section" -}}
-{{- end -}}
-{{- $limit := 3 -}}
-{{- if isset $cfg "limit" }}
-  {{- $limit = index $cfg "limit" -}}
-{{- end -}}
-{{- $showSummaries := true -}}
-{{- if isset $cfg "showSummaries" }}
-  {{- $showSummaries = index $cfg "showSummaries" -}}
-{{- end -}}
+{{- $news := site.Params.home.news | default dict -}}
+{{- $heading := index $news "heading" | default "Latest News" -}}
+{{- $desc := index $news "description" | default "" -}}
+{{- $section := index $news "section" | default "news" -}}
+{{- $limit := index $news "limit" | default 3 -}} <!-- Limit to 3 for grid -->
+{{- $showSummaries := index $news "showSummaries" | default true -}}
 
-<section class="news home-news-widget" data-reveal>
-  {{- with $heading }}<h3>{{ . }}</h3>{{ end }}
-  <div class="section-divider" aria-hidden="true"></div>
-  {{- with $description }}<p class="news-intro">{{ . }}</p>{{ end }}
+<section class="home-news-widget" data-reveal>
+  <div class="container">
+    <div class="news-header">
+      <h2>{{ $heading }}</h2>
+      {{- with $desc }}<p>{{ . }}</p>{{ end }}
+    </div>
 
-  {{- $context := dict "Site" site
-      "Section" $section
-      "Limit" $limit
-      "ShowSummary" $showSummaries
-      "HighlightColor" (site.Params.highlightColor | default "#cfb87c")
-  -}}
-  {{- partial "components/news_list.html" $context -}}
+    <div class="news-grid">
+      {{- $pages := where site.RegularPages "Section" $section -}}
+      {{- $pages = $pages.ByDate.Reverse -}}
+      {{- if gt $limit 0 -}}
+        {{- $pages = first $limit $pages -}}
+      {{- end -}}
+
+      {{- range $pages }}
+        <article class="news-card">
+          <div class="news-card-content">
+            <div class="news-meta">
+               <span class="news-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+               {{ with .Params.tags }}
+                 <div class="news-tags">
+                   {{ range first 1 . }}<span class="news-tag">{{ . }}</span>{{ end }}
+                 </div>
+               {{ end }}
+            </div>
+            <h3 class="news-card-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h3>
+            {{- if $showSummaries }}
+              <p class="news-card-summary">{{ .Summary | truncate 120 }}</p>
+            {{- end }}
+            <a href="{{ .RelPermalink }}" class="news-read-more">Read more &rarr;</a>
+          </div>
+        </article>
+      {{- end }}
+    </div>
+  </div>
 </section>

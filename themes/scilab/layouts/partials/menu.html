@@ -4,9 +4,11 @@
     {{- /* Compute active state using the current page, plus a URL fallback */ -}}
     {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) -}}
     {{- $active = or $active (eq .URL $current.RelPermalink) -}}
+    {{- $isContact := eq .Name "Contact" -}}
+
     <li class="menu-item">
       <a
-        class="menu-link{{ if $active }} active{{ end }}"
+        class="{{ if $isContact }}menu-cta-pill{{ else }}menu-link{{ if $active }} active{{ end }}{{ end }}"
         href="{{ .URL | relLangURL }}"
         {{ if $active }}aria-current="page"{{ end }}
       >{{ .Name }}</a>

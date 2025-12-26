@@ -18,7 +18,7 @@
 {{- end -}}
 {{- $actionsAria := cond (isset $hero "actionsAria") (index $hero "actionsAria") "Quick links" -}}
 
-<section class="hero-immersive" data-reveal>
+<section class="hero-immersive-gradient" data-reveal>
     <!-- Background / Image Area -->
     <div class="hero-image-container">
          {{- if gt (len $carousel) 0 }}
@@ -26,12 +26,12 @@
          {{- end }}
     </div>
 
-    <!-- Gradient Curtain Overlay -->
-    <div class="hero-curtain-overlay"></div>
+    <!-- Gradient Blur Overlay -->
+    <div class="hero-gradient-overlay"></div>
 
     <!-- Content Area -->
     <div class="container hero-content-wrapper">
-        <div class="hero-text-column">
+        <div class="hero-text-area">
             <h1 class="hero-title">{{ $title }}</h1>
             <div class="hero-body">
                  {{- with $lead }}<p class="hero-lead">{{ . }}</p>{{ end }}
@@ -39,32 +39,45 @@
             </div>
 
             {{- if gt (len $actions) 0 }}
-            <div class="hero-actions" aria-label="{{ $actionsAria }}">
-                {{- range $actions }}
-                {{- $href := "" -}}
-                {{- if isset . "pageRef" -}}
-                    {{- $ref := index . "pageRef" -}}
-                    {{- with site.GetPage $ref -}}
-                    {{- $href = .RelPermalink -}}
-                    {{- else -}}
-                    {{- with site.GetPage (printf "%s/_index.md" $ref) -}}
-                        {{- $href = .RelPermalink -}}
+            <div class="hero-actions-container" aria-label="{{ $actionsAria }}">
+                <div class="hero-buttons-row">
+                    <!-- Specific Targeting for buttons based on index or label is tricky in a generic loop.
+                         We will assume order: 1. Research (Gold), 2. Publications (Black).
+                         And 3. Join (Link) -->
+                    {{- range $i, $action := $actions }}
+                        {{- $href := index $action "url" | default "" -}}
+                        {{- if isset $action "pageRef" -}}
+                            {{- with site.GetPage (index $action "pageRef") -}}
+                                {{- $href = .RelPermalink -}}
+                            {{- end -}}
+                        {{- end -}}
+
+                        {{- if lt $i 2 }} <!-- First two buttons -->
+                            <a class="hero-btn {{ if eq $i 0 }}btn-primary-gold{{ else }}btn-secondary-black{{ end }}" href="{{ $href }}">
+                                {{- index $action "label" | default "Learn more" -}}
+                            </a>
+                        {{- end -}}
+                    {{- end }}
+                </div>
+
+                <!-- Third Action as Text Link -->
+                {{- if gt (len $actions) 2 }}
+                    {{- $joinAction := index $actions 2 -}}
+                    {{- $joinHref := index $joinAction "url" | default "" -}}
+                    {{- if isset $joinAction "pageRef" -}}
+                        {{- with site.GetPage (index $joinAction "pageRef") -}}
+                            {{- $joinHref = .RelPermalink -}}
+                        {{- end -}}
                     {{- end -}}
-                    {{- end -}}
-                {{- end -}}
-                {{- if and (eq $href "") (isset . "url") -}}
-                    {{- $href = index . "url" -}}
-                {{- end -}}
-                {{- if ne $href "" }}
-                    {{- $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") -}}
-                    {{- $newTab := or (and (isset . "newTab") (index . "newTab")) $isExternal -}}
-                    <a class="hero-pill" href="{{ $href }}"{{ if $newTab }} target="_blank" rel="noopener"{{ end }}>
-                    {{- index . "label" | default "Learn more" -}}
+                    <a class="hero-link-tertiary" href="{{ $joinHref }}">
+                        {{- index $joinAction "label" | default "Join the Lab" -}} <span class="arrow">→</span>
                     </a>
-                {{- end -}}
                 {{- end }}
             </div>
             {{- end }}
         </div>
     </div>
+
+    <!-- Gold Divider -->
+    <div class="hero-gold-divider"></div>
 </section>
