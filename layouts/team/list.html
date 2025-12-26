@@ -1,109 +1,85 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
+  {{ with .Content }}{{ . }}{{ end }}
 
-  {{ with .Content }}
-    <div class="team-group-photo-container">
-        {{ . }}
-    </div>
+  {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
+  {{ range $pi }}
+    {{ $page := . }}
+    {{ $imgPath := $page.Params.image }}
+    {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
+    <article class="team-card team-card--lead" data-reveal>
+      {{ with $imgPath }}
+        {{ $img := resources.GetMatch $imgPath }}
+        {{ if $img }}
+          {{ $processed := $img.Fill "320x360 Center" }}
+          <div class="team-portrait">
+            <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+          </div>
+        {{ else }}
+          <div class="team-portrait">
+            <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+          </div>
+        {{ end }}
+      {{ else }}
+        <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
+      {{ end }}
+      <div class="team-info">
+        <h2>{{ .Title }}</h2>
+        {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
+        {{ with .Params.email }}
+          <p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>
+        {{ end }}
+        <div class="content">{{ .Content }}</div>
+      </div>
+    </article>
   {{ end }}
 
-  <!-- Unified Team Grid (PI + Members) -->
   <div class="team-grid" data-reveal>
-
-    <!-- PI (Alice) - First Item -->
-    {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
-    {{ range $pi }}
+    {{ $members := (where .Pages "Params.type" "member").ByWeight }}
+    {{ range $members }}
       {{ $page := . }}
       {{ $imgPath := $page.Params.image }}
       {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
-      <article class="team-card-vertical team-card-pi">
-        <div class="team-card-image">
-          {{ with $imgPath }}
-            {{ $img := resources.GetMatch $imgPath }}
-            {{ if $img }}
-              {{ $processed := $img.Fill "350x466 Top" }} <!-- 3:4 Aspect Ratio -->
-              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
-            {{ else }}
-              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
-            {{ end }}
+      <article class="team-card">
+        {{ with $imgPath }}
+          {{ $img := resources.GetMatch $imgPath }}
+          {{ if $img }}
+            {{ $processed := $img.Fill "280x320 Center" }}
+            <div class="team-portrait">
+              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+            </div>
           {{ else }}
-            <div class="team-portrait--placeholder" aria-hidden="true"></div>
+            <div class="team-portrait">
+              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+            </div>
           {{ end }}
-        </div>
-        <div class="team-card-content">
-          <span class="pi-badge">Principal Investigator</span>
-          <h2 class="team-name team-name-pi">{{ .Title }}</h2>
-          <div class="team-focus">Cryo-EM Methodology & Viral Assembly</div>
-          {{ with .Params.email }}
-            <a href="mailto:{{ . }}" class="team-contact-link">Get in touch &rarr;</a>
-          {{ end }}
+        {{ else }}
+          <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
+        {{ end }}
+        <div class="team-info">
+          <h3>{{ .Title }}</h3>
+          {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
+          {{ with .Params.email }}<p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+          <div class="content">{{ .Content }}</div>
         </div>
       </article>
     {{ end }}
-
-    <!-- Members -->
-    {{ $members := (where .Pages "Params.type" "member").ByWeight }}
-    {{ range $members }}
-      {{ if ne .Title "Someone New" }}
-          {{ $page := . }}
-          {{ $imgPath := $page.Params.image }}
-          {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
-          <article class="team-card-vertical">
-            <div class="team-card-image">
-              {{ with $imgPath }}
-                {{ $img := resources.GetMatch $imgPath }}
-                {{ if $img }}
-                  {{ $processed := $img.Fill "350x466 Top" }} <!-- 3:4 Aspect Ratio, Same as PI -->
-                  <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
-                {{ else }}
-                  <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
-                {{ end }}
-              {{ else }}
-                <div class="team-portrait--placeholder" aria-hidden="true"></div>
-              {{ end }}
-            </div>
-            <div class="team-card-content">
-              <h3 class="team-name">{{ .Title }}</h3>
-              {{ with .Params.role }}<p class="team-role">{{ . }}</p>{{ end }}
-              <p class="team-focus">Structural kinetics of viral entry</p>
-            </div>
-          </article>
-      {{ end }}
-    {{ end }}
-
-    <!-- Join Us Card -->
-    <a href="{{ "contact" | relURL }}" class="team-card-vertical team-join-card">
-        <div class="join-icon">+</div>
-        <h3 class="join-title">Join the Lab</h3>
-        <p class="join-text">We are looking for postdocs and students.</p>
-    </a>
   </div>
 
-  <!-- Alumni Section -->
   {{ with site.Data.alumni }}
     {{ $alumni := . }}
     {{ if gt (len $alumni) 0 }}
       <section class="team-alumni" data-reveal>
         <h2>Alumni</h2>
-        <div class="alumni-table-wrapper">
-            <table class="alumni-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Former Role</th>
-                        <th>Current Position</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  {{ range $alumni }}
-                    <tr>
-                        <td class="alumni-name-cell">{{ .name }}</td>
-                        <td>{{ .role }}</td>
-                        <td>{{ .current }}</td>
-                    </tr>
-                  {{ end }}
-                </tbody>
-            </table>
+        <p class="team-alumni-intro">Former lab members and the paths they’ve taken after their time with us.</p>
+        <div class="alumni-grid">
+          {{ range $alumni }}
+            <article class="alumni-card">
+              <h3 class="alumni-name">{{ .name }}</h3>
+              <p class="alumni-role">{{ .role }}</p>
+              <p class="alumni-current">{{ .current }}</p>
+            </article>
+          {{ end }}
         </div>
       </section>
     {{ end }}
