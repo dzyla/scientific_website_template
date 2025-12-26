@@ -18,7 +18,7 @@
 {{- end -}}
 {{- $actionsAria := cond (isset $hero "actionsAria") (index $hero "actionsAria") "Quick links" -}}
 
-<section class="hero-frosted" data-reveal>
+<section class="hero-immersive" data-reveal>
     <!-- Background / Image Area -->
     <div class="hero-image-container">
          {{- if gt (len $carousel) 0 }}
@@ -26,9 +26,12 @@
          {{- end }}
     </div>
 
-    <!-- Frosted Glass Column -->
-    <div class="hero-frosted-column">
-        <div class="hero-text-content">
+    <!-- Gradient Curtain Overlay -->
+    <div class="hero-curtain-overlay"></div>
+
+    <!-- Content Area -->
+    <div class="container hero-content-wrapper">
+        <div class="hero-text-column">
             <h1 class="hero-title">{{ $title }}</h1>
             <div class="hero-body">
                  {{- with $lead }}<p class="hero-lead">{{ . }}</p>{{ end }}

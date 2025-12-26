@@ -7,18 +7,25 @@
 }
 
 /* Specific styling for homepage widget: Scrollable Box */
+.home-news-widget {
+    position: relative;
+    z-index: 20; /* Above Hero */
+    margin-top: -6rem; /* Overlap Hero */
+}
+
 .home-news-widget .news-list-wrapper {
   max-height: 450px;
   overflow-y: auto;
   padding-right: 0.5rem; /* space for scrollbar */
-  border: none; /* Removed border */
+  border: none;
   border-radius: var(--radius-md);
-  padding: 1rem;
-  background: var(--surface);
-  box-shadow: var(--shadow-1); /* Soft shadow */
+  padding: 2rem;
+  background: #fff; /* Solid White */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1); /* Strong Lift */
 }
+
 .home-news-widget .news-list-wrapper:hover {
-    box-shadow: var(--shadow-medium);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.12);
 }
 
 
@@ -40,11 +47,6 @@
   background: #fff;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border-radius: var(--radius-sm);
-  /* "Cards ... Remove the hard grey borders" - I removed the main wrapper border.
-      Individual news items can be cards or just list items.
-      Let's make them soft cards on hover or just clean list items.
-      User said "Cards (News/Research): Remove the hard grey borders. Use a subtle CSS box-shadow that elevates on hover".
-  */
   border: none; /* Remove border */
   box-shadow: var(--shadow-1);
 }
@@ -155,6 +157,12 @@
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+    .home-news-widget {
+        margin-top: 2rem; /* Remove overlap on mobile */
+    }
+}
+
 @media (max-width: 640px) {
   .news-item {
     grid-template-columns: 1fr;
