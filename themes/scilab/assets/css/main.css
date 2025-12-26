@@ -274,3 +274,26 @@ hr {
 @media (max-width: 540px) {
   .container { padding: 0 var(--s-md); }
 }
+
+/* ========== Accessibility ================================================= */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--highlight-color);
+  color: #fff; /* Always white on highlight color for contrast */
+  padding: 0.5rem 1rem;
+  z-index: 10000;
+  border-radius: 0 0 6px 6px;
+  font-weight: 500;
+  transition: top 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
