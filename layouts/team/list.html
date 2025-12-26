@@ -7,7 +7,7 @@
     </div>
   {{ end }}
 
-  <!-- PI Section (Scaled Down) -->
+  <!-- PI Section (Corrected Cropping) -->
   {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
   {{ range $pi }}
     {{ $page := . }}
@@ -19,7 +19,7 @@
           {{ with $imgPath }}
             {{ $img := resources.GetMatch $imgPath }}
             {{ if $img }}
-              {{ $processed := $img.Fill "400x450 Center" }} <!-- Slightly reduced height from 500 -->
+              {{ $processed := $img.Fill "400x533 Top" }} <!-- 3:4 Aspect Ratio, Anchored Top -->
               <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
             {{ else }}
               <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
@@ -45,7 +45,7 @@
     </section>
   {{ end }}
 
-  <!-- Team Grid (Scaled Down Cards) -->
+  <!-- Team Grid (3-Column, 3:4 Ratio, Top Crop) -->
   <div class="team-grid" data-reveal>
     {{ $members := (where .Pages "Params.type" "member").ByWeight }}
     {{ range $members }}
@@ -58,7 +58,7 @@
               {{ with $imgPath }}
                 {{ $img := resources.GetMatch $imgPath }}
                 {{ if $img }}
-                  {{ $processed := $img.Fill "300x350 Center" }} <!-- Scaled Down significantly (was 400x500) -->
+                  {{ $processed := $img.Fill "300x400 Top" }} <!-- 3:4 Aspect Ratio, Anchored Top -->
                   <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
                 {{ else }}
                   <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
@@ -76,7 +76,7 @@
       {{ end }}
     {{ end }}
 
-    <!-- Join Us Card (Last Item in Grid) -->
+    <!-- Join Us Card -->
     <a href="{{ "contact" | relURL }}" class="team-card-vertical team-join-card">
         <div class="join-icon">+</div>
         <h3 class="join-title">Join the Lab</h3>
@@ -84,7 +84,7 @@
     </a>
   </div>
 
-  <!-- Alumni Section (Compact Table) -->
+  <!-- Alumni Section -->
   {{ with site.Data.alumni }}
     {{ $alumni := . }}
     {{ if gt (len $alumni) 0 }}
