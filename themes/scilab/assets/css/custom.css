@@ -848,3 +848,54 @@
   font-size: .95rem;
 }
 .publications-grid { grid-template-columns: 1fr; }
+
+/* Value Cards Grid (Philosophy) */
+.value-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+    gap: var(--s-lg);
+    margin-top: var(--s-lg);
+}
+
+.value-card {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    height: 100%;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.value-card-icon {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.value-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
+}
+
+.value-card-body {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .value-cards-grid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+}

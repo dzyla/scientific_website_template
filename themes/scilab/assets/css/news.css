@@ -20,18 +20,27 @@
 }
 
 .news-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 Columns */
-    gap: 2rem;
+    display: flex; /* Horizontal Scroll Layout */
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem; /* Space for scrollbar/shadow */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar for cleaner look if supported, otherwise standard */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
 }
 
 .news-card {
+    flex: 0 0 320px; /* Fixed width cards */
+    scroll-snap-align: start;
     background: #fff;
-    border: 1px solid #E5E7EB; /* Subtle Border */
-    border-radius: var(--radius-md);
+    /* Remove Border, use Shadow per global style request */
+    border: none;
+    border-radius: var(--radius-lg);
     padding: 1.5rem;
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--shadow-soft);
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +48,7 @@
 .news-card:hover {
     transform: translateY(-5px); /* Lift */
     box-shadow: var(--shadow-medium);
-    border-color: var(--accent); /* Gold Border on Hover */
+    /* No border on hover, just lift/shadow */
 }
 
 .news-card-content {

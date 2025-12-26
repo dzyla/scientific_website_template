@@ -1,98 +1,79 @@
-/* ---------- Landing hero and carousel ----------------------------------- */
-/* Immersive Gradient Hero */
-.hero-immersive-gradient {
+/* ---------- Landing hero ----------------------------------- */
+
+/* Split Hero with Matte Overlay */
+.hero-split-matte {
   position: relative;
-  height: 80vh;
-  min-height: 600px;
+  min-height: 85vh; /* Taller, immersive feel */
   display: flex;
-  align-items: flex-start; /* Align content to top */
+  align-items: flex-start; /* Align content to top per request */
+  padding-top: var(--s-3xl); /* Push content down for "start with image" feel */
   overflow: hidden;
-  margin-bottom: var(--s-xl); /* Reduced margin */
-  z-index: 10;
+  margin-bottom: var(--s-xl);
 }
 
-/* Image fills the section */
-.hero-image-container {
+/* Background Image (Right/Full) */
+.hero-bg-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  background-size: cover;
+  background-position: center;
   z-index: 0;
 }
 
-.hero-image-container .carousel {
-    height: 100%;
-    width: 100%;
-    aspect-ratio: auto;
-    border-radius: 0;
-    box-shadow: none;
-}
-.hero-image-container .carousel img {
-    object-fit: cover;
-}
-
-/* Gradient Blur Overlay */
-.hero-gradient-overlay {
+/* Matte Gradient Overlay */
+.hero-matte-overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
-    /* Gradient: White/Blur Left -> Transparent Right */
+    /* White (Left) -> Transparent (Right) */
+    /* The 40% hard stop ensures the text area is fully legible on white, then fades out */
     background: linear-gradient(90deg,
-        rgba(255,255,255,0.95) 0%,
-        rgba(255,255,255,0.85) 30%,
-        rgba(255,255,255,0.4) 60%,
+        #ffffff 40%,
+        rgba(255,255,255,0.95) 55%,
         rgba(255,255,255,0) 100%);
-    backdrop-filter: blur(5px); /* Subtle blur across the gradient zone if supported */
-    -webkit-mask-image: linear-gradient(90deg, black 0%, black 40%, transparent 100%); /* Fade out the blur effect itself */
-    mask-image: linear-gradient(90deg, black 0%, black 40%, transparent 100%);
+    pointer-events: none; /* Let clicks pass through to image if needed (rare) */
 }
 
-/* Content Wrapper */
-.hero-content-wrapper {
+/* Content Container */
+.hero-container {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Sit above the matte */
     width: 100%;
-    height: 100%;
-    pointer-events: none;
-    display: flex;
-    align-items: center; /* Vertically center content */
-    padding-top: 4rem;
+    pointer-events: none; /* Layout wrapper shouldn't block */
 }
 
-/* Text Area */
-.hero-text-area {
+/* Left Column Content */
+.hero-content-col {
     width: 50%;
-    max-width: 650px;
-    pointer-events: auto;
-    /* Ensure readability */
-    text-shadow: 0 0 0 transparent; /* Clean text */
+    max-width: 680px;
+    padding-right: 2rem;
+    pointer-events: auto; /* Re-enable pointer events for text/buttons */
 }
 
+/* Typography */
 .hero-title {
+  font-family: var(--font-serif);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
-  color: #000; /* Deep Charcoal/Black */
+  color: #000;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
 
-.hero-body p {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
 .hero-lead {
-    font-size: 1.4rem !important;
-    font-weight: 500;
-    color: #212529 !important;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem) !important;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #333 !important; /* High contrast dark grey */
+    margin-bottom: 2.5rem;
+    max-width: 90%;
 }
 
-/* Buttons Container */
+/* Buttons */
 .hero-actions-container {
-    margin-top: 2.5rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -109,44 +90,46 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.85rem 2rem;
-    border-radius: var(--radius-sm);
-    font-weight: 700;
+    padding: 0.9rem 2.2rem;
+    border-radius: var(--radius-sm); /* Slightly squarer modern look */
+    font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-1);
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    letter-spacing: 0.01em;
 }
 
+/* Primary (Gold) - Ensure High Contrast */
 .btn-primary-gold {
-    background: var(--accent); /* CU Gold */
-    color: #000; /* Black text */
-    border: 2px solid var(--accent);
+    background: var(--accent); /* Now darker gold from config */
+    color: #fff; /* White text on dark gold */
+    border: 1px solid transparent;
 }
 .btn-primary-gold:hover {
-    background: #bfa05f; /* Slightly darker gold */
-    border-color: #bfa05f;
+    filter: brightness(1.1);
     transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
 }
 
+/* Secondary (Black) */
 .btn-secondary-black {
-    background: #000;
+    background: #1a1a1a;
     color: #fff;
-    border: 2px solid #000;
+    border: 1px solid transparent;
 }
 .btn-secondary-black:hover {
-    background: #333;
-    border-color: #333;
+    background: #000;
     transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
 }
 
+/* Tertiary Link */
 .hero-link-tertiary {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #000;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #1a1a1a;
     text-decoration: none;
-    border-bottom: 2px solid #000;
-    padding-bottom: 2px;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -154,81 +137,50 @@
 }
 .hero-link-tertiary:hover {
     color: var(--accent);
-    border-color: var(--accent);
+    gap: 0.75rem; /* subtle arrow movement */
 }
 .hero-link-tertiary .arrow {
     transition: transform 0.2s ease;
 }
-.hero-link-tertiary:hover .arrow {
-    transform: translateX(4px);
-}
 
-/* Gold Divider */
-.hero-gold-divider {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--accent);
-    z-index: 10;
-}
-
-/* Carousel Internal Logic (Preserved) */
-.carousel {
-  position: relative;
-  isolation: isolate;
-}
-.carousel img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out;
-  will-change: opacity, transform;
-  z-index: 0;
-  transform: scale(1.05);
-}
-.carousel img.active {
-  opacity: 1;
-  z-index: 1;
-  transform: scale(1);
-}
-/* Hide nav buttons if immersive, or style them minimally */
-.carousel .nav-btn {
-    opacity: 0; /* Hide by default for cleaner look, or keep? Instructions imply "visual quality". Let's hide or make very subtle. */
-    pointer-events: none; /* Disable interaction if hidden */
-}
-
-/* Responsive */
+/* Responsive: Mobile Stack */
 @media (max-width: 992px) {
-  .hero-immersive-gradient {
+  .hero-split-matte {
     flex-direction: column;
     height: auto;
     min-height: auto;
-    display: block;
-    background: #fff;
+    display: flex;
+    margin-bottom: var(--s-lg);
   }
 
-  .hero-image-container {
+  /* Image moves to top */
+  .hero-bg-image {
       position: relative;
-      height: 50vh;
+      height: 40vh;
+      min-height: 300px;
+      order: -1; /* Ensure it's first visually */
   }
 
-  .hero-gradient-overlay {
+  /* Remove the horizontal matte */
+  .hero-matte-overlay {
       display: none;
+      /* Optional: Replace with vertical gradient if text overlays image,
+         but instructions say "stack" which usually means text block below image. */
   }
 
-  .hero-content-wrapper {
+  .hero-container {
+      width: 100%;
       padding: 3rem 1.5rem;
-      background: #fff;
+      background: #fff; /* Solid background for text area */
   }
 
-  .hero-text-area {
+  .hero-content-col {
       width: 100%;
       max-width: none;
-      text-align: left;
+      padding-right: 0;
+  }
+
+  .hero-title {
+      font-size: 2.5rem; /* Smaller on mobile */
   }
 }

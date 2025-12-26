@@ -4,10 +4,6 @@
   {{- $carousel = index $hero "carousel" -}}
 {{- end -}}
 {{- $title := cond (isset $hero "title") (index $hero "title") (printf "Welcome to %s" site.Title) -}}
-{{- $intro := slice -}}
-{{- if isset $hero "intro" -}}
-  {{- $intro = index $hero "intro" -}}
-{{- end -}}
 {{- $lead := "" -}}
 {{- if isset $hero "lead" -}}
   {{- $lead = index $hero "lead" -}}
@@ -18,32 +14,22 @@
 {{- end -}}
 {{- $actionsAria := cond (isset $hero "actionsAria") (index $hero "actionsAria") "Quick links" -}}
 
-<section class="hero-immersive-gradient" data-reveal>
-    <!-- Background / Image Area -->
-    <div class="hero-image-container">
-         {{- if gt (len $carousel) 0 }}
-             {{- partial "components/carousel.html" (dict "Page" . "Images" $carousel "AriaLabel" "Hero carousel" "DataAttr" "auto" "AltPrefix" "Hero image") -}}
-         {{- end }}
-    </div>
+<section class="hero-split-matte" data-reveal>
+    <!-- Background Image (Absolute, behind everything) -->
+    <div class="hero-bg-image" style="background-image: url('{{ index $carousel 0 | relURL }}');"></div>
 
-    <!-- Gradient Blur Overlay -->
-    <div class="hero-gradient-overlay"></div>
+    <!-- Matte Gradient Overlay (Absolute, sits on top of image, behind text) -->
+    <div class="hero-matte-overlay"></div>
 
-    <!-- Content Area -->
-    <div class="container hero-content-wrapper">
-        <div class="hero-text-area">
+    <!-- Content Container -->
+    <div class="container hero-container">
+        <div class="hero-content-col">
             <h1 class="hero-title">{{ $title }}</h1>
-            <div class="hero-body">
-                 {{- with $lead }}<p class="hero-lead">{{ . }}</p>{{ end }}
-                 {{- range $intro }}<p>{{ . }}</p>{{ end }}
-            </div>
+            {{- with $lead }}<p class="hero-lead">{{ . }}</p>{{ end }}
 
             {{- if gt (len $actions) 0 }}
             <div class="hero-actions-container" aria-label="{{ $actionsAria }}">
                 <div class="hero-buttons-row">
-                    <!-- Specific Targeting for buttons based on index or label is tricky in a generic loop.
-                         We will assume order: 1. Research (Gold), 2. Publications (Black).
-                         And 3. Join (Link) -->
                     {{- range $i, $action := $actions }}
                         {{- $href := index $action "url" | default "" -}}
                         {{- if isset $action "pageRef" -}}
@@ -52,7 +38,7 @@
                             {{- end -}}
                         {{- end -}}
 
-                        {{- if lt $i 2 }} <!-- First two buttons -->
+                        {{- if lt $i 2 }} <!-- Buttons -->
                             <a class="hero-btn {{ if eq $i 0 }}btn-primary-gold{{ else }}btn-secondary-black{{ end }}" href="{{ $href }}">
                                 {{- index $action "label" | default "Learn more" -}}
                             </a>
@@ -60,7 +46,7 @@
                     {{- end }}
                 </div>
 
-                <!-- Third Action as Text Link -->
+                <!-- Link -->
                 {{- if gt (len $actions) 2 }}
                     {{- $joinAction := index $actions 2 -}}
                     {{- $joinHref := index $joinAction "url" | default "" -}}
@@ -77,7 +63,4 @@
             {{- end }}
         </div>
     </div>
-
-    <!-- Gold Divider -->
-    <div class="hero-gold-divider"></div>
 </section>

@@ -234,11 +234,17 @@ hr {
 .publications-list { list-style: none; padding: 0; }
 .publications-list li {
   background: var(--surface);
-  border: 1px solid var(--border);
+  /* Remove border, add soft shadow */
+  border: none;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-1);
-  padding: 1.2rem;
-  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.publications-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
 }
 
 /* ========== Footer ======================================================== */

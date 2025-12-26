@@ -7,8 +7,8 @@ theme = "scilab"
 [params]
   # Highlight palette: `highlightColor` drives borders/buttons; `highlightTextColor`
   # overrides the text color when that accent is used on light backgrounds.
-  highlightColor = "#b78b2c"         # warm gold with higher contrast
-  highlightTextColor = "#271400"     # deep brown for text on gold elements
+  highlightColor = "#8B6508"         # dark goldenrod/ochre for better contrast
+  highlightTextColor = "#ffffff"     # white text on dark gold
   description = "Structure-guided virology and biophysics for antiviral discovery."
   tagline = "Structure-guided virology and biophysics for antiviral discovery."
   ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
