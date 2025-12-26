@@ -16,84 +16,11 @@
 }
 
 
-/* --- PI Section (Refined & Top Crop) --- */
-.team-pi-section {
-    margin-bottom: var(--s-3xl);
-}
-
-.team-pi-card {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: var(--s-2xl);
-    align-items: center;
-    background: #fff;
-}
-
-.team-pi-visual img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: top center; /* Critical Fix */
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-medium);
-}
-
-.team-pi-info {
-    text-align: left;
-}
-
-.pi-tag {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.team-pi-info h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-    line-height: 1.1;
-}
-
-.pi-focus {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--muted);
-    margin-bottom: 1.5rem;
-}
-
-.pi-bio {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-}
-
-.pi-contact-link {
-    display: inline-block;
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 2px;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-.pi-contact-link:hover {
-    color: var(--accent);
-    border-color: transparent;
-}
-
-
-/* --- Team Grid (3-Column, 3:4 Ratio) --- */
+/* --- Unified Team Grid (Strict 3-Column) --- */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.5rem; /* Reduced Gap */
     margin-bottom: var(--s-3xl);
 }
 
@@ -103,20 +30,22 @@
     flex-direction: column;
     text-decoration: none;
     color: var(--text);
-    max-width: 320px;
-    margin: 0 auto;
+    max-width: 350px; /* Consistent constraint */
     width: 100%;
+    margin: 0 auto; /* Center in cell */
 }
 
+/* Common Image Styling */
 .team-card-image {
     width: 100%;
-    aspect-ratio: 3/4; /* Vertical 3:4 */
+    aspect-ratio: 3/4; /* Strict 3:4 */
     background: var(--neutral-100);
     overflow: hidden;
     border-radius: var(--radius-md);
     margin-bottom: 0.75rem;
     box-shadow: var(--shadow-1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Removed transition for transform (static hover) */
+    transition: box-shadow 0.2s ease;
 }
 
 .team-card-image img {
@@ -129,7 +58,7 @@
 }
 
 .team-card-vertical:hover .team-card-image {
-    transform: translateY(-5px);
+    /* No translateY */
     box-shadow: var(--shadow-medium);
 }
 
@@ -161,7 +90,37 @@
     line-height: 1.4;
 }
 
-/* --- Join Us Card (Integrated) --- */
+/* --- PI Specific Styling (Within Grid) --- */
+.team-card-pi .team-name-pi {
+    font-size: 1.5rem; /* Slightly larger name */
+    margin-bottom: 0.25rem;
+}
+
+.pi-badge {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+}
+
+.team-contact-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid var(--accent);
+}
+.team-contact-link:hover {
+    color: var(--accent);
+}
+
+
+/* --- Join Us Card --- */
 .team-join-card {
     border: 2px dashed var(--border);
     border-radius: var(--radius-md);
@@ -171,7 +130,7 @@
     justify-content: center;
     text-align: center;
     padding: 2rem;
-    aspect-ratio: 3/4; /* Match image ratio */
+    aspect-ratio: 3/4; /* Match others */
     transition: all 0.2s ease;
     background: var(--surface-alt);
     box-sizing: border-box;
@@ -180,7 +139,7 @@
 .team-join-card:hover {
     border-color: var(--accent);
     background: var(--neutral-50);
-    transform: translateY(-5px);
+    /* No lift */
 }
 
 .join-icon {
@@ -238,17 +197,6 @@
 @media (max-width: 992px) {
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .team-pi-card {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .team-pi-info {
-        text-align: center;
-    }
-    .team-pi-visual img {
-        margin: 0 auto;
-        max-width: 350px;
     }
 }
 

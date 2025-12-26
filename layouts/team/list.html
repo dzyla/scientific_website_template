@@ -7,46 +7,41 @@
     </div>
   {{ end }}
 
-  <!-- PI Section (Corrected Cropping) -->
-  {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
-  {{ range $pi }}
-    {{ $page := . }}
-    {{ $imgPath := $page.Params.image }}
-    {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
-    <section class="team-pi-section" data-reveal>
-      <div class="team-pi-card">
-        <div class="team-pi-visual">
+  <!-- Unified Team Grid (PI + Members) -->
+  <div class="team-grid" data-reveal>
+
+    <!-- PI (Alice) - First Item -->
+    {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
+    {{ range $pi }}
+      {{ $page := . }}
+      {{ $imgPath := $page.Params.image }}
+      {{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
+      <article class="team-card-vertical team-card-pi">
+        <div class="team-card-image">
           {{ with $imgPath }}
             {{ $img := resources.GetMatch $imgPath }}
             {{ if $img }}
-              {{ $processed := $img.Fill "400x533 Top" }} <!-- 3:4 Aspect Ratio, Anchored Top -->
-              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+              {{ $processed := $img.Fill "350x466 Top" }} <!-- 3:4 Aspect Ratio -->
+              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
             {{ else }}
-              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+              <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
             {{ end }}
           {{ else }}
             <div class="team-portrait--placeholder" aria-hidden="true"></div>
           {{ end }}
         </div>
-        <div class="team-pi-info">
-          <span class="pi-tag">Principal Investigator</span>
-          <h2>{{ .Title }}</h2>
-          <div class="pi-focus">Cryo-EM Methodology & Viral Assembly</div>
-
-          <div class="pi-bio">
-              {{ .Content }}
-          </div>
-
+        <div class="team-card-content">
+          <span class="pi-badge">Principal Investigator</span>
+          <h2 class="team-name team-name-pi">{{ .Title }}</h2>
+          <div class="team-focus">Cryo-EM Methodology & Viral Assembly</div>
           {{ with .Params.email }}
-            <a href="mailto:{{ . }}" class="pi-contact-link">Get in touch &rarr;</a>
+            <a href="mailto:{{ . }}" class="team-contact-link">Get in touch &rarr;</a>
           {{ end }}
         </div>
-      </div>
-    </section>
-  {{ end }}
+      </article>
+    {{ end }}
 
-  <!-- Team Grid (3-Column, 3:4 Ratio, Top Crop) -->
-  <div class="team-grid" data-reveal>
+    <!-- Members -->
     {{ $members := (where .Pages "Params.type" "member").ByWeight }}
     {{ range $members }}
       {{ if ne .Title "Someone New" }}
@@ -58,7 +53,7 @@
               {{ with $imgPath }}
                 {{ $img := resources.GetMatch $imgPath }}
                 {{ if $img }}
-                  {{ $processed := $img.Fill "300x400 Top" }} <!-- 3:4 Aspect Ratio, Anchored Top -->
+                  {{ $processed := $img.Fill "350x466 Top" }} <!-- 3:4 Aspect Ratio, Same as PI -->
                   <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
                 {{ else }}
                   <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}" class="grayscale-hover">
