@@ -32,6 +32,7 @@
 }
 
 .news-card {
+    position: relative; /* For stretched link */
     flex: 0 0 320px; /* Fixed width cards */
     scroll-snap-align: start;
     background: #fff;
@@ -94,13 +95,21 @@
 }
 
 .news-card-title a {
-    color: #111827;
+    color: var(--text);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .news-card-title a:hover {
     color: var(--accent);
+}
+
+/* Stretched link utility - applied to the main title link in HTML */
+.news-card-title a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
 }
 
 .news-card-summary {
@@ -112,7 +121,7 @@
 }
 
 .news-read-more {
-    font-size: 0.9rem;
+    font-size: 1.2rem; /* Larger arrow */
     font-weight: 600;
     color: var(--accent);
     text-decoration: none;

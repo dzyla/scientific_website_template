@@ -16,26 +16,30 @@
     {{- $authors := split ( $p.authors | plainify ) "," -}}
     {{- $hl := $p.highlight | default slice -}}
     <article class="publication-card">
-      <header class="publication-header">
-        <span class="publication-year">{{ $p.year }}</span>
-        <span class="publication-journal">{{ $p.journal | plainify }}</span>
-      </header>
-      <h3 class="publication-title">
-        {{- if $p.link -}}
-          <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
-        {{- else -}}
-          {{ $p.title | plainify }}
-        {{- end -}}
-      </h3>
-      <p class="publication-authors">
-        {{- range $i, $name := $authors -}}
-          {{- $trim := trim $name " " -}}
-          {{- $isHL := in $hl $trim -}}
-          {{- if $isHL -}}<strong>{{ $trim }}</strong>{{ else }}{{ $trim }}{{ end -}}
-          {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
-        {{- end -}}
-      </p>
-      {{ with $p.summary }}<p class="publication-summary">{{ . }}</p>{{ end }}
+      <div class="publication-sidebar">
+         <span class="publication-year-sticky">{{ $p.year }}</span>
+      </div>
+      <div class="publication-content">
+        <header class="publication-header">
+           <span class="publication-journal">{{ $p.journal | plainify }}</span>
+        </header>
+        <h3 class="publication-title">
+            {{- if $p.link -}}
+            <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
+            {{- else -}}
+            {{ $p.title | plainify }}
+            {{- end -}}
+        </h3>
+        <p class="publication-authors">
+            {{- range $i, $name := $authors -}}
+            {{- $trim := trim $name " " -}}
+            {{- $isHL := in $hl $trim -}}
+            {{- if $isHL -}}<strong>{{ $trim }}</strong>{{ else }}{{ $trim }}{{ end -}}
+            {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
+            {{- end -}}
+        </p>
+        {{ with $p.summary }}<p class="publication-summary">{{ . }}</p>{{ end }}
+      </div>
     </article>
   {{- end -}}
   </div>

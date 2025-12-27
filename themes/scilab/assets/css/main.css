@@ -20,25 +20,28 @@
   --container-narrow: 768px;
 
   /* Colors */
-  --text: #1a1a1a; /* Slightly darker for better contrast */
+  --text: #1A1A1A; /* Slightly darker for better contrast */
   --muted: #555;
   --border: #eaeaea;
   --shadow-1: 0 1px 3px rgba(0,0,0,0.05);
   --background: #ffffff;
   --surface: #ffffff;
   --surface-alt: #faf6ee;
-  --accent: var(--highlight-color, #b78b2c);
-  --accent-soft: rgba(183,139,44,0.18);
-  --highlight-soft: rgba(183,139,44,0.18);
-  --highlight-outline: rgba(183,139,44,0.4);
+  --accent: #CFB87C; /* CU Gold */
+  --accent-soft: rgba(207,184,124,0.18);
+  --highlight-soft: rgba(207,184,124,0.18);
+  --highlight-outline: rgba(207,184,124,0.4);
   --highlight-text: var(--highlight-text-color, #ffffff); /* Default text on accent should be white unless overridden */
   --neutral-50: #f8fafc;
   --neutral-100: #f1f5f9;
   --neutral-200: #e2e8f0;
 
   /* Typography */
-  --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Source Serif 4', 'Georgia', serif;
+  --font-headers: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body: 'Source Serif 4', 'Georgia', serif;
+  /* Mapped for backward compatibility/base usage */
+  --font: var(--font-body);
+  --font-serif: var(--font-body);
 
   /* Fluid typography */
   --h1: clamp(2rem, 5vw, 2.75rem);
@@ -96,7 +99,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .container.is-narrow { max-width: var(--container-narrow); }
 .section {
-  padding-block: var(--s-2xl);
+  padding-block: 6rem; /* Doubled whitespace */
 }
 
 /* Main area grows to push footer down */
@@ -171,6 +174,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ========== Typography ===================================================== */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headers);
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;

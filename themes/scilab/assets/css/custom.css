@@ -287,10 +287,10 @@
 .research-topic {
   background: var(--surface);
   border-radius: var(--radius-lg);
-  border: 0;
+  border: 1px solid #E5E7EB; /* Subtle border per request */
   padding: var(--s-lg);
   box-shadow: var(--shadow-1);
-  transition: box-shadow .2s ease, transform .2s ease;
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
 }
 .research-topic h3 {
   margin-top: 0;
@@ -303,7 +303,8 @@
 .research-topic:hover,
 .research-topic:focus-within {
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
-  transform: translateY(-2px);
+  transform: translateY(-5px); /* Stronger lift per request */
+  border-color: var(--accent); /* CU Gold border on hover */
 }
 
 .research-projects {
@@ -401,12 +402,12 @@
   align-items: stretch;
 }
 .resource-card {
-  border: 0;
+  border: 1px solid #E5E7EB; /* Border as requested */
   border-radius: var(--radius-lg);
   padding: var(--s-lg);
   background: var(--surface);
   box-shadow: var(--shadow-1);
-  transition: box-shadow .2s ease, transform .2s ease;
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
   display: grid;
   grid-template-rows: auto auto 1fr;
   gap: .75rem;
@@ -415,6 +416,7 @@
 .resource-card:focus-within {
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
   transform: translateY(-2px);
+  border-color: var(--accent);
 }
 .resource-pill {
   display: inline-flex;
@@ -821,7 +823,8 @@
   background: var(--surface);
   box-shadow: var(--shadow-1);
   display: grid;
-  gap: .6rem;
+  grid-template-columns: 80px 1fr; /* Year sidebar + Content */
+  gap: 1.5rem;
   transition: box-shadow .2s ease, transform .2s ease;
 }
 .publication-card:hover,
@@ -829,23 +832,37 @@
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
   transform: translateY(-2px);
 }
+.publication-sidebar {
+    text-align: right;
+    padding-top: 0.2rem;
+}
+.publication-year-sticky {
+    font-weight: 800;
+    color: var(--text);
+    font-size: 1.1rem;
+    display: block;
+    position: sticky;
+    top: 1rem;
+}
+.publication-content {
+    display: grid;
+    gap: 0.5rem;
+}
 .publication-header {
   display: flex;
   gap: .75rem;
   align-items: center;
-  font-size: .9rem;
-  color: var(--muted);
+  font-size: .85rem;
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: .08em;
-}
-.publication-year {
-  font-weight: 700;
-  color: var(--highlight-color);
+  font-weight: 600;
 }
 .publication-title {
   margin: 0;
   font-size: 1.2rem;
   color: var(--text);
+  font-weight: 800; /* Bold title */
 }
 .publication-title a {
   text-decoration: none;
@@ -901,6 +918,7 @@
     grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
     gap: var(--s-lg);
     margin-top: var(--s-lg);
+    counter-reset: value-card-counter; /* Init counter */
 }
 
 .value-card {
@@ -914,6 +932,7 @@
     align-items: flex-start;
     gap: 1rem;
     height: 100%;
+    position: relative;
 }
 
 .value-card:hover {
@@ -924,6 +943,13 @@
 .value-card-icon {
     color: var(--accent);
     margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+/* Use counters to generate 01, 02... */
+.value-card-icon::before {
+    counter-increment: value-card-counter;
+    content: counter(value-card-counter, decimal-leading-zero);
 }
 
 .value-card-title {

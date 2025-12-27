@@ -20,6 +20,7 @@
   background-size: cover;
   background-position: center;
   z-index: 0;
+  border-radius: 8px; /* Soften the blocky feel */
 }
 
 /* Matte Gradient Overlay */
@@ -54,11 +55,12 @@
 
 /* Typography */
 .hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-family: var(--font-headers);
+  font-size: clamp(2.1rem, 4.5vw, 4rem); /* Reduced by ~10-15% */
+  max-width: 20ch; /* Prevent stretching */
   font-weight: 800;
   line-height: 1.1;
-  color: #000;
+  color: var(--text);
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }

@@ -36,7 +36,7 @@
             {{- if $showSummaries }}
               <p class="news-card-summary">{{ .Summary | truncate 120 }}</p>
             {{- end }}
-            <a href="{{ .RelPermalink }}" class="news-read-more">Read more &rarr;</a>
+            <div class="news-read-more" aria-hidden="true">&rarr;</div>
           </div>
         </article>
       {{- end }}
