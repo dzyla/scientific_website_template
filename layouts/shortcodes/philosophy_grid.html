@@ -1,0 +1,16 @@
+{{/*
+  Renders philosophy value cards from data/philosophy.json
+*/}}
+<div class="value-cards-grid">
+  {{- range site.Data.philosophy -}}
+    <div class="value-card">
+      <div class="value-card-icon">
+        <!-- Icon or counter via CSS -->
+      </div>
+      <h3 class="value-card-title">{{ .title }}</h3>
+      <div class="value-card-body">
+        {{ .content | markdownify }}
+      </div>
+    </div>
+  {{- end -}}
+</div>

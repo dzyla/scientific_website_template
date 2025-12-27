@@ -8,29 +8,7 @@ We organise our culture around a handful of promises. They keep the day-to-day a
 
 ## What Anchors Our Lab
 
-{{< value_cards >}}
-
-{{< value_card title="Evidence guides every decision" icon="circle" >}}
-Data, validated methods, and constructive peer review shape our conclusions. When the evidence changes, so do our plans.
-{{< /value_card >}}
-
-{{< value_card title="Curiosity is key" icon="circle" >}}
-We choose questions that spark excitement *and* move the field. Weekly progress might be incremental, but the arc should stay energising.
-{{< /value_card >}}
-
-{{< value_card title="Everyone is welcome" icon="circle" >}}
-Respect is non-negotiable; ideas stand on their own merits. Everyone gets room to contribute and to be heard.
-{{< /value_card >}}
-
-{{< value_card title="Collaboration comes with accountability" icon="circle" >}}
-Shared projects mean shared credit, clear updates, and transparent ownership of next steps.
-{{< /value_card >}}
-
-{{< value_card title="Reproducibility is mandatory" icon="circle" >}}
-We document what we do, clean our data and code, and share when policy and consent allow. If someone else cannot repeat it, it is not finished yet.
-{{< /value_card >}}
-
-{{< /value_cards >}}
+{{< philosophy_grid >}}
 
 ## How We Support You
 

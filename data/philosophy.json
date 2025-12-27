@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Evidence guides every decision",
+    "icon": "circle",
+    "content": "Data, validated methods, and constructive peer review shape our conclusions. When the evidence changes, so do our plans."
+  },
+  {
+    "title": "Curiosity is key",
+    "icon": "circle",
+    "content": "We choose questions that spark excitement *and* move the field. Weekly progress might be incremental, but the arc should stay energising."
+  },
+  {
+    "title": "Everyone is welcome",
+    "icon": "circle",
+    "content": "Respect is non-negotiable; ideas stand on their own merits. Everyone gets room to contribute and to be heard."
+  },
+  {
+    "title": "Collaboration comes with accountability",
+    "icon": "circle",
+    "content": "Shared projects mean shared credit, clear updates, and transparent ownership of next steps."
+  },
+  {
+    "title": "Reproducibility is mandatory",
+    "icon": "circle",
+    "content": "We document what we do, clean our data and code, and share when policy and consent allow. If someone else cannot repeat it, it is not finished yet."
+  }
+]

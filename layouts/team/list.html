@@ -44,7 +44,7 @@
         {{ with $imgPath }}
           {{ $img := resources.GetMatch $imgPath }}
           {{ if $img }}
-            {{ $processed := $img.Fill "280x320 Center" }}
+            {{ $processed := $img.Fill "320x360 Center" }}
             <div class="team-portrait">
               <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
             </div>

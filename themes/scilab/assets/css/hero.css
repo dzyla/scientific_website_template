@@ -23,6 +23,20 @@
   border-radius: 8px; /* Soften the blocky feel */
 }
 
+/* Ensure images in the background carousel stack properly */
+.hero-bg-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+.hero-bg-image img.active {
+  opacity: 1;
+}
+
 /* Matte Gradient Overlay */
 .hero-matte-overlay {
     position: absolute;
@@ -51,6 +65,7 @@
     max-width: 680px;
     padding-right: 2rem;
     pointer-events: auto; /* Re-enable pointer events for text/buttons */
+    margin-top: -2rem; /* Move text higher per request */
 }
 
 /* Typography */

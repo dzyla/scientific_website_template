@@ -1,6 +1,9 @@
 {{- $hero := site.Params.home.hero | default dict -}}
 {{- $carousel := slice -}}
-{{- if isset $hero "carousel" -}}
+{{- $images := .Get "images" -}}
+{{- if $images -}}
+  {{- $carousel = split $images "," -}}
+{{- else if isset $hero "carousel" -}}
   {{- $carousel = index $hero "carousel" -}}
 {{- end -}}
 {{- $title := cond (isset $hero "title") (index $hero "title") (printf "Welcome to %s" site.Title) -}}

@@ -24,20 +24,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1.25rem;
-  background: var(--highlight-color);
-  color: var(--highlight-text-color, #ffffff) !important;
-  border-radius: 999px;
+  /* Removed pill styling as requested */
+  padding: 0;
+  background: transparent;
+  color: var(--muted) !important; /* Match other links */
+  border-radius: 0;
   text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid transparent;
+  font-weight: 700; /* Bolded as requested */
+  transition: color 0.2s ease;
+  border: 0;
+  padding-bottom: 2px; /* Match standard link alignment */
+  border-bottom: 2px solid transparent;
 }
 .menu-cta-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  filter: brightness(1.05);
-  border-bottom-color: transparent; /* Override default link underline logic */
+  color: var(--highlight-color) !important;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+  border-bottom-color: var(--highlight-color);
 }
 
 /* Backdrop (mobile only) */

@@ -793,6 +793,10 @@
   flex-wrap: wrap;
   gap: .6rem;
 }
+/* Reduce spacing for profiles card */
+.contact-card--profiles {
+    gap: 0.5rem; /* Reduced from default var(--s-md) */
+}
 
 @media (max-width: 640px) {
   .contact-map-actions {
