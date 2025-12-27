@@ -1,6 +1,6 @@
 {{- $hero := site.Params.home.hero | default dict -}}
 {{- $carousel := slice -}}
-{{- $images := .Get "images" -}}
+{{- $images := .Get "hero_images" -}}
 {{- if $images -}}
   {{- $carousel = split $images "," -}}
 {{- else if isset $hero "carousel" -}}

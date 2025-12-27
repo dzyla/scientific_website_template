@@ -49,10 +49,12 @@
     z-index: 1;
     /* White (Left) -> Transparent (Right) */
     /* Clearer right side per request */
-    background: linear-gradient(90deg,
-        #ffffff 30%,
-        rgba(255,255,255,0.95) 45%,
-        rgba(255,255,255,0) 60%);
+    background: linear-gradient(90deg, 
+        #ffffff 25%, 
+        rgba(255,255,255,0.85) 45%, 
+        rgba(255,255,255,0.4) 55%, 
+        rgba(255,255,255,0) 70%
+    );
     pointer-events: none; /* Let clicks pass through to image if needed (rare) */
 }
 
