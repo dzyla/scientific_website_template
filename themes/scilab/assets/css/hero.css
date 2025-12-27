@@ -8,19 +8,23 @@
   align-items: flex-start; /* Align content to top per request */
   padding-top: var(--s-3xl); /* Push content down for "start with image" feel */
   overflow: hidden;
-  margin-bottom: 0; /* Removed spacing per request */
+  /* 1. Background Field & Overlap setup */
+  background-color: #F8F5EF; /* Matching the warm CU vibe or footer color */
+  padding-bottom: 120px; /* Extra space at bottom for overlap */
+  margin-bottom: 0;
 }
 
 /* Background Image (Right/Full) */
 .hero-bg-image {
   position: absolute;
   inset: 0;
+  bottom: 120px; /* Stop image short so background color shows at bottom ("floor") */
   width: 100%;
-  height: 100%;
+  height: auto; /* Allow height to adjust based on bottom constraint */
   background-size: cover;
   background-position: center;
   z-index: 0;
-  border-radius: 8px; /* Soften the blocky feel */
+  border-radius: 8px;
 }
 
 /* Ensure images in the background carousel stack properly */
@@ -41,6 +45,7 @@
 .hero-matte-overlay {
     position: absolute;
     inset: 0;
+    bottom: 120px; /* Match image bottom */
     z-index: 1;
     /* White (Left) -> Transparent (Right) */
     /* Clearer right side per request */

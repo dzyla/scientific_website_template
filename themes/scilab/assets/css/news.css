@@ -1,13 +1,13 @@
 /* ===== News: Modern Grid Layout ===== */
 
 .home-news-widget {
+    /* 3. Pull the News Section Up (The Overlap) */
     position: relative;
-    z-index: 20;
-    /* margin-top: -6rem; Removed overlap per new design req */
-    margin-top: 0;
-    margin-bottom: 0; /* Reduced spacing per request */
-    padding-top: 2rem; /* Reduced top spacing */
-    padding-bottom: 1rem; /* Reduced bottom spacing for footer */
+    z-index: 20; /* Higher than hero background */
+    margin-top: -80px; /* Pull up into Hero */
+    margin-bottom: 0;
+    padding-top: 0; /* Remove padding-top so cards sit flush */
+    padding-bottom: 2rem;
 }
 
 .news-header {
@@ -35,13 +35,13 @@
     position: relative; /* For stretched link */
     flex: 0 0 320px; /* Fixed width cards */
     scroll-snap-align: start;
-    background: #fff;
-    /* Remove Border, use Shadow per global style request */
-    border: none;
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    /* 4. Define the Cards (Separation) */
+    background: #ffffff;
+    border: 1px solid #E5E7EB; /* Subtle definition */
+    border-radius: 8px; /* Small border radius per instruction */
+    padding: 24px; /* Increased padding */
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Requested shadow */
     display: flex;
     flex-direction: column;
 }
