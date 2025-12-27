@@ -176,7 +176,7 @@
 /* PI Card (Horizontal) */
 .team-card--lead {
   display: grid;
-  grid-template-columns: 180px 1fr; /* Image left, text right */
+  grid-template-columns: 320px 1fr; /* Image left, text right - Matched standard card width */
   align-items: start;
 }
 

@@ -5,9 +5,9 @@
     z-index: 20;
     /* margin-top: -6rem; Removed overlap per new design req */
     margin-top: 0;
-    margin-bottom: var(--s-3xl);
-    padding-top: var(--s-xl); /* Add spacing below divider */
-    padding-bottom: 2rem;
+    margin-bottom: 0; /* Reduced spacing per request */
+    padding-top: 2rem; /* Reduced top spacing */
+    padding-bottom: 1rem; /* Reduced bottom spacing for footer */
 }
 
 .news-header {
