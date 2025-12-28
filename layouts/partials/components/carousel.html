@@ -12,7 +12,7 @@
         src="{{ $src | safeURL }}"
         alt="{{ printf "%s %d" $altPrefix (add $i 1) }}"
         loading="lazy"
-        {{- if eq $i 0 }} class="active"{{ end }}
+        {{- if eq $i 0 }} class="active" aria-hidden="false"{{ else }} aria-hidden="true"{{ end }}
       >
     {{- end }}
 

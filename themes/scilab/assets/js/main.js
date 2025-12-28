@@ -124,8 +124,7 @@ runWhenStylesReady(() => {
   if (carousels.length) carousels.forEach(initCarousel);
 
   function initCarousel(root) {
-    // Explicitly opt-in to animation even if OS has reduced motion
-    root.setAttribute('data-animate', 'always');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // If controls already exist in markup, reuse them
     let prev = root.querySelector('.nav-prev');
@@ -159,8 +158,16 @@ runWhenStylesReady(() => {
     const SWIPE_THRESHOLD = 40;
     let touchStartX = null, touchStartY = null;
 
-    // Initialize first slide as active
-    slides.forEach((el, i) => i === 0 ? el.classList.add('active') : el.classList.remove('active'));
+    // Initialize first slide as active, set aria-hidden on others
+    slides.forEach((el, i) => {
+      if (i === 0) {
+        el.classList.add('active');
+        el.setAttribute('aria-hidden', 'false');
+      } else {
+        el.classList.remove('active');
+        el.setAttribute('aria-hidden', 'true');
+      }
+    });
 
     // Two-RAF crossfade so transitions always fire visibly
     const crossfadeTo = (i) => {
@@ -171,11 +178,13 @@ runWhenStylesReady(() => {
 
       // 1) fade-in next
       nextEl.classList.add('active');
+      nextEl.setAttribute('aria-hidden', 'false');
 
       // 2) then fade-out previous in the next paint
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           current.classList.remove('active');
+          current.setAttribute('aria-hidden', 'true');
           index = targetIndex;
         });
       });
@@ -184,7 +193,13 @@ runWhenStylesReady(() => {
     const nextSlide = () => crossfadeTo(index + 1);
     const prevSlide = () => crossfadeTo(index - 1);
 
-    const start = () => { stop(); if (slides.length > 1) timer = setInterval(nextSlide, AUTOPLAY_MS); };
+    const start = () => {
+      stop();
+      // Only autoplay if user hasn't requested reduced motion
+      if (slides.length > 1 && !prefersReducedMotion) {
+        timer = setInterval(nextSlide, AUTOPLAY_MS);
+      }
+    };
     const stop  = () => { if (timer) { clearInterval(timer); timer = null; } };
 
     next.addEventListener('click', () => { nextSlide(); start(); });
