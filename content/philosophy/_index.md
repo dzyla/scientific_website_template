@@ -2,29 +2,29 @@
 title: "Philosophy"
 ---
 
-We are a welcoming, data-driven lab that values clarity, kindness, and rigor. Whether you join us as a student, postdoc, or collaborator, you should know what it feels like to work here and how we look after one another.
+We are a data-driven lab that believes rigor and kindness go hand in hand. Our goal is to create an environment where scientists at every level—students, postdocs, and specialists—can do their best work while feeling supported and valued.
 
-We organise our culture around a handful of promises. They keep the day-to-day approachable and make the bigger ambitions believable.
+Our culture relies on a shared commitment to excellence and mutual respect.
 
 ## What Anchors Our Lab
 
 {{< philosophy_grid >}}
 
-## How We Support You
+## How We Invest in You
 
-- Clear expectations, regular feedback, and concrete next steps for growth.
-- Documented protocols, validated analysis tools, and mentorship at every stage.
-- A psychologically safe space where questions are expected and mistakes become lessons.
-- Protected time for learning new skills, presenting your work, and planning what comes next.
+- **Tailored Mentorship:** We provide clear expectations, regular feedback, and a defined roadmap for your professional growth.
+- **Resources for Success:** You will have access to established protocols, training on advanced instrumentation, and guidance at every stage of your project.
+- **A Supportive Environment:** We cultivate a culture of trust where asking questions is encouraged and setbacks are treated as natural steps in the learning process.
+- **Career Development:** We protect your time for learning new skills, presenting at conferences, and planning your career trajectory.
 
-## What We Ask of You
+## How You Contribute
 
-- Stay curious, careful, and candid; especially when the data is surprising.
-- Plan your work, communicate early, and reach out before you feel stuck. We are all here to learn.
-- Respect teammates’ time, materials, and boundaries; give feedback that is direct and kind.
-- Discuss science, challenge ideas; science thrives on debate when it is constructive.
-- Treat safety, data integrity, and inclusion as part of every experiment, not a side note.
+- **Integrity and Curiosity:** Be precise with your data and honest about your results, especially when they challenge your hypothesis.
+- **Proactive Communication:** Plan thoughtfully, update the team often, and reach out for help early. We solve problems better together.
+- **Community:** Respect your colleagues' time, space, and ideas. Deliver feedback that is constructive and kind.
+- **Engagement:** Speak up and challenge ideas. We believe that rigorous, respectful debate drives scientific discovery.
+- **Responsibility:** Treat safety, documentation, and inclusivity as non-negotiable parts of your daily work.
 
 ---
 
-Our aim is simple: do excellent science that stands up to scrutiny, share it openly, and grow as scientists and colleagues along the way.
+Ultimately, we aim to produce science that is reproducible and impactful, ensuring that everyone who joins our team grows as both a scientist and a colleague.

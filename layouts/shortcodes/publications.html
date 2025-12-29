@@ -13,7 +13,7 @@
   <div class="publications-grid">
   {{- range sort $pubs "year" "desc" -}}
     {{- $p := . -}}
-    {{- $authors := split ( $p.authors | plainify ) "," -}}
+    {{- $authors := split ( $p.authors | plainify ) ";" -}}
     {{- $hl := $p.highlight | default slice -}}
     <article class="publication-card">
       <div class="publication-sidebar">
@@ -34,7 +34,7 @@
             {{- range $i, $name := $authors -}}
             {{- $trim := trim $name " " -}}
             {{- $isHL := in $hl $trim -}}
-            {{- if $isHL -}}<strong>{{ $trim }}</strong>{{ else }}{{ $trim }}{{ end -}}
+            {{- if $isHL -}}<span class="author-highlight">{{ $trim }}</span>{{ else }}{{ $trim }}{{ end -}}
             {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
             {{- end -}}
         </p>

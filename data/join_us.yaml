@@ -1,22 +1,23 @@
-intro: "We're always excited to meet scientists who want to combine structural biology and virology. If one of the roles below resonates with you, send a short email introducing yourself along with a CV and highlight project."
+intro: "We are looking for driven scientists to join our team. If you are eager to combine structural biology and virology to solve difficult problems, we want to hear from you."
+
 positions:
   - title: "PhD Student"
     bullets:
-      - "Strong foundation in biochemistry, molecular biology, or biophysics"
-      - "Hands-on experience in cryo-EM sample prep, tomography, or related imaging"
-      - "Comfortable writing Python or R scripts for data analysis and reproducibility"
-      - "Collaborative mindset—you’ll co-mentor undergraduates and work closely with postdocs"
+      - "Interested in solving difficult biological problems with creativity and resilience."
+      - "Willing to learn—we teach structural biology, biophysics, and protein chemistry from scratch."
+      - "Background in biochemistry or computational biology is welcome, but initiative is key."
+
   - title: "Postdoctoral Researcher"
     bullets:
-      - "PhD in structural biology, virology, or biophysics with a published record of cryo-EM or structural studies"
-      - "Deep expertise in single-particle analysis, subtomogram averaging, or hybrid modeling"
-      - "Interest in translating structural insights into antiviral screening or mechanistic models"
-      - "Ready to drive an independent project while mentoring students"
-  - title: "Lab Technician"
+      - "PhD in structural biology, virology, or a related field."
+      - "Ready to lead independent projects and supervise junior team members."
+      - "Expertise in cryo-EM, tomography, or kinetic assays is highly valued."
+
+  - title: "Research Specialist"
     bullets:
-      - "BS or MS in a relevant field with 2+ years of wet-lab experience"
-      - "Skilled in cell culture, protein purification, and general lab operations"
-      - "Experienced with instrument scheduling, inventory, and safety compliance"
-      - "Enthusiastic about enabling collaborative experiments and keeping the lab running smoothly"
+      - "BS or MS in a relevant field with strong organizational skills."
+      - "Willing to support diverse projects (e.g., protein purification, cell culture)."
+      - "Enthusiastic about helping maintain smooth lab operations."
+
 cta:
-  text: "To apply, email hello@biolab.edu with ‘Bio Lab Opportunity’ in the subject line."
+  text: "To apply, email dawid.zyla@cuanschutz.edu. Please include your CV, contact info for references, and a brief note describing your motivation and which project excites you."

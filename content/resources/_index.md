@@ -1,26 +1,19 @@
 ---
 title: "Resources"
 resources:
-  - title: "Cryo-EM Sample Preparation"
-    ref: "protocols/sample-prep.md"
+  - title: "Graphene Oxide Grid Preparation"
+    ref: "protocols/go-grids.md"
     category: "Protocol"
-    description: "Bench-ready checklist for vitrifying grids and preserving fragile complexes."
-  - title: "Image Processing Workflow"
-    ref: "protocols/image-processing.md"
-    category: "Workflow"
-    description: "Standard image-cleanup and reconstruction pipeline we teach to incoming students."
-  - title: "Data Collection Guide"
-    ref: "protocols/data-collection.md"
-    category: "Protocol"
-    description: "Step-by-step microscope setup and QC notes for reliable data acquisition."
-  - title: "Analysis Scripts on GitHub"
-    url: "https://github.com/example/repo"
-    category: "Tools"
-    description: "Reusable Python notebooks and Snakemake pipelines for map refinement."
-  - title: "Plasmid & Construct Database"
-    url: "https://example.com/plasmids"
-    category: "Reference"
-    description: "Shared catalog of validated expression constructs with cloning notes."
+    description: "Detailed procedure for preparing graphene oxide coated EM grids."
+  - title: "ProteinCHAOS"
+    url: "https://github.com/dzyla/ProteinCHAOS"
+    category: "GitHub Repository"
+    description: "MD-inspired Protein dynamics generative art tool"
+  - title: "Follow Relion Gracefully"
+    url: "https://github.com/dzyla/Follow_Relion_gracefully"
+    category: "GitHub Repository"
+    description: "Browser-based tool to monitor RELION jobs"
 ---
 
-Explore the quick links below for the resources we rely on most frequently. Each card includes a short note about how it helps you get work done faster.
+Explore the quick links below for the resources we rely on most frequently. Feel free to reach out if you have questions or need assistance accessing any of these materials.
+

@@ -3,14 +3,22 @@
 /* Split Hero with Matte Overlay */
 .hero-split-matte {
   position: relative;
-  min-height: 85vh; /* Taller, immersive feel */
+  
+  /* 1. FORCE NATURAL HEIGHT */
+  /* This ensures the hero is never taller than the text inside it */
+  min-height: auto; 
+  height: auto; 
+  
   display: flex;
-  align-items: flex-start; /* Align content to top per request */
-  padding-top: var(--s-3xl); /* Push content down for "start with image" feel */
+  align-items: center; /* Vertically center the content for a balanced look */
+  padding-top: 6rem;   /* ample top space */
+  
+  /* 2. REDUCE BOTTOM PADDING */
+  /* This brings the News section closer */
+  padding-bottom: 4rem; 
+  
   overflow: hidden;
-  /* 1. Background Field & Overlap setup */
-  background-color: #F8F5EF; /* Matching the warm CU vibe or footer color */
-  padding-bottom: 120px; /* Extra space at bottom for overlap */
+  background-color: #F8F5EF; 
   margin-bottom: 0;
 }
 
@@ -18,13 +26,14 @@
 .hero-bg-image {
   position: absolute;
   inset: 0;
-  bottom: 120px; /* Stop image short so background color shows at bottom ("floor") */
+  
+  /* 3. SYNC BOTTOM WITH MATTE */
+  /* Let's stop both 0px from bottom for a clean flush look */
+  bottom: 0; 
+  
   width: 100%;
-  height: auto; /* Allow height to adjust based on bottom constraint */
-  background-size: cover;
-  background-position: center;
+  height: 100%; /* Fill the container */
   z-index: 0;
-  border-radius: 8px;
 }
 
 /* Ensure images in the background carousel stack properly */
@@ -45,17 +54,20 @@
 .hero-matte-overlay {
     position: absolute;
     inset: 0;
-    bottom: 120px; /* Match image bottom */
+    
+    /* 4. FIX THE STRIPE ARTIFACT */
+    /* Previously 120px - change to 0 to match the image */
+    bottom: 0; 
+    
     z-index: 1;
-    /* White (Left) -> Transparent (Right) */
-    /* Clearer right side per request */
+    /* Your improved gradient */
     background: linear-gradient(90deg, 
-        #ffffff 25%, 
-        rgba(255,255,255,0.85) 45%, 
-        rgba(255,255,255,0.4) 55%, 
-        rgba(255,255,255,0) 70%
+        #ffffff 10%, 
+        rgba(255,255,255,0.95) 30%, 
+        rgba(255,255,255,0.6) 60%, 
+        rgba(255,255,255,0) 100%
     );
-    pointer-events: none; /* Let clicks pass through to image if needed (rare) */
+    pointer-events: none;
 }
 
 /* Content Container */

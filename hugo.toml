@@ -1,7 +1,7 @@
 # Hugo configuration file
 baseURL = "https://dzyla.github.io/scientific_website_template/"
 languageCode = "en-us"
-title = "Bio Lab"
+title = "Zyla Lab"
 theme = "scilab"
 
 [params]
@@ -9,35 +9,46 @@ theme = "scilab"
   # overrides the text color when that accent is used on light backgrounds.
   highlightColor = "#8B6508"         # dark goldenrod/ochre for better contrast
   highlightTextColor = "#ffffff"     # white text on dark gold
-  description = "Structure-guided virology and biophysics for antiviral discovery."
-  tagline = "Structure-guided virology and biophysics for antiviral discovery."
+  description = "Structure-guided virology and biophysics"
+  tagline = "Structure-guided virology and biophysics"
   ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
   # Use one or more verification tokens below after you register each service.
   verification_google = ""           # e.g., "abc123..."
   verification_bing = ""             # e.g., "BingSiteAuthCode"
   verification_yandex = ""           # optional
-  organization_name = "Bio Lab"
+  organization_name = "Zyla Lab"
   organization_logo = "/favicon.svg"
   organization_url  = "https://dzyla.github.io/scientific_website_template/"
   joinURL = "/contact/"
   joinLabel = "Join us"
-  contact_email = "hello@biolab.example"
+  contact_email = "dawid.zyla@cuanschutz.edu"
   contact_phone = "+1 (555) 123-4567"
-  contact_address = "University of Avalone · Department of Structural Biology"
-  scholar = "https://scholar.google.com/"
-  github = "https://github.com/yourorg"
-  linkedin = "https://www.linkedin.com/company/biolab/"
-  bluesky = "https://bsky.app/profile/biolab.example"
+  contact_hours = "Mon–Fri · 9:00–17:00 PT"
+  scholar = "https://scholar.google.com/citations?user=dEGnzrwAAAAJ&hl=en"
+  orcid = ""
+  github = "https://github.com/dzyla"
+  linkedin = "https://www.linkedin.com/in/dawidzyla/"
+  bluesky = "https://bsky.app/profile/dzyla.bsky.social"
+
+  [params.address]
+    building = "Research I South"
+    department = "Department of Biochemistry and Molecular Genetics"
+    institution = "University of Colorado Anschutz Medical Campus"
+    street = "12801 East 17th Avenue Mail Stop 8101"
+    city = "Aurora"
+    state = "CO"
+    zip = "80045"
+    country = "USA"
 
   [params.home]
     [params.home.hero]
-      title = "Structure-guided virology, from single virions to therapeutics"
-      lead = "We combine cryo-EM and biophysics to capture atomic snapshots of viral assembly. By revealing these transient mechanisms, we identify weak spots to target with next-generation antivirals."
+      title = "Structure-guided virology and biophysics"
+      lead = "We combine structural biology and biophysics to understand molecular machines that drive virus entry"
       intro = []
       carousel = [
-        "images/lab.jpg",
-        "images/img1.jpg",
-        "images/img2.jpg"
+        "images/fectoFab_export2.png",
+        "images/P6-S43-5554.png",
+        "images/2d_grid.png",
       ]
       actionsAria = "Primary site sections"
 

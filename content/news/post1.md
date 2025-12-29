@@ -1,8 +1,8 @@
 ---
-title: "New member joins the lab"
-date: 2024-01-15
+title: "Hello World!"
+date: 2025-12-01
 draft: false
-tags: ["member", "news"]
+tags: ["news"]
 ---
 
-We are excited to announce that Dr. Jane Doe has joined our lab as a postdoctoral researcher. Dr. Doe brings a wealth of experience in structural biology and will be working on our ongoing projects related to viral protein structures.
+The lab is launching a new website! Stay tuned for updates.

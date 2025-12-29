@@ -1,12 +1,15 @@
 /* ===== News: Modern Grid Layout ===== */
 
 .home-news-widget {
-    /* 3. Pull the News Section Up (The Overlap) */
     position: relative;
-    z-index: 20; /* Higher than hero background */
-    margin-top: -80px; /* Pull up into Hero */
+    z-index: 20;
+    
+    /* 5. RESET MARGINS */
+    /* No overlap, no gap. It will sit directly after the 4rem padding of the hero */
+    margin-top: 0; 
+    
     margin-bottom: 0;
-    padding-top: 0; /* Remove padding-top so cards sit flush */
+    padding-top: 0; 
     padding-bottom: 2rem;
 }
 

@@ -1,27 +1,32 @@
 [
   {
-    "title": "Evidence guides every decision",
+    "title": "Guided by evidence",
     "icon": "circle",
-    "content": "Data, validated methods, and constructive peer review shape our conclusions. When the evidence changes, so do our plans."
+    "content": "We let data and constructive feedback shape our direction. When the evidence evolves, we adapt our plans to follow the science."
   },
   {
-    "title": "Curiosity is key",
+    "title": "Driven by curiosity",
     "icon": "circle",
-    "content": "We choose questions that spark excitement *and* move the field. Weekly progress might be incremental, but the arc should stay energising."
+    "content": "We pursue questions that excite us and push the field forward. While daily progress can be gradual, we aim to keep the bigger picture inspiring."
   },
   {
-    "title": "Everyone is welcome",
+    "title": "An inclusive environment",
     "icon": "circle",
-    "content": "Respect is non-negotiable; ideas stand on their own merits. Everyone gets room to contribute and to be heard."
+    "content": "Respect is fundamental to our work. We believe ideas should stand on their own merit and that everyone deserves space to contribute and be heard."
   },
   {
-    "title": "Collaboration comes with accountability",
+    "title": "Collaboration and ownership",
     "icon": "circle",
-    "content": "Shared projects mean shared credit, clear updates, and transparent ownership of next steps."
+    "content": "We believe shared projects require shared credit and clear communication. We support one another by being transparent about updates and next steps."
   },
   {
-    "title": "Reproducibility is mandatory",
+    "title": "Committed to reproducibility",
     "icon": "circle",
-    "content": "We document what we do, clean our data and code, and share when policy and consent allow. If someone else cannot repeat it, it is not finished yet."
+    "content": "We take pride in documenting our work and sharing data whenever possible. We aim for science that is robust, transparent, and can be built upon by others."
+  },
+  {
+    "title": "Invested in growth",
+    "icon": "circle",
+    "content": "We are dedicated to mentoring and personal development. Our goal is to train the next generation of scientists and help each member reach their potential."
   }
 ]

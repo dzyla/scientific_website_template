@@ -1,23 +1,27 @@
 hero:
-  title: "Viral fusion and kinetics at structural resolution"
-  intro: "We dissect how enveloped viruses engage host membranes, refold their fusion machinery, and assemble new particles. Cryo-EM, tomography, and kinetic assays let us link structural snapshots to functional outcomes."
+  title: "Structure-guided virology and biophysics"
+  intro: "We combine structural biology and biophysics to understand molecular machines that drive virus entry. By capturing viral proteins in action, we aim to uncover the mechanisms of infection and inspire new antiviral strategies."
 
 topics:
-  - title: Molecular choreography of fusion proteins
-    description: "We trace the refolding pathways of viral fusion proteins and pinpoint intermediate states that determine tropism and entry efficiency."
-  - title: Host-factor engagement
-    description: "Integrative EM and crosslinking strategies reveal how viral machines recruit chaperones, co-factors, and immune modulators during infection."
-  - title: Time-resolved structure
-    description: "Mix-and-plunge workflows capture millisecond transitions so we can translate structural kinetics into mechanistic models."
+  - title: "Visualizing viral entry"
+    description: "We use advanced imaging to see how viruses attach to and penetrate cells, revealing the complex machinery they use to invade."
+  - title: "Capturing dynamic movements"
+    description: "Proteins are not static; they move and change shape. We track these fleeting moments to understand how proteins carry out their functions."
+  - title: "Developing next-gen tools"
+    description: "We engineer new ways to study pathogens in their native environment, creating better platforms for vaccine design and drug discovery."
 
 projects:
-  title: "Selected projects"
+  title: "Our Research Focus"
   items:
-    - title: "Tracking fusion in real time"
-      summary: "Cryo-ET combined with subtomogram averaging lets us visualize Virus X as it docks, primes, and fuses with host membranes, revealing a newly exposed pocket susceptible to inhibitory peptides."
-      image: "images/img1.jpg"
-      caption: "Cryo-ET snapshots of fusion intermediates"
-    - title: "Allosteric inhibitors of polymerase assembly"
-      summary: "Single-particle cryo-EM and fragment screening identify allosteric chemotypes that stall Virus Y polymerase formation and block genome replication in primary cells."
-      image: "images/img2.jpg"
-      caption: "Structure-guided inhibitor campaign"
+    - title: "Decoding the fusion machinery"
+      summary: "Using cryo-electron microscopy, we map the detailed structures of viral fusion complexes to understand how they merge viral and cellular membranes and how immune systems can block this process."
+      image: "images/proteinchaos.png"
+      caption: "High-resolution architecture of viral entry complexes"
+    - title: "Watching viruses in motion"
+      summary: "We are developing time-resolved techniques to freeze-frame viral proteins during infection, capturing the elusive intermediate steps of the fusion process."
+      image: "images/chaos_vc_FPOST_charcoal.png"
+      caption: "Capturing the dynamic steps of viral fusion"
+    - title: "Innovating for cures"
+      summary: "By understanding the natural shape of viral proteins, we use AI and structural insights to design smarter vaccines and potent antiviral therapies."
+      image: "images/chaos_vc_FECTO2M__ink.png"
+      caption: "Structure-based design of new therapeutics"
