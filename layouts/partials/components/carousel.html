@@ -11,8 +11,8 @@
       <img
         src="{{ $src | safeURL }}"
         alt="{{ printf "%s %d" $altPrefix (add $i 1) }}"
-        loading="lazy"
-        {{- if eq $i 0 }} class="active"{{ end }}
+        loading="{{ if eq $i 0 }}eager{{ else }}lazy{{ end }}"
+        {{- if eq $i 0 }} class="active"{{ else }} aria-hidden="true"{{ end }}
       >
     {{- end }}
 

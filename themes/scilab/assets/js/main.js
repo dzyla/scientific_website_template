@@ -171,11 +171,13 @@ runWhenStylesReady(() => {
 
       // 1) fade-in next
       nextEl.classList.add('active');
+      nextEl.removeAttribute('aria-hidden');
 
       // 2) then fade-out previous in the next paint
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           current.classList.remove('active');
+          current.setAttribute('aria-hidden', 'true');
           index = targetIndex;
         });
       });
