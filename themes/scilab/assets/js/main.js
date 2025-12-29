@@ -16,10 +16,10 @@ const runWhenStylesReady = (handler) => {
     ready.then(invoke);
   };
 
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  if (document.readyState === 'complete') {
     afterFonts();
   } else {
-    document.addEventListener('DOMContentLoaded', afterFonts, { once: true });
+    window.addEventListener('load', afterFonts);
   }
 };
 
