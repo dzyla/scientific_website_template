@@ -38,14 +38,13 @@
             <div class="hero-actions-container" aria-label="{{ $actionsAria }}">
                 <div class="hero-buttons-row">
                     {{- range $i, $action := $actions }}
-                        {{- $href := index $action "url" | default "" -}}
-                        {{- if isset $action "pageRef" -}}
-                            {{- with site.GetPage (index $action "pageRef") -}}
-                                {{- $href = .RelPermalink -}}
-                            {{- end -}}
-                        {{- end -}}
-
                         {{- if lt $i 2 }} <!-- Buttons -->
+                            {{- $href := index $action "url" | default "" -}}
+                            {{- if isset $action "pageRef" -}}
+                                {{- with site.GetPage (index $action "pageRef") -}}
+                                    {{- $href = .RelPermalink -}}
+                                {{- end -}}
+                            {{- end -}}
                             <a class="hero-btn {{ if eq $i 0 }}btn-primary-gold{{ else }}btn-secondary-black{{ end }}" href="{{ $href }}">
                                 {{- index $action "label" | default "Learn more" -}}
                             </a>

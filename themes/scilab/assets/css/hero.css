@@ -18,7 +18,7 @@
   padding-bottom: 4rem; 
   
   overflow: hidden;
-  background-color: #F8F5EF; 
+  background-color: #FFFFFF; 
   margin-bottom: 0;
 }
 
@@ -60,12 +60,10 @@
     bottom: 0; 
     
     z-index: 1;
-    /* Your improved gradient */
+    /* 80% White Split: Covers left 50% with 80% opacity */
     background: linear-gradient(90deg, 
-        #ffffff 10%, 
-        rgba(255,255,255,0.95) 30%, 
-        rgba(255,255,255,0.6) 60%, 
-        rgba(255,255,255,0) 100%
+        rgba(255, 255, 255, 0.90) 50%, 
+        transparent 50%
     );
     pointer-events: none;
 }
@@ -118,8 +116,24 @@
 
 .hero-buttons-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: row;  /* Side-by-side by default */
+    align-items: center;
+    gap: 1rem;            /* Spacing between buttons */
+    width: auto;
+    flex-wrap: wrap; /* Allow wrapping if absolutely necessary */
+}
+
+/* Mobile Stack for Buttons */
+@media (max-width: 600px) {
+    .hero-buttons-row {
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch; /* Full width buttons on mobile */
+    }
+    .hero-btn {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .hero-btn {
@@ -245,6 +259,6 @@
   background: rgba(255,255,255,0.8);
   transform: translateY(-50%) scale(1.1);
 }
-.nav-prev { left: 1.5rem; }
+.nav-prev { display: none; }
 .nav-next { right: 1.5rem; }
 .nav-btn svg { width: 24px; height: 24px; stroke-width: 2.5; }

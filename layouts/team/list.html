@@ -11,7 +11,7 @@
       {{ with $imgPath }}
         {{ $img := resources.GetMatch $imgPath }}
         {{ if $img }}
-          {{ $processed := $img.Fill "320x360 Center" }}
+          {{ $processed := $img.Fill "600x800 Center" }}
           <div class="team-portrait">
             <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
           </div>
@@ -44,7 +44,7 @@
         {{ with $imgPath }}
           {{ $img := resources.GetMatch $imgPath }}
           {{ if $img }}
-            {{ $processed := $img.Fill "320x360 Center" }}
+            {{ $processed := $img.Fill "600x800 Center" }}
             <div class="team-portrait">
               <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
             </div>
@@ -69,16 +69,17 @@
     {{- $joinData := site.Data.join_us -}}
     {{- if $joinData -}}
     <article class="team-card team-card--join">
-      <div class="join-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="16"></line>
-          <line x1="8" y1="12" x2="16" y2="12"></line>
-        </svg>
+      <div class="join-content-wrapper">
+        <div class="join-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+        <h3>This could be you</h3>
+        {{ with $joinData.intro }}<p class="join-text">{{ . }}</p>{{ end }}
+        <a href="{{ "contact" | relURL }}" class="join-link">See Positions</a>
       </div>
-      <h3>This could be you</h3>
-      {{ with $joinData.intro }}<p class="join-text">{{ . }}</p>{{ end }}
-      <a href="{{ "contact" | relURL }}" class="join-link">See Positions</a>
     </article>
     {{- end -}}
   </div>

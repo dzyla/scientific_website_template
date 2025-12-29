@@ -27,10 +27,10 @@
   --background: #ffffff;
   --surface: #ffffff;
   --surface-alt: #faf6ee;
-  --accent: #CFB87C; /* CU Gold */
-  --accent-soft: rgba(207,184,124,0.18);
-  --highlight-soft: rgba(207,184,124,0.18);
-  --highlight-outline: rgba(207,184,124,0.4);
+  --accent: #99751E; /* Darker Gold for Accessibility (WCAG AA) */
+  --accent-soft: rgba(153,117,30,0.18);
+  --highlight-soft: rgba(153,117,30,0.18);
+  --highlight-outline: rgba(153,117,30,0.4);
   --highlight-text: var(--highlight-text-color, #ffffff); /* Default text on accent should be white unless overridden */
   --neutral-50: #f8fafc;
   --neutral-100: #f1f5f9;

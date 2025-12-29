@@ -24,24 +24,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* Removed pill styling as requested */
-  padding: 0;
-  background: transparent;
-  color: var(--muted) !important; /* Match other links */
-  border-radius: 0;
+  padding: 0.5rem 1.25rem;
+  background: var(--accent);
+  color: #fff !important; 
+  border-radius: 9999px;
   text-decoration: none;
-  font-weight: 700; /* Bolded as requested */
-  transition: color 0.2s ease;
-  border: 0;
-  padding-bottom: 2px; /* Match standard link alignment */
-  border-bottom: 2px solid transparent;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  padding-bottom: 0.5rem; 
+  border-bottom: 1px solid transparent;
 }
 .menu-cta-pill:hover {
-  color: var(--highlight-color) !important;
-  transform: none;
-  box-shadow: none;
-  filter: none;
-  border-bottom-color: var(--highlight-color);
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  color: #fff !important;
 }
 
 /* Backdrop (mobile only) */

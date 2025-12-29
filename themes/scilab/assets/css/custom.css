@@ -169,8 +169,8 @@
 .team-card {
   display: flex;
   flex-direction: column;
-  gap: var(--s-md);
-  padding: var(--s-lg);
+  gap: 0; /* Remove gap, handle with padding in info */
+  padding: 0; /* Remove padding from card for full-bleed image */
   border-radius: 0; /* No rounded edges */
   border: 0;
   background: var(--surface);
@@ -186,11 +186,13 @@
 /* PI Card (Horizontal) */
 .team-card--lead {
   display: grid;
-  grid-template-columns: 320px 1fr; /* Image left, text right - Matched standard card width */
+  grid-template-columns: 320px 1fr; /* Image left, text right */
   align-items: start;
 }
 
 .team-grid {
+  margin-top: var(--s-2xl); /* Restored spacing */
+  margin-bottom: var(--s-2xl); /* Space before footer (or alumni) */
   display: grid;
   gap: var(--s-lg);
 }
@@ -201,7 +203,7 @@
   border-radius: 0; /* No rounded edges */
   overflow: hidden;
   background: var(--neutral-100);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+  box-shadow: none; /* Removed inner shadow/border */
 }
 .team-portrait img {
   width: 100%;
@@ -219,6 +221,10 @@
 
 .team-portrait--placeholder {
   background: linear-gradient(135deg, rgba(148,163,184,0.2), rgba(148,163,184,0.05));
+}
+
+.team-info {
+    padding: var(--s-lg); /* Add padding here for content */
 }
 
 .team-info h2,
@@ -488,7 +494,7 @@
 .footer {
   background: var(--surface-alt);
   border-top: 1px solid var(--border);
-  padding: var(--s-2xl) 0 var(--s-xl);
+  padding: var(--s-3xl) 0 var(--s-xl); /* Increased top padding */
   color: var(--muted);
 }
 .footer-top {
@@ -504,7 +510,8 @@
 .footer-grid {
   display: grid;
   gap: var(--s-xl);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* Force 4 columns on desktop: Branding (1.5fr), Explore, Connect, Contact */
+  grid-template-columns: repeat(4, 1fr); 
   align-items: start;
   margin-bottom: var(--s-xl);
 }
@@ -551,6 +558,16 @@
   justify-content: center;
   font-size: .85rem;
   color: var(--muted);
+  /* Top border separator */
+  border-top: 1px solid #E5E7EB;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid on tablets */
+  }
 }
 
 @media (max-width: 640px) {
@@ -574,6 +591,12 @@
     background: transparent;
     border: 0;
     box-shadow: none;
+  }
+  
+  /* On mobile, stack order: Branding First, then others */
+  .footer-col.branding-col {
+      order: -1;
+      margin-bottom: 1rem;
   }
 
   /* Reduce info: Hide navigation links and social icons lists */
@@ -837,6 +860,25 @@
   display: grid;
   gap: var(--s-lg);
 }
+
+.publication-year-heading {
+    grid-column: 1 / -1;
+    font-size: 1.5rem;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.publication-year-heading:first-child {
+    margin-top: 0;
+}
+
+.publication-year-group {
+    display: grid;
+    gap: var(--s-lg);
+}
+
 .publication-card {
   border: 0;
   border-radius: var(--radius-lg);
@@ -844,7 +886,7 @@
   background: var(--surface);
   box-shadow: var(--shadow-1);
   display: grid;
-  grid-template-columns: 80px 1fr; /* Year sidebar + Content */
+  grid-template-columns: 1fr; /* Full width content */
   gap: 1.5rem;
   transition: box-shadow .2s ease, transform .2s ease;
 }
@@ -853,17 +895,17 @@
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
   transform: translateY(-2px);
 }
+/* Removed sidebar styles */
 .publication-sidebar {
-    text-align: right;
-    padding-top: 0.2rem;
+    display: none;
 }
 .publication-year-sticky {
-    font-weight: 800;
-    color: var(--text);
-    font-size: 1.1rem;
-    display: block;
-    position: sticky;
-    top: 1rem;
+    display: none;
+}
+
+/* Global List Spacing in Main Content */
+.main ul li, .main ol li {
+    margin-bottom: 0.5rem;
 }
 .publication-content {
     display: grid;
@@ -913,25 +955,62 @@
   justify-content: center;
   text-align: center;
   border: 2px dashed var(--border);
-  background: transparent;
-  box-shadow: none;
-  min-height: 350px; /* Match approximate height of peers */
+  background: var(--surface);
+  padding: var(--s-lg);
+  height: 100%; /* Stretch to match neighbors */
+  min-height: 300px; /* Ensure decent minimum size */
+  transition: all 0.3s ease; /* Transition for all changes including filter */
+  filter: grayscale(100%); /* Default to grayscale */
 }
+
 .team-card--join:hover {
   border-color: var(--accent);
   background: var(--neutral-50);
-  box-shadow: none; /* No lift for this specific card */
+  filter: grayscale(0%); /* Remove grayscale on hover */
 }
+
+.join-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
 .join-icon {
-  font-size: 2.5rem;
   color: var(--accent);
-  margin-bottom: 1rem;
+  opacity: 0.8;
+  transition: transform 0.3s ease;
+  /* Reset previous fixed sizing/containers */
+  width: auto;
+  height: auto;
 }
+
+.team-card--join h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.join-text {
+    margin: 0;
+    color: var(--muted);
+}
+
+.team-card--join:hover .join-icon {
+  transform: scale(1.1) rotate(90deg);
+}
+
 .join-link {
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
+  text-decoration: none;
+  color: var(--highlight-color);
+  margin-top: 0.5rem;
 }
+.join-link:hover {
+  text-decoration: underline;
+}
+
+/* Cleanup old specific overrides if they exist */
+.team-portrait--join { display: none; }
 
 /* Value Cards Grid (Philosophy) */
 .value-cards-grid {

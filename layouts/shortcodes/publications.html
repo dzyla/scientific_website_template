@@ -11,13 +11,23 @@
 {{- else -}}
 <section class="publications-section" data-reveal>
   <div class="publications-grid">
+  {{- $lastYear := "" -}}
   {{- range sort $pubs "year" "desc" -}}
     {{- $p := . -}}
+    {{- $currentYear := $p.year -}}
+    
+    {{- if ne $currentYear $lastYear -}}
+        {{- if ne $lastYear "" -}}</div>{{- end -}} <!-- Close previous group if not first -->
+        <h2 class="publication-year-heading">{{ $currentYear }}</h2>
+        <div class="publication-year-group">
+        {{- $lastYear = $currentYear -}}
+    {{- end -}}
+    
     {{- $authors := split ( $p.authors | plainify ) ";" -}}
     {{- $hl := $p.highlight | default slice -}}
     <article class="publication-card">
       <div class="publication-sidebar">
-         <span class="publication-year-sticky">{{ $p.year }}</span>
+         <!-- Removed sticky year since we have headers now -->
       </div>
       <div class="publication-content">
         <header class="publication-header">
@@ -42,6 +52,7 @@
       </div>
     </article>
   {{- end -}}
+  {{- if ne $lastYear "" -}}</div>{{- end -}} <!-- Close last group -->
   </div>
 </section>
 {{- end -}}
