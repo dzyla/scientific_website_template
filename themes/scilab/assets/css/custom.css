@@ -61,7 +61,7 @@
   list-style: none; /* Remove default bullets */
   color: var(--text);
   font-size: 1rem;
-  line-height: var(--line-height);
+  line-height: 1.7; /* Increased line-height for readability */
 }
 .join-position li {
   margin-bottom: .4rem;
@@ -75,11 +75,46 @@
   line-height: var(--line-height); /* Align with first line */
   flex-shrink: 0;
 }
-.join-us-cta {
+
+/* New Join Us CTA Bar */
+.join-cta-bar {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  border: 2px solid var(--accent); /* Gold border */
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 768px) {
+  .join-cta-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    padding: 2rem;
+  }
+}
+
+.join-cta-text {
   margin: 0;
   font-weight: 600;
+  font-size: 1.1rem;
   color: var(--text);
+  max-width: 45ch;
 }
+
+/* Ensure button looks good in CTA context */
+.join-cta-bar .btn-primary-gold {
+  white-space: nowrap;
+  padding: 0.8rem 1.5rem;
+}
+
 /* Responsive images within main content */
 .main img {
   max-width: 100%;
@@ -722,6 +757,13 @@
   max-width: 52ch;
 }
 
+/* Updated Contact Map Wrapper for better layout control */
+.contact-map-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 .contact-map {
   position: relative;
   border-radius: var(--radius-lg);
@@ -737,12 +779,27 @@
   border: 0;
   filter: saturate(0.9) contrast(1.05);
 }
-.contact-map-actions {
-  position: absolute;
-  bottom: 1.1rem;
-  right: 1.2rem;
-  display: flex;
-  gap: .6rem;
+
+/* New Text Link for Maps */
+.contact-map-footer {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.contact-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--highlight-color); /* Gold color */
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.contact-map-link svg {
+  color: inherit;
+}
+.contact-map-link:hover {
+  text-decoration: underline;
 }
 
 .contact-grid {
@@ -757,6 +814,7 @@
   padding: var(--s-lg);
   box-shadow: var(--shadow-1);
   display: grid;
+  grid-template-rows: auto 1fr;
   gap: var(--s-md);
   transition: box-shadow .2s ease, transform .2s ease;
 }
@@ -765,39 +823,98 @@
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
   transform: translateY(-2px);
 }
-.contact-card h3 { margin: 0; }
+
+/* Contact Header with Icon */
+.contact-header {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text);
+  font-size: 1.25rem;
+}
+.contact-header svg {
+  color: var(--highlight-color);
+  flex-shrink: 0;
+}
+
 .contact-card address {
   display: grid;
   gap: .4rem;
   font-style: normal;
   color: var(--text);
+  align-self: start;
 }
 .contact-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: .6rem;
+  gap: 1rem;
 }
 .contact-list li {
   display: flex;
   flex-direction: column;
-  gap: .15rem;
+  gap: .25rem;
 }
-.contact-list span {
+
+/* Icon Label for List Items */
+.icon-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 600;
   color: var(--text);
   text-transform: uppercase;
   letter-spacing: .04em;
   font-size: .8rem;
 }
+.icon-label svg {
+  color: var(--highlight-color);
+  opacity: 0.8;
+}
+
 .contact-list a {
   color: var(--text);
   text-decoration: none;
   font-weight: 600;
+  margin-left: 0; /* Reset indentation */
 }
 .contact-list a:hover { text-decoration: underline; }
-.contact-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+.contact-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: auto; }
+
+/* Refined Profiles List */
+.contact-list-profiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.contact-list-profiles li a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.contact-list-profiles li a svg {
+  color: var(--highlight-color);
+  opacity: 0.8;
+  transition: transform 0.2s ease;
+}
+.contact-list-profiles li a:hover {
+  color: var(--highlight-color);
+}
+.contact-list-profiles li a:hover svg {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
 .chip {
   display: inline-flex;
   align-items: center;

@@ -1,6 +1,7 @@
 {{/* Join Us shortcode: renders roles from data/join_us.yaml */}}
 
 {{- $data := site.Data.join_us -}}
+{{- $contactEmail := site.Params.contact_email | default "hello@biolab.example" -}}
 {{- if not $data -}}
   {{- warnf "join_us shortcode: data/join_us.yaml not found." -}}
 {{- else -}}
@@ -23,8 +24,12 @@
       </div>
     {{ end }}
 
-    {{ with $data.cta.text }}
-      <p class="join-us-cta">{{ . }}</p>
-    {{ end }}
+    <div class="join-cta-bar">
+      <p class="join-cta-text">
+        Ready to join the team? Email your CV and references to Dr. Zyla.
+      </p>
+      <a class="btn-primary-gold" href="mailto:{{ $contactEmail }}">Apply Now</a>
+    </div>
   </section>
 {{- end -}}
+

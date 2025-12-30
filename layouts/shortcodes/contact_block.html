@@ -24,17 +24,51 @@
 {{- $bluesky := .Get "bluesky" | default site.Params.bluesky | default "" -}}
 {{- $linkedin := .Get "linkedin" | default site.Params.linkedin | default "" -}}
 
+{{/* Minimal contact layout: left column info, right column map, below: quick actions. */}}
+
+{{- $building := .Get "building" | default site.Params.address.building | default "" -}}
+{{- $department := .Get "department" | default site.Params.address.department | default "" -}}
+{{- $institution := .Get "institution" | default site.Params.address.institution | default "" -}}
+{{- $street := .Get "street" | default site.Params.address.street | default "" -}}
+{{- $city := .Get "city" | default site.Params.address.city | default "" -}}
+{{- $state := .Get "state" | default site.Params.address.state | default "" -}}
+{{- $zip := .Get "zip" | default site.Params.address.zip | default "" -}}
+{{- $country := .Get "country" | default site.Params.address.country | default "" -}}
+
+{{- $addrLine := printf "%s, %s, %s %s" $street $city $state $zip -}}
+{{- $gmapsQuery := $addrLine | urlquery -}}
+{{- $gmapsEmbed := printf "https://www.google.com/maps?q=%s&output=embed" $gmapsQuery -}}
+{{- $gmapsDir := printf "https://www.google.com/maps/dir/?api=1&destination=%s" $gmapsQuery -}}
+
+{{- $email := .Get "email" | default site.Params.contact_email | default "hello@biolab.example" -}}
+{{- $phone := .Get "phone" | default site.Params.contact_phone | default "+1 (555) 123-4567" -}}
+{{- $officeHours := .Get "hours" | default site.Params.contact_hours | default "Mon–Fri · 9:00–17:00 PT" -}}
+
+{{- $scholar := .Get "scholar" | default site.Params.scholar | default "" -}}
+{{- $orcid := .Get "orcid" | default site.Params.orcid | default "" -}}
+{{- $github := .Get "github" | default site.Params.github | default "" -}}
+{{- $bluesky := .Get "bluesky" | default site.Params.bluesky | default "" -}}
+{{- $linkedin := .Get "linkedin" | default site.Params.linkedin | default "" -}}
+
 <section class="contact-section contact-modern" data-reveal>
-  <div class="contact-map" aria-label="Lab location">
-    <iframe src="{{ $gmapsEmbed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to our lab" allowfullscreen></iframe>
-    <div class="contact-map-actions">
-      <a class="chip chip--light" href="{{ $gmapsDir }}" target="_blank" rel="noopener">Open in Google Maps</a>
+  <div class="contact-map-wrapper">
+    <div class="contact-map" aria-label="Lab location">
+      <iframe src="{{ $gmapsEmbed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to our lab" allowfullscreen></iframe>
+    </div>
+    <div class="contact-map-footer">
+      <a class="contact-map-link" href="{{ $gmapsDir }}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Google Maps
+      </a>
     </div>
   </div>
 
   <div class="contact-grid">
     <article class="contact-card contact-card--address">
-      <h3>Visit us</h3>
+      <h3 class="contact-header">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Visit us
+      </h3>
       <address>
         {{- if $building }}<span>{{ $building }}</span>{{ end -}}
         {{- if or $department $institution }}<span>{{ if $department }}{{ $department }}, {{ end }}{{ $institution }}</span>{{ end -}}
@@ -45,11 +79,25 @@
     </article>
 
     <article class="contact-card contact-card--reach">
-      <h3>Reach out</h3>
+      <h3 class="contact-header">
+         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+         Reach out
+      </h3>
       <ul class="contact-list">
-        <li><span>Email</span><a href="mailto:{{ $email }}">{{ $email }}</a></li>
-        <li><span>Phone</span><a href="tel:{{ $phone | replace " " "" }}">{{ $phone }}</a></li>
-        <li><span>Office hours</span>{{ $officeHours }}</li>
+        <li>
+          <span class="icon-label">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Email
+          </span>
+          <a href="mailto:{{ $email }}">{{ $email }}</a>
+        </li>
+        <li>
+          <span class="icon-label">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            Phone
+          </span>
+          <a href="tel:{{ $phone | replace " " "" }}">{{ $phone }}</a>
+        </li>
       </ul>
       <div class="contact-actions">
         <a class="chip chip--outline" href="mailto:{{ $email }}">Email the lab</a>
@@ -58,20 +106,29 @@
     </article>
 
     {{- $profiles := slice -}}
-    {{- with $scholar }}{{ $profiles = $profiles | append (dict "name" "Google Scholar" "url" .) }}{{ end -}}
-    {{- with $orcid }}{{ $profiles = $profiles | append (dict "name" "ORCID" "url" .) }}{{ end -}}
-    {{- with $github }}{{ $profiles = $profiles | append (dict "name" "GitHub" "url" .) }}{{ end -}}
-    {{- with $bluesky }}{{ $profiles = $profiles | append (dict "name" "Bluesky" "url" .) }}{{ end -}}
-    {{- with $linkedin }}{{ $profiles = $profiles | append (dict "name" "LinkedIn" "url" .) }}{{ end -}}
+    {{- with $scholar }}{{ $profiles = $profiles | append (dict "name" "Google Scholar" "url" . "icon" "M12 3L1 9l11 6 9-4.91V17h2V9L12 3z M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z") }}{{ end -}}
+    {{- with $orcid }}{{ $profiles = $profiles | append (dict "name" "ORCID" "url" . "icon" "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z") }}{{ end -}}
+    {{- with $github }}{{ $profiles = $profiles | append (dict "name" "GitHub" "url" . "icon" "M12 2C6.47 2 2 6.47 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02a9.68 9.68 0 0 1 2.5-.34c.85.01 1.71.13 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z") }}{{ end -}}
+    {{- with $bluesky }}{{ $profiles = $profiles | append (dict "name" "Bluesky" "url" . "icon" "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z") }}{{ end -}}
+    {{- with $linkedin }}{{ $profiles = $profiles | append (dict "name" "LinkedIn" "url" . "icon" "M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z") }}{{ end -}}
+
     {{- if gt (len $profiles) 0 }}
       <article class="contact-card contact-card--profiles">
-        <h3>Research profiles</h3>
-        <div class="contact-profiles">
+        <h3 class="contact-header">Research profiles</h3>
+        <ul class="contact-list-profiles">
           {{- range $profiles }}
-            <a class="chip chip--outline" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>
+            <li>
+              <a href="{{ .url }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                   <path d="{{ .icon | default "M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" }}"/>
+                </svg>
+                {{ .name }}
+              </a>
+            </li>
           {{- end }}
-        </div>
+        </ul>
       </article>
     {{- end -}}
   </div>
 </section>
+
