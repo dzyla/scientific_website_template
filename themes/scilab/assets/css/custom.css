@@ -1314,9 +1314,40 @@
 }
 [data-theme="dark"] .hero-matte-overlay {
   background: linear-gradient(90deg, 
-    var(--background) 50%, 
+    rgba(18, 18, 18, 0.9) 50%, 
     transparent 50%
   );
+}
+
+/* Adjust hero top padding to remove extra space */
+.hero-split-matte {
+  padding-top: 3rem;
+  padding-bottom: 8rem; /* Increased from 4rem to add space before news */
+}
+
+/* Make buttons smaller to fit in one row */
+.hero-btn {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  white-space: nowrap; /* Prevent text wrapping inside button */
+}
+
+/* Ensure buttons stay on one row on larger screens */
+@media (min-width: 992px) {
+  .hero-buttons-row {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Add space between content and footer on all pages */
+.main {
+  padding-bottom: 5rem;
+}
+
+/* Allow last contact section to have margin/spacing if needed, 
+   or rely on .main padding. Removing the forced 0 margin is safer. */
+.contact-section:last-of-type {
+  margin-bottom: auto; 
 }
 [data-theme="dark"] .hero-lead {
   color: var(--muted) !important;

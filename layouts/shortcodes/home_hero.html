@@ -38,33 +38,24 @@
             <div class="hero-actions-container" aria-label="{{ $actionsAria }}">
                 <div class="hero-buttons-row">
                     {{- range $i, $action := $actions }}
-                        {{- if lt $i 2 }} <!-- Buttons -->
-                            {{- $href := index $action "url" | default "" -}}
-                            {{- if isset $action "pageRef" -}}
-                                {{- with site.GetPage (index $action "pageRef") -}}
-                                    {{- $href = .RelPermalink -}}
-                                {{- end -}}
+                        {{- $href := index $action "url" | default "" -}}
+                        {{- if isset $action "pageRef" -}}
+                            {{- with site.GetPage (index $action "pageRef") -}}
+                                {{- $href = .RelPermalink -}}
                             {{- end -}}
-                            <a class="hero-btn {{ if eq $i 0 }}btn-primary-gold{{ else }}btn-secondary-black{{ end }}" href="{{ $href }}">
-                                {{- index $action "label" | default "Learn more" -}}
-                            </a>
                         {{- end -}}
+                        
+                        {{- if lt $i 2 }}
+                        <a class="hero-btn {{ if eq $i 0 }}btn-primary-gold{{ else }}btn-secondary-black{{ end }}" href="{{ $href }}">
+                            {{- index $action "label" | default "Learn more" -}}
+                        </a>
+                        {{- else }}
+                        <a class="hero-link-tertiary" href="{{ $href }}">
+                            {{- index $action "label" | default "Join the Lab" -}} <span class="arrow">→</span>
+                        </a>
+                        {{- end }}
                     {{- end }}
                 </div>
-
-                <!-- Link -->
-                {{- if gt (len $actions) 2 }}
-                    {{- $joinAction := index $actions 2 -}}
-                    {{- $joinHref := index $joinAction "url" | default "" -}}
-                    {{- if isset $joinAction "pageRef" -}}
-                        {{- with site.GetPage (index $joinAction "pageRef") -}}
-                            {{- $joinHref = .RelPermalink -}}
-                        {{- end -}}
-                    {{- end -}}
-                    <a class="hero-link-tertiary" href="{{ $joinHref }}">
-                        {{- index $joinAction "label" | default "Join the Lab" -}} <span class="arrow">→</span>
-                    </a>
-                {{- end }}
             </div>
             {{- end }}
         </div>

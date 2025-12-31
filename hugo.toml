@@ -42,8 +42,8 @@ theme = "scilab"
 
   [params.home]
     [params.home.hero]
-      title = "Structure-guided virology and biophysics"
-      lead = "We combine structural biology and biophysics to understand molecular machines that drive virus entry"
+      title = "Structural Dynamics of Molecular Machines"
+      lead = "We integrate structural biology and biophysics to capture the transient dynamics of molecular machines, revealing the structural mechanisms of disease."
       intro = []
       carousel = [
         "images/fectoFab_export2.png",

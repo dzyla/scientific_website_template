@@ -26,7 +26,7 @@
 
     <div class="join-cta-bar">
       <p class="join-cta-text">
-        If you are interested, please send us your CV, a project idea, or a description of what you would like to work on.
+        {{ $data.cta.text | markdownify }}
       </p>
       <a class="btn-primary-gold" href="mailto:{{ $contactEmail }}">Apply Now</a>
     </div>
