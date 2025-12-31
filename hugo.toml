@@ -1,5 +1,5 @@
 # Hugo configuration file
-baseURL = "https://dzyla.github.io/scientific_website_template/"
+baseURL = "https://zylalab.org/"
 languageCode = "en-us"
 title = "Zyla Lab"
 theme = "scilab"
@@ -22,7 +22,7 @@ theme = "scilab"
   verification_yandex = ""           # optional
   organization_name = "Zyla Lab"
   organization_logo = "/favicon.svg"
-  organization_url  = "https://dzyla.github.io/scientific_website_template/"
+  organization_url  = "https://zylalab.org/"
   joinURL = "/contact/"
   joinLabel = "Join us"
   contact_email = "dawid.zyla@cuanschutz.edu"
