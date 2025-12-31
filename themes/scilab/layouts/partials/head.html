@@ -68,5 +68,14 @@
   {{ partial "seo/website.json.html" . }}
   {{ partial "seo/publications.json.html" . }}
 
+  <script>
+    (function() {
+      const storageKey = 'theme-preference';
+      const savedTheme = localStorage.getItem(storageKey);
+      const theme = savedTheme || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
   {{ block "head_extra" . }}{{ end }}
 </head>

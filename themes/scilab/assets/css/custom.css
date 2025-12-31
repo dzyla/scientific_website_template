@@ -79,7 +79,7 @@
 /* New Join Us CTA Bar */
 .join-cta-bar {
   grid-column: 1 / -1;
-  background: #ffffff;
+  background: var(--surface); /* Use surface instead of hardcoded white */
   border: 2px solid var(--accent); /* Gold border */
   border-radius: var(--radius-lg);
   padding: 1.5rem 2rem;
@@ -1208,4 +1208,221 @@
     padding: 0 0.25rem;
     border-radius: 4px;
     border-bottom: 2px solid var(--accent);
+}
+
+/* ==========================================================================
+   Dark Mode & Theme Toggle
+   ========================================================================== */
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  margin-left: 1rem; /* Space from menu */
+}
+
+.theme-toggle:hover {
+  background: var(--neutral-100);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: none; /* Hide both by default */
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  /* Recolor variables */
+  --text: #EAEAEA;
+  --muted: #A3A3A3;
+  --border: #333333;
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.5);
+  
+  --background: #121212;
+  --surface: #1E1E1E;
+  --surface-alt: #181818;
+  
+  --neutral-50: #252525;
+  --neutral-100: #333333;
+  --neutral-200: #404040;
+  
+  --accent: #D4AF37; /* Lighter gold */
+  --accent-soft: rgba(212, 175, 55, 0.15);
+  
+  --shadow-soft: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-medium: 0 10px 24px rgba(0,0,0,0.4);
+  --shadow-strong: 0 18px 48px rgba(0,0,0,0.5);
+
+  /* Specific overrides for elements that need it */
+  .contact-map iframe {
+    filter: invert(90%) hue-rotate(180deg) contrast(90%);
+  }
+}
+
+/* Icon Switching */
+[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+/* Default (before JS loads, prefer system) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-toggle .icon-moon { display: block; }
+  :root:not([data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
+}
+
+/* Ensure nav-menu flows horizontally on desktop */
+@media (min-width: 769px) {
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .theme-toggle {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    align-self: flex-start;
+  }
+}
+
+/* Dark mode overrides for hero */
+[data-theme="dark"] .hero-split-matte {
+  background-color: var(--background);
+}
+[data-theme="dark"] .hero-matte-overlay {
+  background: linear-gradient(90deg, 
+    var(--background) 50%, 
+    transparent 50%
+  );
+}
+[data-theme="dark"] .hero-lead {
+  color: var(--muted) !important;
+}
+[data-theme="dark"] .hero-link-tertiary {
+  color: var(--text);
+}
+/* Ensure hero container background on mobile is dark */
+@media (max-width: 992px) {
+  [data-theme="dark"] .hero-container {
+    background: var(--background);
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Component Overrides
+   ========================================================================== */
+
+/* Header & Nav */
+[data-theme="dark"] .header {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .header.is-condensed {
+  background: rgba(30, 30, 30, 0.95);
+  box-shadow: var(--shadow-1);
+}
+
+[data-theme="dark"] .logo a {
+  color: var(--text);
+}
+
+/* Mobile Nav Menu (Drawer) */
+@media (max-width: 768px) {
+  [data-theme="dark"] .nav-menu {
+    background: rgba(30, 30, 30, 0.98);
+    border-color: var(--border);
+    box-shadow: var(--shadow-medium);
+  }
+  [data-theme="dark"] .menu-link:hover {
+    background: var(--neutral-100);
+  }
+}
+
+/* News Widget */
+[data-theme="dark"] .news-card {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .news-tag {
+  background: var(--neutral-100);
+  color: var(--text);
+}
+
+[data-theme="dark"] .news-card-summary {
+  color: var(--muted);
+}
+
+/* General Cards (Subpages) - Ensure they use surface color */
+[data-theme="dark"] .research-topic,
+[data-theme="dark"] .research-project,
+[data-theme="dark"] .team-card,
+[data-theme="dark"] .resource-card,
+[data-theme="dark"] .alumni-card,
+[data-theme="dark"] .publication-list li {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+/* Join Us Positions */
+[data-theme="dark"] .join-position {
+  background: var(--surface-alt); /* Slightly distinct from main surface */
+  box-shadow: var(--shadow-1);
+}
+
+/* Footer Overrides */
+[data-theme="dark"] .footer {
+  background: var(--neutral-50);
+  color: var(--muted);
+  border-top: 1px solid #333; /* Dark mode separator */
+}
+[data-theme="dark"] .footer h4 {
+  color: var(--text);
+}
+[data-theme="dark"] .footer a {
+  color: var(--text);
+}
+[data-theme="dark"] .footer-bottom {
+  border-top-color: var(--border);
+  color: var(--muted);
+}
+[data-theme="dark"] .footer-logo p {
+  color: #E5E5E5 !important; /* Fix branding text visibility */
+}
+
+/* Resource Tags Dark Mode */
+[data-theme="dark"] .resource-pill {
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Hero Button Stacking Fix */
+.hero-buttons-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
 }

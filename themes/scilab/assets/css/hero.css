@@ -201,13 +201,14 @@
     min-height: auto;
     display: flex;
     margin-bottom: var(--s-lg);
+    padding-top: 4rem; /* Reduced from 6rem */
   }
 
   /* Image moves to top */
   .hero-bg-image {
       position: relative;
-      height: 40vh;
-      min-height: 300px;
+      height: 35vh; /* Slightly reduced height */
+      min-height: 250px;
       order: -1; /* Ensure it's first visually */
   }
 
@@ -220,7 +221,7 @@
 
   .hero-container {
       width: 100%;
-      padding: 3rem 1.5rem;
+      padding: 1.5rem 1.5rem; /* Reduced top/bottom padding */
       background: #fff; /* Solid background for text area */
   }
 

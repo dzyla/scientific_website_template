@@ -230,3 +230,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+/* ===========================================================================
+   Dark Mode Toggle
+   ========================================================================== */
+(() => {
+  const toggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+  const STORAGE_KEY = 'theme-preference';
+
+  const getTheme = () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return saved;
+    return 'light';
+  };
+
+  const setTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem(STORAGE_KEY, theme);
+  };
+
+  // Initialize
+  setTheme(getTheme());
+
+  // Listen for toggle
+  toggle?.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+  });
+
+  // Listen for system changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+})();
