@@ -595,8 +595,8 @@
   color: var(--muted);
   /* Top border separator */
   border-top: 1px solid #E5E7EB;
-  padding-top: 2rem;
-  margin-top: 2rem;
+  padding-top: 1rem;
+  margin-top: 1rem;
 }
 
 @media (max-width: 992px) {
@@ -1341,7 +1341,7 @@
 
 /* Add space between content and footer on all pages */
 .main {
-  padding-bottom: 5rem;
+  padding-bottom: 1rem;
 }
 
 /* Allow last contact section to have margin/spacing if needed, 
