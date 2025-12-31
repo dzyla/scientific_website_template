@@ -1,4 +1,8 @@
-# Papain Antibody Digestion Protocol
+---
+title: "Papain Antibody Digestion Protocol"
+date: 2023-01-01
+author: "Dawid Zyla"
+---
 
 This protocol details the steps for digesting 1 mg of immunoglobulin G (IgG) antibody using papain. It ensures efficient generation of Fab and Fc fragments with precise reagent concentrations and reaction conditions.
 
@@ -112,9 +116,10 @@ This protocol details the steps for digesting 1 mg of immunoglobulin G (IgG) a
 
 3. **Filter and Concentrate Fab Fragments**
    - **Procedure:**
-     1. Use centrifugal concentrator with **30 kDa MWCO filter** to remove Ionadacetamide. Wash with buffer of choice (HBS or PBS).
-     2. **Quality Check:** Measure absorbance at **280 nm (A₍₂₈₀₎)** to verify removal of iodoacetamide and assess Fab concentration. Should be ~60% of the original IgG concentration.
-     3. **Store:** Concentrated Fab fragments at **4°C**.
+     1. Use centrifugal concentrator with **30 kDa MWCO filter** to remove Iodoacetamide (or use dialysis).
+     2. Wash with buffer of choice (HBS or PBS).
+     3. **Quality Check:** Measure absorbance at **280 nm (A₍₂₈₀₎)** to verify removal of iodoacetamide and assess Fab concentration. Should be ~60% of the original IgG concentration.
+     4. **Store:** Concentrated Fab fragments at **4°C**.
 
 ---
 

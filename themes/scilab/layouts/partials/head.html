@@ -23,6 +23,11 @@
     <meta name="description" content="{{ . }}">
   {{ end }}
 
+  {{- $keywords := .Params.keywords | default .Site.Params.keywords -}}
+  {{- with $keywords -}}
+    <meta name="keywords" content="{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">
+  {{- end -}}
+
   {{ $ogImage := .Params.og_image | default .Params.image | default .Site.Params.social_image | default .Site.Params.organization_logo }}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">

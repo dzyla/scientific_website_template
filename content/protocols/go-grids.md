@@ -1,10 +1,8 @@
 ---
-title: "GO Grid Preparation Protocol"
+title: "Graphene Oxide (GO) Grid Preparation Protocol"
 date: 2023-01-01
 author: "Dawid Zyla"
 ---
-
-# **Graphene Oxide (GO) Grid Preparation Protocol**
 
 This protocol describes how to prepare **1-3 layers of semi-amorphous graphene oxide (GO)** on Quantifoil grids, suitable for cryo-EM. GO films demonstrate reduced inelastic scattering and lower background compared to amorphous carbon, which improves phase contrast for imaging smaller complexes. In addition, it allows working with lower protein concentration and avoid prefered orientation. This protocol ensures 40-80% coverage of GO after vitrification, with precise handling steps to minimize aggregation and variation in coverage.
 

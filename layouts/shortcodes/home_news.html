@@ -2,7 +2,7 @@
 {{- $heading := index $news "heading" | default "Latest News" -}}
 {{- $desc := index $news "description" | default "" -}}
 {{- $section := index $news "section" | default "news" -}}
-{{- $limit := index $news "limit" | default 3 -}} <!-- Limit to 3 for grid -->
+{{- $limit := index $news "limit" | default 10 -}} <!-- Limit to 10 for horizontal scroll -->
 {{- $showSummaries := index $news "showSummaries" | default true -}}
 
 <section class="home-news-widget" data-reveal>

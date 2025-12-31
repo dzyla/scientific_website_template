@@ -9,8 +9,12 @@ theme = "scilab"
   # overrides the text color when that accent is used on light backgrounds.
   highlightColor = "#8B6508"         # dark goldenrod/ochre for better contrast
   highlightTextColor = "#ffffff"     # white text on dark gold
-  description = "Structure-guided virology and biophysics"
-  tagline = "Structure-guided virology and biophysics"
+  description = "Structural Dynamics of Molecular Machines"
+  tagline = "Structural Dynamics of Molecular Machines"
+  keywords = ["Structural Biology", "Virology", "Biophysics", "Cryo-EM", "Measles Virus", "Protein Dynamics", "Zyla Lab", "University of Colorado Anschutz"]
+  social_image = "images/fectoFab_export2.png"
+  twitter_handle = "@DawidZyla"
+  
   ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
   # Use one or more verification tokens below after you register each service.
   verification_google = ""           # e.g., "abc123..."
@@ -25,10 +29,14 @@ theme = "scilab"
   contact_phone = "+1 (555) 123-4567"
   contact_hours = "Mon–Fri · 9:00–17:00 PT"
   scholar = "https://scholar.google.com/citations?user=dEGnzrwAAAAJ&hl=en"
-  orcid = ""
+  orcid = "https://orcid.org/0000-0001-8471-469X"
   github = "https://github.com/dzyla"
   linkedin = "https://www.linkedin.com/in/dawidzyla/"
   bluesky = "https://bsky.app/profile/dzyla.bsky.social"
+
+  [params.robots]
+    disallow_paths = []
+    allow_paths = ["/"]
 
   [params.address]
     building = "Research I South"

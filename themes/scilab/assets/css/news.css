@@ -23,25 +23,50 @@
 }
 
 .news-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    overflow-x: auto;
     gap: 1.5rem;
-    padding-bottom: 0;
+    padding-bottom: 1.5rem; /* Space for scrollbar */
+    padding-left: 1px; /* Avoid cropping box-shadow on first item */
+    padding-right: 1px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+}
+
+.news-grid::-webkit-scrollbar {
+    height: 6px;
+}
+.news-grid::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+.news-grid::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .news-card {
-    position: relative; /* For stretched link */
-    /* Removed flex fixed width */
-    height: 100%;
-    /* 4. Define the Cards (Separation) */
+    position: relative;
+    flex: 0 0 calc(33.333% - 1rem); /* Show 3 items minus gap */
+    min-width: 300px; /* Minimum width for readability */
+    height: auto; /* Let content dictate height, but align via flex stretch */
     background: #ffffff;
-    border: 1px solid #E5E7EB; /* Subtle definition */
-    border-radius: 8px; /* Small border radius per instruction */
-    padding: 24px; /* Increased padding */
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 24px;
     transition: all 0.2s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Requested shadow */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
+    scroll-snap-align: start;
+}
+
+/* Ensure equal height cards */
+.news-grid {
+    align-items: stretch; 
 }
 
 .news-card:hover {
@@ -138,13 +163,14 @@
     .home-news-widget {
         margin-top: 0;
     }
-    .news-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .news-card {
+        flex: 0 0 calc(50% - 1rem); /* Show 2 items */
     }
 }
 
 @media (max-width: 640px) {
-    .news-grid {
-        grid-template-columns: 1fr;
+    .news-card {
+        flex: 0 0 85%; /* Show 1 item with a peek of the next */
+        min-width: unset;
     }
 }
