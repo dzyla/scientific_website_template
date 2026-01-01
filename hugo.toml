@@ -14,6 +14,7 @@ theme = "scilab"
   keywords = ["Structural Biology", "Virology", "Biophysics", "Cryo-EM", "Measles Virus", "Protein Dynamics", "Zyla Lab", "University of Colorado Anschutz"]
   social_image = "images/fectoFab_export2.png"
   twitter_handle = "@DawidZyla"
+  author = "Dawid S. Zyla"
   
   ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
   # Use one or more verification tokens below after you register each service.
