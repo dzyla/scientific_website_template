@@ -1,5 +1,5 @@
 ---
-title: "Bio Lab"
+title: "Zyla Lab"
 ---
 {{< home_hero >}}
 
