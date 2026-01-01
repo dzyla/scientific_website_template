@@ -4,8 +4,6 @@ title: "Philosophy"
 
 We are a data-driven lab built on scientific rigor and mutual respect. Our goal is to create an environment where scientists at every level, from students to specialists, can pursue thoughtful, careful research. We believe that true support comes from clear expectations, constructive feedback, and a shared commitment to excellence.
 
-Our culture relies on a shared commitment to excellence and mutual respect.
-
 ## What Anchors Our Lab
 
 {{< philosophy_grid >}}
