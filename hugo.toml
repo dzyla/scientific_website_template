@@ -15,12 +15,12 @@ theme = "scilab"
   social_image = "images/fectoFab_export2.png"
   twitter_handle = "@DawidZyla"
   author = "Dawid S. Zyla"
-  
-  ga4MeasurementID = "G-XXXXXXXXXX"  # set your GA4 ID here
+
+  ga4MeasurementID = "G-22NWJXHMQX"  # set your GA4 ID here
   # Use one or more verification tokens below after you register each service.
-  verification_google = ""           # e.g., "abc123..."
-  verification_bing = ""             # e.g., "BingSiteAuthCode"
-  verification_yandex = ""           # optional
+  verification_google = "Vz7Gl-n9zkRCK3_l9C9CIi_8NGHjg_BzTH-z7jQwHSY"           # e.g., "abc123..."
+  verification_bing = "61B74CA254AA5A274DBB1A3E21C33827"             # e.g., "BingSiteAuthCode"
+  verification_yandex = "08f69a50ba6c41ce"           # optional
   organization_name = "Zyla Lab"
   organization_logo = "/favicon.svg"
   organization_url  = "https://zylalab.org/"
