@@ -71,28 +71,11 @@ const initUI = () => {
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
 
-  /* ===== Reveal on scroll =================================================== */
+  /* ===== Reveal on scroll (Disabled) ======================================== */
+  /* Content is now always visible by default to prevent loading issues. */
   const revealTargets = document.querySelectorAll('[data-reveal]');
   if (revealTargets.length) {
-    runWhenStylesReady(() => {
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-revealed');
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
-
-        revealTargets.forEach((el) => {
-          el.classList.add('reveal');
-          observer.observe(el);
-        });
-      } else {
-        revealTargets.forEach((el) => el.classList.add('is-revealed'));
-      }
-    });
+    revealTargets.forEach((el) => el.classList.add('is-revealed'));
   }
 
   const hoverCards = document.querySelectorAll('.research-topic, .research-project, .resource-card, .publication-card, .alumni-card, .join-position, .contact-card, .team-card');
