@@ -27,7 +27,7 @@
         <h2>{{ .Title }}</h2>
         {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
         {{ with .Params.email }}
-          <p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>
+          <p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>
         {{ end }}
         <div class="content">{{ .Content }}</div>
       </div>
@@ -59,7 +59,7 @@
         <div class="team-info">
           <h3>{{ .Title }}</h3>
           {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
-          {{ with .Params.email }}<p class="email"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+          {{ with .Params.email }}<p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>{{ end }}
           <div class="content">{{ .Content }}</div>
         </div>
       </article>

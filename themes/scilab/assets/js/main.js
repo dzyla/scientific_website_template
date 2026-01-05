@@ -250,3 +250,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 })();
+
+/* ===========================================================================
+   Email Obfuscation
+   ========================================================================== */
+const initEmailObfuscation = () => {
+  document.querySelectorAll('.__cf_email__').forEach(el => {
+    try {
+      const email = atob(el.dataset.cfemail);
+      const display = el.dataset.display || email;
+
+      if (el.tagName === 'A') {
+        el.href = 'mailto:' + email;
+        if (el.innerHTML.includes('[email]')) {
+          el.innerHTML = el.innerHTML.replace('[email]', email);
+        }
+        el.removeAttribute('data-cfemail');
+        el.removeAttribute('data-display');
+        el.classList.remove('__cf_email__');
+      } else {
+        const a = document.createElement('a');
+        a.href = 'mailto:' + email;
+        a.textContent = display;
+        a.className = el.className;
+        a.classList.remove('__cf_email__');
+        el.replaceWith(a);
+      }
+    } catch (e) {
+      console.error('Email obfuscation failed', e);
+    }
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEmailObfuscation);
+} else {
+  initEmailObfuscation();
+}

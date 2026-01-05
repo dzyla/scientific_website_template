@@ -99,10 +99,9 @@
         <ul class="footer-contact">
           {{ with .Site.Params.contact_email }}
             <li>
-              <a class="footer-link" href="mailto:{{ . }}">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span>{{ . }}</span>
-              </a>
+              {{ $icon := `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>` }}
+              {{ $content := printf "%s<span>[email]</span>" $icon }}
+              {{ partial "email-obfuscator.html" (dict "address" . "class" "footer-link" "display" $content) }}
             </li>
           {{ end }}
           {{ with .Site.Params.contact_phone }}

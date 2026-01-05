@@ -28,7 +28,7 @@
       <p class="join-cta-text">
         {{ $data.cta.text | markdownify }}
       </p>
-      <a class="btn-primary-gold" href="mailto:{{ $contactEmail }}">Apply Now</a>
+      {{ partial "email-obfuscator.html" (dict "address" $contactEmail "display" "Apply Now" "class" "btn-primary-gold") }}
     </div>
   </section>
 {{- end -}}
