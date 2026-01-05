@@ -8,7 +8,7 @@ topics:
   - title: "Capturing Transient States"
     description: "Proteins are not static structures. We track the fleeting conformational changes—from prefusion to postfusion—to understand how molecular machines perform work."
   - title: "Developing next-gen tools"
-    description: "We engineer novel antibody probes and native-membrane environments (eVLPs) to trap specific protein states, creating better platforms for structure-based drug design."
+    description: "We engineer novel antibody probes and native-membrane environments (VLPs) to trap specific protein states, creating better platforms for structure-based drug design."
 
 projects:
   title: "Our Research Focus"
