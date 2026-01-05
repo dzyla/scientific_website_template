@@ -1,0 +1,10 @@
+{{ $address := .address }}
+{{ $display := .display | default $address }}
+{{ $class := .class | default "" }}
+{{ $is_email_text := eq $display $address }}
+
+{{ if $is_email_text }}
+<span class="__cf_email__ {{ $class }}" data-cfemail="{{ $address | base64Encode }}"></span>
+{{ else }}
+<a href="#" class="__cf_email__ {{ $class }}" data-cfemail="{{ $address | base64Encode }}" data-display="{{ $display }}">{{ $display | safeHTML }}</a>
+{{ end }}

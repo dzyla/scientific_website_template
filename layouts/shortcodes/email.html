@@ -1,0 +1,5 @@
+{{ if .IsNamedParams }}
+  {{ partial "email-obfuscator.html" (dict "address" (.Get "address") "display" (.Get "display")) }}
+{{ else }}
+  {{ partial "email-obfuscator.html" (dict "address" (.Get 0)) }}
+{{ end }}
