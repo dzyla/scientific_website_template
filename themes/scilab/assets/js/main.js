@@ -262,6 +262,9 @@ const initEmailObfuscation = () => {
 
       if (el.tagName === 'A') {
         el.href = 'mailto:' + email;
+        if (el.innerHTML.includes('[email]')) {
+          el.innerHTML = el.innerHTML.replace('[email]', email);
+        }
         el.removeAttribute('data-cfemail');
         el.removeAttribute('data-display');
         el.classList.remove('__cf_email__');
