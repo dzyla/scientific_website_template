@@ -8,7 +8,7 @@ topics:
   - title: "Capturing Transient States"
     description: "Proteins are not static structures. We track the fleeting conformational changes—from prefusion to postfusion—to understand how molecular machines perform work."
   - title: "Developing next-gen tools"
-    description: "We engineer novel antibody probes and native-membrane environments (VLPs) to trap specific protein states, creating better platforms for structure-based drug design."
+    description: "We engineer novel antibody probes and use native-membrane environments (VLPs) to trap specific protein states, creating better platforms for structure-based drug design."
 
 projects:
   title: "Our Research Focus"
@@ -22,6 +22,6 @@ projects:
       image: "images/chaos_vc_FPOST_charcoal.png"
       caption: "Capturing the dynamic steps of viral fusion"
     - title: "Structure-Guided Therapeutic Design"
-      summary: "By understanding the natural shape-shifting of viral proteins, we use AI and structural insights to design smarter vaccines and potent fusion-arresting antibodies."
+      summary: "We leverage our understanding of viral conformational dynamics to engineer next-generation therapeutics. Using AI and structural insights, we design vaccines and antibodies that precisely target and arrest viral fusion."
       image: "images/chaos_vc_FECTO2M__ink.png"
       caption: "Structure-based design of new therapeutics"
