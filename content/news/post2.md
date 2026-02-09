@@ -1,5 +1,5 @@
 ---
-title: "Posdoc position available"
+title: "Postdoc position available"
 date: 2026-02-05
 draft: false
 tags: ["hiring"]
