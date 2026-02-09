@@ -19,6 +19,11 @@
                 {{ range . }}<li>{{ . }}</li>{{ end }}
               </ul>
             {{ end }}
+            {{ if .apply_link }}
+              <div style="margin-top: 1rem;">
+                <a href="{{ .apply_link }}" class="btn-primary-gold" target="_blank" rel="noopener noreferrer">Apply Now</a>
+              </div>
+            {{ end }}
           </div>
         {{ end }}
       </div>
@@ -28,7 +33,7 @@
       <p class="join-cta-text">
         {{ $data.cta.text | markdownify }}
       </p>
-      {{ partial "email-obfuscator.html" (dict "address" $contactEmail "display" "Apply Now" "class" "btn-primary-gold") }}
+      {{ partial "email-obfuscator.html" (dict "address" $contactEmail "display" "Contact Us" "class" "btn-primary-gold") }}
     </div>
   </section>
 {{- end -}}
