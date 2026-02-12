@@ -18,7 +18,7 @@ resources:
     category: "GitHub Repository"
     description: "Browser-based tool to monitor RELION jobs"
   - title: "Semantic Manuscript Search"
-    url: "https://mssearch.xyz/"
+    url: "https://www.manuscript-search.org/"
     category: "Website"
     description: "Search scientific manuscripts using abstracts, titles and ideas."
 ---
