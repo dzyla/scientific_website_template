@@ -25,6 +25,9 @@
     
     {{- $authors := split ( $p.authors | plainify ) ";" -}}
     {{- $hl := $p.highlight | default slice -}}
+    {{- $citeAuthors := replace $p.authors ";" "," -}}
+    {{- $citeStr := printf "%s (%v). %s. %s." $citeAuthors $p.year ($p.title | plainify) ($p.journal | plainify) -}}
+    {{- if $p.link -}}{{- $citeStr = printf "%s %s" $citeStr $p.link -}}{{- end -}}
     <article class="publication-card">
       <div class="publication-sidebar">
          <!-- Removed sticky year since we have headers now -->
@@ -32,6 +35,10 @@
       <div class="publication-content">
         <header class="publication-header">
            <span class="publication-journal">{{ $p.journal | plainify }}</span>
+           <button class="pub-copy-btn" aria-label="Copy citation to clipboard" data-citation="{{ $citeStr }}">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+             <span class="pub-copy-label">Cite</span>
+           </button>
         </header>
         <h3 class="publication-title">
             {{- if $p.link -}}

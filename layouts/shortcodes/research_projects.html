@@ -7,8 +7,15 @@
     {{- range .items -}}
       <article class="research-project">
         <div class="project-media">
-          {{- $img := .image | relURL -}}
-          <img src="{{ $img }}" alt="{{ .caption | default .title }}">
+          {{- $imgPath := .image -}}
+          {{- $imgRes := resources.GetMatch $imgPath -}}
+          {{- if $imgRes -}}
+            {{- $imgRes = $imgRes.Resize "900x webp q85" -}}
+            <img src="{{ $imgRes.RelPermalink }}" alt="{{ .caption | default .title }}"
+                 width="{{ $imgRes.Width }}" height="{{ $imgRes.Height }}" loading="lazy">
+          {{- else -}}
+            <img src="{{ $imgPath | relURL }}" alt="{{ .caption | default .title }}" loading="lazy">
+          {{- end -}}
         </div>
         <div class="project-body">
           <h3>{{ .title }}</h3>

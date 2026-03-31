@@ -28,7 +28,18 @@
     <meta name="keywords" content="{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">
   {{- end -}}
 
-  {{ $ogImage := .Params.og_image | default .Params.image | default .Site.Params.social_image | default .Site.Params.organization_logo }}
+  {{/* Resolve og:image through asset pipeline so the correct served URL is used */}}
+  {{ $ogImagePath := .Params.og_image | default .Params.image | default .Site.Params.social_image | default .Site.Params.organization_logo }}
+  {{ $ogImage := "" }}
+  {{ with $ogImagePath }}
+    {{ $res := resources.GetMatch . }}
+    {{ if $res }}
+      {{ $res = $res.Resize "1200x" }}
+      {{ $ogImage = $res.Permalink }}
+    {{ else }}
+      {{ $ogImage = . | absURL }}
+    {{ end }}
+  {{ end }}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,8 +69,8 @@
     <meta name="twitter:description" content="{{ . | plainify }}">
   {{ end }}
   {{ with $ogImage }}
-    <meta property="og:image" content="{{ . | absURL }}">
-    <meta name="twitter:image" content="{{ . | absURL }}">
+    <meta property="og:image" content="{{ . }}">
+    <meta name="twitter:image" content="{{ . }}">
   {{ end }}
   <meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
   {{ with .Site.Params.twitter_handle }}<meta name="twitter:site" content="{{ . }}">{{ end }}

@@ -1,30 +1,4 @@
-{{/* Minimal contact layout: left column info, right column map, below: quick actions. */}}
-
-{{- $building := .Get "building" | default site.Params.address.building | default "" -}}
-{{- $department := .Get "department" | default site.Params.address.department | default "" -}}
-{{- $institution := .Get "institution" | default site.Params.address.institution | default "" -}}
-{{- $street := .Get "street" | default site.Params.address.street | default "" -}}
-{{- $city := .Get "city" | default site.Params.address.city | default "" -}}
-{{- $state := .Get "state" | default site.Params.address.state | default "" -}}
-{{- $zip := .Get "zip" | default site.Params.address.zip | default "" -}}
-{{- $country := .Get "country" | default site.Params.address.country | default "" -}}
-
-{{- $addrLine := printf "%s, %s, %s %s" $street $city $state $zip -}}
-{{- $gmapsQuery := $addrLine | urlquery -}}
-{{- $gmapsEmbed := printf "https://www.google.com/maps?q=%s&output=embed" $gmapsQuery -}}
-{{- $gmapsDir := printf "https://www.google.com/maps/dir/?api=1&destination=%s" $gmapsQuery -}}
-
-{{- $email := .Get "email" | default site.Params.contact_email | default "hello@biolab.example" -}}
-{{- $phone := .Get "phone" | default site.Params.contact_phone | default "+1 (555) 123-4567" -}}
-{{- $officeHours := .Get "hours" | default site.Params.contact_hours | default "Mon–Fri · 9:00–17:00 PT" -}}
-
-{{- $scholar := .Get "scholar" | default site.Params.scholar | default "" -}}
-{{- $orcid := .Get "orcid" | default site.Params.orcid | default "" -}}
-{{- $github := .Get "github" | default site.Params.github | default "" -}}
-{{- $bluesky := .Get "bluesky" | default site.Params.bluesky | default "" -}}
-{{- $linkedin := .Get "linkedin" | default site.Params.linkedin | default "" -}}
-
-{{/* Minimal contact layout: left column info, right column map, below: quick actions. */}}
+{{/* Contact section: map, address, reach-out, and research profiles. */}}
 
 {{- $building := .Get "building" | default site.Params.address.building | default "" -}}
 {{- $department := .Get "department" | default site.Params.address.department | default "" -}}

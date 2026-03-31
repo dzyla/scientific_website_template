@@ -14,13 +14,23 @@
 }
 
 .news-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    display: none; /* Hide header if visual design implies implicit "Latest" */
-    visibility: hidden;
-    height: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0 1px;
+}
+.news-header h2 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    font-family: var(--font-headers);
     margin: 0;
 }
+/* Hide the verbose description — eyebrow label is enough */
+.news-header p { display: none; }
 
 .news-grid {
     display: flex;

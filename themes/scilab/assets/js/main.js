@@ -58,6 +58,21 @@ const initUI = () => {
   (mq.addEventListener ? mq.addEventListener('change', () => mq.matches && closeMenu())
                        : mq.addListener(() => mq.matches && closeMenu()));
 
+  /* ===== Reading progress bar ============================================== */
+  const progressBar = document.getElementById('reading-progress');
+  if (progressBar) {
+    const updateProgress = () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      if (total > 200) {
+        progressBar.classList.add('is-active');
+        progressBar.style.width = Math.min(100, (scrolled / total) * 100) + '%';
+      }
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
   /* ===== Header + back-to-top behaviour ==================================== */
   const handleScrollState = () => {
     const y = window.scrollY || window.pageYOffset;
@@ -71,11 +86,23 @@ const initUI = () => {
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   });
 
-  /* ===== Reveal on scroll (Disabled) ======================================== */
-  /* Content is now always visible by default to prevent loading issues. */
+  /* ===== Scroll reveal via IntersectionObserver ============================ */
   const revealTargets = document.querySelectorAll('[data-reveal]');
   if (revealTargets.length) {
-    revealTargets.forEach((el) => el.classList.add('is-revealed'));
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      revealTargets.forEach(el => el.classList.add('will-reveal'));
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealTargets.forEach(el => revealObserver.observe(el));
+    } else {
+      revealTargets.forEach(el => el.classList.add('is-revealed'));
+    }
   }
 
   const hoverCards = document.querySelectorAll('.research-topic, .research-project, .resource-card, .publication-card, .alumni-card, .join-position, .contact-card, .team-card');
@@ -286,4 +313,41 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initEmailObfuscation);
 } else {
   initEmailObfuscation();
+}
+
+/* ===========================================================================
+   Copy Citation
+   =========================================================================== */
+const initCitationCopy = () => {
+  document.querySelectorAll('.pub-copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.citation;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      const label = btn.querySelector('.pub-copy-label');
+      btn.classList.add('is-copied');
+      if (label) label.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.classList.remove('is-copied');
+        if (label) label.textContent = 'Cite';
+      }, 2000);
+    });
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCitationCopy);
+} else {
+  initCitationCopy();
 }

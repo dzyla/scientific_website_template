@@ -2,8 +2,10 @@
 <html lang="{{ .Site.LanguageCode }}">
     {{ partial "head.html" . }}
     <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <div id="reading-progress" class="reading-progress" role="progressbar" aria-hidden="true"></div>
         {{ partial "header.html" . }}
-        <main class="main">
+        <main id="main-content" class="main">
             <div class="container">
                 {{ block "main" . }}{{ end }}
             </div>

@@ -54,15 +54,11 @@
 .hero-matte-overlay {
     position: absolute;
     inset: 0;
-    
-    /* 4. FIX THE STRIPE ARTIFACT */
-    /* Previously 120px - change to 0 to match the image */
-    bottom: 0; 
-    
+    bottom: 0;
     z-index: 1;
-    /* 80% White Split: Covers left 50% with 80% opacity */
-    background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0.90) 50%, 
+    /* Hard 50% split: semi-transparent so a sliver of image bleeds through */
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.90) 50%,
         transparent 50%
     );
     pointer-events: none;
@@ -140,11 +136,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.9rem 2.2rem;
-    border-radius: var(--radius-sm); /* Slightly squarer modern look */
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-decoration: none;
+    white-space: nowrap;
     transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     letter-spacing: 0.01em;

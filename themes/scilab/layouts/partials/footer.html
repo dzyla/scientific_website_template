@@ -10,12 +10,23 @@
       <!-- COL 1: BRANDING -->
       <div class="footer-col branding-col">
         <div class="footer-logo">
-           <a href="https://medschool.cuanschutz.edu/biochemistry" target="_blank" rel="noopener">
-             <img src="{{ "images/cuanschutz_h_clr.tmb-ze-450-450.png" | relURL }}" alt="CU Anschutz Logo" style="max-width: 200px; height: auto;">
-           </a>
-           <p style="font-size: 0.85rem; color: #1A1A1A; margin-top: 0.75rem; line-height: 1.4; font-weight: 500;">
-             Department of Biochemistry and Molecular Genetics
-           </p>
+          {{ with .Site.Params.institution_logo }}
+            {{ $instURL := $.Site.Params.institution_url | default "#" }}
+            {{ $instName := $.Site.Params.institution_name | default "Institution" }}
+            {{ $logoRes := resources.GetMatch . }}
+            <a href="{{ $instURL }}" target="_blank" rel="noopener">
+              {{ if $logoRes }}
+                {{ $logoRes = $logoRes.Resize "400x webp q90" }}
+                <img src="{{ $logoRes.RelPermalink }}" alt="{{ $instName }} Logo" class="institution-logo"
+                     width="{{ $logoRes.Width }}" height="{{ $logoRes.Height }}">
+              {{ else }}
+                <img src="{{ . | relURL }}" alt="{{ $instName }} Logo" class="institution-logo">
+              {{ end }}
+            </a>
+          {{ end }}
+          {{ with .Site.Params.institution_department }}
+            <p class="institution-dept">{{ . }}</p>
+          {{ end }}
         </div>
       </div>
 

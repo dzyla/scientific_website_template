@@ -1,3 +1,96 @@
+/* ========== Reading progress bar ========================================= */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--highlight-color);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.reading-progress.is-active {
+  opacity: 1;
+}
+
+/* ========== Copy citation button ========================================= */
+.pub-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-family: var(--font-headers);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
+}
+.pub-copy-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.pub-copy-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.pub-copy-btn.is-copied {
+  border-color: #16a34a;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
+}
+
+/* ========== News "View all" link ========================================= */
+.news-view-all {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-headers);
+  letter-spacing: 0.04em;
+  color: var(--highlight-color);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: gap 0.2s ease;
+  white-space: nowrap;
+}
+.news-view-all:hover {
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+/* ========== Skip to content link (accessibility) ========================= */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--s-md);
+  background: var(--text);
+  color: var(--background);
+  padding: var(--s-sm) var(--s-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-family: var(--font-headers);
+  font-size: 0.9rem;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.15s ease;
+  white-space: nowrap;
+}
+.skip-link:focus {
+  top: var(--s-md);
+}
+
 /* Contact page containers */
 .contact-section {
   margin: var(--s-xl) 0;
@@ -525,6 +618,140 @@
   text-decoration: underline;
 }
 
+/* ========== Post tags (taxonomy terms) =================================== */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--s-sm);
+}
+.post-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: var(--neutral-100);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.post-tag:hover {
+  color: var(--highlight-color);
+  border-color: var(--highlight-color);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+/* ========== Single Page / Post layout ==================================== */
+.post-header {
+  margin-bottom: var(--s-xl);
+  padding-bottom: var(--s-lg);
+  border-bottom: 1px solid var(--border);
+}
+.post-header h1 {
+  margin: 0 0 var(--s-sm);
+}
+.post-date {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-family: var(--font-headers);
+  display: block;
+  margin-top: var(--s-xs);
+}
+
+/* ========== Prose typography for content pages =========================== */
+.prose {
+  max-width: 72ch;
+  line-height: 1.8;
+}
+.prose h2 {
+  margin-top: var(--s-2xl);
+  padding-bottom: var(--s-xs);
+  border-bottom: 1px solid var(--border);
+}
+.prose h3 { margin-top: var(--s-xl); }
+.prose a {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent-soft);
+  text-underline-offset: 3px;
+}
+.prose a:hover {
+  text-decoration-color: var(--accent);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+  display: grid;
+  gap: 0.35em;
+  margin: var(--s-md) 0;
+}
+.prose img {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-medium);
+  margin: var(--s-xl) auto;
+  max-width: 100%;
+}
+.prose blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: var(--s-lg);
+  margin-left: 0;
+  color: var(--muted);
+  font-style: italic;
+}
+.prose code {
+  background: var(--neutral-100);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.875em;
+}
+.prose pre {
+  background: var(--neutral-100);
+  border-radius: var(--radius-md);
+  padding: var(--s-lg);
+  overflow-x: auto;
+  margin: var(--s-lg) 0;
+  border: 1px solid var(--border);
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--s-lg) 0;
+  font-size: 0.95rem;
+}
+.prose th, .prose td {
+  padding: var(--s-sm) var(--s-md);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.prose th {
+  font-weight: 700;
+  font-family: var(--font-headers);
+  background: var(--neutral-50);
+}
+
+/* Institution logo in footer */
+.institution-logo {
+  max-width: 200px;
+  height: auto;
+}
+.institution-dept {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.75rem 0 0;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
 /* Footer enhancements */
 .footer {
   background: var(--surface-alt);
@@ -725,18 +952,19 @@
   outline-offset: 3px;
 }
 
-/* Reveal animations - Disabled for reliability */
-[data-reveal] {
-  /* Animation removed */
+/* Scroll reveal animations (enabled via IntersectionObserver in main.js) */
+[data-reveal].will-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
-[data-reveal].reveal {
-  /* Animation removed */
-}
-[data-reveal].is-revealed {
-  /* Animation removed */
+[data-reveal].will-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
+  [data-reveal].will-reveal {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -998,19 +1226,21 @@
 
 .publication-card {
   border: 0;
+  border-left: 3px solid transparent;
   border-radius: var(--radius-lg);
   padding: var(--s-lg);
   background: var(--surface);
   box-shadow: var(--shadow-1);
   display: grid;
-  grid-template-columns: 1fr; /* Full width content */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-  transition: box-shadow .2s ease, transform .2s ease;
+  transition: box-shadow .2s ease, transform .2s ease, border-left-color .2s ease;
 }
 .publication-card:hover,
 .publication-card:focus-within {
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.12);
   transform: translateY(-2px);
+  border-left-color: var(--accent);
 }
 /* Removed sidebar styles */
 .publication-sidebar {
@@ -1245,31 +1475,27 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  /* Recolor variables */
   --text: #EAEAEA;
   --muted: #A3A3A3;
   --border: #333333;
   --shadow-1: 0 1px 3px rgba(0,0,0,0.5);
-  
+
   --background: #121212;
   --surface: #1E1E1E;
   --surface-alt: #181818;
-  
+
   --neutral-50: #252525;
   --neutral-100: #333333;
   --neutral-200: #404040;
-  
-  --accent: #D4AF37; /* Lighter gold */
+
+  --accent: #D4AF37;
   --accent-soft: rgba(212, 175, 55, 0.15);
-  
+  /* Use a lighter gold so highlight text stays legible on dark backgrounds */
+  --highlight-color: #D4AF37;
+
   --shadow-soft: 0 4px 12px rgba(0,0,0,0.3);
   --shadow-medium: 0 10px 24px rgba(0,0,0,0.4);
   --shadow-strong: 0 18px 48px rgba(0,0,0,0.5);
-
-  /* Specific overrides for elements that need it */
-  .contact-map iframe {
-    filter: invert(90%) hue-rotate(180deg) contrast(90%);
-  }
 }
 
 /* Icon Switching */
@@ -1313,8 +1539,8 @@
   background-color: var(--background);
 }
 [data-theme="dark"] .hero-matte-overlay {
-  background: linear-gradient(90deg, 
-    rgba(18, 18, 18, 0.9) 50%, 
+  background: linear-gradient(90deg,
+    rgba(18, 18, 18, 0.92) 50%,
     transparent 50%
   );
 }
@@ -1323,13 +1549,6 @@
 .hero-split-matte {
   padding-top: 3rem;
   padding-bottom: 8rem; /* Increased from 4rem to add space before news */
-}
-
-/* Make buttons smaller to fit in one row */
-.hero-btn {
-  padding: 0.75rem 1.25rem;
-  font-size: 0.95rem;
-  white-space: nowrap; /* Prevent text wrapping inside button */
 }
 
 /* Ensure buttons stay on one row on larger screens */
@@ -1451,9 +1670,3 @@
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Hero Button Stacking Fix */
-.hero-buttons-row {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
-}

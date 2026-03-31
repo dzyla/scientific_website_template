@@ -1,16 +1,25 @@
-# Hugo configuration file
-baseURL = "https://zylalab.org/"
+# ============================================================
+# Hugo configuration — SciLab theme
+# Template: replace every value tagged [TEMPLATE] with your
+# own lab's information. Remove or comment out any optional
+# sections your lab doesn't need.
+# ============================================================
+
+baseURL = "https://zylalab.org/"          # [TEMPLATE] your site URL
 languageCode = "en-us"
-title = "Zyla Lab"
+title = "Zyla Lab"                         # [TEMPLATE] your lab name
 theme = "scilab"
 
 [params]
-  # Highlight palette: `highlightColor` drives borders/buttons; `highlightTextColor`
-  # overrides the text color when that accent is used on light backgrounds.
-  highlightColor = "#8B6508"         # dark goldenrod/ochre for better contrast
-  highlightTextColor = "#ffffff"     # white text on dark gold
-  description = "Structural Dynamics of Molecular Machines"
-  tagline = "Structural Dynamics of Molecular Machines"
+  # ── Accent color ──────────────────────────────────────────
+  # highlightColor drives nav active-state, buttons, and links.
+  # Choose a color that meets WCAG AA contrast on white (#fff).
+  highlightColor = "#8B6508"         # [TEMPLATE] dark goldenrod/ochre
+  highlightTextColor = "#ffffff"     # text color when used as button bg
+
+  # ── Basic identity ────────────────────────────────────────
+  description = "Structural Dynamics of Molecular Machines"  # [TEMPLATE]
+  tagline = "Structural Dynamics of Molecular Machines"       # [TEMPLATE]
   keywords = ["Structural Biology", "Virology", "Biophysics", "Cryo-EM", "Measles Virus", "Protein Dynamics", "Zyla Lab", "University of Colorado Anschutz"]
   social_image = "images/fectoFab_export2.png"
   twitter_handle = "@DawidZyla"
@@ -24,6 +33,11 @@ theme = "scilab"
   organization_name = "Zyla Lab"
   organization_logo = "/favicon.svg"
   organization_url  = "https://zylalab.org/"
+  # Institution shown in footer branding column
+  institution_name = "University of Colorado Anschutz"
+  institution_department = "Department of Biochemistry and Molecular Genetics"
+  institution_url = "https://medschool.cuanschutz.edu/biochemistry"
+  institution_logo = "images/cuanschutz_h_clr.tmb-ze-450-450.png"
   joinURL = "/contact/"
   joinLabel = "Join us"
   contact_email = "dawid.zyla@cuanschutz.edu"

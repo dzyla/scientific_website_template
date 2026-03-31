@@ -7,11 +7,22 @@
 {{- if gt (len $images) 0 }}
   <div class="carousel" role="region" aria-label="{{ $aria }}" data-carousel="{{ $dataAttr }}">
     {{- range $i, $path := $images }}
-      {{- $src := cond (or (hasPrefix $path "http://") (hasPrefix $path "https://")) $path ($path | relURL) -}}
+      {{- $src := "" -}}
+      {{- if or (hasPrefix $path "http://") (hasPrefix $path "https://") -}}
+        {{- $src = $path -}}
+      {{- else -}}
+        {{- $res := resources.GetMatch $path -}}
+        {{- if $res -}}
+          {{- $res = $res.Resize "1600x webp q85" -}}
+          {{- $src = $res.RelPermalink -}}
+        {{- else -}}
+          {{- $src = $path | relURL -}}
+        {{- end -}}
+      {{- end -}}
       <img
         src="{{ $src | safeURL }}"
         alt="{{ printf "%s %d" $altPrefix (add $i 1) }}"
-        loading="lazy"
+        loading="{{ if eq $i 0 }}eager{{ else }}lazy{{ end }}"
         {{- if eq $i 0 }} class="active"{{ end }}
       >
     {{- end }}

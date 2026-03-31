@@ -136,7 +136,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .logo-mark {
-  height: 3.5rem; /* Restrict logo height */
+  height: 3.5rem;
   width: auto;
   object-fit: contain;
 }
@@ -216,6 +216,23 @@ hr {
   background: var(--highlight-color);
   margin: var(--s-sm) 0 var(--s-lg);
   border-radius: 2px;
+}
+
+/* Eyebrow labels above section headings */
+.section-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-family: var(--font-headers);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--highlight-color);
+  margin-bottom: var(--s-sm);
+}
+
+/* Single-page section padding */
+.post.section {
+  padding-block: var(--s-2xl);
 }
 
 /* ========== Team ========================================================== */
