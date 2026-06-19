@@ -351,3 +351,31 @@ if (document.readyState === 'loading') {
 } else {
   initCitationCopy();
 }
+
+/* ===========================================================================
+   Team Bio Expand/Collapse
+   =========================================================================== */
+const initTeamBioToggles = () => {
+  document.querySelectorAll('.team-bio-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.team-info');
+      const bio = card?.querySelector('[data-team-bio]');
+      const rest = bio?.querySelector('.team-bio-rest');
+      const ellipsis = bio?.querySelector('.team-bio-ellipsis');
+      if (!rest || !ellipsis) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      btn.textContent = expanded ? 'Read more' : 'Read less';
+      rest.hidden = expanded;
+      ellipsis.hidden = !expanded;
+      bio.classList.toggle('is-expanded', !expanded);
+    });
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTeamBioToggles);
+} else {
+  initTeamBioToggles();
+}
