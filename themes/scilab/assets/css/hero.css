@@ -260,3 +260,17 @@
 .nav-prev { display: none; }
 .nav-next { right: 1.5rem; }
 .nav-btn svg { width: 24px; height: 24px; stroke-width: 2.5; }
+
+/* Play/pause control — pinned bottom-right, stays reachable on touch */
+.nav-play {
+  top: auto;
+  bottom: 1rem;
+  right: 1rem;
+  transform: none;
+  padding: 0.5rem;
+}
+.nav-play:hover { transform: scale(1.1); }
+.nav-play svg { width: 18px; height: 18px; }
+@media (max-width: 768px) {
+  .nav-play { display: flex !important; }
+}

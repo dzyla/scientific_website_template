@@ -1,65 +1,77 @@
 {{/*
-  Renders publications from data/publications.json
-  Usage: {{< publications >}}
-  Expected fields per item: title, authors (comma-separated string),
-  journal, year, link (optional), image (optional), highlight (array of names)
+  Renders publications from data/publications.json as a numbered,
+  year-grouped academic reference list.
+  Expected fields per item: title, authors (";"-separated string),
+  journal, year, link (optional), highlight (array of names), summary (optional)
 */}}
 
 {{- $pubs := site.Data.publications -}}
 {{- if not $pubs -}}
   {{- errorf "Could not find publications data in data/publications.json." -}}
 {{- else -}}
-<section class="publications-section" data-reveal>
-  <div class="publications-grid">
+{{- $sorted := sort $pubs "year" "desc" -}}
+<section class="publications">
   {{- $lastYear := "" -}}
-  {{- range sort $pubs "year" "desc" -}}
+  {{- range $sorted -}}
     {{- $p := . -}}
     {{- $currentYear := $p.year -}}
-    
+
     {{- if ne $currentYear $lastYear -}}
-        {{- if ne $lastYear "" -}}</div>{{- end -}} <!-- Close previous group if not first -->
-        <h2 class="publication-year-heading">{{ $currentYear }}</h2>
-        <div class="publication-year-group">
-        {{- $lastYear = $currentYear -}}
+      {{- if ne $lastYear "" -}}</ol></div>{{- end -}}
+      {{- $count := len (where $sorted "year" $currentYear) -}}
+      <div class="pub-group" data-reveal>
+        <h2 class="pub-year-head">
+          <span class="pub-year">{{ $currentYear }}</span>
+          <span class="pub-count">{{ $count }} {{ cond (eq $count 1) "paper" "papers" }}</span>
+        </h2>
+        <ol class="pub-list">
+      {{- $lastYear = $currentYear -}}
     {{- end -}}
-    
-    {{- $authors := split ( $p.authors | plainify ) ";" -}}
+
+    {{- $authors := split ($p.authors | plainify) ";" -}}
     {{- $hl := $p.highlight | default slice -}}
     {{- $citeAuthors := replace $p.authors ";" "," -}}
     {{- $citeStr := printf "%s (%v). %s. %s." $citeAuthors $p.year ($p.title | plainify) ($p.journal | plainify) -}}
     {{- if $p.link -}}{{- $citeStr = printf "%s %s" $citeStr $p.link -}}{{- end -}}
-    <article class="publication-card">
-      <div class="publication-sidebar">
-         <!-- Removed sticky year since we have headers now -->
-      </div>
-      <div class="publication-content">
-        <header class="publication-header">
-           <span class="publication-journal">{{ $p.journal | plainify }}</span>
-           <button class="pub-copy-btn" aria-label="Copy citation to clipboard" data-citation="{{ $citeStr }}">
-             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-             <span class="pub-copy-label">Cite</span>
-           </button>
-        </header>
-        <h3 class="publication-title">
-            {{- if $p.link -}}
+    {{- $doi := $p.doi -}}
+    {{- if and (not $doi) $p.link (hasPrefix $p.link "https://doi.org/") -}}
+      {{- $doi = replaceRE "^https?://(dx\\.)?doi\\.org/" "" $p.link -}}
+    {{- end -}}
+    <li class="pub-item">
+      <div class="pub-body">
+        <h3 class="pub-title">
+          {{- if $p.link -}}
             <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
-            {{- else -}}
+          {{- else -}}
             {{ $p.title | plainify }}
-            {{- end -}}
+          {{- end -}}
         </h3>
-        <p class="publication-authors">
-            {{- range $i, $name := $authors -}}
+        <p class="pub-authors">
+          {{- range $i, $name := $authors -}}
             {{- $trim := trim $name " " -}}
-            {{- $isHL := in $hl $trim -}}
-            {{- if $isHL -}}<span class="author-highlight">{{ $trim }}</span>{{ else }}{{ $trim }}{{ end -}}
+            {{- if in $hl $trim -}}<span class="author-highlight">{{ $trim }}</span>{{ else }}{{ $trim }}{{ end -}}
             {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
-            {{- end -}}
+          {{- end -}}
         </p>
-        {{ with $p.summary }}<p class="publication-summary">{{ . }}</p>{{ end }}
+        {{- with $p.summary }}<p class="pub-summary">{{ . }}</p>{{- end -}}
+        <div class="pub-meta">
+          <span class="pub-source"><span class="pub-journal">{{ $p.journal | plainify }}</span> · {{ $p.year }}{{ with $doi }} · <a class="pub-doi" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">{{ . }}</a>{{ end }}</span>
+          <span class="pub-actions">
+            {{- if $p.link -}}
+            <a class="pub-link" href="{{ $p.link }}" target="_blank" rel="noopener">
+              View paper
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+            {{- end -}}
+            <button class="pub-copy-btn" aria-label="Copy citation to clipboard" data-citation="{{ $citeStr }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span class="pub-copy-label">Cite</span>
+            </button>
+          </span>
+        </div>
       </div>
-    </article>
+    </li>
   {{- end -}}
-  {{- if ne $lastYear "" -}}</div>{{- end -}} <!-- Close last group -->
-  </div>
+  {{- if ne $lastYear "" -}}</ol></div>{{- end -}}
 </section>
 {{- end -}}

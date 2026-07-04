@@ -134,8 +134,9 @@ runWhenStylesReady(() => {
   if (carousels.length) carousels.forEach(initCarousel);
 
   function initCarousel(root) {
-    // Explicitly opt-in to animation even if OS has reduced motion
-    root.setAttribute('data-animate', 'always');
+    // Autoplay is suppressed when the visitor prefers reduced motion.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.setAttribute('data-animate', reducedMotion ? 'off' : 'auto');
 
     // If controls already exist in markup, reuse them
     let prev = root.querySelector('.nav-prev');
@@ -165,9 +166,29 @@ runWhenStylesReady(() => {
     if (!root.hasAttribute('tabindex')) root.setAttribute('tabindex', '0');
 
     let index = 0, timer = null;
+    // Autoplay is off by default under reduced motion, and can be paused by the user.
+    let userPaused = reducedMotion;
     const AUTOPLAY_MS = 5000;
     const SWIPE_THRESHOLD = 40;
     let touchStartX = null, touchStartY = null;
+
+    // Pause/play button (WCAG 2.2.2: a mechanism to stop auto-updating content)
+    let playToggle = root.querySelector('.nav-play');
+    if (!playToggle && slides.length > 1) {
+      playToggle = document.createElement('button');
+      playToggle.className = 'nav-btn nav-play';
+      playToggle.type = 'button';
+      root.appendChild(playToggle);
+    }
+    const ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>';
+    const ICON_PLAY  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
+    const syncPlayToggle = () => {
+      if (!playToggle) return;
+      const paused = userPaused || !timer;
+      playToggle.innerHTML = paused ? ICON_PLAY : ICON_PAUSE;
+      playToggle.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      playToggle.setAttribute('aria-pressed', String(paused));
+    };
 
     // Initialize first slide as active
     slides.forEach((el, i) => i === 0 ? el.classList.add('active') : el.classList.remove('active'));
@@ -194,8 +215,17 @@ runWhenStylesReady(() => {
     const nextSlide = () => crossfadeTo(index + 1);
     const prevSlide = () => crossfadeTo(index - 1);
 
-    const start = () => { stop(); if (slides.length > 1) timer = setInterval(nextSlide, AUTOPLAY_MS); };
-    const stop  = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const start = () => {
+      stop();
+      if (slides.length > 1 && !userPaused) timer = setInterval(nextSlide, AUTOPLAY_MS);
+      syncPlayToggle();
+    };
+    const stop  = () => { if (timer) { clearInterval(timer); timer = null; } syncPlayToggle(); };
+
+    playToggle?.addEventListener('click', () => {
+      userPaused = !userPaused;
+      userPaused ? stop() : start();
+    });
 
     next.addEventListener('click', () => { nextSlide(); start(); });
     prev.addEventListener('click', () => { prevSlide(); start(); });
@@ -256,25 +286,22 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const setTheme = (theme) => {
+    const isDark = theme === 'dark';
     root.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', String(isDark));
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
   };
 
-  // Initialize
+  // Initialize — light-first; only a saved choice overrides the default.
   setTheme(getTheme());
 
-  // Listen for toggle
+  // Manual toggle only; the site does not auto-follow the OS colour scheme.
   toggle?.addEventListener('click', () => {
     const current = root.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-  });
-
-  // Listen for system changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem(STORAGE_KEY)) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
+    setTheme(current === 'dark' ? 'light' : 'dark');
   });
 })();
 

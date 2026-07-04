@@ -4,7 +4,10 @@
     "authors": "Marissa Acciani; Dawid Zyla; Gele Niemeyer; Stephanie Harkins; Diptiben Parekh; Emily Pawlack; Davide Lacarbonara; Dhvanir Kansara; Margaret E. Ackerman; Stefan Niewiesk; Matteo Porotto; Kathryn M. Hastie; Erica Ollmann Saphire",
     "journal": "Cell Host & Microbe",
     "year": 2026,
-    "highlight": ["Dawid Zyla"],
+    "highlight": [
+      "Dawid Zyla"
+    ],
+    "doi": "10.1016/j.chom.2026.04.010",
     "link": "https://doi.org/10.1016/j.chom.2026.04.010"
   },
   {
@@ -12,7 +15,10 @@
     "authors": "Dawid S. Zyla; Roberta Della Marca; Davide Lacarbonara; Gele Niemeyer; Gillian Zipursky; Laura Di Clemente; Mare H. L. Verbruggen; Laura L. A. van Dijk; Oscar Martinez Ceh; Gabriella Jonathan-Trakht; Gavreel Kalantarov; Marissa Acciani; Giulia Laterza; Dariia Vyshenska; Cameron Leedale; Emily Pawlack; Kathryn M. Hastie; Branka Horvat; Rik L. de Swart; Rory D. de Vries; Alexander L. Greninger; Stefan Niewiesk; Erica Ollmann Saphire; Matteo Porotto",
     "journal": "Nature Communications",
     "year": 2026,
-    "highlight": ["Dawid S. Zyla"],
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1038/s41467-026-71373-4",
     "link": "https://doi.org/10.1038/s41467-026-71373-4"
   },
   {
@@ -21,10 +27,9 @@
     "journal": "bioRxiv",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1101/2025.10.07.681039",
     "link": "https://doi.org/10.1101/2025.10.07.681039"
   },
   {
@@ -33,10 +38,9 @@
     "journal": "bioRxiv",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1101/2025.09.11.675466",
     "link": "https://doi.org/10.1101/2025.09.11.675466"
   },
   {
@@ -47,6 +51,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1101/2025.09.09.675230",
     "link": "https://doi.org/10.1101/2025.09.09.675230"
   },
   {
@@ -55,10 +60,9 @@
     "journal": "Science Advances",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
-      "Dawid S. Zyla"
+      "Dawid S Zyla"
     ],
+    "doi": "10.1126/sciadv.ady8168",
     "link": "https://doi.org/10.1126/sciadv.ady8168"
   },
   {
@@ -67,10 +71,9 @@
     "journal": "Cell Reports",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
-      "Dawid S. Zyla"
+      "Dawid Zyla"
     ],
+    "doi": "10.1016/j.celrep.2025.116052",
     "link": "https://doi.org/10.1016/j.celrep.2025.116052"
   },
   {
@@ -79,10 +82,9 @@
     "journal": "bioRxiv",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1101/2025.04.04.647320",
     "link": "https://doi.org/10.1101/2025.04.04.647320"
   },
   {
@@ -91,10 +93,9 @@
     "journal": "eLife",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
-      "Dawid S. Zyla"
+      "Dawid S Zyla"
     ],
+    "doi": "10.7554/eLife.106419",
     "link": "https://doi.org/10.7554/eLife.106419"
   },
   {
@@ -105,6 +106,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1016/j.cell.2024.08.044",
     "link": "https://doi.org/10.1016/j.cell.2024.08.044"
   },
   {
@@ -113,10 +115,9 @@
     "journal": "Science",
     "year": 2024,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1126/science.adm8693",
     "link": "https://doi.org/10.1126/science.adm8693"
   },
   {
@@ -125,10 +126,9 @@
     "journal": "Nature Communications",
     "year": 2024,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1038/s41467-024-47212-9",
     "link": "https://doi.org/10.1038/s41467-024-47212-9"
   },
   {
@@ -139,6 +139,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1101/2023.12.01.569666",
     "link": "https://doi.org/10.1101/2023.12.01.569666"
   },
   {
@@ -147,12 +148,9 @@
     "journal": "Cell Reports",
     "year": 2023,
     "highlight": [
-      "Zyla D",
-      "Zyla, D.",
-      "Zyla, D",
-      "Zyla, D.S.",
-      "Zyla, D.S"
+      "Zyla, D.S."
     ],
+    "doi": "10.1016/j.celrep.2023.112421",
     "link": "https://doi.org/10.1016/j.celrep.2023.112421"
   },
   {
@@ -161,11 +159,7 @@
     "journal": "SSRN",
     "year": 2023,
     "highlight": [
-      "Zyla D",
-      "Zyla, D.",
-      "Zyla, D",
-      "Zyla, D.S.",
-      "Zyla, D.S"
+      "Zyla, D."
     ],
     "link": "http://www.scopus.com/inward/record.url?eid=2-s2.0-85146836910&partnerID=MN8TOARS"
   },
@@ -175,12 +169,9 @@
     "journal": "Cell Chemical Biology",
     "year": 2023,
     "highlight": [
-      "Zyla D",
-      "Zyla, D.",
-      "Zyla, D",
-      "Zyla, D.S.",
-      "Zyla, D.S"
+      "Zyla, D.S."
     ],
+    "doi": "10.1016/j.chembiol.2023.03.005",
     "link": "https://doi.org/10.1016/j.chembiol.2023.03.005"
   },
   {
@@ -191,6 +182,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1126/scitranslmed.abq0991",
     "link": "https://doi.org/10.1126/scitranslmed.abq0991"
   },
   {
@@ -199,10 +191,9 @@
     "journal": "bioRxiv",
     "year": 2022,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1101/2022.07.17.500368",
     "link": "https://doi.org/10.1101/2022.07.17.500368"
   },
   {
@@ -213,6 +204,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1126/sciadv.abp9151",
     "link": "https://doi.org/10.1126/sciadv.abp9151"
   },
   {
@@ -223,6 +215,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1101/2021.11.16.468852",
     "link": "https://doi.org/10.1101/2021.11.16.468852"
   },
   {
@@ -231,15 +224,9 @@
     "journal": "Science",
     "year": 2021,
     "highlight": [
-      "Zyla D",
-      "Zyla, D.",
-      "Dawid S. Zyla",
-      "Zyla, D",
-      "Zyla, D.S.",
-      "Zyla, D.S",
-      "Dawid S Zyla",
       "Dawid Zyla"
     ],
+    "doi": "10.1126/science.abh2315",
     "link": "https://doi.org/10.1126/science.abh2315"
   },
   {
@@ -250,6 +237,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1007/s10858-021-00373-x",
     "link": "https://doi.org/10.1007/s10858-021-00373-x"
   },
   {
@@ -258,10 +246,9 @@
     "journal": "Science Advances",
     "year": 2021,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
-      "Dawid S. Zyla"
+      "Dawid Zyla"
     ],
+    "doi": "10.1126/sciadv.abc6381",
     "link": "https://doi.org/10.1126/sciadv.abc6381"
   },
   {
@@ -270,12 +257,9 @@
     "journal": "bioRxiv",
     "year": 2021,
     "highlight": [
-      "Zyla D",
-      "Zyla, D.",
-      "Zyla, D",
-      "Zyla, D.S.",
-      "Zyla, D.S"
+      "Zyla, D."
     ],
+    "doi": "10.1101/2021.03.31.437892",
     "link": "https://doi.org/10.1101/2021.03.31.437892"
   },
   {
@@ -284,9 +268,9 @@
     "journal": "The EMBO Journal",
     "year": 2020,
     "highlight": [
-      "Dawid S. Żyła",
       "Dawid S Żyła"
     ],
+    "doi": "10.15252/embj.2019104231",
     "link": "https://doi.org/10.15252/embj.2019104231"
   },
   {
@@ -295,10 +279,9 @@
     "journal": "eLife",
     "year": 2020,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
-      "Dawid S. Zyla"
+      "Dawid S Zyla"
     ],
+    "doi": "10.7554/eLife.60265",
     "link": "https://doi.org/10.7554/eLife.60265"
   },
   {
@@ -309,6 +292,7 @@
     "highlight": [
       "Dawid Zyla"
     ],
+    "doi": "10.1074/jbc.RA120.014324",
     "link": "https://doi.org/10.1074/jbc.RA120.014324"
   },
   {
@@ -317,10 +301,9 @@
     "journal": "Science",
     "year": 2020,
     "highlight": [
-      "Dawid Zyla",
-      "Dawid S Zyla",
       "Dawid S. Zyla"
     ],
+    "doi": "10.1126/science.aaz9866",
     "link": "https://doi.org/10.1126/science.aaz9866"
   },
   {
@@ -329,9 +312,9 @@
     "journal": "Journal of Biological Chemistry",
     "year": 2019,
     "highlight": [
-      "Dawid S. Żyła",
-      "Dawid S Żyła"
+      "Dawid S. Żyła"
     ],
+    "doi": "10.1074/jbc.RA119.008610",
     "link": "https://doi.org/10.1074/jbc.RA119.008610"
   },
   {
@@ -340,10 +323,9 @@
     "journal": "Structure (London, England : 1993)",
     "year": 2017,
     "highlight": [
-      "Zyla D",
-      "Zyla, D.",
-      "Zyla, D"
+      "Zyla D"
     ],
+    "doi": "10.1016/j.str.2017.10.004",
     "link": "https://doi.org/10.1016/j.str.2017.10.004"
   }
 ]

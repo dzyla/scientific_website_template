@@ -1,0 +1,23 @@
+{
+  "name": "Zyla Lab",
+  "short_name": "Zyla Lab",
+  "description": "Structural Dynamics of Molecular Machines",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B6508",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "256x256",
+      "purpose": "any maskable"
+    }
+  ]
+}

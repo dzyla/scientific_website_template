@@ -11,9 +11,9 @@
       {{ with $imgPath }}
         {{ $img := resources.GetMatch $imgPath }}
         {{ if $img }}
-          {{ $processed := $img.Fill "600x800 Center" }}
+          {{ $processed := $img.Fill "600x800 Center webp q82" }}
           <div class="team-portrait">
-            <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+            <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}" fetchpriority="high">
           </div>
         {{ else }}
           <div class="team-portrait">
@@ -44,9 +44,9 @@
         {{ with $imgPath }}
           {{ $img := resources.GetMatch $imgPath }}
           {{ if $img }}
-            {{ $processed := $img.Fill "600x800 Center" }}
+            {{ $processed := $img.Fill "600x800 Center webp q82" }}
             <div class="team-portrait">
-              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}">
+              <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}" loading="lazy">
             </div>
           {{ else }}
             <div class="team-portrait">

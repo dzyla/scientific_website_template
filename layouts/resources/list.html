@@ -35,4 +35,33 @@
   {{ else }}
     <p>Check back soon — we are curating a refreshed list of onboarding and analysis resources.</p>
   {{ end }}
+
+  {{ with .Params.cores }}
+    <section class="core-section" data-reveal>
+      <div class="core-intro">
+        <h2>Core Facilities at CU Anschutz</h2>
+        <p>Our structural and biophysical work is supported by the shared resource cores on the CU Anschutz Medical Campus. We routinely access the facilities below — follow each link for instrumentation details, rates, and booking.</p>
+      </div>
+      <div class="core-list">
+        {{ range . }}
+          <article class="core-card">
+            <div class="core-card-head">
+              <span class="resource-pill">Core Facility</span>
+              {{ if .url }}
+                <h3><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></h3>
+              {{ else }}
+                <h3>{{ .name }}</h3>
+              {{ end }}
+            </div>
+            {{ with .summary }}<p class="core-summary">{{ . }}</p>{{ end }}
+            {{ with .instruments }}
+              <ul class="core-instruments">
+                {{ range . }}<li class="core-chip">{{ . }}</li>{{ end }}
+              </ul>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
 {{ end }}
