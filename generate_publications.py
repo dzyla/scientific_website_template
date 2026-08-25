@@ -241,7 +241,7 @@ def fetch_publications(orcid_id, highlight_list=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("orcid_id")
-    parser.add_argument("-o", "--output", default="publications.json")
+    parser.add_argument("-o", "--output", default="data/publications.json")
     parser.add_argument("-hl", "--highlight", default="",
                         help="Canonical name(s) to bold, semicolon-separated. "
                              "Give ONE spelling per person (e.g. 'Dawid Zyla'); "

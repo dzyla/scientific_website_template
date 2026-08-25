@@ -1,2 +1,5 @@
 /public/
 /resources/_gen/
+__pycache__/
+*.pyc
+.hugo_build.lock
