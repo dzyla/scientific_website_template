@@ -1,6 +1,6 @@
 ---
 title: "Contact"
-description: "How to reach our lab for collaborations, positions, and media."
+description: "How to reach our lab for collaborations and media."
 ---
 
 {{< contact_block >}}
