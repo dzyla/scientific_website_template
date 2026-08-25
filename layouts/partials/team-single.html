@@ -1,0 +1,37 @@
+{{/* Shared markup for a single team-member profile page.
+    Invoked from layouts/member/single.html and layouts/pi/single.html
+    (the front-matter `type` field — member/pi — drives Hugo's template
+    resolution, so the layout lives under the type, not the section). */}}
+{{ $imgPath := .Params.image }}
+{{ $alt := .Params.image_alt | default (printf "%s portrait" .Title) }}
+
+<p class="back-link-wrapper">
+  <a class="back-link" href="{{ "team" | relURL }}">← Back to Team</a>
+</p>
+
+<article class="team-card team-card--lead" data-reveal>
+  {{ with $imgPath }}
+    {{ $img := resources.GetMatch $imgPath }}
+    {{ if $img }}
+      {{ $processed := $img.Fill "600x800 Center webp q82" }}
+      <div class="team-portrait">
+        <img src="{{ $processed.RelPermalink }}" alt="{{ $alt | plainify }}" width="{{ $processed.Width }}" height="{{ $processed.Height }}" fetchpriority="high">
+      </div>
+    {{ else }}
+      <div class="team-portrait">
+        <img src="{{ . | relURL | safeURL }}" alt="{{ $alt | plainify }}">
+      </div>
+    {{ end }}
+  {{ else }}
+    <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
+  {{ end }}
+
+  <div class="team-info">
+    <h1 class="team-name">{{ .Title }}</h1>
+    {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
+    {{ with .Params.email }}
+      <p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>
+    {{ end }}
+    <div class="content team-bio team-bio--full">{{ .Content }}</div>
+  </div>
+</article>

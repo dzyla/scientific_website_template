@@ -451,6 +451,21 @@
   }
 }
 
+/* Team single page (individual member profile) */
+.team-card--lead .team-name {
+  font-size: 2rem;
+  margin-bottom: .35rem;
+}
+.team-bio--full {
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: initial;
+  overflow: visible;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-top: var(--s-sm);
+}
+
 /* Research sections */
 .research-hero {
   margin: var(--s-2xl) auto var(--s-xl);
