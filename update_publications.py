@@ -32,6 +32,10 @@ from generate_publications import (  # noqa: E402
 )
 
 ORCID = "0000-0001-8471-469X"
+# DOIs never to add (curated out: author responses, junk ORCID imports, ...)
+EXCLUDE_DOIS = {
+    "10.7554/elife.60265.sa2",  # eLife author response — not a publication
+}
 HIGHLIGHT = ["Dawid Zyla"]          # one canonical spelling; variants auto-matched
 DATA_FILE = HERE / "data" / "publications.json"
 HDRS = {"Accept": "application/json"}
@@ -130,9 +134,12 @@ def main():
         if not gdoi:
             no_doi += 1
             continue
-        if norm(gdoi) in have_dois:
+        n = norm(gdoi)
+        if n in EXCLUDE_DOIS:
             continue
-        todo.setdefault(norm(gdoi), (gdoi, put))
+        if n in have_dois:
+            continue
+        todo.setdefault(n, (gdoi, put))
 
     print(f"Existing entries: {len(existing)} | candidate new DOIs: {len(todo)} | "
           f"ORCID groups without DOI (skipped): {no_doi}")
