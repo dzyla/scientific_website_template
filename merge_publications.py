@@ -22,6 +22,13 @@ HIGHLIGHT = ["Dawid Zyla"]
 EXCLUDE_DOIS = {
     "10.7554/elife.60265.sa2",  # eLife author response — not a publication
 }
+# Exact ORCID titles that must never be added (junk/duplicate imports, exact match).
+EXCLUDE_TITLES = {
+    # Japanese machine translation (JST) of the EMBO J 2020 paper already listed
+    # under its English title "A metabolite binding protein moonlights as a
+    # bile-responsive chaperone" — duplicate record without DOI.
+    "胆汁応答性シャペロンとしての代謝産物結合蛋白質ムーンライト【JST・京大機械翻訳】",
+}
 
 
 def norm(s):
@@ -45,6 +52,9 @@ def main():
         n = norm(doi) if doi else None
         if n and n in {norm(x) for x in EXCLUDE_DOIS}:
             excluded.append((doi, p["title"]))
+            continue
+        if p.get("title") in EXCLUDE_TITLES:
+            excluded.append((doi or "(no doi)", p["title"]))
             continue
         if n and n in have_dois:
             continue
