@@ -1,6 +1,7 @@
 ---
 title: "Papain Antibody Digestion Protocol"
-date: 2023-01-01
+date: 2025-12-28
+# Add `updated: YYYY-MM-DD` when the procedure is revised.
 author: "Dawid Zyla"
 ---
 

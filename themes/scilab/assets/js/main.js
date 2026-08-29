@@ -380,29 +380,29 @@ if (document.readyState === 'loading') {
 }
 
 /* ===========================================================================
-   Team Bio Expand/Collapse
-   =========================================================================== */
-const initTeamBioToggles = () => {
-  document.querySelectorAll('.team-bio-toggle').forEach(btn => {
+   Click-to-load map
+   Keeps Google out of the page until the visitor actually wants the map.
+   ========================================================================== */
+const initMapConsent = () => {
+  document.querySelectorAll('.contact-map[data-map-embed]').forEach(box => {
+    const btn = box.querySelector('.contact-map-consent');
+    if (!btn) return;
     btn.addEventListener('click', () => {
-      const card = btn.closest('.team-info');
-      const bio = card?.querySelector('[data-team-bio]');
-      const rest = bio?.querySelector('.team-bio-rest');
-      const ellipsis = bio?.querySelector('.team-bio-ellipsis');
-      if (!rest || !ellipsis) return;
-
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      btn.textContent = expanded ? 'Read more' : 'Read less';
-      rest.hidden = expanded;
-      ellipsis.hidden = !expanded;
-      bio.classList.toggle('is-expanded', !expanded);
-    });
+      const frame = document.createElement('iframe');
+      frame.src = box.dataset.mapEmbed;
+      frame.title = box.dataset.mapTitle || 'Map';
+      frame.loading = 'lazy';
+      frame.referrerPolicy = 'no-referrer-when-downgrade';
+      frame.allowFullscreen = true;
+      box.replaceChildren(frame);
+      box.classList.add('is-loaded');
+      frame.focus();
+    }, { once: true });
   });
 };
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initTeamBioToggles);
+  document.addEventListener('DOMContentLoaded', initMapConsent);
 } else {
-  initTeamBioToggles();
+  initMapConsent();
 }

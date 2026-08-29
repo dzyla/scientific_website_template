@@ -1,35 +1,43 @@
 # ============================================================
-# Hugo configuration — SciLab theme
-# Template: replace every value tagged [TEMPLATE] with your
-# own lab's information. Remove or comment out any optional
-# sections your lab doesn't need.
+# Zyla Lab — site configuration
+# University of Colorado Anschutz Medical Campus
 # ============================================================
 
-baseURL = "https://zylalab.org/"          # [TEMPLATE] your site URL
+baseURL = "https://zylalab.org/"
 languageCode = "en-us"
-title = "Zyla Lab"                         # [TEMPLATE] your lab name
+title = "Zyla Lab"
 theme = "scilab"
+
+enableRobotsTXT = true        # emit /robots.txt from layouts/robots.txt
+enableGitInfo = false
+
+# /categories/ was never used and only produced an empty listing page.
+[taxonomies]
+  tag = "tags"
 
 [params]
   # ── Accent color ──────────────────────────────────────────
   # highlightColor drives nav active-state, buttons, and links.
-  # Choose a color that meets WCAG AA contrast on white (#fff).
-  highlightColor = "#8B6508"         # [TEMPLATE] dark goldenrod/ochre
+  # Must meet WCAG AA (4.5:1) against white; #8B6508 measures 5.3:1.
+  # The dark-theme counterpart lives in assets/css/custom.css.
+  highlightColor = "#8B6508"
   highlightTextColor = "#ffffff"     # text color when used as button bg
 
   # ── Basic identity ────────────────────────────────────────
-  description = "Structural Dynamics of Molecular Machines"  # [TEMPLATE]
-  tagline = "Structural Dynamics of Molecular Machines"       # [TEMPLATE]
+  description = "The Zyla Lab at the University of Colorado Anschutz combines cryo-EM, biophysics and computation to capture how viral fusion proteins and other molecular machines change shape to do their work."
+  tagline = "Structural Dynamics of Molecular Machines"
   keywords = ["Structural Biology", "Virology", "Biophysics", "Cryo-EM", "Measles Virus", "Protein Dynamics", "Zyla Lab", "University of Colorado Anschutz"]
   social_image = "images/fectoFab_export2.png"
+  social_image_alt = "Molecular models of trimeric viral fusion protein ectodomains bound by antibody Fab fragments."
   twitter_handle = "@DawidZyla"
   author = "Dawid S. Zyla"
 
-  ga4MeasurementID = "G-22NWJXHMQX"  # set your GA4 ID here
-  # Use one or more verification tokens below after you register each service.
-  verification_google = "Vz7Gl-n9zkRCK3_l9C9CIi_8NGHjg_BzTH-z7jQwHSY"           # e.g., "abc123..."
-  verification_bing = "61B74CA254AA5A274DBB1A3E21C33827"             # e.g., "BingSiteAuthCode"
-  verification_yandex = "08f69a50ba6c41ce"           # optional
+  ga4MeasurementID = "G-22NWJXHMQX"
+
+  # Search-console ownership tokens.
+  verification_google = "Vz7Gl-n9zkRCK3_l9C9CIi_8NGHjg_BzTH-z7jQwHSY"
+  verification_bing = "61B74CA254AA5A274DBB1A3E21C33827"
+  verification_yandex = "08f69a50ba6c41ce"
   organization_name = "Zyla Lab"
   organization_logo = "/favicon.svg"
   organization_url  = "https://zylalab.org/"
@@ -40,7 +48,7 @@ theme = "scilab"
   institution_logo = "images/cuanschutz_h_clr.tmb-ze-450-450.png"
   contact_email = "dawid.zyla@cuanschutz.edu"
   contact_phone = "303-724-3201"
-  contact_hours = "Mon–Fri · 9:00–17:00 PT"
+  contact_hours = "Mon–Fri · 9:00–17:00 MT"
   scholar = "https://scholar.google.com/citations?user=dEGnzrwAAAAJ&hl=en"
   orcid = "https://orcid.org/0000-0001-8471-469X"
   github = "https://github.com/dzyla"
@@ -53,6 +61,7 @@ theme = "scilab"
 
   [params.address]
     building = "Research I South"
+    room = "Room L18-10-122"
     department = "Department of Biochemistry and Molecular Genetics"
     institution = "University of Colorado Anschutz Medical Campus"
     street = "12801 East 17th Avenue Mail Stop 8101"
@@ -66,11 +75,13 @@ theme = "scilab"
       title = "Structural Dynamics of Molecular Machines"
       lead = "We integrate structural biology and biophysics to capture the transient dynamics of molecular machines, revealing the structural mechanisms of disease."
       intro = []
+      # Each slide carries real alt text: it is read aloud by screen readers
+      # and is the only description search engines get for these images.
       carousel = [
-        "images/fectoFab_export2.png",
-        "images/P6-S43-5554.png",
-        "images/2d_grid.png",
-        "images/spark3.png",
+        { src = "images/fectoFab_export2.png", alt = "Molecular models of trimeric viral fusion protein ectodomains in green, several of them bound by antibody Fab fragments in blue." },
+        { src = "images/P6-S43-5554.png", alt = "Raw cryo-electron microscopy micrograph showing individual protein particles suspended in vitreous ice." },
+        { src = "images/2d_grid.png", alt = "Grid of two-dimensional cryo-EM class averages showing a three-lobed complex viewed in many different orientations." },
+        { src = "images/spark3.png", alt = "Illustration of teal and pink antibodies engaging the densely packed glycoprotein surface of a virus particle." },
       ]
       actionsAria = "Primary site sections"
 
@@ -90,7 +101,7 @@ theme = "scilab"
       heading = "Latest News"
       description = "Insights and announcements from the lab."
       section = "news"
-      limit = 0
+      limit = 6          # 0 shows every post; the rest live at /news/
       showSummaries = true
 
   [[params.footer_links]]
@@ -100,6 +111,10 @@ theme = "scilab"
   [[params.footer_links]]
     name = "Publications"
     pageRef = "publications"
+
+  [[params.footer_links]]
+    name = "News"
+    pageRef = "news"
 
   [[params.footer_links]]
     name = "Team"

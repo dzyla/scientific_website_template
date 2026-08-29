@@ -7,7 +7,7 @@
 {{- else -}}
   <section class="contact-section join-us" data-reveal>
     <h2>Join Us</h2>
-    {{ with $data.intro }}<p class="join-us-intro">{{ . }}</p>{{ end }}
+    {{ with $data.intro }}<div class="join-us-intro">{{ . | markdownify }}</div>{{ end }}
 
     {{ with $data.positions }}
       <div class="join-positions">

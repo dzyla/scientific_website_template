@@ -2,7 +2,10 @@
 {{- $heading := index $news "heading" | default "Latest News" -}}
 {{- $desc := index $news "description" | default "" -}}
 {{- $section := index $news "section" | default "news" -}}
-{{- $limit := index $news "limit" | default 10 -}} <!-- Limit to 10 for horizontal scroll -->
+{{/* Note: `default` treats 0 as empty, so an explicit `limit = 0`
+     ("show everything") must be read before falling back. */}}
+{{- $limit := 10 -}}
+{{- if isset $news "limit" -}}{{- $limit = int (index $news "limit") -}}{{- end -}}
 {{- $showSummaries := index $news "showSummaries" | default true -}}
 
 <section class="home-news-widget" data-reveal>
@@ -34,7 +37,7 @@
               <a href="{{ .RelPermalink }}">{{ .Title }}</a>
             </h3>
             {{- if $showSummaries }}
-              <p class="news-card-summary">{{ .Summary | truncate 120 }}</p>
+              <p class="news-card-summary">{{ .Summary | plainify | truncate 120 }}</p>
             {{- end }}
             <div class="news-read-more" aria-hidden="true">&rarr;</div>
           </div>

@@ -1,5 +1,8 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.lead }}<p class="page-lead">{{ . }}</p>{{ end }}
+  </header>
   {{ with .Content }}{{ . }}{{ end }}
 
   {{ $pi := (where .Pages "Params.type" "pi").ByWeight }}
@@ -60,19 +63,18 @@
           <h3>{{ .Title }}</h3>
           {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
           {{ with .Params.email }}<p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>{{ end }}
-          {{ $plain := .Plain | strings.TrimSpace }}
-          {{ $words := findRE `\S+` $plain }}
-          {{ $limit := 30 }}
-          {{ if gt (len $words) $limit }}
-            {{ $preview := delimit (first $limit $words) " " }}
-            {{ $rest := delimit (after $limit $words) " " }}
-            <p class="content team-bio" data-team-bio>
-              <span class="team-bio-preview">{{ $preview }}</span><span class="team-bio-ellipsis">...</span><span class="team-bio-rest" hidden> {{ $rest }}</span>
-            </p>
-            <button class="team-bio-toggle" type="button" aria-expanded="false">Read more</button>
-          {{ else }}
-            <div class="content">{{ .Content }}</div>
-          {{ end }}
+          {{/*
+            Every card clamps its bio to the same number of lines and carries
+            the same link, so the grid stays even. Expanding in place made the
+            cards different heights, only ever opened one of them, and left
+            some with no control at all because the bio happened to be short.
+            The full text already lives on the member's own page.
+          */}}
+          <div class="content team-bio">{{ .Content }}</div>
+          <a class="team-profile-link" href="{{ .RelPermalink }}">
+            Full profile<span class="visually-hidden"> of {{ .Title }}</span>
+            <span class="team-profile-arrow" aria-hidden="true">→</span>
+          </a>
         </div>
       </article>
     {{ end }}

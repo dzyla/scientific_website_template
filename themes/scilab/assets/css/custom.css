@@ -361,6 +361,16 @@
   padding: var(--s-lg);
 }
 
+/* Member cards lay their info out as a column so the "Full profile" link can
+   sit flush with the bottom of every card regardless of bio length, keeping
+   the row of links level across the grid. */
+.team-grid .team-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 .team-info h2,
 .team-info h3 {
   margin: 0 0 .35rem;
@@ -399,32 +409,28 @@
   overflow: hidden;
 }
 
-.team-grid .team-bio.is-expanded {
-  display: block;
-  -webkit-line-clamp: unset;
-  -webkit-box-orient: initial;
-  overflow: visible;
-}
-
-.team-bio-toggle {
-  margin-top: 0.35rem;
-  padding: 0;
-  background: transparent;
-  border: 0;
+/* Sits at the bottom of every member card, at the same place in each. */
+.team-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: auto;
+  padding-top: var(--s-sm);
   color: var(--highlight-color);
   font-family: var(--font-headers);
   font-size: 0.86rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  text-transform: none;
-  cursor: pointer;
+  text-decoration: none;
 }
-.team-bio-toggle:hover {
+.team-profile-link:hover {
   text-decoration: underline;
 }
-.team-bio-toggle:focus-visible {
-  outline: 2px solid var(--highlight-color);
-  outline-offset: 3px;
+.team-profile-arrow {
+  transition: transform .2s ease;
+}
+.team-profile-link:hover .team-profile-arrow {
+  transform: translateX(3px);
 }
 
 @media (max-width: 768px) {
@@ -491,7 +497,14 @@
 .research-topic-grid {
   display: grid;
   gap: var(--s-lg);
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
+}
+/* Two across from tablet up. With four topics this reads as a balanced 2x2;
+   the previous auto-fit produced three cards then a stranded fourth. */
+@media (min-width: 700px) {
+  .research-topic-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .research-topic {
   background: var(--surface);
@@ -611,10 +624,11 @@
   align-items: stretch;
 }
 
-/* Tablet & Desktop: Force 3 columns */
+/* Tablet & desktop. auto-fit rather than a hard 3 columns so a group of two
+   fills the row instead of leaving a gap, and a group of five wraps evenly. */
 @media (min-width: 768px) {
   .resource-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 }
 .resource-card {
@@ -650,17 +664,18 @@
   color: var(--muted);
   min-width: fit-content;
 }
-.resource-card h2 {
+.resource-card h3 {
   margin-top: 0;
   margin-bottom: var(--s-sm);
+  font-size: 1.15rem;
 }
-.resource-card h2 a {
+.resource-card h3 a {
   text-decoration: none;
   color: inherit;
   border-bottom: 2px solid transparent;
   transition: border-color .2s ease;
 }
-.resource-card h2 a:hover {
+.resource-card h3 a:hover {
   border-bottom-color: var(--highlight-color);
 }
 .resource-card p {
@@ -1301,7 +1316,9 @@
   padding: .45rem 1.1rem;
   border-radius: 999px;
   background: var(--text);
-  color: #fff;
+  /* Pairs with the --text fill, so it must invert with the theme: in dark mode
+     --text is near-white and a hardcoded #fff would be invisible. */
+  color: var(--background);
   text-decoration: none;
   font-weight: 600;
   transition: background .2s ease, transform .2s ease;
@@ -1684,26 +1701,26 @@
   --accent-soft: rgba(212, 175, 55, 0.15);
   /* Use a lighter gold so highlight text stays legible on dark backgrounds */
   --highlight-color: #D4AF37;
+  --highlight-soft: rgba(212, 175, 55, 0.15);
+  --highlight-outline: rgba(212, 175, 55, 0.4);
+  /* The gold lightens in dark mode, so anything sitting ON it must darken:
+     white on #D4AF37 is 2.1:1, while this near-black is 8.4:1. Without this
+     override the light theme's white leaks through and every gold button,
+     chip and pill fails WCAG AA. */
+  --highlight-text: #271400;
 
   --shadow-soft: 0 4px 12px rgba(0,0,0,0.3);
   --shadow-medium: 0 10px 24px rgba(0,0,0,0.4);
   --shadow-strong: 0 18px 48px rgba(0,0,0,0.5);
 }
 
-/* Icon Switching */
+/* Icon switching. The blocking script in head.html stamps data-theme before
+   the first paint, so these two rules always have something to match — the
+   prefers-color-scheme fallback that used to sit here could never apply. */
 [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+[data-theme="light"] .theme-toggle .icon-sun { display: none; }
 [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-
-/* Default (before JS loads, prefer system) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
-  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .theme-toggle .icon-moon { display: block; }
-  :root:not([data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
-}
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 /* Ensure nav-menu flows horizontally on desktop */
 @media (min-width: 769px) {
@@ -1886,4 +1903,246 @@
 .error-404-links {
   justify-content: center;
 }
+
+
+/* ===========================================================================
+   Section page headers
+   Shared by every list page so the archive views match the shortcode-driven
+   ones instead of falling back to a bare <h1>.
+   ========================================================================== */
+.page-header {
+  margin: var(--s-xl) 0 var(--s-lg);
+}
+.page-header h1 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-headers);
+  font-size: var(--h1);
+  line-height: 1.15;
+}
+.page-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 4px;
+  margin-top: var(--s-md);
+  background: var(--highlight-color);
+  border-radius: 2px;
+}
+.page-lead {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* Screen-reader-only text: adds context to repeated link labels such as the
+   "View paper" links on the publications page. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===========================================================================
+   News archive
+   ========================================================================== */
+.news-archive .news-year-group { margin-bottom: var(--s-2xl); }
+.news-year {
+  margin: 0 0 var(--s-md);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-headers);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.news-archive .news-grid { margin-bottom: 0; }
+
+.resource-date {
+  display: block;
+  margin: -0.2rem 0 0.4rem;
+  font-family: var(--font-headers);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ===========================================================================
+   Publications: peer-reviewed / preprint split
+   ========================================================================== */
+.pub-section { margin-bottom: var(--s-2xl); }
+.pub-section-head { margin-bottom: var(--s-lg); }
+.pub-section-title {
+  margin: 0;
+  font-family: var(--font-headers);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.pub-section-blurb {
+  margin: 0.35rem 0 0;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.pub-badge {
+  display: inline-block;
+  margin-right: 0.35rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--highlight-outline);
+  border-radius: 999px;
+  background: var(--highlight-soft);
+  font-family: var(--font-headers);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  vertical-align: 0.08em;
+}
+
+/* ===========================================================================
+   Click-to-load map placeholder
+   ========================================================================== */
+.contact-map-consent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  padding: var(--s-lg);
+  border: 1px dashed var(--border);
+  border-radius: inherit;
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-family: var(--font-headers);
+  cursor: pointer;
+  text-align: center;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.contact-map-consent:hover,
+.contact-map-consent:focus-visible {
+  background: var(--highlight-soft);
+  border-color: var(--highlight-outline);
+  color: var(--text);
+}
+.contact-map-consent-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.contact-map-consent-note {
+  font-size: 0.78rem;
+  max-width: 32ch;
+}
+
+/* The clamped bio now contains real rendered markup (paragraphs, links,
+   italics) instead of a flattened text span, so neutralise the paragraph
+   margins that would otherwise fight -webkit-line-clamp. */
+.team-grid .team-bio > p { margin: 0; }
+.team-grid .team-bio > p + p { margin-top: 0.6rem; }
+
+/* The secondary hero button is painted with fixed near-black; on the dark
+   theme that leaves it almost invisible against the page, so give it the
+   surface treatment and a visible edge instead. */
+[data-theme="dark"] .btn-secondary-black {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+[data-theme="dark"] .btn-secondary-black:hover {
+  background: var(--neutral-100);
+}
+
+/* ===========================================================================
+   Global focus ring
+   Only a handful of controls defined their own :focus-visible, so every link,
+   menu item and card fell back to the browser default — which is close to
+   invisible on the dark theme. :where() keeps specificity at zero, so the
+   component-level rules further up still win where they exist.
+   The 3px offset puts the ring on the page background rather than on top of
+   an accent fill, keeping it legible on the gold buttons too.
+   ========================================================================== */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Inside the hero the background is a photograph, so pair the ring with a
+   contrasting halo to guarantee it separates from whatever is behind it. */
+:where(.hero-split-matte, .carousel) :where(a, button):focus-visible {
+  outline-color: var(--highlight-color);
+  box-shadow: 0 0 0 5px var(--background);
+}
+
+/* Address shown in place of the JS-assembled mailto: when scripting is off. */
+.email-fallback {
+  font-family: var(--font-headers);
+  font-size: 0.92rem;
+  color: var(--text);
+  word-break: break-word;
+}
+
+/* ===========================================================================
+   Resources page grouping
+   ========================================================================== */
+.resource-group {
+  margin-bottom: var(--s-2xl);
+}
+.resource-group-head {
+  max-width: var(--container-narrow);
+}
+.resource-group-head h2 {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 var(--s-xs);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-headers);
+  font-size: 1.35rem;
+}
+.resource-group-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.resource-card .resource-external {
+  align-self: end;
+  font-family: var(--font-headers);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+
+/* ===========================================================================
+   Contact: office hours
+   ========================================================================== */
+.contact-hours {
+  margin: var(--s-sm) 0 0;
+  padding-top: var(--s-sm);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-headers);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
 

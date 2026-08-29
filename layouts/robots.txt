@@ -1,14 +1,8 @@
 User-agent: *
-{{- if .Site.Params.robots.disallow_paths -}}
-{{ range .Site.Params.robots.disallow_paths }}
+{{ range site.Params.robots.disallow_paths -}}
 Disallow: {{ . }}
-{{- end -}}
-{{- end -}}
-{{- if .Site.Params.robots.allow_paths -}}
-{{ range .Site.Params.robots.allow_paths }}
+{{ end -}}
+{{ range site.Params.robots.allow_paths -}}
 Allow: {{ . }}
-{{- end -}}
-{{- end -}}
-
+{{ end }}
 Sitemap: {{ "sitemap.xml" | absURL }}
-Host: {{ .Site.BaseURL }}

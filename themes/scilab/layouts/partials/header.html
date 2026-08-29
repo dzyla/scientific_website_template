@@ -2,7 +2,8 @@
   <div class="container">
     <div class="logo">
       <a class="logo-link" href="{{ .Site.BaseURL }}">
-        <img class="logo-mark" src="{{ "favicon.svg" | absURL }}" alt="Site logo"/>
+        {{/* Decorative: the site name follows immediately in the same link. */}}
+        <img class="logo-mark" src="{{ "favicon.svg" | absURL }}" alt="" width="28" height="28"/>
         {{ .Site.Title }}
       </a>
     </div>

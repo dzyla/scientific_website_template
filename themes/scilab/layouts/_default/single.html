@@ -8,10 +8,12 @@
 
     <header class="post-header">
       <h1>{{ .Title }}</h1>
-      {{ if not .Date.IsZero }}
-        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-        {{ $dateHuman := .Date | time.Format ":date_long" }}
-        <time datetime="{{ $dateMachine }}" class="post-date">{{ $dateHuman }}</time>
+      {{/* Pages whose .Date is a placeholder (the protocols) set hide_date and
+           can surface a real revision date through `updated` instead. */}}
+      {{ if and (not .Date.IsZero) (not .Params.hide_date) }}
+        <time datetime="{{ .Date | time.Format "2006-01-02T15:04:05-07:00" }}" class="post-date">{{ .Date | time.Format ":date_long" }}</time>
+      {{ else if .Params.updated }}
+        <time datetime="{{ .Params.updated | time.Format "2006-01-02" }}" class="post-date">Updated {{ .Params.updated | time.Format ":date_long" }}</time>
       {{ end }}
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
     </header>

@@ -1,16 +1,27 @@
 {{- $styles := slice
+    (resources.Get "css/fonts.css")
     (resources.Get "css/main.css")
     (resources.Get "css/nav.css")
     (resources.Get "css/hero.css")
     (resources.Get "css/news.css")
     (resources.Get "css/custom.css")
+    (resources.Get "css/print.css")
 -}}
 {{- $bundle := $styles | resources.Concat "css/site-v2.css" | resources.Minify | resources.Fingerprint -}}
 
+{{- /*
+  Preload the two faces used above the fold. Without this the browser only
+  discovers them after parsing the stylesheet, which pushes first paint of the
+  hero text out by a round trip. `crossorigin` is required on font preloads
+  even for same-origin files, or the preload is discarded and fetched twice.
+*/ -}}
+<link rel="preload" as="font" type="font/woff2" href="{{ "fonts/inter-latin.woff2" | relURL }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ "fonts/source-serif-4-latin.woff2" | relURL }}" crossorigin>
+
 <style>
   :root {
-    --highlight-color: {{ site.Params.highlightColor | default "#b78b2c" }};
-    --highlight-text-color: {{ site.Params.highlightTextColor | default "#271400" }};
+    --highlight-color: {{ site.Params.highlightColor | default "#8B6508" }};
+    --highlight-text-color: {{ site.Params.highlightTextColor | default "#ffffff" }};
   }
 </style>
 

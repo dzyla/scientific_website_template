@@ -1,0 +1,95 @@
+{{- /*
+  Renders one set of publications, grouped by year.
+
+  @context {slice} Items      Publication entries (see data/publications.json).
+  @context {string} Heading   Section heading text.
+  @context {string} Id        Anchor id for the section.
+  @context {string} Blurb     Optional one-line description under the heading.
+  @context {bool}   Preprint  Marks every entry with a "Preprint" badge.
+*/ -}}
+{{- $items := .Items -}}
+{{- if $items -}}
+{{- $sorted := sort $items "year" "desc" -}}
+<section class="pub-section" id="{{ .Id }}" aria-labelledby="{{ .Id }}-title">
+  <div class="pub-section-head">
+    <h2 class="pub-section-title" id="{{ .Id }}-title">{{ .Heading }}</h2>
+    {{- with .Blurb }}<p class="pub-section-blurb">{{ . }}</p>{{ end }}
+  </div>
+
+  {{- $lastYear := "" -}}
+  {{- range $sorted -}}
+    {{- $p := . -}}
+    {{- $currentYear := $p.year -}}
+
+    {{- if ne $currentYear $lastYear -}}
+      {{- if ne $lastYear "" -}}</ol></div>{{- end -}}
+      {{- $count := len (where $sorted "year" $currentYear) -}}
+      <div class="pub-group" data-reveal>
+        <h3 class="pub-year-head">
+          <span class="pub-year">{{ $currentYear }}</span>
+          <span class="pub-count">{{ $count }} {{ cond (eq $count 1) "paper" "papers" }}</span>
+        </h3>
+        <ol class="pub-list">
+      {{- $lastYear = $currentYear -}}
+    {{- end -}}
+
+    {{- $authors := split ($p.authors | plainify) ";" -}}
+    {{- $hl := $p.highlight | default slice -}}
+
+    {{- /* Resolve the DOI, falling back to parsing it out of a doi.org link. */ -}}
+    {{- $doi := $p.doi -}}
+    {{- if and (not $doi) $p.link (hasPrefix $p.link "https://doi.org/") -}}
+      {{- $doi = replaceRE "^https?://(dx\\.)?doi\\.org/" "" $p.link -}}
+    {{- end -}}
+
+    {{- /* Plain-text citation for the copy button. */ -}}
+    {{- $citeAuthors := replace ($p.authors | plainify) ";" "," -}}
+    {{- $citeStr := printf "%s (%v). %s. %s." $citeAuthors $p.year ($p.title | plainify) ($p.journal | plainify) -}}
+    {{- if $doi -}}
+      {{- $citeStr = printf "%s https://doi.org/%s" $citeStr $doi -}}
+    {{- else if $p.link -}}
+      {{- $citeStr = printf "%s %s" $citeStr $p.link -}}
+    {{- end -}}
+
+    <li class="pub-item">
+      <div class="pub-body">
+        <h4 class="pub-title">
+          {{- if $p.link -}}
+            <a href="{{ $p.link }}" target="_blank" rel="noopener">{{ $p.title | plainify }}</a>
+          {{- else -}}
+            {{ $p.title | plainify }}
+          {{- end -}}
+        </h4>
+        <p class="pub-authors">
+          {{- range $i, $name := $authors -}}
+            {{- $trim := trim $name " " -}}
+            {{- if in $hl $trim -}}<span class="author-highlight">{{ $trim }}</span>{{ else }}{{ $trim }}{{ end -}}
+            {{- if lt (add $i 1) (len $authors) -}}, {{ end -}}
+          {{- end -}}
+        </p>
+        {{- with $p.summary }}<p class="pub-summary">{{ . }}</p>{{- end -}}
+        <div class="pub-meta">
+          <span class="pub-source">
+            {{- if $.Preprint }}<span class="pub-badge">Preprint</span> {{ end -}}
+            <span class="pub-journal">{{ $p.journal | plainify }}</span> · {{ $p.year }}
+            {{- with $doi }} · <a class="pub-doi" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">{{ . }}</a>{{ end -}}
+          </span>
+          <span class="pub-actions">
+            {{- if $p.link -}}
+            <a class="pub-link" href="{{ $p.link }}" target="_blank" rel="noopener">
+              View paper<span class="visually-hidden">: {{ $p.title | plainify }}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+            {{- end -}}
+            <button class="pub-copy-btn" type="button" aria-label="Copy citation for {{ $p.title | plainify }}" data-citation="{{ $citeStr }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span class="pub-copy-label">Cite</span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </li>
+  {{- end -}}
+  {{- if ne $lastYear "" -}}</ol></div>{{- end -}}
+</section>
+{{- end -}}

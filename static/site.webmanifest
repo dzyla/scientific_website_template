@@ -1,0 +1,28 @@
+{
+  "name": "Zyla Lab",
+  "short_name": "Zyla Lab",
+  "description": "Structural Dynamics of Molecular Machines — University of Colorado Anschutz",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#8B6508",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

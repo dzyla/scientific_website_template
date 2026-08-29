@@ -1,25 +1,75 @@
 [
   {
     "title": "A Zika virus vaccine with E protein fusion loop mutations protects via CD8+ T cells",
-    "authors": "Kantinan Chuensirikulchai; Qin Hui Li; Hsueh-han Lu; Julia Timis; Manuel Montano; Luke Eder; Pradip Bhandari; Dawid Zyla; Maximilian Bunz; Henry Madany; Rubens Prince Dos Santos Alves; Paolla Beatriz Almeida Pinto; Erin Maule; Michael Nguyen; Erica Ollmann Saphire; Lakshmanane Premkumar; Annie Elong Ngono; Sujan Shresta",
+    "authors": "Kantinan Chuensirikulchai; Qin Hui Li; Hsueh-han Lu; Julia Timis; Manuel Montano; Luke Eder; Pradip Bhandari; Dawid S. Zyla; Maximilian Bunz; Henry Madany; Rubens Prince Dos Santos Alves; Paolla Beatriz Almeida Pinto; Erin Maule; Michael Nguyen; Erica Ollmann Saphire; Lakshmanane Premkumar; Annie Elong Ngono; Sujan Shresta",
     "journal": "Nature Microbiology",
     "year": 2026,
     "highlight": [
-      "Dawid Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1038/s41564-026-02465-6",
-    "link": "https://doi.org/10.1038/s41564-026-02465-6"
+    "link": "https://doi.org/10.1038/s41564-026-02465-6",
+    "preprint": false
+  },
+  {
+    "title": "Antigenic landscape of rabies and related lyssaviruses revealed by cryo-EM",
+    "authors": "Heather M. Callaway; Dawid S. Zyla; Kathryn M. Hastie; Stephanie S. Harkins; Shanika Kothalawalage; Nimasha Samarasinghe; Alexander Flynn; Chitra Hariharan; Jieyun Yin; Davide Corti; Herve Bourhy; Scott K. Dessain; Erica Ollmann Saphire",
+    "journal": "bioRxiv",
+    "year": 2026,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.64898/2026.01.14.699513",
+    "link": "https://doi.org/10.64898/2026.01.14.699513",
+    "preprint": true
   },
   {
     "title": "Human neutralizing antibodies targeting the measles virus hemagglutinin and fusion surface proteins.",
-    "authors": "Marissa Acciani; Dawid Zyla; Gele Niemeyer; Stephanie Harkins; Diptiben Parekh; Emily Pawlack; Davide Lacarbonara; Dhvanir Kansara; Margaret E. Ackerman; Stefan Niewiesk; Matteo Porotto; Kathryn M. Hastie; Erica Ollmann Saphire",
+    "authors": "Marissa Acciani; Dawid S. Zyla; Gele Niemeyer; Stephanie Harkins; Diptiben Parekh; Emily Pawlack; Davide Lacarbonara; Dhvanir Kansara; Margaret E. Ackerman; Stefan Niewiesk; Matteo Porotto; Kathryn M. Hastie; Erica Ollmann Saphire",
     "journal": "Cell host & microbe",
     "year": 2026,
     "highlight": [
-      "Dawid Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1016/j.chom.2026.04.010",
-    "link": "https://doi.org/10.1016/j.chom.2026.04.010"
+    "link": "https://doi.org/10.1016/j.chom.2026.04.010",
+    "preprint": false
+  },
+  {
+    "title": "Structural and mechanistic basis for antibody neutralization of the measles fusion protein",
+    "authors": "Dawid S. Zyla; Roberta Della Marca; Davide Lacarbonara; Gele Niemeyer; Gillian Zipursky; Laura Di Clemente; Mare H. L. Verbruggen; Laura L. A. van Dijk; Oscar Martinez Ceh; Gabriella Jonathan-Trakht; Gavreel Kalantarov; Marissa Acciani; Giulia Laterza; Dariia Vyshenska; Cameron Leedale; Emily Pawlack; Kathryn M. Hastie; Branka Horvat; Rik L. de Swart; Rory D. de Vries; Alexander L. Greninger; Stefan Niewiesk; Erica Ollmann Saphire; Matteo Porotto",
+    "journal": "Nature Communications",
+    "year": 2026,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1038/s41467-026-71373-4",
+    "link": "https://doi.org/10.1038/s41467-026-71373-4",
+    "preprint": false
+  },
+  {
+    "title": "How herpes is assembled",
+    "authors": "Dawid S. Zyla",
+    "journal": "eLife",
+    "year": 2025,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.7554/eLife.106419",
+    "link": "https://doi.org/10.7554/eLife.106419",
+    "preprint": false
+  },
+  {
+    "title": "Human endogenous retrovirus K (HERV-K) envelope structures in pre- and post-fusion by cryo-EM",
+    "authors": "Tomas  Mustelin; Chitra  Hariharan; Stephanie  Harkins; Roshan Raj  Rajamanickam; Kathryn  Hastie; Diptiben  Parekh; Chen  Sun; Patrick  Penalosa; Cassandra  Yu; Elise  Wilson; Ruben  Diaz Avalos; Victoria Irene Lewis; Fatemeh  Moadab; Jeremy  Shek; Erica Ollmann Saphire; Dawid S. Zyla; Kelly Christine Lee Shaffer",
+    "journal": "Science Advances",
+    "year": 2025,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1126/sciadv.ady8168",
+    "link": "https://doi.org/10.1126/sciadv.ady8168",
+    "preprint": false
   },
   {
     "title": "Stabilized Full-Length Measles Fusion Protein Elicits Potent Immunity and Protection In Vivo",
@@ -30,84 +80,32 @@
       "Dawid S. Zyla"
     ],
     "doi": "10.1101/2025.10.07.681039",
-    "link": "https://doi.org/10.1101/2025.10.07.681039"
-  },
-  {
-    "title": "Structural and Mechanistic Basis for Antibody Neutralization of the Measles Fusion Protein",
-    "authors": "Dawid S. Zyla; Roberta Della Marca; Davide Lacarbonara; Gele Niemeyer; Gillian Zipursky; Laura Di Clemente; Gabriella Jonathan-Trakht; Gavreel Kalantarov; Marissa Acciani; Giulia Laterza; Dariia Vyshenska; Kathryn M Hastie; Branka Horvat; Alexander L. Greninger; Stefan Niewiesk; Erica Ollmann Saphire; Matteo Porotto",
-    "journal": "bioRxiv",
-    "year": 2025,
-    "highlight": [
-      "Dawid S. Zyla"
-    ],
-    "doi": "10.1101/2025.09.11.675466",
-    "link": "https://doi.org/10.1101/2025.09.11.675466"
-  },
-  {
-    "title": "Uncovering the features of Measles-targeting human antibodies elicited by the MMR vaccine",
-    "authors": "Marissa Acciani; Dawid Zyla; Gele Niemeyer; Stephanie Harkins; Diptiben Parekh; Emily Pawlack; Davide LaCarbonara; Stefan Niewiesk; Matteo Porotto; Kathryn M. Hastie; Erica Ollmann Saphire",
-    "journal": "bioRxiv",
-    "year": 2025,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1101/2025.09.09.675230",
-    "link": "https://doi.org/10.1101/2025.09.09.675230"
-  },
-  {
-    "title": "Human endogenous retrovirus K (HERV-K) envelope structures in pre- and post-fusion by cryo-EM",
-    "authors": "Tomas  Mustelin; Chitra  Hariharan; Stephanie  Harkins; Roshan Raj  Rajamanickam; Kathryn  Hastie; Diptiben  Parekh; Chen  Sun; Patrick  Penalosa; Cassandra  Yu; Elise  Wilson; Ruben  Diaz Avalos; Victoria Irene Lewis; Fatemeh  Moadab; Jeremy  Shek; Erica Ollmann Saphire; Dawid S Zyla; Kelly Christine Lee Shaffer",
-    "journal": "Science Advances",
-    "year": 2025,
-    "highlight": [
-      "Dawid S Zyla"
-    ],
-    "doi": "10.1126/sciadv.ady8168",
-    "link": "https://doi.org/10.1126/sciadv.ady8168"
+    "link": "https://doi.org/10.1101/2025.10.07.681039",
+    "preprint": true
   },
   {
     "title": "Structure of a SARS-CoV-2 spike S2 subunit in a pre-fusion, open conformation.",
-    "authors": "Eduardo Olmedillas; Fernanda Ana-Sosa-Batiz; Kathryn M Hastie; Michelle A Zandonatti; Roshan R Rajamanickam; Ruben Diaz Avalos; Stephanie S Harkins; Sujan Shresta; Dawid Zyla; Erica Ollmann Saphire",
+    "authors": "Eduardo Olmedillas; Fernanda Ana-Sosa-Batiz; Kathryn M Hastie; Michelle A Zandonatti; Roshan R Rajamanickam; Ruben Diaz Avalos; Stephanie S Harkins; Sujan Shresta; Dawid S. Zyla; Erica Ollmann Saphire",
     "journal": "Cell reports",
     "year": 2025,
     "highlight": [
-      "Dawid Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1016/j.celrep.2025.116052",
-    "link": "https://doi.org/10.1016/j.celrep.2025.116052"
+    "link": "https://doi.org/10.1016/j.celrep.2025.116052",
+    "preprint": false
   },
   {
-    "title": "Human endogenous retrovirus K (HERV-K) envelope structures in pre- and post-fusion by Cryo-EM",
-    "authors": "Jeremy Shek; Chen Sun; Elise M. Wilson; Fatemeh Moadab; Kathryn M. Hastie; Roshan R. Rajamanickam; Patrick J. Penalosa; Stephanie S. Harkins; Diptiben Parekh; Chitra Hariharan; Dawid S. Zyla; Cassandra Yu; Kelly C.L. Shaffer; Victoria I. Lewis; Ruben Diaz Avalos; Tomas Mustelin; Erica Ollmann Saphire",
+    "title": "Uncovering the features of Measles-targeting human antibodies elicited by the MMR vaccine",
+    "authors": "Marissa Acciani; Dawid S. Zyla; Gele Niemeyer; Stephanie Harkins; Diptiben Parekh; Emily Pawlack; Davide LaCarbonara; Stefan Niewiesk; Matteo Porotto; Kathryn M. Hastie; Erica Ollmann Saphire",
     "journal": "bioRxiv",
     "year": 2025,
     "highlight": [
       "Dawid S. Zyla"
     ],
-    "doi": "10.1101/2025.04.04.647320",
-    "link": "https://doi.org/10.1101/2025.04.04.647320"
-  },
-  {
-    "title": "How herpes is assembled",
-    "authors": "Dawid S Zyla",
-    "journal": "eLife",
-    "year": 2025,
-    "highlight": [
-      "Dawid S Zyla"
-    ],
-    "doi": "10.7554/eLife.106419",
-    "link": "https://doi.org/10.7554/eLife.106419"
-  },
-  {
-    "title": "Intracellular Ebola virus nucleocapsid assembly revealed by in situ cryo-electron tomography.",
-    "authors": "Reika Watanabe; Dawid Zyla; Diptiben Parekh; Connor Hong; Ying Jones; Sharon L Schendel; William Wan; Guillaume Castillon; Erica Ollmann Saphire",
-    "journal": "Cell",
-    "year": 2024,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1016/j.cell.2024.08.044",
-    "link": "https://doi.org/10.1016/j.cell.2024.08.044"
+    "doi": "10.1101/2025.09.09.675230",
+    "link": "https://doi.org/10.1101/2025.09.09.675230",
+    "preprint": true
   },
   {
     "title": "A neutralizing antibody prevents postfusion transition of measles virus fusion protein",
@@ -118,193 +116,128 @@
       "Dawid S. Zyla"
     ],
     "doi": "10.1126/science.adm8693",
-    "link": "https://doi.org/10.1126/science.adm8693"
+    "link": "https://doi.org/10.1126/science.adm8693",
+    "preprint": false
+  },
+  {
+    "title": "Intracellular Ebola virus nucleocapsid assembly revealed by in situ cryo-electron tomography.",
+    "authors": "Reika Watanabe; Dawid S. Zyla; Diptiben Parekh; Connor Hong; Ying Jones; Sharon L Schendel; William Wan; Guillaume Castillon; Erica Ollmann Saphire",
+    "journal": "Cell",
+    "year": 2024,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1016/j.cell.2024.08.044",
+    "link": "https://doi.org/10.1016/j.cell.2024.08.044",
+    "preprint": false
   },
   {
     "title": "The assembly platform FimD is required to obtain the most stable quaternary structure of type 1 pili.",
-    "authors": "Beat H Meier; Gabriel Waksman; Dawid S Zyla; Christoph Giese; Manuela K Hospenthal; Rudi Glockshuber; Thomas Wiegand; Paul Bachmann; Rafal Zdanowicz",
+    "authors": "Beat H Meier; Gabriel Waksman; Dawid S. Zyla; Christoph Giese; Manuela K Hospenthal; Rudi Glockshuber; Thomas Wiegand; Paul Bachmann; Rafal Zdanowicz",
     "journal": "Nature communications",
     "year": 2024,
     "highlight": [
-      "Dawid S Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1038/s41467-024-47212-9",
-    "link": "https://doi.org/10.1038/s41467-024-47212-9"
-  },
-  {
-    "title": "Intracellular Ebola Virus nucleocapsid assembly revealed by in situ cryo-electron tomography.",
-    "authors": "Reika Watanabe; Dawid Zyla; Diptiben Parekh; Connor Hong; Ying Jones; Sharon L. Schendel; Willian Wan; Guillaume Castillon; Erica Ollmann Saphire",
-    "journal": "bioRxiv",
-    "year": 2023,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1101/2023.12.01.569666",
-    "link": "https://doi.org/10.1101/2023.12.01.569666"
+    "link": "https://doi.org/10.1038/s41467-024-47212-9",
+    "preprint": false
   },
   {
     "title": "Potent Omicron-neutralizing antibodies isolated from a patient vaccinated 6 months before Omicron emergence.",
-    "authors": "Chitra Hariharan; Erica Ollmann Saphire; Erin Maule; Fernanda Ana-Sosa-Batiz; Hal Wasserman; Kristen M Valentine; Michelle A Zandonatti; Robyn Miller; Stephanie S Harkins; Sujan Shresta; Dawid S Zyla; Kathryn M Hastie; Kenneth Kim; Xiaoying Yu",
+    "authors": "Chitra Hariharan; Erica Ollmann Saphire; Erin Maule; Fernanda Ana-Sosa-Batiz; Hal Wasserman; Kristen M Valentine; Michelle A Zandonatti; Robyn Miller; Stephanie S Harkins; Sujan Shresta; Dawid S. Zyla; Kathryn M Hastie; Kenneth Kim; Xiaoying Yu",
     "journal": "Cell reports",
     "year": 2023,
     "highlight": [
-      "Dawid S Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1016/j.celrep.2023.112421",
-    "link": "https://doi.org/10.1016/j.celrep.2023.112421"
+    "link": "https://doi.org/10.1016/j.celrep.2023.112421",
+    "preprint": false
   },
   {
     "title": "Structural basis for antibody-mediated neutralization of lymphocytic choriomeningitis virus.",
-    "authors": "Kathryn M Hastie; Ruben Diaz Avalos; Shane Crotty; Sharon L Schendel; Tierra K Buck; Zeli Zhang; Dawid S Zyla; Erica Ollmann Saphire; Alex Moon-Walker; Haoyang Li",
+    "authors": "Kathryn M Hastie; Ruben Diaz Avalos; Shane Crotty; Sharon L Schendel; Tierra K Buck; Zeli Zhang; Dawid S. Zyla; Erica Ollmann Saphire; Alex Moon-Walker; Haoyang Li",
     "journal": "Cell chemical biology",
     "year": 2023,
     "highlight": [
-      "Dawid S Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1016/j.chembiol.2023.03.005",
-    "link": "https://doi.org/10.1016/j.chembiol.2023.03.005"
-  },
-  {
-    "title": "Potent, Omicron-Neutralizing Antibodies Isolated From a Patient Vaccinated 6 Months Before Omicron Emergence",
-    "authors": "Kathryn Hastie; Xiaoying Yu; Fernanda  Ana Sosa Batiz; Dawid Zyla; Stephanie  S. Harkins; Chitra Hariharan; Hal Wasserman; Michelle Zandonatti; Robyn Miller; Erin Maule; Kenneth Kim; Kristen Valentine; Sujan Shresta; Erica  Ollmann Saphire",
-    "journal": "Preprint",
-    "year": 2023,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.2139/ssrn.4327436",
-    "link": "https://doi.org/10.2139/ssrn.4327436"
-  },
-  {
-    "title": "Potent, Omicron-Neutralizing Antibodies Isolated From a Patient Vaccinated 6 Months Before Omicron Emergence",
-    "authors": "Hastie, K.M.; Yu, X.; Batiz, F.A.S.; Zyla, D.; Harkins, S.S.; Hariharan, C.; Wasserman, H.; Zandonatti, M.A.; Miller, R.; Maule, E.; Kim, K.; Valentine, K.; Shresta, S.; Saphire, E.O.",
-    "journal": "SSRN",
-    "year": 2023,
-    "highlight": [
-      "Zyla, D."
-    ],
-    "link": "http://www.scopus.com/inward/record.url?eid=2-s2.0-85146836910&partnerID=MN8TOARS"
+    "link": "https://doi.org/10.1016/j.chembiol.2023.03.005",
+    "preprint": false
   },
   {
     "title": "A cocktail of protective antibodies subverts the dense glycan shield of Lassa virus",
-    "authors": "Haoyang Li; Tierra Buck; Michelle Zandonatti; Jieyun Yin; Alex Moon-Walker; Jingru Fang; Anatoliy Koval; Megan L. Heinrich; Megan M. Rowland; Ruben Diaz Avalos; Sharon L. Schendel; Diptiben Parekh; Dawid Zyla; Adrian Enriquez; Stephanie Harkins; Brian Sullivan; Victoria Smith; Onyeka Chukwudozie; Reika Watanabe; James E. Robinson; Robert F. Garry; Luis M. Branco; Kathryn M. Hastie; Erica Ollmann Saphire",
+    "authors": "Haoyang Li; Tierra Buck; Michelle Zandonatti; Jieyun Yin; Alex Moon-Walker; Jingru Fang; Anatoliy Koval; Megan L. Heinrich; Megan M. Rowland; Ruben Diaz Avalos; Sharon L. Schendel; Diptiben Parekh; Dawid S. Zyla; Adrian Enriquez; Stephanie Harkins; Brian Sullivan; Victoria Smith; Onyeka Chukwudozie; Reika Watanabe; James E. Robinson; Robert F. Garry; Luis M. Branco; Kathryn M. Hastie; Erica Ollmann Saphire",
     "journal": "Science Translational Medicine",
-    "year": 2022,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1126/scitranslmed.abq0991",
-    "link": "https://doi.org/10.1126/scitranslmed.abq0991"
-  },
-  {
-    "title": "Structural basis for antibody-mediated neutralization of Lymphocytic choriomeningitis virus",
-    "authors": "Alex Moon-Walker; Zeli Zhang; Dawid S. Zyla; Tierra K. Buck; Haoyang Li; Ruben Diaz Avalos; Sharon L. Schendel; Kathryn M. Hastie; Shane Crotty; Erica Ollmann Saphire",
-    "journal": "bioRxiv",
     "year": 2022,
     "highlight": [
       "Dawid S. Zyla"
     ],
-    "doi": "10.1101/2022.07.17.500368",
-    "link": "https://doi.org/10.1101/2022.07.17.500368"
+    "doi": "10.1126/scitranslmed.abq0991",
+    "link": "https://doi.org/10.1126/scitranslmed.abq0991",
+    "preprint": false
   },
   {
     "title": "Structure of the rabies virus glycoprotein trimer bound to a prefusion-specific neutralizing antibody.",
-    "authors": "Alyssa Agarwal; Dawid Zyla; Erica Ollmann Saphire; Hervé Bourhy; Kathryn M Hastie; Davide Corti; Guilherme Dias de Melo; Florence Larrous; Ruben Diaz Avalos; Heather M Callaway",
+    "authors": "Alyssa Agarwal; Dawid S. Zyla; Erica Ollmann Saphire; Hervé Bourhy; Kathryn M Hastie; Davide Corti; Guilherme Dias de Melo; Florence Larrous; Ruben Diaz Avalos; Heather M Callaway",
     "journal": "Science advances",
     "year": 2022,
     "highlight": [
-      "Dawid Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1126/sciadv.abp9151",
-    "link": "https://doi.org/10.1126/sciadv.abp9151"
-  },
-  {
-    "title": "Structure of the rabies virus glycoprotein trimer bound to a pre-fusion specific neutralizing antibody",
-    "authors": "Heather M Callaway; Dawid Zyla; Kathryn M. Hastie; Ruben Diaz Avalos; Alyssa Agarwal; Hervé Bourhy; Davide Corti; Erica Ollmann Saphire",
-    "journal": "bioRxiv",
-    "year": 2021,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1101/2021.11.16.468852",
-    "link": "https://doi.org/10.1101/2021.11.16.468852"
-  },
-  {
-    "title": "Defining variant-resistant epitopes targeted by SARS-CoV-2 antibodies: A global consortium study",
-    "authors": "Kathryn M. Hastie; Haoyang Li; Daniel Bedinger; Sharon L. Schendel; S. Moses Dennison; Kan Li; Vamseedhar Rayaprolu; Xiaoying Yu; Colin Mann; Michelle Zandonatti; Ruben Diaz Avalos; Dawid Zyla; Tierra Buck; Sean Hui; Kelly Shaffer; Chitra Hariharan; Jieyun Yin; Eduardo Olmedillas; Adrian Enriquez; Diptiben Parekh; Milite Abraha; Elizabeth Feeney; Gillian Q. Horn; Yoann Aldon; Hanif Ali; Sanja Aracic; Ronald R. Cobb; Ross S. Federman; Joseph M. Fernandez; Jacob Glanville; Robin Green; Gevorg Grigoryan; Ana G. Lujan Hernandez; David D. Ho; Kuan-Ying A. Huang; John Ingraham; Weidong Jiang; Paul Kellam; Cheolmin Kim; Minsoo Kim; Hyeong Mi Kim; Chao Kong; Shelly J. Krebs; Fei Lan; Guojun Lang; Sooyoung Lee; Cheuk Lun Leung; Junli Liu; Yanan Lu; Anna MacCamy; Andrew T. McGuire; Anne L. Palser; Terence H. Rabbitts; Zahra Rikhtegaran Tehrani; Mohammad M. Sajadi; Rogier W. Sanders; Aaron K. Sato; Liang Schweizer; Jimin Seo; Bingqing Shen; Jonne L. Snitselaar; Leonidas Stamatatos; Yongcong Tan; Milan T. Tomic; Marit J. van Gils; Sawsan Youssef; Jian Yu; Tom Z. Yuan; Qian Zhang; Bjoern Peters; Georgia D. Tomaras; Timothy Germann; Erica Ollmann Saphire",
-    "journal": "Science",
-    "year": 2021,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1126/science.abh2315",
-    "link": "https://doi.org/10.1126/science.abh2315"
-  },
-  {
-    "title": "Biomolecular solid-state NMR spectroscopy at 1200 MHz: the gain in resolution",
-    "authors": "Morgane Callon; Alexander A. Malär; Sara Pfister; Václav Římal; Marco E. Weber; Thomas Wiegand; Johannes Zehnder; Matías Chávez; Riccardo Cadalbert; Rajdeep Deb; Alexander Däpp; Marie-Laure Fogeron; Andreas Hunkeler; Lauriane Lecoq; Anahit Torosyan; Dawid Zyla; Rudolf Glockshuber; Stefanie Jonas; Michael Nassal; Matthias Ernst; Anja Böckmann; Beat H. Meier",
-    "journal": "Journal of Biomolecular NMR",
-    "year": 2021,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1007/s10858-021-00373-x",
-    "link": "https://doi.org/10.1007/s10858-021-00373-x"
-  },
-  {
-    "title": "Biomolecular solid-state NMR spectroscopy at highest field: the gain in resolution at 1200 MHz",
-    "authors": "Morgane Callon; Alexander A. Malär; Sara Pfister; Václav Rímal; Marco E. Weber; Thomas Wiegand; Johannes Zehnder; Matías Chávez; Rajdeep Deb; Riccardo Cadalbert; Alexander Däpp; Marie-Laure Fogeron; Andreas Hunkeler; Lauriane Lecoq; Anahit Torosyan; Dawid Zyla; Rudolf Glockshuber; Stefanie Jonas; Michael Nassal; Matthias Ernst; Anja Böckmann; Beat H. Meier",
-    "journal": "bioRxiv",
-    "year": 2021,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1101/2021.03.31.437892",
-    "link": "https://doi.org/10.1101/2021.03.31.437892"
+    "link": "https://doi.org/10.1126/sciadv.abp9151",
+    "preprint": false
   },
   {
     "title": "A stapled peptide mimetic of the CtIP tetramerization motif interferes with double-strand break repair and replication fork protection.",
-    "authors": "Christine von Aesch; Oliver J Wilkinson; R. Scott Williams; Dawid Zyla; Sara Przetocka; Anika Kuster; Christina Zurfluh; Nour L. Mozaffari; Mark S. Dillingham; Jessica L. Wojtaszek; Alessandro A. Sartori",
+    "authors": "Christine von Aesch; Oliver J Wilkinson; R. Scott Williams; Dawid S. Zyla; Sara Przetocka; Anika Kuster; Christina Zurfluh; Nour L. Mozaffari; Mark S. Dillingham; Jessica L. Wojtaszek; Alessandro A. Sartori",
     "journal": "Science advances",
     "year": 2021,
     "highlight": [
-      "Dawid Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1126/sciadv.abc6381",
-    "link": "https://doi.org/10.1126/sciadv.abc6381"
+    "link": "https://doi.org/10.1126/sciadv.abc6381",
+    "preprint": false
+  },
+  {
+    "title": "Biomolecular solid-state NMR spectroscopy at 1200 MHz: the gain in resolution",
+    "authors": "Morgane Callon; Alexander A. Malär; Sara Pfister; Václav Římal; Marco E. Weber; Thomas Wiegand; Johannes Zehnder; Matías Chávez; Riccardo Cadalbert; Rajdeep Deb; Alexander Däpp; Marie-Laure Fogeron; Andreas Hunkeler; Lauriane Lecoq; Anahit Torosyan; Dawid S. Zyla; Rudolf Glockshuber; Stefanie Jonas; Michael Nassal; Matthias Ernst; Anja Böckmann; Beat H. Meier",
+    "journal": "Journal of Biomolecular NMR",
+    "year": 2021,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1007/s10858-021-00373-x",
+    "link": "https://doi.org/10.1007/s10858-021-00373-x",
+    "preprint": false
+  },
+  {
+    "title": "Defining variant-resistant epitopes targeted by SARS-CoV-2 antibodies: A global consortium study",
+    "authors": "Kathryn M. Hastie; Haoyang Li; Daniel Bedinger; Sharon L. Schendel; S. Moses Dennison; Kan Li; Vamseedhar Rayaprolu; Xiaoying Yu; Colin Mann; Michelle Zandonatti; Ruben Diaz Avalos; Dawid S. Zyla; Tierra Buck; Sean Hui; Kelly Shaffer; Chitra Hariharan; Jieyun Yin; Eduardo Olmedillas; Adrian Enriquez; Diptiben Parekh; Milite Abraha; Elizabeth Feeney; Gillian Q. Horn; Yoann Aldon; Hanif Ali; Sanja Aracic; Ronald R. Cobb; Ross S. Federman; Joseph M. Fernandez; Jacob Glanville; Robin Green; Gevorg Grigoryan; Ana G. Lujan Hernandez; David D. Ho; Kuan-Ying A. Huang; John Ingraham; Weidong Jiang; Paul Kellam; Cheolmin Kim; Minsoo Kim; Hyeong Mi Kim; Chao Kong; Shelly J. Krebs; Fei Lan; Guojun Lang; Sooyoung Lee; Cheuk Lun Leung; Junli Liu; Yanan Lu; Anna MacCamy; Andrew T. McGuire; Anne L. Palser; Terence H. Rabbitts; Zahra Rikhtegaran Tehrani; Mohammad M. Sajadi; Rogier W. Sanders; Aaron K. Sato; Liang Schweizer; Jimin Seo; Bingqing Shen; Jonne L. Snitselaar; Leonidas Stamatatos; Yongcong Tan; Milan T. Tomic; Marit J. van Gils; Sawsan Youssef; Jian Yu; Tom Z. Yuan; Qian Zhang; Bjoern Peters; Georgia D. Tomaras; Timothy Germann; Erica Ollmann Saphire",
+    "journal": "Science",
+    "year": 2021,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1126/science.abh2315",
+    "link": "https://doi.org/10.1126/science.abh2315",
+    "preprint": false
   },
   {
     "title": "A metabolite binding protein moonlights as a bile‐responsive chaperone",
-    "authors": "Changhan Lee; Patrick Betschinger; Kevin Wu; Dawid S Żyła; Rudi Glockshuber; James CA Bardwell",
+    "authors": "Changhan Lee; Patrick Betschinger; Kevin Wu; Dawid S. Zyla; Rudi Glockshuber; James CA Bardwell",
     "journal": "The EMBO Journal",
     "year": 2020,
     "highlight": [
-      "Dawid S Żyła"
+      "Dawid S. Zyla"
     ],
     "doi": "10.15252/embj.2019104231",
-    "link": "https://doi.org/10.15252/embj.2019104231"
-  },
-  {
-    "title": "The cryo-EM structure of the human uromodulin filament core reveals a unique assembly mechanism",
-    "authors": "Anne Kipp; Dawid Zyla; Jessica J Stanisich; Martin Pilhofer; Pavel Afanasyev; Daniel Boehringer; Eric Olinger; Jingwei Xu; Rudi Glockshuber; Olivier Devuyst",
-    "journal": "eLife",
-    "year": 2020,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.7554/elife.60265",
-    "link": "https://doi.org/10.7554/elife.60265"
-  },
-  {
-    "title": "Donor strand sequence, rather than donor strand orientation, determines the stability and non-equilibrium folding of the type 1 pilus subunit FimA",
-    "authors": "Dawid Zyla; Blanca Echeverria; Rudi Glockshuber",
-    "journal": "The Journal of biological chemistry",
-    "year": 2020,
-    "highlight": [
-      "Dawid Zyla"
-    ],
-    "doi": "10.1074/jbc.ra120.014324",
-    "link": "https://doi.org/10.1074/jbc.ra120.014324"
+    "link": "https://doi.org/10.15252/embj.2019104231",
+    "preprint": false
   },
   {
     "title": "Architecture and function of human uromodulin filaments in urinary tract infections",
@@ -315,28 +248,55 @@
       "Dawid S. Zyla"
     ],
     "doi": "10.1126/science.aaz9866",
-    "link": "https://doi.org/10.1126/science.aaz9866"
+    "link": "https://doi.org/10.1126/science.aaz9866",
+    "preprint": false
+  },
+  {
+    "title": "Donor strand sequence, rather than donor strand orientation, determines the stability and non-equilibrium folding of the type 1 pilus subunit FimA",
+    "authors": "Dawid S. Zyla; Blanca Echeverria; Rudi Glockshuber",
+    "journal": "The Journal of biological chemistry",
+    "year": 2020,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.1074/jbc.ra120.014324",
+    "link": "https://doi.org/10.1074/jbc.ra120.014324",
+    "preprint": false
+  },
+  {
+    "title": "The cryo-EM structure of the human uromodulin filament core reveals a unique assembly mechanism",
+    "authors": "Anne Kipp; Dawid S. Zyla; Jessica J Stanisich; Martin Pilhofer; Pavel Afanasyev; Daniel Boehringer; Eric Olinger; Jingwei Xu; Rudi Glockshuber; Olivier Devuyst",
+    "journal": "eLife",
+    "year": 2020,
+    "highlight": [
+      "Dawid S. Zyla"
+    ],
+    "doi": "10.7554/elife.60265",
+    "link": "https://doi.org/10.7554/elife.60265",
+    "preprint": false
   },
   {
     "title": "Alternative folding to a monomer or homopolymer is a common feature of the type 1 pilus subunit FimA from enteroinvasive bacteria",
-    "authors": "Dawid S. Żyła; Andrea E. Prota; Guido Capitani; Rudi Glockshuber",
+    "authors": "Dawid S. Zyla; Andrea E. Prota; Guido Capitani; Rudi Glockshuber",
     "journal": "Journal of Biological Chemistry",
     "year": 2019,
     "highlight": [
-      "Dawid S. Żyła"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1074/jbc.RA119.008610",
-    "link": "https://doi.org/10.1074/jbc.RA119.008610"
+    "link": "https://doi.org/10.1074/jbc.RA119.008610",
+    "preprint": false
   },
   {
     "title": "The Cryoelectron Microscopy structure of the Type 1 Chaperone-Usher Pilus Rod",
-    "authors": "Manuela K. Hospenthal; Dawid Zyla; Tiago R. D. Costa; Adam Redzej; Christoph Giese; James Lillington; Rudi Glockshuber; Gabriel Waksman",
+    "authors": "Manuela K. Hospenthal; Dawid S. Zyla; Tiago R. D. Costa; Adam Redzej; Christoph Giese; James Lillington; Rudi Glockshuber; Gabriel Waksman",
     "journal": "Structure (London, England : 1993)",
     "year": 2017,
     "highlight": [
-      "Dawid Zyla"
+      "Dawid S. Zyla"
     ],
     "doi": "10.1016/j.str.2017.10.004",
-    "link": "https://doi.org/10.1016/j.str.2017.10.004"
+    "link": "https://doi.org/10.1016/j.str.2017.10.004",
+    "preprint": false
   }
 ]

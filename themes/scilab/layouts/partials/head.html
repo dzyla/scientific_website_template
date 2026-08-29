@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>:root { --highlight-color: {{ .Site.Params.highlightColor | default "#cfb87c" }}; }</style>
+  {{/* The accent custom properties are emitted once, in head/css.html. */}}
 
   {{/* Page <title> — include site name while avoiding duplication on the homepage */}}
   {{ $siteTitle := .Site.Title }}
@@ -28,28 +28,50 @@
     <meta name="keywords" content="{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">
   {{- end -}}
 
-  {{/* Resolve og:image through asset pipeline so the correct served URL is used */}}
+  {{/* Resolve og:image through asset pipeline so the correct served URL is used.
+       Set `og_image` (or `image`, which team members already use for their
+       portrait) in front matter to give a page its own share preview; anything
+       unset falls back to the site-wide social_image. */}}
   {{ $ogImagePath := .Params.og_image | default .Params.image | default .Site.Params.social_image | default .Site.Params.organization_logo }}
   {{ $ogImage := "" }}
+  {{ $ogImageW := 0 }}
+  {{ $ogImageH := 0 }}
   {{ with $ogImagePath }}
     {{ $res := resources.GetMatch . }}
     {{ if $res }}
       {{/* JPEG keeps Open Graph cards small and universally previewable */}}
       {{ $res = $res.Resize "1200x jpg q82" }}
       {{ $ogImage = $res.Permalink }}
+      {{ $ogImageW = $res.Width }}
+      {{ $ogImageH = $res.Height }}
     {{ else }}
       {{ $ogImage = . | absURL }}
     {{ end }}
   {{ end }}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  {{/* Describes the picture, not the page — the two are different, and the
+       page description was previously doing double duty here. */}}
+  {{ $ogImageAlt := .Params.og_image_alt | default .Params.image_alt }}
+  {{ if and (not $ogImageAlt) .Params.image (eq .Section "team") }}
+    {{ $ogImageAlt = printf "Portrait of %s" (.Title | plainify) }}
+  {{ end }}
+  {{ $ogImageAlt = $ogImageAlt | default site.Params.social_image_alt }}
+
   <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
-  <link rel="alternate icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
-  <link rel="apple-touch-icon" href="{{ "favicon.png" | relURL }}">
+  <link rel="alternate icon" href="{{ "favicon.ico" | relURL }}" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
   <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
   <meta name="theme-color" content="{{ site.Params.highlightColor | default "#8B6508" }}">
+
+  {{/* RSS autodiscovery, so feed readers can find the news feed at all */}}
+  {{ range .AlternativeOutputFormats -}}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $siteTitle | plainify }} — {{ $pageHeading | plainify }}">
+  {{ end -}}
+  {{ with site.GetPage "news" -}}
+    {{ with .OutputFormats.Get "rss" -}}
+      <link rel="alternate" type="application/rss+xml" href="{{ .Permalink | safeURL }}" title="{{ site.Title }} — News">
+    {{ end -}}
+  {{ end -}}
 
   {{ partial "head/analytics.html" . }}
   {{ partial "head/css.html" . }}
@@ -75,9 +97,27 @@
   {{ with $ogImage }}
     <meta property="og:image" content="{{ . }}">
     <meta name="twitter:image" content="{{ . }}">
+    {{ if $ogImageW }}
+      <meta property="og:image:width" content="{{ $ogImageW }}">
+      <meta property="og:image:height" content="{{ $ogImageH }}">
+    {{ end }}
+    {{ with $ogImageAlt }}
+      <meta property="og:image:alt" content="{{ . | plainify }}">
+      <meta name="twitter:image:alt" content="{{ . | plainify }}">
+    {{ end }}
   {{ end }}
   <meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
   {{ with .Site.Params.twitter_handle }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+
+  {{/* Article timestamps for dated posts, so shares and feeds show when the
+       item was actually published rather than guessing. */}}
+  {{ if and (eq .Kind "page") (not .Date.IsZero) (not .Params.hide_date) }}
+    <meta property="article:published_time" content="{{ .Date | time.Format "2006-01-02T15:04:05Z07:00" }}">
+    {{ if and (not .Lastmod.IsZero) (ne .Lastmod .Date) }}
+      <meta property="article:modified_time" content="{{ .Lastmod | time.Format "2006-01-02T15:04:05Z07:00" }}">
+    {{ end }}
+    {{ with .Site.Params.author }}<meta property="article:author" content="{{ . }}">{{ end }}
+  {{ end }}
 
   <!-- Site verification (optional, set tokens in hugo.toml) -->
   {{ with site.Params.verification_google }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
@@ -87,6 +127,7 @@
   {{ partial "seo/organization.json.html" . }}
   {{ partial "seo/website.json.html" . }}
   {{ partial "seo/publications.json.html" . }}
+  {{ partial "seo/person.json.html" . }}
 
   <script>
     (function() {

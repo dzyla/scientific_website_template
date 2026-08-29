@@ -1,0 +1,46 @@
+{{ define "main" }}
+  <div class="page news-archive">
+    <header class="page-header">
+      <h1>{{ .Title }}</h1>
+      <p class="page-lead">Announcements, papers, and arrivals from the lab.</p>
+    </header>
+
+    {{ .Content }}
+
+    {{/* Same card treatment as the homepage widget, so the archive and the
+         front page read as one thing rather than two. */}}
+    {{ $pages := .Pages.ByDate.Reverse }}
+    {{ if $pages }}
+      {{ range $pages.GroupByDate "2006" }}
+        <section class="news-year-group" data-reveal>
+          <h2 class="news-year">{{ .Key }}</h2>
+          <div class="news-grid">
+            {{ range .Pages }}
+              <article class="news-card">
+                <div class="news-card-content">
+                  <div class="news-meta">
+                    <time class="news-date" datetime="{{ .Date | time.Format "2006-01-02" }}">
+                      {{ .Date.Format "Jan 02, 2006" }}
+                    </time>
+                    {{ with .Params.tags }}
+                      <div class="news-tags">
+                        {{ range first 1 . }}<span class="news-tag">{{ . }}</span>{{ end }}
+                      </div>
+                    {{ end }}
+                  </div>
+                  <h3 class="news-card-title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                  </h3>
+                  <p class="news-card-summary">{{ .Summary | plainify | truncate 160 }}</p>
+                  <div class="news-read-more" aria-hidden="true">&rarr;</div>
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    {{ else }}
+      <p>No news yet — check back soon.</p>
+    {{ end }}
+  </div>
+{{ end }}

@@ -1,5 +1,8 @@
 ---
 title: "Philosophy"
+og_image: "images/spark3.png"
+og_image_alt: "Illustration of antibodies engaging the glycoprotein surface of a virus particle."
+description: "How the Zyla Lab works: expectations, mentorship, and what we ask of each other."
 ---
 
 We are a data-driven lab built on scientific rigor and mutual respect. Our goal is to create an environment where scientists at every level, from students to specialists, can pursue thoughtful, careful research. We believe that true support comes from clear expectations, constructive feedback, and a shared commitment to excellence.

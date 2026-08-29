@@ -1,5 +1,8 @@
 ---
 title: "Lab Fun"
+# Unpublished: the copy and photos below are still placeholders from the
+# original template. Set draft: false once real content replaces them.
+draft: true
 ---
 
 We believe that a positive and collaborative lab environment fosters creativity and productivity. Here are some glimpses into our lab life:

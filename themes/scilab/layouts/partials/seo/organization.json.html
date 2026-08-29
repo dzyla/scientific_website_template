@@ -1,12 +1,62 @@
+{{- /*
+  Organization (ResearchOrganization) schema for the lab.
+
+  NOTE: the JSON must be piped through `safeJS`. Hugo treats the contents of a
+  <script> element as a JS context, so an unmarked `jsonify` result gets escaped
+  a second time and every string comes out wrapped in literal quotes.
+*/ -}}
 {{- $name := site.Params.organization_name | default site.Title -}}
-{{- $logo := site.Params.organization_logo | default "/favicon.svg" | relURL -}}
-{{- $url  := site.Params.organization_url  | default site.BaseURL -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": {{ $name | jsonify }},
-  "url": {{ $url | jsonify }},
-  "logo": {{ $logo | absURL | jsonify }}
-}
-</script>
+{{- $logo := site.Params.organization_logo | default "/favicon.svg" | relURL | absURL -}}
+{{- $url := site.Params.organization_url | default site.BaseURL -}}
+
+{{- $org := dict
+  "@context" "https://schema.org"
+  "@type" "ResearchOrganization"
+  "@id" (printf "%s#organization" $url)
+  "name" $name
+  "url" $url
+  "logo" $logo
+-}}
+
+{{- with site.Params.description -}}
+  {{- $org = merge $org (dict "description" .) -}}
+{{- end -}}
+
+{{- /* Deliberately no "email": the address is obfuscated everywhere else on
+       the site, and publishing it here in plain text would hand it to every
+       scraper and undo that. The phone number is already a plain tel: link. */ -}}
+{{- with site.Params.contact_phone -}}
+  {{- $org = merge $org (dict "telephone" .) -}}
+{{- end -}}
+
+{{- with site.Params.address -}}
+  {{- $addr := dict "@type" "PostalAddress" -}}
+  {{- $street := .street -}}
+  {{- if and $street .room -}}{{- $street = printf "%s, %s" $street .room -}}{{- end -}}
+  {{- with $street -}}{{- $addr = merge $addr (dict "streetAddress" .) -}}{{- end -}}
+  {{- with .city -}}{{- $addr = merge $addr (dict "addressLocality" .) -}}{{- end -}}
+  {{- with .state -}}{{- $addr = merge $addr (dict "addressRegion" .) -}}{{- end -}}
+  {{- with .zip -}}{{- $addr = merge $addr (dict "postalCode" .) -}}{{- end -}}
+  {{- with .country -}}{{- $addr = merge $addr (dict "addressCountry" .) -}}{{- end -}}
+  {{- $org = merge $org (dict "address" $addr) -}}
+{{- end -}}
+
+{{- with site.Params.institution_name -}}
+  {{- $parent := dict "@type" "CollegeOrUniversity" "name" . -}}
+  {{- with site.Params.institution_url -}}{{- $parent = merge $parent (dict "url" .) -}}{{- end -}}
+  {{- $org = merge $org (dict "parentOrganization" $parent) -}}
+{{- end -}}
+
+{{- with site.Params.institution_department -}}
+  {{- $org = merge $org (dict "department" (dict "@type" "Organization" "name" .)) -}}
+{{- end -}}
+
+{{- $sameAs := slice -}}
+{{- range (slice site.Params.scholar site.Params.orcid site.Params.github site.Params.linkedin site.Params.bluesky) -}}
+  {{- with . -}}{{- $sameAs = $sameAs | append . -}}{{- end -}}
+{{- end -}}
+{{- with $sameAs -}}
+  {{- $org = merge $org (dict "sameAs" .) -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>

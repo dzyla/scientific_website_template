@@ -149,8 +149,10 @@
 
 /* Primary (Gold) - Ensure High Contrast */
 .btn-primary-gold {
-    background: var(--accent); /* Now darker gold from config */
-    color: #fff; /* White text on dark gold */
+    background: var(--accent);
+    /* Not a hardcoded #fff: the gold inverts between themes, so the label has
+       to follow it (white on dark gold, near-black on light gold). */
+    color: var(--highlight-text, #fff);
     border: 1px solid transparent;
 }
 .btn-primary-gold:hover {

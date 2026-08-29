@@ -1,30 +1,77 @@
-{{- $page := .Page -}}
+{{- /*
+  Cross-fading image carousel.
+
+  @context {page}   Page       The calling page.
+  @context {slice}  Images     Either plain paths ("images/x.png") or maps with
+                               `src` and a descriptive `alt`. Prefer the maps —
+                               generic alt text like "Hero image 2" is useless
+                               to screen readers and to image search.
+  @context {string} AriaLabel  Label for the carousel region.
+  @context {string} DataAttr   Value of data-carousel (autoplay mode).
+  @context {string} AltPrefix  Fallback alt prefix when an entry has no `alt`.
+*/ -}}
 {{- $images := .Images | default slice -}}
 {{- $aria := .AriaLabel | default "Image carousel" -}}
 {{- $dataAttr := .DataAttr | default "auto" -}}
 {{- $altPrefix := .AltPrefix | default "Slide" -}}
 
+{{- /* Widths emitted in srcset so phones do not download a 1600px image. */ -}}
+{{- $widths := slice 640 1024 1600 -}}
+
 {{- if gt (len $images) 0 }}
   <div class="carousel" role="region" aria-label="{{ $aria }}" data-carousel="{{ $dataAttr }}">
-    {{- range $i, $path := $images }}
-      {{- $src := "" -}}
-      {{- if or (hasPrefix $path "http://") (hasPrefix $path "https://") -}}
-        {{- $src = $path -}}
+    {{- range $i, $entry := $images }}
+      {{- $path := "" -}}
+      {{- $alt := "" -}}
+      {{- if reflect.IsMap $entry -}}
+        {{- $path = index $entry "src" -}}
+        {{- $alt = index $entry "alt" | default "" -}}
       {{- else -}}
-        {{- $res := resources.GetMatch $path -}}
-        {{- if $res -}}
-          {{- $res = $res.Resize "1600x webp q85" -}}
-          {{- $src = $res.RelPermalink -}}
-        {{- else -}}
-          {{- $src = $path | relURL -}}
-        {{- end -}}
+        {{- $path = $entry -}}
       {{- end -}}
-      <img
-        src="{{ $src | safeURL }}"
-        alt="{{ printf "%s %d" $altPrefix (add $i 1) }}"
-        loading="{{ if eq $i 0 }}eager{{ else }}lazy{{ end }}"
-        {{- if eq $i 0 }} class="active"{{ end }}
-      >
+      {{- if not $alt -}}
+        {{- $alt = printf "%s %d" $altPrefix (add $i 1) -}}
+      {{- end -}}
+
+      {{- $isRemote := or (hasPrefix $path "http://") (hasPrefix $path "https://") -}}
+      {{- $res := "" -}}
+      {{- if not $isRemote -}}{{- $res = resources.GetMatch $path -}}{{- end -}}
+
+      {{- if $res -}}
+        {{- /*
+          Never upscale — the previous version resized every slide to 1600px
+          wide, which turned a 683px micrograph into a half-megabyte file
+          without adding a single pixel of real detail. Candidates are the
+          breakpoints below the source width, plus the source width itself so
+          no genuine resolution is thrown away.
+        */ -}}
+        {{- $candidates := slice -}}
+        {{- range $widths -}}
+          {{- if lt . $res.Width -}}{{- $candidates = $candidates | append . -}}{{- end -}}
+        {{- end -}}
+        {{- $candidates = $candidates | append $res.Width -}}
+
+        {{- $srcset := slice -}}
+        {{- $largest := $res -}}
+        {{- range $candidates -}}
+          {{- $v := $res.Resize (printf "%dx webp q82" .) -}}
+          {{- $srcset = $srcset | append (printf "%s %dw" $v.RelPermalink $v.Width) -}}
+          {{- $largest = $v -}}
+        {{- end -}}
+        <img
+          src="{{ $largest.RelPermalink }}"
+          srcset="{{ delimit $srcset ", " }}"
+          sizes="100vw"
+          width="{{ $largest.Width }}"
+          height="{{ $largest.Height }}"
+          alt="{{ $alt }}"
+          {{ if eq $i 0 }}fetchpriority="high" loading="eager" decoding="async" class="active"{{ else }}loading="lazy" decoding="async"{{ end }}>
+      {{- else -}}
+        <img
+          src="{{ $path | relURL | safeURL }}"
+          alt="{{ $alt }}"
+          {{ if eq $i 0 }}fetchpriority="high" loading="eager" decoding="async" class="active"{{ else }}loading="lazy" decoding="async"{{ end }}>
+      {{- end -}}
     {{- end }}
 
     <button class="nav-btn nav-prev" type="button" aria-label="Previous slide">

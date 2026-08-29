@@ -1,8 +1,38 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
-  {{ end }}
+  {{/* Deliberately not .section: that class carries 6rem of block padding
+       meant for single-post pages and would reflow every list view. */}}
+  <div class="page">
+    {{/* Pages whose content supplies its own hero heading set hide_title in
+         front matter, so the section never renders two competing <h1>s. */}}
+    {{ if not .Params.hide_title }}
+      <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.lead }}<p class="page-lead">{{ . }}</p>{{ end }}
+      </header>
+    {{ end }}
+
+    {{ .Content }}
+
+    {{/* Child pages, when the section has any. Sections built purely from
+         shortcodes (research, publications, contact…) have none and skip this. */}}
+    {{ with .Pages }}
+      <div class="resource-list" data-reveal>
+        {{ range .ByDate.Reverse }}
+          <article class="resource-card">
+            {{ with .Params.category }}<span class="resource-pill">{{ . }}</span>{{ end }}
+            <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+            {{/* Driven by an explicit `updated` field rather than .Date: the
+                 protocols all carry a placeholder 2023-01-01 date, and showing
+                 that would state something untrue about when they last changed. */}}
+            {{ with .Params.updated }}
+              <time class="resource-date" datetime="{{ . | time.Format "2006-01-02" }}">
+                Updated {{ . | time.Format ":date_long" }}
+              </time>
+            {{ end }}
+            <p>{{ .Summary | plainify | truncate 180 }}</p>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
 {{ end }}

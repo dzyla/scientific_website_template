@@ -1,38 +1,49 @@
-{{- if eq .Kind "page" -}}
-  {{- if in .RelPermalink "/publications" -}}
-    {{- $pubs := site.Data.publications -}}
-    {{- if $pubs -}}
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {{- $first := true -}}
-          {{- range $pubs -}}
-            {{- if not $first }},{{ end -}}
-            {
-              "@type": "ScholarlyArticle",
-              "name": {{ .title | plainify | jsonify }},
-              "author": [
-                {{- $names := split ( .authors | plainify ) "," -}}
-                {{- $nfirst := true -}}
-                {{- range $names -}}
-                  {{- if not $nfirst }},{{ end -}}
-                  { "@type": "Person", "name": {{ trim . " " | jsonify }} }
-                  {{- $nfirst = false -}}
-                {{- end -}}
-              ],
-              "isPartOf": { "@type": "Periodical", "name": {{ .journal | plainify | jsonify }} },
-              "datePublished": "{{ .year }}",
-              {{- with .link -}}
-              "url": {{ . | jsonify }},
-              {{- end -}}
-              "headline": {{ .title | plainify | jsonify }}
-            }
-            {{- $first = false -}}
-          {{- end -}}
-        ]
-      }
-      </script>
+{{- /*
+  ScholarlyArticle graph for the publications page.
+
+  Two things were wrong before and are worth not reintroducing:
+    1. the guard tested `.Kind "page"`, but /publications/ is built from
+       _index.md and so has Kind "section" — the block never rendered;
+    2. authors were split on "," although the data is ";"-separated, which
+       would have shredded every name into fragments.
+  As elsewhere, the JSON must be piped through `safeJS`.
+*/ -}}
+{{- if and .IsSection (eq .Section "publications") -}}
+  {{- $pubs := site.Data.publications -}}
+  {{- with $pubs -}}
+    {{- $graph := slice -}}
+    {{- range . -}}
+      {{- $authors := slice -}}
+      {{- range (split (.authors | plainify) ";") -}}
+        {{- $name := trim . " " -}}
+        {{- with $name -}}
+          {{- $authors = $authors | append (dict "@type" "Person" "name" .) -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $article := dict
+        "@type" "ScholarlyArticle"
+        "headline" (.title | plainify)
+        "name" (.title | plainify)
+        "datePublished" (printf "%v" .year)
+        "isPartOf" (dict "@type" "Periodical" "name" (.journal | plainify))
+      -}}
+      {{- with $authors -}}{{- $article = merge $article (dict "author" .) -}}{{- end -}}
+      {{- with .doi -}}
+        {{- $article = merge $article (dict
+            "identifier" (dict "@type" "PropertyValue" "propertyID" "DOI" "value" .)
+            "sameAs" (printf "https://doi.org/%s" .)
+        ) -}}
+      {{- end -}}
+      {{- with .link -}}{{- $article = merge $article (dict "url" .) -}}{{- end -}}
+      {{- if eq .preprint true -}}
+        {{- $article = merge $article (dict "creativeWorkStatus" "Preprint") -}}
+      {{- end -}}
+
+      {{- $graph = $graph | append $article -}}
     {{- end -}}
+
+    {{- $doc := dict "@context" "https://schema.org" "@graph" $graph -}}
+<script type="application/ld+json">{{ $doc | jsonify | safeJS }}</script>
   {{- end -}}
 {{- end -}}

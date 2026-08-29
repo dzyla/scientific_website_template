@@ -1,4 +1,5 @@
 name = 'SciLab'
 license = 'MIT'
 description = 'Minimalist scientific group theme.'
-homepage = 'https://example.org'
+homepage = 'https://zylalab.org/'
+min_version = '0.128.0'

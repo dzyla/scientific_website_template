@@ -1,115 +1,97 @@
-## Generating Publications Automatically
+# zylalab.org
 
-You can generate a `publications.json` file from an ORCID iD using the provided Python script:
+Source for the [Zyla Lab](https://zylalab.org) website — Department of
+Biochemistry and Molecular Genetics, University of Colorado Anschutz Medical
+Campus.
 
-1. Make sure you have Python 3 and `requests` installed:
-   ```bash
-   pip install requests
-   ```
+Built with [Hugo](https://gohugo.io) and the in-repo `scilab` theme. Pushing to
+`main` builds and deploys to GitHub Pages via `.github/workflows/hugo.yml`.
 
-2. Run the script with your ORCID iD:
-   ```bash
-   python generate_publications.py <your_orcid_id>
-   ```
-   Example:
-   ```bash
-   python generate_publications.py 0000-0002-1825-0097
-   ```
-   This will create or update `data/publications.json` with your publications.
+## Running locally
 
-3. Optional: Highlight specific author names in the output:
-   ```bash
-   python generate_publications.py <your_orcid_id> --highlight "Alice Smith,Bob Johnson"
-   ```
+```bash
+hugo server -D          # http://localhost:1313, -D includes drafts
+hugo --gc --minify      # production build into public/
+```
 
-## Example Resources
+Hugo **extended** 0.154.1 is what CI uses; keep the local version in step with
+`HUGO_VERSION` in the workflow.
 
-See the `content/resources/` folder for template resources:
+## Where things live
 
-- `lab-safety.md`: Lab safety guidelines template
-- `equipment-list.md`: Example equipment list template
+| What | Where |
+|---|---|
+| Site-wide settings, menus, hero, contact details | `hugo.toml` |
+| Page content | `content/` |
+| Publications, research topics, open positions, alumni | `data/*.json`, `data/*.yaml` |
+| Photos and figures | `assets/images/` (processed by Hugo) |
+| Favicons, web manifest, self-hosted fonts | `static/` |
+| Templates | `layouts/` (site) and `themes/scilab/layouts/` (theme) |
+| Styles | `themes/scilab/assets/css/` — concatenated, minified, fingerprinted |
+| Behaviour | `themes/scilab/assets/js/main.js` |
 
-Add your own Markdown files to this folder to share protocols, guidelines, or other resources with your lab.
+`layouts/` overrides `themes/scilab/layouts/` for the same path.
 
-# Scientific Website Template for Biochemistry Labs
+## Common tasks
 
-This repository contains a minimal Hugo template for scientific labs, designed for easy setup and customization.
+**Add a news post** — create `content/news/<slug>.md` with `title`, `date` and
+optional `tags`. It appears on the homepage widget (newest six) and on `/news/`.
 
-## Features
+**Add a team member** — create `content/team/<name>.md` with `title`, `role`,
+`image`, optional `email`, and `type: "member"` (or `"pi"` for the lead card).
+Ordering follows `weight`.
 
-- Custom theme `SciLab` with a clean, responsive layout
-- Pre-configured sections: Research, Team, Publications, Resources, Lab Fun, Philosophy, Protocols, News
-- Shortcodes for news, publications, and carousel
-- Example content for team members, publications, and protocols
+**Add a protocol** — create `content/protocols/<slug>.md`, then link it from the
+`resources:` list in `content/resources/_index.md`. Protocols carry a
+placeholder `date` and set `hide_date: true`; add `updated: YYYY-MM-DD` to show
+a real revision date.
 
-## Prerequisites
+**Change the hero images** — edit `params.home.hero.carousel` in `hugo.toml`.
+Every slide needs real `alt` text; it is what screen readers and image search
+actually see.
 
-- [Install Hugo](https://gohugo.io/getting-started/installing/)
+## Publications
 
-## Getting Started
+`data/publications.json` is generated from ORCID:
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/scientific_website_template.git
-   cd scientific_website_template
-   ```
+```bash
+pip install requests
+python3 generate_publications.py 0000-0001-8471-469X -hl "Dawid S. Zyla"
+```
 
-2. **Run the site locally:**
-   ```bash
-   hugo server -D
-   ```
-   Visit `http://localhost:1313` in your browser.
+The script also:
 
-3. **Customize your content:**
-   - Edit team members in `content/team/`
-   - Add publications in `data/publications.json` and `content/publications/`
-   - Add protocols in `content/protocols/`
-   - Add news posts in `content/news/`
-   - Update images in `static/images/`
+- tags preprints (bioRxiv, SSRN, arXiv…) with `"preprint": true`, which the
+  publications page renders as a separate section;
+- drops preprints superseded by their published version, matching titles by
+  word overlap so retitled manuscripts are still caught;
+- rewrites every spelling of a tracked author to the one canonical form passed
+  in `-hl`, so the list does not mix "Dawid Zyla", "Dawid S Zyla" and
+  "Dawid S. Żyła".
 
-4. **Customize styles:**
-   - Edit CSS under the Hugo asset pipeline in `themes/scilab/assets/css/` (e.g., `main.css`, `custom.css`). The styles are fingerprinted and concatenated automatically.
+To re-run just that post-processing over the existing file without hitting the
+ORCID API:
 
-5. **Shortcodes:**
-   - Use shortcodes in your Markdown files: `{{< news limit="4" summary="true" >}}`, `{{< publications >}}`, `{{< carousel >}}`
-   - `news` accepts optional `section` (default `news`), `limit`, and `summary=false` to tailor the widget.
+```bash
+python3 generate_publications.py --normalize data/publications.json \
+  -hl "Dawid S. Zyla" -o data/publications.json
+```
 
-## How to Add/Remove Team Members
+Per-entry escape hatches when the heuristics get it wrong: `"keep": true` pins a
+preprint that would otherwise be dropped, `"superseded": true` forces one out.
 
-- Add a new Markdown file in `content/team/` (see examples in that folder)
-- Remove a member by deleting their file
+## Conventions worth keeping
 
-## How to Add Publications
-
-- Add entries to `data/publications.json` (see example format)
-- Optionally, add Markdown files in `content/publications/` for detailed pages
-
-## How to Add Protocols
-
-- Add Markdown files in `content/protocols/`
-
-## How to Add News Posts
-
-- Add Markdown files in `content/news/`
-
-## Customization
-
-- Edit layouts in `layouts/` and `themes/scilab/layouts/` as needed
-- Edit shortcodes in `layouts/shortcodes/`
-
-## Cleaning Up
-
-- Theme CSS/JS is managed through the `/themes/scilab/assets/` pipeline (no need for duplicate files under `static/`)
-- Unused archetypes and empty folders have been removed
-
-## Deploying
-
-- Build the site for production:
-  ```bash
-  hugo
-  ```
-- The output will be in the `public/` folder
-
----
-
-For more details, see the Hugo documentation: https://gohugo.io/documentation/
+- **JSON-LD must be piped through `safeJS`.** Hugo treats `<script>` contents as
+  a JS context, so a bare `jsonify` gets escaped twice and every string ends up
+  wrapped in literal quotes. See `themes/scilab/layouts/partials/seo/`.
+- **Accent colour must clear WCAG AA.** `params.highlightColor` (#8B6508) is
+  5.3:1 on white. The dark theme lightens it to #D4AF37 and therefore overrides
+  `--highlight-text` to a near-black — anything drawn on a gold fill must use
+  that variable rather than a hardcoded `#fff`.
+- **Fonts are self-hosted** in `static/fonts/` (SIL OFL, see `OFL.txt`). Do not
+  reintroduce the Google Fonts `<link>`; it blocks rendering and leaks visitor
+  IPs to a third party.
+- **Nothing in `themes/scilab/content/`.** Theme content directories get merged
+  into the site — that is how a set of lorem-ipsum demo posts ended up published
+  and indexed at `/posts/`.

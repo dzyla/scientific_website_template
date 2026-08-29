@@ -1,10 +1,17 @@
+{{- /* WebSite schema, homepage only. See organization.json.html for why safeJS is required. */ -}}
 {{- if .IsHome -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "url": {{ .Site.BaseURL | jsonify }},
-  "name": {{ .Site.Title | jsonify }}
-}
-</script>
+  {{- $url := site.BaseURL -}}
+  {{- $site := dict
+    "@context" "https://schema.org"
+    "@type" "WebSite"
+    "@id" (printf "%s#website" $url)
+    "url" $url
+    "name" site.Title
+    "inLanguage" (site.LanguageCode | default "en-us")
+    "publisher" (dict "@id" (printf "%s#organization" (site.Params.organization_url | default $url)))
+  -}}
+  {{- with site.Params.description -}}
+    {{- $site = merge $site (dict "description" .) -}}
+  {{- end -}}
+<script type="application/ld+json">{{ $site | jsonify | safeJS }}</script>
 {{- end -}}

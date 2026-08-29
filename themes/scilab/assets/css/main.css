@@ -27,11 +27,17 @@
   --background: #ffffff;
   --surface: #ffffff;
   --surface-alt: #faf6ee;
-  --accent: #99751E; /* Darker Gold for Accessibility (WCAG AA) */
-  --accent-soft: rgba(153,117,30,0.18);
-  --highlight-soft: rgba(153,117,30,0.18);
-  --highlight-outline: rgba(153,117,30,0.4);
-  --highlight-text: var(--highlight-text-color, #ffffff); /* Default text on accent should be white unless overridden */
+  /* Ochre accent, kept in step with params.highlightColor in hugo.toml.
+     Measures 5.3:1 against white, so it clears WCAG AA (4.5:1) for link text
+     and for white text on an accent-filled button. The previous #99751E was
+     4.27:1 and quietly failed both. */
+  --accent: #8B6508;
+  --accent-soft: rgba(139,101,8,0.18);
+  --highlight-soft: rgba(139,101,8,0.18);
+  --highlight-outline: rgba(139,101,8,0.4);
+  /* Text drawn on top of an accent/highlight fill. Overridden in the dark
+     theme, where the gold lightens and white text would drop to 2.1:1. */
+  --highlight-text: var(--highlight-text-color, #ffffff);
   --neutral-50: #f8fafc;
   --neutral-100: #f1f5f9;
   --neutral-200: #e2e8f0;
@@ -62,8 +68,8 @@
 @supports (color: color-mix(in srgb, black 50%, white 50%)) {
   :root {
     --accent-soft: color-mix(in srgb, var(--accent) 15%, transparent);
-    --highlight-soft: color-mix(in srgb, var(--highlight-color, #b78b2c) 15%, transparent);
-    --highlight-outline: color-mix(in srgb, var(--highlight-color, #b78b2c) 40%, transparent);
+    --highlight-soft: color-mix(in srgb, var(--highlight-color, #8B6508) 15%, transparent);
+    --highlight-outline: color-mix(in srgb, var(--highlight-color, #8B6508) 40%, transparent);
   }
 }
 

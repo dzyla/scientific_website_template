@@ -1,0 +1,152 @@
+/* ===========================================================================
+   Print
+
+   Protocols get printed and taped to a bench; publication lists get printed
+   for reviews and progress reports. Without these rules the page carried the
+   nav, hero carousel, footer, floating back-to-top button and every card
+   shadow onto paper.
+   ========================================================================== */
+@media print {
+  /* Always print the light palette, whatever the reader had on screen. */
+  :root,
+  :root[data-theme="dark"] {
+    --text: #000;
+    --muted: #333;
+    --background: #fff;
+    --surface: #fff;
+    --surface-alt: #fff;
+    --border: #bbb;
+    --accent: #000;
+    --highlight-color: #000;
+    --highlight-text: #fff;
+    --shadow-1: none;
+    --shadow-soft: none;
+    --shadow-medium: none;
+    --shadow-strong: none;
+  }
+
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  html { font-size: 11pt; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Chrome around the content carries no information on paper. */
+  .header,
+  .footer,
+  .nav-backdrop,
+  .skip-link,
+  .reading-progress,
+  .back-to-top,
+  .theme-toggle,
+  .nav-toggle,
+  .nav-btn,
+  .hero-bg-image,
+  .hero-matte-overlay,
+  .hero-actions-container,
+  .contact-map-wrapper,
+  .pub-copy-btn,
+  .team-profile-link,
+  .news-read-more,
+  .news-view-all,
+  .join-cta-bar {
+    display: none !important;
+  }
+
+  /* Reveal-on-scroll never runs without a viewport to scroll. */
+  [data-reveal],
+  .will-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Flatten cards: borders read on paper, shadows and fills do not. */
+  .team-card,
+  .news-card,
+  .resource-card,
+  .core-card,
+  .research-topic,
+  .research-project,
+  .join-position,
+  .contact-card,
+  .contact-section {
+    box-shadow: none !important;
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+  }
+
+  /* Bios are line-clamped on screen (the full text lives on each member's
+     own page); on paper there is nowhere to click through to, so print them
+     in full. */
+  .team-grid .team-info .content,
+  .team-grid .team-bio {
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    overflow: visible !important;
+  }
+
+  /* Keep a reference and its metadata on one page. */
+  .pub-item,
+  .pub-group,
+  li,
+  figure,
+  table {
+    break-inside: avoid;
+  }
+
+  h1, h2, h3, h4 {
+    break-after: avoid;
+    color: #000 !important;
+  }
+
+  .pub-section,
+  .news-year-group {
+    break-before: auto;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* A link is useless on paper unless its target is written out. Only expand
+     external and DOI links — printing every internal nav href is noise. */
+  .prose a[href^="http"]::after,
+  .pub-title a[href^="http"]::after,
+  .pub-doi::after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+    word-break: break-all;
+  }
+  .pub-doi::after { content: none; }
+
+  /* The bolded lab author should survive the loss of colour. */
+  .author-highlight {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100% !important;
+    break-inside: avoid;
+  }
+
+  /* Print the site identity once, at the top of the first page. */
+  .main::before {
+    content: "Zyla Lab · zylalab.org";
+    display: block;
+    margin-bottom: 8mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid #000;
+    font-family: var(--font-headers);
+    font-size: 9pt;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}

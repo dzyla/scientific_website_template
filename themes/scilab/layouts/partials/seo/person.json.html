@@ -1,0 +1,32 @@
+{{- /*
+  Person schema for team member pages. Helps Google associate the researcher
+  with the lab and the institution rather than treating the page as generic
+  prose. See organization.json.html for why safeJS is required.
+*/ -}}
+{{- if eq .Section "team" -}}
+  {{- if eq .Kind "page" -}}
+    {{- $orgURL := site.Params.organization_url | default site.BaseURL -}}
+    {{- $person := dict
+      "@context" "https://schema.org"
+      "@type" "Person"
+      "name" (.Title | plainify)
+      "url" .Permalink
+      "affiliation" (dict "@id" (printf "%s#organization" $orgURL))
+    -}}
+    {{- with .Params.role -}}{{- $person = merge $person (dict "jobTitle" .) -}}{{- end -}}
+    {{- /* No "email" — see organization.json.html. */ -}}
+    {{- with .Summary -}}{{- $person = merge $person (dict "description" (. | plainify)) -}}{{- end -}}
+
+    {{- /* Only the PI's public profiles are configured site-wide; members can
+           add their own via `sameAs` in front matter. */ -}}
+    {{- $sameAs := .Params.sameAs | default slice -}}
+    {{- if eq .Params.type "pi" -}}
+      {{- range (slice site.Params.orcid site.Params.scholar site.Params.linkedin site.Params.github site.Params.bluesky) -}}
+        {{- with . -}}{{- $sameAs = $sameAs | append . -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with $sameAs -}}{{- $person = merge $person (dict "sameAs" .) -}}{{- end -}}
+
+<script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+  {{- end -}}
+{{- end -}}

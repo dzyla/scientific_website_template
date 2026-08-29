@@ -7,6 +7,8 @@ topics:
     description: "We use advanced imaging to see how proteins remodel membranes. Using viral entry as a model system, we map the complex machinery that drives fusion and cellular infection."
   - title: "Capturing Transient States"
     description: "Proteins are not static structures. We track the fleeting conformational changes—from prefusion to postfusion—to understand how molecular machines perform work."
+  - title: "Mechanisms of Antibody Neutralization"
+    description: "Antibodies do more than bind. We resolve how neutralizing antibodies engage viral glycoproteins—clamping them shut, blocking receptor engagement, or forcing premature collapse—to define what makes protection potent and durable."
   - title: "Developing next-gen tools"
     description: "We engineer novel antibody probes and use native-membrane environments (VLPs) to trap specific protein states, creating better platforms for structure-based drug design."
 
