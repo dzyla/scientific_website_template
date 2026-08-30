@@ -1,11 +1,5 @@
 <footer class="footer">
   <div class="container">
-    <div class="footer-top">
-      <p class="footer-tagline">
-        {{ .Site.Params.tagline | default "Curious minds mapping viral structure to therapeutic impact." }}
-      </p>
-    </div>
-
     <div class="footer-grid" role="navigation" aria-label="Footer">
       <!-- COL 1: BRANDING -->
       <div class="footer-col branding-col">
@@ -52,7 +46,6 @@
               {{ if $href }}
                 <li>
                   <a class="footer-link" href="{{ $href }}" {{ if (strings.HasPrefix $href "http") }}target="_blank" rel="noopener"{{ end }}>
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
                     <span>{{ .name }}</span>
                   </a>
                 </li>

@@ -19,29 +19,13 @@
 .menu-link { display: inline-block; text-decoration: none; padding-bottom: 3px; border-bottom: 2px solid transparent; }
 .menu-link:hover, .menu-link.active { color: var(--highlight-color); border-bottom-color: var(--highlight-color); }
 
-/* CTA Pill for Contact */
-.menu-cta-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1.25rem;
-  background: var(--accent);
-  /* Follows the theme rather than pinning white — see --highlight-text. */
-  color: var(--highlight-text, #fff) !important;
-  border-radius: 9999px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
-  padding-bottom: 0.5rem; 
-  border-bottom: 1px solid transparent;
+/* Contact: the same quiet link, set apart by a hairline divider and the accent */
+.menu-item--contact {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--border);
 }
-.menu-cta-pill:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  color: var(--highlight-text, #fff) !important;
-}
+/* Colour lives with the other .header .menu-link rules in custom.css, which
+   set it with !important. */
 
 /* Backdrop (mobile only) */
 .nav-backdrop { position: fixed; inset: 0; background: rgba(17,24,39,.45); z-index: 40; }
@@ -66,7 +50,8 @@
   }
   .nav-menu.is-open { display: block; }
 
-  .menu-list { flex-direction: column; gap: .25rem; }
+  .menu-list { flex-direction: column; gap: .25rem; align-items: stretch; }
+  .menu-item--contact { padding-left: 0; border-left: 0; }
   .menu-item { border: 0; }
   .menu-link {
     display: block;

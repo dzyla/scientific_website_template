@@ -108,6 +108,37 @@ def find_highlighted_authors(authors_string, identities):
                 result.append(author)
     return result
 
+# --- Manual curation -----------------------------------------------------
+
+# ORCID indexes some records that are not publications of the lab: machine
+# translations of an existing paper, eLife peer-review "Author response"
+# stubs, conference meeting abstracts, and pre-lab work from another field.
+# Matched on the normalized title (see title_key), so punctuation and case do
+# not matter. Kept here rather than hand-edited out of the JSON, because a
+# full ORCID re-sync rewrites that file from scratch.
+EXCLUDED_TITLES = [
+    # Japanese machine translation of the EMBO Journal chaperone paper
+    "胆汁応答性シャペロンとしての代謝産物結合蛋白質ムーンライト【JST・京大機械翻訳】",
+    # eLife peer-review artifacts, not papers
+    "Author response: The cryo-EM structure of the human uromodulin filament "
+    "core reveals a unique assembly mechanism",
+    # Biophysical Society meeting abstract
+    "BPS2025 - Structural analysis of human endogenous retrovirus K envelope "
+    "protein",
+    # Undergraduate entomology, unrelated to the lab
+    "Drugie stanowisko Myrmeleon inconspicuus, RAMBUR, 1842 w Polsce "
+    "(Neuroptera: Myrmeleontidae)",
+]
+
+# Papers ORCID has not indexed yet, fetched from Crossref on every run. ORCID
+# can lag months behind publication, and a journal version listed here also
+# retires its own preprint through the normal superseded-preprint pairing.
+EXTRA_DOIS = [
+    "10.1038/s41467-026-71373-4",   # Nat Commun 2026, measles fusion protein
+    "10.64898/2026.01.14.699513",   # bioRxiv 2026, lyssavirus antigenic landscape
+]
+
+
 # --- Preprint handling ---------------------------------------------------
 
 # Servers whose "journal" is really a preprint venue. Matched case-insensitively
@@ -117,7 +148,8 @@ PREPRINT_VENUES = {
     'biorxiv', 'medrxiv', 'arxiv', 'chemrxiv', 'ssrn', 'preprint',
     'research square', 'authorea', 'osf preprints',
 }
-PREPRINT_DOI_PREFIXES = ('10.1101/', '10.2139/', '10.48550/', '10.21203/')
+PREPRINT_DOI_PREFIXES = ('10.1101/', '10.64898/', '10.2139/', '10.48550/',
+                         '10.21203/')
 
 
 def is_preprint(journal, doi=None):
@@ -214,8 +246,15 @@ def canonicalize_authors(authors_string, identities, canonical_names):
     return "; ".join(out), highlights
 
 
+def drop_excluded(publications):
+    """Remove records listed in EXCLUDED_TITLES."""
+    blocked = {title_key(t) for t in EXCLUDED_TITLES}
+    return [p for p in publications if title_key(p.get('title')) not in blocked]
+
+
 def postprocess(publications, identities, canonical_names):
     """Tag preprints, drop superseded ones, and normalize highlighted names."""
+    publications = drop_excluded(publications)
     for p in publications:
         p['preprint'] = is_preprint(p.get('journal'), p.get('doi'))
         if identities and p.get('authors') and p['authors'] != 'N/A':
@@ -294,8 +333,8 @@ def get_authors_from_crossref(doi):
     try:
         clean_doi = doi.replace("https://doi.org/", "").strip()
         url = f"https://api.crossref.org/works/{clean_doi}"
-        headers = {"User-Agent": "PublicationFetcher/1.0 (mailto:example@test.com)"}
-        resp = requests.get(url, headers=headers, timeout=5)
+        headers = {"User-Agent": CROSSREF_UA}
+        resp = requests.get(url, headers=headers, timeout=15)
         if resp.status_code != 200:
             return None
         
@@ -351,10 +390,6 @@ def fetch_publications(orcid_id, highlight_list=None):
             pub_date = work.get('publication-date') or {}
             year = (pub_date.get('year') or {}).get('value')
             
-            # Authors
-            contribs = work.get('contributors') or {}
-            authors = format_authors(contribs.get('contributor', []))
-            
             # Links
             link, doi = None, None
             for ext in (work.get('external-ids') or {}).get('external-id', []):
@@ -365,11 +400,14 @@ def fetch_publications(orcid_id, highlight_list=None):
             if not link:
                 link = (work.get('url') or {}).get('value')
 
-            # Fallback for Authors
-            if (not authors or authors == "N/A") and doi:
-                cr_authors = get_authors_from_crossref(doi)
-                if cr_authors: authors = cr_authors
-            
+            # Authors. ORCID's contributor list does not reliably preserve the
+            # paper's author order (imported works often come back scrambled),
+            # while Crossref does — so Crossref wins whenever there is a DOI,
+            # and ORCID contributors are only the fallback.
+            authors = get_authors_from_crossref(doi) if doi else None
+            if not authors:
+                contribs = work.get('contributors') or {}
+                authors = format_authors(contribs.get('contributor', []))
             if not authors: authors = "N/A"
 
             # Journal
@@ -404,6 +442,22 @@ def fetch_publications(orcid_id, highlight_list=None):
             sys.stdout.flush()
 
         print("\nDone.")
+
+        # Merge the hand-curated DOIs before postprocessing, so they take part
+        # in preprint pairing and name normalization like any ORCID record.
+        known = {(p.get('doi') or '').lower() for p in publications}
+        for doi in EXTRA_DOIS:
+            if doi.lower() in known:
+                continue
+            try:
+                entry = entry_from_crossref(doi)
+            except Exception as e:
+                print(f"Could not fetch {doi}: {e}")
+                continue
+            print(f"Added from Crossref: {entry['year']} {entry['journal']} — "
+                  f"{entry['title'][:60]}")
+            publications.append(entry)
+
         before = len(publications)
         publications = postprocess(publications, identities, highlight_list)
         if before != len(publications):
@@ -444,7 +498,7 @@ def main():
         with open(args.normalize, encoding='utf-8') as f:
             existing = json.load(f)
         before = len(existing)
-        for doi in args.add_doi:
+        for doi in EXTRA_DOIS + args.add_doi:
             known = {(p.get('doi') or '').lower() for p in existing}
             if doi.lower() in known:
                 print(f"Already present, skipping: {doi}")

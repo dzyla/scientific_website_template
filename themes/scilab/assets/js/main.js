@@ -379,30 +379,3 @@ if (document.readyState === 'loading') {
   initCitationCopy();
 }
 
-/* ===========================================================================
-   Click-to-load map
-   Keeps Google out of the page until the visitor actually wants the map.
-   ========================================================================== */
-const initMapConsent = () => {
-  document.querySelectorAll('.contact-map[data-map-embed]').forEach(box => {
-    const btn = box.querySelector('.contact-map-consent');
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-      const frame = document.createElement('iframe');
-      frame.src = box.dataset.mapEmbed;
-      frame.title = box.dataset.mapTitle || 'Map';
-      frame.loading = 'lazy';
-      frame.referrerPolicy = 'no-referrer-when-downgrade';
-      frame.allowFullscreen = true;
-      box.replaceChildren(frame);
-      box.classList.add('is-loaded');
-      frame.focus();
-    }, { once: true });
-  });
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMapConsent);
-} else {
-  initMapConsent();
-}

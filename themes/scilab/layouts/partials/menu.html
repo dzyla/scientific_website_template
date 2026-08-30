@@ -6,9 +6,9 @@
     {{- $active = or $active (eq .URL $current.RelPermalink) -}}
     {{- $isContact := eq .Name "Contact" -}}
 
-    <li class="menu-item">
+    <li class="menu-item{{ if $isContact }} menu-item--contact{{ end }}">
       <a
-        class="{{ if $isContact }}menu-cta-pill{{ else }}menu-link{{ if $active }} active{{ end }}{{ end }}"
+        class="menu-link{{ if $isContact }} menu-link--contact{{ end }}{{ if $active }} active{{ end }}"
         href="{{ .URL | relLangURL }}"
         {{ if $active }}aria-current="page"{{ end }}
       >{{ .Name }}</a>
