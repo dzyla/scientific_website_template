@@ -27,7 +27,7 @@
         <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
       {{ end }}
       <div class="team-info">
-        <h2>{{ .Title }}</h2>
+        <h2>{{ .Title }}{{ partial "country-flag.html" .Params.country }}</h2>
         {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
         {{ with .Params.email }}
           <p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>
@@ -60,7 +60,7 @@
           <div class="team-portrait team-portrait--placeholder" aria-hidden="true"></div>
         {{ end }}
         <div class="team-info">
-          <h3>{{ .Title }}</h3>
+          <h3>{{ .Title }}{{ partial "country-flag.html" .Params.country }}</h3>
           {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
           {{ with .Params.email }}<p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>{{ end }}
           {{/*

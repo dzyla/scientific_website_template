@@ -3,6 +3,7 @@ title: "Dawid S. Zyla"
 image: "images/dawid.jpg"
 role: "Assistant Professor"
 email: "dawid.zyla@cuanschutz.edu"
+country: "PL"
 type: "pi"
 ---
 

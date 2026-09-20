@@ -391,6 +391,25 @@
   font-style: italic;
   color: var(--muted);
 }
+
+/* Country-of-origin flag, sized off the name it follows so it stays in
+   proportion on the card headings and the larger single-page title. */
+.country-flag {
+  display: inline-block;
+  width: 0.82em;
+  max-width: 22px;
+  height: auto;
+  margin-left: 0.4em;
+  vertical-align: baseline;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.18);
+}
+/* The hairline has to invert too, or the white in the Polish and US flags
+   bleeds into the dark card. */
+[data-theme="dark"] .country-flag {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+}
+
 .team-info .email {
   margin: 0 0 .55rem;
 }

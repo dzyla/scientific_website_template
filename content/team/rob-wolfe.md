@@ -3,6 +3,7 @@ title: "Robert Wolfe"
 image: "images/rob.png"
 role: "Postdoctoral Researcher"
 email: "wolfero3@chemistry.msu.edu"
+country: "US"
 type: "member"
 ---
 

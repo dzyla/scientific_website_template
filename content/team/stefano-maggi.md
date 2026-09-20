@@ -2,6 +2,8 @@
 title: "Stefano Maggi"
 image: "images/stefano.jpg"
 role: "Staff Scientist"
+email: "stefano.maggi@cuanschutz.edu"
+country: "IT"
 type: "member"
 ---
 

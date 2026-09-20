@@ -27,7 +27,7 @@
   {{ end }}
 
   <div class="team-info">
-    <h1 class="team-name">{{ .Title }}</h1>
+    <h1 class="team-name">{{ .Title }}{{ partial "country-flag.html" .Params.country }}</h1>
     {{ with .Params.role }}<p class="role">{{ . }}</p>{{ end }}
     {{ with .Params.email }}
       <p class="email">{{ partial "email-obfuscator.html" (dict "address" . ) }}</p>
