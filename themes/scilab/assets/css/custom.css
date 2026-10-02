@@ -655,10 +655,11 @@
    fills the row instead of leaving a gap, and a group of five wraps evenly. */
 @media (min-width: 768px) {
   .resource-list {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
 .resource-card {
+  position: relative;
   border: 1px solid #E5E7EB; /* Border as requested */
   border-radius: var(--radius-lg);
   padding: var(--s-lg);
@@ -669,11 +670,17 @@
   grid-template-rows: auto auto 1fr;
   gap: .75rem;
 }
+.resource-card:has(a) {
+  cursor: pointer;
+}
 .resource-card:hover,
 .resource-card:focus-within {
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
   transform: translateY(-2px);
   border-color: var(--accent);
+}
+.resource-card:hover h3 a {
+  border-bottom-color: var(--highlight-color);
 }
 .resource-pill {
   display: inline-flex;
@@ -697,13 +704,34 @@
   font-size: 1.15rem;
 }
 .resource-card h3 a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   text-decoration: none;
   color: inherit;
   border-bottom: 2px solid transparent;
   transition: border-color .2s ease;
 }
+.resource-card h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  z-index: 1;
+}
 .resource-card h3 a:hover {
   border-bottom-color: var(--highlight-color);
+}
+.main .resource-card .resource-card-icon,
+.resource-card .resource-card-icon,
+.resource-card-icon {
+  width: 1.15rem !important;
+  height: 1.15rem !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
 }
 .resource-card p {
   margin: 0;

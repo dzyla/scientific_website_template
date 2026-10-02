@@ -39,6 +39,14 @@ groups:
         url: "https://www.manuscript-search.org/"
         description: "Search the literature by abstract, title, or idea rather than keyword."
 
+  - title: "Infrastructure we use"
+    description: "External platforms and services supporting our daily research and lab operations."
+    items:
+      - title: "Zulip"
+        url: "https://zulip.com/"
+        icon: "images/zulip-icon-circle.svg"
+        description: "Our lab communication is hosted on Zulip Cloud Standard, an organized team chat app designed for efficient communication."
+
 # CU Anschutz School of Medicine shared resources. Instrument lists checked
 # against each facility's own page — see README before editing.
 cores:

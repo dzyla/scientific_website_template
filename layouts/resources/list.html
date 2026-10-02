@@ -25,8 +25,12 @@
             <article class="resource-card">
               <h3>
                 {{ if $url }}
-                  <a href="{{ $url }}" {{ if $external }}target="_blank" rel="noopener"{{ end }}>{{ .title }}</a>
+                  <a href="{{ $url }}" {{ if $external }}target="_blank" rel="noopener"{{ end }}>
+                    {{- with .icon }}<img src="{{ . | relURL }}" alt="" class="resource-card-icon" width="20" height="20" loading="lazy">{{ end -}}
+                    {{ .title }}
+                  </a>
                 {{ else }}
+                  {{- with .icon }}<img src="{{ . | relURL }}" alt="" class="resource-card-icon" width="20" height="20" loading="lazy">{{ end -}}
                   {{ .title }}
                 {{ end }}
               </h3>
